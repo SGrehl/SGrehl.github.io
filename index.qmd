@@ -1,0 +1,12 @@
+---
+  title: "Welcome to the Module Courses"
+---
+  
+  # Overview
+  
+  Welcome to our module website! Here you will find two courses:
+  
+  - **Experimental Sociology**
+  - **Computational Social Sciences**
+  
+  Use the navigation bar to explore course sessions and read the latest announcements.

@@ -1,0 +1,10 @@
+---
+  title: "Computational Social Sciences - Session 2: Overview"
+---
+  
+  # Session 1: Overview
+  
+  Welcome to the first session of **Computational Social Sciences**. In this session, we will introduce key computational methods used in social science research.
+
+*Content for session 1 goes here...*
+  

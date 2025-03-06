@@ -1,0 +1,10 @@
+---
+  title: "Experimental Sociology - Session 1: Introduction"
+---
+  
+  # Session 1: Introduction
+  
+  Welcome to the first session of **Experimental Sociology**. Here we will cover the basics of experimental design in social research.
+
+*Content for session 1 goes here...*
+  
