@@ -1,8 +1,9 @@
 project:
   type: website
+  output-dir: docs
 
 website:
-  title: "Module Courses"
+  title: "ES & CSS"
   navbar:
     left:
       - text: "Home"
@@ -19,8 +20,6 @@ website:
             href: computational-social-sciences/session1.qmd
           - text: "Session 2"
             href: computational-social-sciences/session2.qmd
-      - text: "Announcements"
-        href: announcements.qmd
 
 format:
   html:

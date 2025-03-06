@@ -1,12 +1,38 @@
 ---
-  title: "Welcome to the Module Courses"
+  title: "Experimental Sociology and Computational Social Sciences 2025"
 ---
   
-  # Overview
-  
-  Welcome to our module website! Here you will find two courses:
-  
-  - **Experimental Sociology**
-  - **Computational Social Sciences**
-  
-  Use the navigation bar to explore course sessions and read the latest announcements.
+# Announcements
+
+Stay tuned for important updates and module news.
+
+# Overview
+
+Welcome to the module \"Experimental Sociology and Computational Social Sciences 2025\""! Here you will find the two courses, most of the materials (except the papers and books used in the course) and so on.
+
+- **Experimental Sociology**
+- **Computational Social Sciences**
+
+Use the navigation bar to explore course sessions and read the latest announcements.
+
+::: {.callout-tip collapse="false" title="Experimental Sociology - Basic Information"}
+
+|||
+|:--------------|:--------------------------------------------|
+| Lecturer:     | Dr. Sascha Grehl                            | 
+| Start:        | 2025-04-09                                  | 
+| Seminar:      | Thursday, 11:15 – 12:45                     | 
+| Location:     | GWZ, H2 1.15                                | 
+| Office Hours: | by appointment, <sascha.grehl@uni-leipzig.de>| 
+:::
+
+::: {.callout-tip collapse="false" title="Computational Social Sciences - Basic Information"}
+
+|||
+|:--------------|:--------------------------------------------|
+| Lecturer:     | MA, Leonie Steinbrinker                             | 
+| Start:        | 2025-04-XX                                          | 
+| Seminar:      | XXXXX                                               | 
+| Location:     | GWZ, H2 1.15                                        | 
+| Office Hours: | by appointment, <leonie.steinbrinker@uni-leipzig.de>| 
+:::

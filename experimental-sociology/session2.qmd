@@ -1,10 +1,7 @@
 ---
-  title: "Experimental Sociology - Session 2: Introduction"
+  title: "Experimental Sociology - Session 2: TBA"
 ---
   
-  # Session 1: Introduction
-  
-  Welcome to the first session of **Experimental Sociology**. Here we will cover the basics of experimental design in social research.
+# Session 2: TBA
 
-*Content for session 1 goes here...*
-  
+Welcome to the second session of **Experimental Sociology**.

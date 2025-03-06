@@ -1,7 +1,0 @@
----
-  title: "Announcements"
----
-  
-  # Announcements
-  
-  Stay tuned for important updates and module news.
