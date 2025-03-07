@@ -1,8 +1,45 @@
 ---
-  title: "Computational Social Sciences - Session 2: TBA"
+title: "Session 02 - Social Network Analysis"
+subtitle: "Network representations and basic manipulations in R"
+date: today
+date-format: short
+title-block-banner: "#e7d6e6"
+format:
+  html:
+    theme: cerulian
+    toc: true
+    toc-title: Contents
+    toc-location: left
+    page-layout: full
+    html-math method: katex
+    code-fold: false
+    code-tools: true
+    code-block-bg: true
+    code-block-border-left: "#e7d6e6"
+    highlight-style: atom-one
+    eval: false
+    results: hide
+    embed-resources: true
+    self-contained-math: true
+    bibliography: CSS.bib
+    bibliography-style: apa
+    link-citation: true
+    lightbox:
+      loop: true
+      match: auto
+css: styles.css
+copyright: "Copyright Leonie Steinbrinker, 2024. All Rights Reserved"      
+editor: visual
 ---
+
+Welcome to the second session of the seminar **Computational Social Sciences**
   
-# Session 2: TBA
+# Social networks
   
-Welcome to the second session of **Computational Social Sciences**. 
+A **social network** consists of a set of **actors** that are connected by **relationships** in a pairwise manner [@wassermanSocialNetworkAnalysis2009]. Actors can represent individuals, groups, organizations, companies, or even entire countries. The nature of these relationships varies and can be defined in different ways, such as:
+
+- **Similarity-based relationships** (e.g., shared interests, attributes, or behaviors)
+- **Role- and position-based relationships** (e.g., hierarchies, affiliations, or professional connections)
+- **Resource-transfer relationships** (e.g., exchange of information, goods, or support)
+
 

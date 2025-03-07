@@ -1,5 +1,6 @@
 ---
-  title: "Experimental Sociology and Computational Social Sciences 2025"
+  title: "Experimental Sociology and Computational Social Sciences"
+  subtitle: "Summer term 2025"
 ---
   
 # Announcements
@@ -15,6 +16,10 @@ Welcome to the module \"Experimental Sociology and Computational Social Sciences
 
 Use the navigation bar to explore course sessions and read the latest announcements.
 
+
+:::: {.columns}
+
+::: {.column}
 ::: {.callout-tip collapse="false" title="Experimental Sociology - Basic Information"}
 
 |||
@@ -26,13 +31,18 @@ Use the navigation bar to explore course sessions and read the latest announceme
 | Office Hours: | by appointment, <sascha.grehl@uni-leipzig.de>| 
 :::
 
+::: 
+
+:::{.column}
 ::: {.callout-tip collapse="false" title="Computational Social Sciences - Basic Information"}
 
 |||
 |:--------------|:--------------------------------------------|
 | Lecturer:     | MA, Leonie Steinbrinker                             | 
-| Start:        | 2025-04-XX                                          | 
-| Seminar:      | XXXXX                                               | 
+| Start:        | 2025-04-07                                          | 
+| Seminar:      | Thuesday, 15:15 - 16:45                             | 
 | Location:     | GWZ, H2 1.15                                        | 
 | Office Hours: | by appointment, <leonie.steinbrinker@uni-leipzig.de>| 
+:::
+:::
 :::
