@@ -29,17 +29,87 @@ format:
       match: auto
 css: styles.css
 copyright: "Copyright Leonie Steinbrinker, 2024. All Rights Reserved"      
-editor: visual
 ---
 
 Welcome to the second session of the seminar **Computational Social Sciences**
-  
+
 # Social networks
-  
+
 A **social network** consists of a set of **actors** that are connected by **relationships** in a pairwise manner [@wassermanSocialNetworkAnalysis2009]. Actors can represent individuals, groups, organizations, companies, or even entire countries. The nature of these relationships varies and can be defined in different ways, such as:
 
-- **Similarity-based relationships** (e.g., shared interests, attributes, or behaviors)
-- **Role- and position-based relationships** (e.g., hierarchies, affiliations, or professional connections)
-- **Resource-transfer relationships** (e.g., exchange of information, goods, or support)
+-   **Similarity-based relationships** (e.g., shared interests, attributes, or behaviors)
+-   **Role- and position-based relationships** (e.g., hierarchies, affiliations, or professional connections)
+-   **Resource-transfer relationships** (e.g., exchange of information, goods, or support)
+
+Networks are commonly visualised by **nodes** (usually circles), representing the actors and **edges** (lines or arrows) , representing the relationships.
+
+```{r}
 
 
+library(igraph)
+library(ggraph)
+library(ggplot2)
+
+# Set seed for reproducibility
+set.seed(123)
+
+# Generate a random graph with 30 nodes and 50 edges
+g <- erdos.renyi.game(n = 60, p.or.m = 70, type = "gnm", directed = FALSE)
+
+# Assign random colors to nodes
+V(g)$color <- sample(c("blue", "green"), vcount(g), replace = TRUE)
+
+# Assign random sizes to nodes
+V(g)$size <- sample(5:12, vcount(g), replace = TRUE)
+
+# Plot the network using ggraph
+ggraph(g, layout = "fr") + 
+  geom_edge_link(color = "lightgray", alpha = 0.5) +
+  geom_node_point(aes(size = size, color = color), alpha = 0.8) +
+  scale_color_manual(values = c("blue" = "#967bb6", "green" = "#e8bff7")) +
+  theme_void() +
+  theme(legend.position = "none")
+
+
+
+```
+
+![Social network with nodes and edges](Graphics/definition.png)
+
+#### Excercise
+
+Reflect briefly on the occasions, where in the past you have been confronted with social networks. In what theoretical concepts of sociology is the embedding of actors of central importance?
+
+## Types of social networks
+
+In social network analysis, we distinguish between **directed** and **undirected** networks. In most real-world cases, **directed networks** are more realistic because relationships are often asymmetric. However, **undirected networks** are easier to analyze mathematically and computationally.
+
+### Directed Networks
+
+Directed networks represent relationships where the connection has a defined direction. These relationships do not necessarily have to be reciprocal.
+
+$$
+\forall A,B \in V:(A \to B) \not\Rightarrow (B \to A)
+$$
+
+**Examples:**\
+- **Social media interactions**: On Twitter or Instagram, one user can follow another without being followed back.\
+
+### Undirected Networks
+
+Undirected networks assume that if a connection exists, it is inherently mutual. These networks are simpler to analyze since they do not require considering directionality.
+
+$$
+\forall A, B \in V: (A \leftrightarrow B) \Rightarrow (B \leftrightarrow A)
+$$
+
+**Examples:**\
+- **Mutual friendships**: In many studies, friendship networks are assumed to be undirected, meaning if A considers B a friend, B also considers A a friend (although this is not always the case in reality).\
+- **Co-authorship networks**: If two researchers have co-authored a paper together, the connection exists for both equally.\
+- **Collaboration networks**: In corporate or scientific collaborations, individuals or institutions work together on projects, making the relationship inherently bidirectional.
+
+In practice, the choice between directed and undirected networks depends on the research question. If directionality is crucial (e.g., influence, hierarchy, or information flow), a **directed network** is necessary. However, if the goal is to analyze overall connectivity, **undirected networks** provide a simpler approach.
+
+# Social network analysis (SNA) in R
+
+## Network representations

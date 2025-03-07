@@ -25,7 +25,7 @@
     "href": "computational-social-sciences/session2.html",
     "title": "Session 02 - Social Network Analysis",
     "section": "",
-    "text": "Welcome to the second session of the seminar Computational Social Sciences\n\nSocial networks\nA social network consists of a set of actors that are connected by relationships in a pairwise manner (Wasserman and Faust 2009). Actors can represent individuals, groups, organizations, companies, or even entire countries. The nature of these relationships varies and can be defined in different ways, such as:\n\nSimilarity-based relationships (e.g., shared interests, attributes, or behaviors)\nRole- and position-based relationships (e.g., hierarchies, affiliations, or professional connections)\nResource-transfer relationships (e.g., exchange of information, goods, or support)\n\n\n\n\n\n\n\n\nReferences\n\nWasserman, Stanley, and Katherine Faust. 2009. Social Network Analysis: Methods and Applications. 18. print. Structural Analysis in the Social Sciences 8. Cambridge: Cambridge Univ. Press.\n\nCopyrightCopyright Leonie Steinbrinker, 2024. All Rights Reserved"
+    "text": "Welcome to the second session of the seminar Computational Social Sciences"
   },
   {
     "objectID": "experimental-sociology/session2.html",
@@ -33,5 +33,12 @@
     "title": "Experimental Sociology - Session 2: TBA",
     "section": "",
     "text": "Session 2: TBA\nWelcome to the second session of Experimental Sociology."
+  },
+  {
+    "objectID": "computational-social-sciences/session2.html#types-of-social-networks",
+    "href": "computational-social-sciences/session2.html#types-of-social-networks",
+    "title": "Session 02 - Social Network Analysis",
+    "section": "Types of social networks",
+    "text": "Types of social networks\nIn social network analysis, we distinguish between directed and undirected networks. In most real-world cases, directed networks are more realistic because relationships are often asymmetric. However, undirected networks are easier to analyze mathematically and computationally.\n\nDirected Networks\nDirected networks represent relationships where the connection has a defined direction. These relationships do not necessarily have to be reciprocal.\n\\[\n\\forall A,B \\in V:(A \\to B) \\not\\Rightarrow (B \\to A)\n\\]\nExamples:\n- Social media interactions: On Twitter or Instagram, one user can follow another without being followed back.\n\n\n\nUndirected Networks\nUndirected networks assume that if a connection exists, it is inherently mutual. These networks are simpler to analyze since they do not require considering directionality.\n\\[\n\\forall A, B \\in V: (A \\leftrightarrow B) \\Rightarrow (B \\leftrightarrow A)\n\\]\nExamples:\n- Mutual friendships: In many studies, friendship networks are assumed to be undirected, meaning if A considers B a friend, B also considers A a friend (although this is not always the case in reality).\n- Co-authorship networks: If two researchers have co-authored a paper together, the connection exists for both equally.\n- Collaboration networks: In corporate or scientific collaborations, individuals or institutions work together on projects, making the relationship inherently bidirectional.\nIn practice, the choice between directed and undirected networks depends on the research question. If directionality is crucial (e.g., influence, hierarchy, or information flow), a directed network is necessary. However, if the goal is to analyze overall connectivity, undirected networks provide a simpler approach."
   }
 ]
