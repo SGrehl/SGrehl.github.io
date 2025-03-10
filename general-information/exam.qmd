@@ -1,0 +1,13 @@
+---
+title: "Assessment Details"
+format: html
+editor: visual
+---
+
+# Prüfungsvorleistung
+
+# Prüfungsleistung
+
+## Sonderregelung: Nutzung von KI für Prüfungsinhalte
+
+If you chose to use AI-Applications for assignments that you hand in in this course, please document what and for what tasks you applied help. You can either do this by writing a statement of your own or you could also use AI-documentation tools like the [**AI-Usage-Cards**](https://ai-cards.org/) by the University of Göttingen.

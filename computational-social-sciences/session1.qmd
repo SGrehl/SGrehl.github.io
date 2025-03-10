@@ -1,10 +1,332 @@
 ---
-  title: "Computational Social Sciences - Session 1: Overview"
+title: "Session 1 - Kick-Off"
+subtitle: "Course Setup, Introduction and R-refresher"
+date: today
+date-format: short
+title-block-banner: "#e7d6e6"
+format:
+  html:
+    theme: cerulian
+    toc: true
+    toc-title: Contents
+    toc-location: left
+    page-layout: full
+    html-math method: katex
+    code-fold: false
+    code-tools: true
+    code-block-bg: "FBCCD1"
+    code-block-border-left: "#e7d6e6"
+    highlight-style: atom-one
+    eval: false
+    results: show
+    embed-resources: true
+    self-contained-math: true
+    bibliography: CSS.bib
+    bibliography-style: apa
+    link-citation: true
+    lightbox:
+      loop: true
+      match: auto
+css: styles.css
+copyright: "Copyright Leonie Steinbrinker, 2024. All Rights Reserved"
 ---
-  
-# Session 1: Overview
-  
-Welcome to the first session of **Computational Social Sciences**. In this session, we will introduce key computational methods used in social science research.
 
-*Content for session 1 goes here...*
-  
+Welcome to the first session of **Computational Social Sciences**!
+
+Today, we will go over the plan for the semester, including:
+
+-   How the course materials are organized
+
+-   What the examination requirements are
+
+-   How we interact and work together in this course
+
+-   And finally, a short optional **R refresher** with some key functions that will be important for us. Those who would like to join are very welcome to stay!
+
+Looking forward to a great semester with you all!
+
+# Introduction round
+
+Online Umfrage zu verschiedenen Random-Themen und Soziologie Abschluss mit Interessen und Erwartungen
+
+# R-Refresher
+
+R is a statistical programming language and environment. It includes thousands of packages for data management, analasys and visualisation. It supports high quality graphic. It is free and open source, there is a large community of R users and developers. Usually new statistical and analytical techniques are quickly available in R
+
+New functions can be written and checked by other users
+
+Support for network analysis in R and geodata analysis in R (various packages: network, igraph, intergraph, sna, ergm, RSiena), etc.
+
+For further informations see Cheat Sheets
+
+-   [RStudio IDE Cheatsheet](https://rstudio.github.io/cheatsheets/rstudio-ide.pdf)
+
+-   [Publish and Share with Quarto](https://rstudio.github.io/cheatsheets/quarto.pdf)
+
+### Installation
+
+In case you haven`t installed R and RStudio
+
+1. Install **R**
+2. Install **RStudio**
+
+This is the easiest way, you are of course allowed to use other source code editors (like `VSCode`, `Eclipse`, `PyCharm`, `Vim`, `Emacs` or any other preference you might have). I will show the examples in class using RStudio though.
+
+
+### Getting started
+
+Create a new R Script or R Notebook or Quarto document
+
+File –\> New File –\> chose your option
+
+Working directory
+
+```{r}
+# Find the current workind directory (where inputs are found and output are send)
+getwd()
+
+# Change the current working directory
+setwd("C://file/path")
+
+```
+
+When we analyze data in R usually we also depend on functions, other users and developers have written, which are usually stored in so called `packages`. Packages can be installed and called like this: 
+
+```{r}
+install.packages("igraph")
+
+library(igraph)
+```
+
+
+#### Accessing help files
+
+```{r}
+# Get help of a particular function
+help(rnorm)
+# or
+?rnorm
+
+# Search te help files for a word or a phrase (if you don't know the name of the function)
+help.search("weighted mean")
+# or
+??"weighted mean"
+
+# Find help for a package
+help(package=igraph)
+
+```
+
+### Atomic datatypes in R
+
+Atomic in this case means the data is of size = 1.
+
+| Name      | Description                   | Example         |
+|-----------|-------------------------------|-----------------|
+| integer   | Whole numbers                 | `5`             |
+| numeric   | Decimal numbers               | `4.2`           |
+| logic     | Boolean values                | `TRUE`, `FALSE` |
+| character | Text or string values         | `"Hello"`       |
+| NA        | Missing value indicator       | `NA`            |
+| NULL      | Absence of a value/object     | `NULL`          |
+| NaN       | Not a number (e.g. 0/0)       | `NaN`           |
+| Inf       | Positive or negative infinity | `Inf`, `-Inf`   |
+
+Checking types
+
+```{r}
+int <- as.integer(42)
+num <- 42.1
+log <- TRUE
+char <- "Hello"
+
+class(int)
+class(num)
+class(log)
+class(char)
+
+```
+
+### Basic Operations
+
+Arithmetic operations
+
+```{r}
+# Addition
+2 + 7
+
+# Substraction
+4 - 2
+
+# Multiplication
+5 * 2
+
+# Division
+8 / 2
+
+# Natural log
+log(2)
+
+# Exponentation
+2^3
+
+# Exponential
+exp(7)
+
+# Round to nearest integer
+floor(4.8)
+ceiling(4.8)
+
+# Round
+round(7.5)
+
+
+```
+
+### Objects & Structured Data Types 
+
+Values can be stored in Variables. The name of a variable starts with a letter and may consist of any sequence of letters, numbers, dot or underline characters.
+
+```{r}
+# assigning values to variables
+a <- 15.7
+a
+a + 10
+a / 10
+round(a)
+
+# storing results in new variables
+b <- round(a)
+
+```
+
+Logical operations
+
+```{r}
+# is equal?
+d == a
+
+# is unequal?
+d != a
+
+
+d < a
+
+d > a
+
+d >= a
+
+d <= a
+
+
+# Logical operations
+(3 > 2) & (4 > 1)   # AND
+(3 > 5) | (4 > 1)   # OR
+!TRUE  # NOT
+
+```
+
+#### Classes of Data in R
+
+R has several classes that define how data is structured and handled. Just to name a few:
+
+| Class | Description | Example |
+|--------------|-------------------------------------------|--------------|
+| vector | Basic 1D array of elements of one type | `c(1, 2, 3)` |
+| factor | Categorical data with levels | `factor(c("low", "high"))` |
+| matrix | 2D array with elements of one type | `matrix(1:9, nrow = 3)` |
+| array | Multi-dimensional generalization of matrix | `array(1:12, dim = c(2,3,2))` |
+| list | Collection of different types of objects | `list(name="Alice", age=25)` |
+| data.frame | Tabular data, columns can have different types | `data.frame(a=1:3, b=c("x","y","z"))` |
+| tibble | Enhanced version of a data frame | `tibble::tibble(a=1:3, b=c("x","y","z"))` |
+
+::: {.callout-note}
+For a better readability we can align code
+:::
+
+```{r}
+# Vectors
+vec <- c(1, 2, 3, 4, 5)
+
+# Lists
+my_list <- list(name = "Alice",
+                age = 25,
+                scores = c(90, 85, 88)
+                )
+
+# Data frames
+my_data <- data.frame(id = 1:3,
+                      name = c("A", "B", "C"),
+                      score = c(88, 92, 85)
+                      )
+
+
+# check class of an object
+class(my_list)
+```
+### Indexication
+
+#### Vectors 
+
+```{r}
+vec <- c(1,2,3,4,5,6,7)
+vec[1] # Returns first element
+vec[2:4] # Returns elements of position 2 through 4
+
+```
+
+# Vector Operations
+
+min, max, mean, etc.
+
+#### Matrices or Dataframes 
+
+
+```{r}
+M <- matrix(c(11,0,3,3,5,1,7,1,0),
+            nrow = 3 )
+M
+N <- matrix(1:9,
+            nrow = 3
+            )
+N 
+
+M[1, ]   # First row
+M[, 2]   # Second column
+
+
+```
+
+
+
+
+Functions
+
+```{r}
+# Creating and using functions
+my_function <- function(x) {
+  return(x^2 + 3)
+}
+
+my_function(5)  # Example usage
+```
+
+::: {.callout-tip}
+Rule of thumb: Whenever you repeatedly have to write a code, better automate your doing.
+:::
+
+Code Alignment
+
+If you have more than one parameter in a function, you can align the code for better readability:
+
+```{r}
+
+
+
+```
+
+
+
+Matrices
+
+Control structures

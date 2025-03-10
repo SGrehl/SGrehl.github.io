@@ -11,6 +11,7 @@ Stay tuned for important updates and module news.
 
 Welcome to the module \"Experimental Sociology and Computational Social Sciences 2025\""! Here you will find the two courses, most of the materials (except the papers and books used in the course) and so on.
 
+- **General Information**
 - **Experimental Sociology**
 - **Computational Social Sciences**
 
