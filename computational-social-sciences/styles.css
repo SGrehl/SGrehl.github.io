@@ -43,3 +43,18 @@ strong, b {
 h1, h2, h3, h4, h5, h6 {
   color: #76448a; /* Darker lavender */
 }
+
+
+.student-exercise {
+  background-color: rgba(216, 179, 230, 0.6); /* Helles Lila mit 60% Deckkraft */
+  padding: 15px;
+  border: 2px solid rgba(168, 95, 197, 0.8); /* Dunkleres Lila mit 80% Deckkraft */
+  border-radius: 8px;
+  margin-bottom: 15px;
+  color: rgba(74, 35, 90, 0.9); /* Sehr dunkles Lila mit 90% Deckkraft */
+  font-weight: bold;
+}
+
+.student-exercise h2 {
+  color: rgba(74, 35, 90, 1); /* 100% Deckkraft für bessere Lesbarkeit */
+}
