@@ -8,6 +8,13 @@ website:
     left:
       - text: "Home"
         href: index.qmd
+      - text: "General Information"
+        menu:
+          - text: "Anti-Discrimination Policy"
+          - text: "Course Assessment"
+            href: general-information/exam.qmd
+          - text: "AI-Usage"
+            href: general-information/ai_usage.qmd
       - text: "Experimental Sociology"
         menu:
           - text: "Session 1"
@@ -16,9 +23,11 @@ website:
             href: experimental-sociology/session2.qmd
       - text: "Computational Social Sciences"
         menu:
-          - text: "Session 1"
+          - text: "Course Overview"
+            href: "computational-social-sciences/css_overview.qmd"
+          - text: "Session 1 - Kickoff"
             href: computational-social-sciences/session1.qmd
-          - text: "Session 2"
+          - text: "Session 2 - SNA"
             href: computational-social-sciences/session2.qmd
 
 format:

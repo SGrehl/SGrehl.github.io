@@ -1,10 +1,583 @@
 ---
-  title: "Computational Social Sciences - Session 1: Overview"
+title: "Session 1 - Kick-Off"
+subtitle: "Course Setup, Introduction and R-refresher"
+date: today
+date-format: short
+title-block-banner: "#e7d6e6"
+format:
+  html:
+    theme: cerulian
+    toc: true
+    toc-title: Contents
+    toc-location: left
+    page-layout: full
+    html-math method: katex
+    code-fold: false
+    code-tools: true
+    code-block-bg: "FBCCD1"
+    code-block-border-left: "#e7d6e6"
+    highlight-style: atom-one
+    eval: false
+    results: show
+    embed-resources: true
+    self-contained-math: true
+    bibliography: CSS.bib
+    bibliography-style: apa
+    link-citation: true
+    lightbox:
+      loop: true
+      match: auto
+css: styles.css
+copyright: "Copyright Leonie Steinbrinker, 2024. All Rights Reserved"
 ---
-  
-# Session 1: Overview
-  
-Welcome to the first session of **Computational Social Sciences**. In this session, we will introduce key computational methods used in social science research.
 
-*Content for session 1 goes here...*
+Welcome to the first session of **Computational Social Sciences**!
+
+Today, we will go over the plan for the semester, including:
+
+-   How the course materials are organized
+
+-   What the examination requirements are
+
+-   How we interact and work together in this course
+
+-   And finally, a short optional **R refresher** with some key functions that will be important for us. Those who would like to join are very welcome to stay!
+
+Looking forward to a great semester with you all!
+
+# Introduction round
+
+Online Umfrage zu verschiedenen Random-Themen und Soziologie Abschluss mit Interessen und Erwartungen
+
+# R-Refresher
+
+R is a statistical programming language and environment. It includes thousands of packages for data management, analasys and visualisation. It supports high quality graphic. It is free and open source, there is a large community of R users and developers. Usually new statistical and analytical techniques are quickly available in R
+
+New functions can be written and checked by other users
+
+Support for network analysis in R and geodata analysis in R (various packages: network, igraph, intergraph, sna, ergm, RSiena), etc.
+
+For further informations see Cheat Sheets
+
+-   [RStudio IDE Cheatsheet](https://rstudio.github.io/cheatsheets/rstudio-ide.pdf)
+
+-   [Publish and Share with Quarto](https://rstudio.github.io/cheatsheets/quarto.pdf)
+
+## Getting started
+
+### Installation
+
+In case you haven\`t installed R and RStudio
+
+1.  Install **R**
+2.  Install **RStudio**
+
+This is the easiest way, you are of course allowed to use other source code editors (like `VSCode`, `Eclipse`, `PyCharm`, `Vim`, `Emacs` or any other preference you might have). I will show the examples in class using RStudio though.
+
+### Start a new file
+
+Create a new R Script, R Notebook, or Quarto document:
+
+1.  Go to the menu bar and click on `File`.
+2.  Select `New File`.
+3.  Choose the type of file you want to create (R Script, R Notebook, or Quarto document).
+
+Working directory
+
+```{r}
+# Find the current workind directory (where inputs are found and output are send)
+getwd()
+
+# Change the current working directory
+setwd("C://your/file/path")
+
+```
+
+When we analyze data in R usually we also depend on functions, other users and developers have written, which are usually stored in so called `packages`. Packages can be installed and called like this:
+
+```{r}
+install.packages("igraph")
+
+library(igraph)
+```
+
+#### Accessing help files
+
+```{r}
+# Get help of a particular function
+help(rnorm)
+# or
+?rnorm
+
+# Search te help files for a word or a phrase (if you don't know the name of the function)
+help.search("weighted mean")
+# or
+??"weighted mean"
+
+# Find help for a package
+help(package=igraph)
+
+```
+
+### Atomic classes in R
+
+Atomic in this case means the data is of size = 1.
+
+| Name      | Description                   | Example         |
+|-----------|-------------------------------|-----------------|
+| integer   | Whole numbers                 | `5`             |
+| numeric   | Decimal numbers               | `4.2`           |
+| logic     | Boolean values                | `TRUE`, `FALSE` |
+| character | Text or string values         | `"Hello"`       |
+| NA        | Missing value indicator       | `NA`            |
+| NULL      | Missing object indicator      | `NULL`          |
+| NaN       | Not a number (e.g. 0/0)       | `NaN`           |
+| Inf       | Positive or negative infinity | `Inf`, `-Inf`   |
+
+Checking types
+
+```{r}
+int <- 5L #capital L forces integer-storage
+num <- 42.1
+log <- TRUE
+char <- "Hello"
+
+class(int)
+class(num)
+class(log)
+class(char)
+
+```
+
+### Basic Operations 
+
+#### Storage of values
+
+Values can be stored in Variables. The name of a variable starts with a letter and may consist of any sequence of letters, numbers, dot or underline characters.
+
+```{r}
+# assigning values to variables
+a <- 15.7
+a
+a + 10
+a / 10
+round(a)
+
+# storing results in new variables
+b <- round(a)
+
+```
+
+#### Arithmetic operations
+
+```{r}
+# Addition
+2 + 7
+
+# Substraction
+4 - 2
+
+# Multiplication
+5 * 2
+
+# Division
+8 / 2
+
+# Natural log
+log(2)
+
+# Exponentation
+2^3
+
+# Exponential
+exp(7)
+
+# Round to nearest integer
+floor(4.8)
+ceiling(4.8)
+
+# Round
+round(7.5)
+```
+
+#### Logical operations
+
+```{r}
+# is equal?
+b == a
+
+# is unequal?
+b != a
+
+# is greater?
+b > a
+
+# is smaller?
+b < a
+
+# is greater or equal?
+b >= a
+
+# is smaller or equal?
+b <= a
+
+
+# Further logical operations
+(3 > 2) & (4 > 1)   # AND
+(3 > 5) | (1 > 4)   # OR
+!TRUE  # NOT
+
+```
+
+## Classes of Data in R
+
+R has several classes that define how data is structured and handled. Just to name a few:
+
+| Class | Description | Example |
+|-----------------|--------------------------------------|-----------------|
+| vector | Basic 1D array of elements of one type | `c(1, 2, 3)` |
+| factor | Categorical data with levels | `factor(c("low", "high"))` |
+| matrix | 2D array with elements of one type | `matrix(1:9, nrow = 3)` |
+| array | Multi-dimensional generalization of matrix | `array(1:12, dim = c(2,3,2))` |
+| list | Collection of different types of objects | `list(name="Alice", age=25)` |
+| data.frame | Tabular data, columns can have different types | `data.frame(a=1:3, b=c("x","y","z"))` |
+| tibble | Enhanced version of a data frame | `tibble::tibble(a=1:3, b=c("x","y","z"))` |
+
+#### Vectors
+
+A vector is a simple data structure, that can store multiple elements of the same type. You can create a vector using the `c()` function.
+
+::: callout-note
+To ensure, that all elements in a vector are of the same type, R will coerce the elements to the most general type. For example, if you combine a numeric and a character, the numeric will be coerced to a character.
+:::
+
+
+```{r}
+ages <- c(25, 30, 35, 40)
+names <- c("Albert", "Berta", "Charlie", "Dora")
+sociologists <- c(TRUE, FALSE, TRUE, FALSE)
+```
+
+##### Indexication
+
+
+**R indices start counting at 1**, not at 0 like in many other programming languages. You can access elements of a vector, matrix, or data frame by using square brackets `[]`.
+
+```{r}
+# Accessing elements of a vector
+ages[1]
+names[2]
+sociologists[3]
+ages[c(1,4)] # First and fourth element
+names[-1] #  All but the first element
+names[names == "Tom"] #  All elements with the name "Tom"
+ages[names == "Tom"] # Age of the person with the name "Tom"
+
+```
+
+::: student-exercise
+**Short Exercise:**
+ 
+1.  What are the names of the sociologists?
+2.  What are the ages of the non-sociologists?
+2.  Are Berta and Charlie sociologists?
+:::
+
+#### Matrices
+
+Matrices are two-dimensional arrays with elements of the same type. You can create a matrix using the `matrix()` function.
+
+```{r}
+M <- matrix(c(11, 0, 3, 3, 5, 1, 7, 1, 0),
+      nrow = 3)
+M
+
+N <- matrix(1:9,
+      nrow = 3)
+N
+```
+
+##### Indexication
+
+```{r}
+M[1, 2] # First row, second column
+M[1, ]   # First row
+M[, 2]   # Second column
+
+# name the row of a matrix
+rownames(M) <- c("A", "B", "C")
+
+# name the column of a matrix
+colnames(M) <- c("A", "B", "C")
+
+```
+
+#### Data frames
+
+Data frames are one of the most common data structures in R. They are two-dimensional objects, with rows and columns. Each column can have a different type. You can create a data frame using the `data.frame()` function.
+
+```{r}
+df_friends <- data.frame(name = names, 
+                         religious = religious, 
+                         age = ages)
+df_friends
+
+```
+
+##### Indexication
+
+```{r}
+df_friends[3,]   # Dritte Zeile
+
+df_friends[,2]   # Zweite Spalte
+
+df_friends[3,2]  # Drittes Element in der zweiten Spalte
+
+df_friends$name  # Zugriff auf eine Spalte per Namen
+```
+
+##### Add variables
+
+```{r}
+year_of_birth <- 2025 - df_friends$age
+df_friends$birth_year <- year_of_birth
+
+df_friends$city <- c("Leipzig", "Leipzig", "Berlin", "Leipzig")
+df_friends
+```
+
+#### Lists
+
+Lists are collections of different types of objects. You can create a list using the `list()` function.
+
+```{r}
+friends_list <- list(
+  name = df_friends$name,
+  age = df_friends$age,
+  city = df_friends$city,
+  birth_year = df_friends$birth_year,
+  sociologists = df_friends$sociologists
+)
+
+friends_list
+```
+
+##### Indexication
+
+```{r}
+friends_list$name # Index via name
+friends_list[[1]] # Index via position
+
+
+# Further indexing
+
+list_of_list <- list(
+  l1 = friends_list,
+  l2 = list("something else",
+            c(1:1000))
+)
+
+list_of_lists$l1$name 
+list_of_lists[[1]][[1]] 
+list_of_lists[[2]]
+
+```
+
+## Operations
+
+We can perform several operations on different classes of vectors or variables. If we want to call variables we use the name of the object followed by the `$` sign and the name of the variable.
+
+```{r}
+# give mimum value
+min(vec)
+
+# give maximum value
+max(vec)
+
+# give mean value
+mean(vec)
+
+# give median value
+median(vec)
+
+# give standard deviation
+sd(vec)
+
+# give sum of all values
+sum(vec)
+
+# give length of vector
+length(vec)
+
+# give range of vector
+range(vec)
+
+# give quantile of vector
+quantile(vec)
+
+# give unique values of vector
+unique(vec)
+
+# give number of unique values
+length(unique(vec))
+
+# give frequency of values
+table(vec)
+
+# This works also with variables. 
+mean(my_data$score)
+
+```
+
+
+## Control structures
+
+Control structures are used to control the flow of a program. They include loops and conditional statements.
+
+::: callout-tip
+There are two tips, that will make your programming game a whole lot easier: 1. Don\`t repeat yourself: If you find yourself writing the same code over and over again, you should consider automating your task. 2. Divide and conquer: If you have a complex task, break it down into smaller, more manageable parts.
+:::
+
+#### If-loops
+
+A if-loop is useful to discern between different cases. The syntax is as follows
+
+If (condition) {\
+\# do something\
+} else {\
+\# do something else\
+}
+
+If the condition (**logical value**) is true, the code in the first block will be executed. Otherwise, the code in the second block will be executed.
+
+```{r}
+x <- 10
+
+if (x > 0) {
+  print(TRUE)
+} else {
+  print(FALSE)
+}
+```
+
+For simple vector-based operations, you can use the `ifelse()` function. It has the following structure: `ifelse(condition, value if true, value if false)`.
+
+```{r}
+birthyear <- c(1991, 1984, 1969, 2004, 1988, 2007, 1996)
+
+ifelse(birthyear < 1996, "other", "Generation Z")
+```
+
+#### Loops
+
+There are two main types of loops in R: `for` and `while` loops. 1. `for (i in I) {code execution}`: The `for` loop is used to iterate over a sequence of values in a set. 2. `while (condition) {code execution}`: The `while` loop is used to execute a block of code as long as a condition is true.
+
+**Example:** Compute how long a person still has to work until retirement (for-loop)
+
+```{r}
+
+ages <- c(21, 29, 61, 72, 12)
+
+for (i in ages) {
+  if (i >= 67) {
+    print("retired")
+  }
+  if (i < 18) {
+    print("in education")
+  }
+  if (i > 18 & i < 67) {
+    rest <- 67 - i
+    print(rest)
+  }
+}
+```
+
+**Example:** Compute how long a person can drink, staying below a certain alcohol level and not spending more than a certain amount of money (while-loop)
+
+```{r}
+
+money <- 25
+alcohol <- 0
+
+while (money >= 3 & alcohol < 1.2) {
+    
+    money <- money - 3
+    alcohol <- alcohol + 0.3
+    
+    print(paste0("Money spent: ", money))
+    print(paste0("Alcohol in blood: ", alcohol))
+       
+}
+```
+
+#### Functions
+
+Sometimes, we want to repeat a certain task multiple times. In this case, we can write a function. Functions are blocks of code that perform a specific task. They can take arguments as input and return a value as output. The syntax follows: `function_name <- function(argument) {function body}`
+
+When doing this, the function is loaded as an object to the global environment.
+
+```{r}
+# Creating and using functions
+my_function <- function(x) {
   
+  y <- x^2 + 3
+
+  return(y)
+}
+
+my_function(5)  # Example usage
+```
+
+**Apply functions** The family of `apply` functions is used to apply a function to the rows or columns of a matrix or data frame. The most common functions are `apply()`, `lapply()`, `sapply()`, and `tapply()`. In principle, they are a more efficient variant of for-loops running a function FUN over a vector or list X. Most often, we use lapply() which returns a list of outputs (one entry per part in X).
+
+```{r}
+nums <- c(1:10)
+new_nums <- lapply(X = nums, # run over nums
+                   FUN = my_function) # run my_function
+                   
+
+new_nums
+
+```
+
+## Global environment
+
+The global environment is the workspace of R. It contains all objects that you have created during your session. You can see all objects in the global environment in the upper right corner of RStudio. You can also list all objects in the global environment using the `ls()` function.
+
+```{r}
+ls()
+
+# delete specific object
+rm(df_friends)
+
+# delete global environment
+rm(list = ls())
+
+# Save objects in global environment
+# Save data
+save(df_friends, file = "files/df_friends.RData")
+
+# Load data
+load("files/df_friends.RData")
+
+```
+
+Thats about it. If you have any questions during the semester, feel free to ask! You can also always come back to this document to refresh your memory.
+
+::: student-exercise
+**Homework**
+
+Please install the packages `igraph`, `ggplot2`, `ggraph`, `intergraph`, `sand`, `devtools`, and `UserNetR` in your R environment. You can do this by running the following code:
+
+```{r}
+install.packages("igraph")
+install.packages("igraphdata")
+install.packages("ggplot2")
+
+install.packages("sand")
+install.packages("devtools")
+library(devtools)
+install_github("DougLuke/UserNetR")
+install.packages("intergraph")
+```
+:::
