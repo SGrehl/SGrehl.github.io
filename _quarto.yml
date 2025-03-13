@@ -10,13 +10,16 @@ website:
         href: index.qmd
       - text: "General Information"
         menu:
-          - text: "Anti-Discrimination Policy"
           - text: "Course Assessment"
             href: general-information/exam.qmd
           - text: "AI-Usage"
             href: general-information/ai_usage.qmd
+          - text: "Anti-Discrimination Policy"
+            href: general-information/anti_dis.qmd
       - text: "Experimental Sociology"
         menu:
+          - text: "Course Overview"
+            href: experimental-sociology/es_overview.qmd
           - text: "Session 1"
             href: experimental-sociology/session1.qmd
           - text: "Session 2"

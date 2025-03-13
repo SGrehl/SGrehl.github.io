@@ -1,0 +1,160 @@
+---
+title: "Course Overview"
+subtitle: "Contact, Syllabus, Guidelines, KI-Usage"
+date: today
+date-format: short
+title-block-banner: "#39e3a7"
+format:
+  html:
+    theme: cerulian
+    toc: true
+    toc-title: Contents
+    toc-location: left
+    page-layout: full
+    html-math method: katex
+    code-fold: false
+    code-tools: false
+    code-block-bg: true
+    code-block-border-left: "#39e3a7"
+    highlight-style: atom-one
+    eval: false
+    results: hide
+    embed-resources: true
+    self-contained-math: true
+    bibliography: ES.bib
+    bibliography-style: apa
+    link-citation: true
+    lightbox:
+      loop: true
+      match: auto
+css: ../computational-social-sciences/styles.css
+---
+
+# Overview
+
+Welcome to the **Experimental Sociology (ES)** seminar!
+
+In this course, we will explore how analytical and computational tools can be used to derive experimental research questions, optimize experimental design, and plan necessary observations more effectively. Together, we’ll bridge the gap between theory and practice, using simulations and agent-based models (ABMs) to enhance the quality and efficiency of sociological research.
+
+::: {#custom-block}
+**General Information**
+
+|                   |                   |
+|:------------------|-------------------|
+| Wednesday, weekly | 11:15 - 12:45     |
+| GWZ, H2 1.15      | Start: 2025-04-09 |
+:::
+
+# Focus
+
+Our focus will be twofold:
+
+1.  **Hypothesis derivation:** How can analytical tools and agent-based models (ABMs) help us derive meaningful hypotheses and design better experiments?
+
+2.  **Planning an experiment:** How can ABMs help us improve the statistical power of our experiments, save time and money, and make smarter design decisions (e.g., number of participants, treatment structure)?
+
+# Format
+
+We’ll be following a **flipped classroom** strategy:
+
+-   During the week, you’ll study the core concepts at your own pace — whether at home, in the library, or even in the park (it’s the summer term after all!).
+
+-   At the beginning of each seminar, we’ll clear up any open questions before diving into **active problem-solving** and **programming**.
+
+-   Expect a mix of hands-on coding, small-group discussions, and the occasional productive chaos when things don’t work as expected (that’s part of the learning process!).
+
+# Course Goals
+
+By the end of this course, you should be able to:
+
+-   Model a social problem so that it can be tackled analytically or via an ABM.
+-   Program a simple ABM (either from scratch or with the help of an LLM).
+-   Use ABMs to design experiments — including determining the number of participants needed to detect a given effect size and setting up meaningful treatments.
+-   Understand how to fine-tune experimental design to increase statistical power.
+-   Reflect on the broader implications of experimental sociology and agent-based modeling in real-world research.
+
+# Requirements
+
+-   Most importantly: Sociological curiosity – An interest in social behavior and experiments is essential. If you’re not genuinely curious about how people behave and why, this course might not be for you! -
+-   Basic R programming skills – You should be comfortable reading and understanding R code (including functions). You don’t need to be an expert, but you should know the basics.
+-   Laptop – Make sure you have R and RStudio installed and running. If you don’t have a laptop (yes, this can happen!), don’t hesitate to contact me (sascha.grehl\@uni-leipzig.de) — we’ll work something out.
+-   Paper and pen – Digital or analog, as long as you can sketch out your ideas and map your thoughts. -
+-   A sense of humor – Things will break, code will crash, and unexpected results will happen — that’s all part of the process.[^1]
+
+[^1]: *A good tip from someone who’s spent hours raging over broken code:* The problem is 99.99999% of the time sitting **in front of the screen**. You probably made a silly mistake and just aren’t spotting it right now. Keep calm, drink some tea and relax. In this respect, ChatGPT changed my life — just ask it where the error is, and it will usually confront you with your obvious mistake.
+
+# Syllabus
+
++------------+------+-------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
+| Date       | Week | Subject                                                     | Content                                          | Literature and Materials                                                   |
++============+======+=============================================================+==================================================+============================================================================+
+| 2025-04-09 | 1    | **Kick-Off**                                                | -   Introduction                                 | Readings:                                                                  |
+|            |      |                                                             |                                                  |                                                                            |
+|            |      |                                                             | -   Course setup and structure                   |                                                                            |
++------------+------+-------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
+| 2025-04-16 | 2    | **Analytical Solutions & Hypotheses**                       | -   Why analytical solutions?                    | Readings:                                                                  |
+|            |      |                                                             |                                                  |                                                                            |
+|            |      |                                                             | -   Game Theory                                  |                                                                            |
+|            |      |                                                             |                                                  |                                                                            |
+|            |      |                                                             | -   Differential Equations                       |                                                                            |
++------------+------+-------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
+| 2025-04-23 | 3    | **Game Theory & Evolutionary Game Theory**                  | -   General Principles                           | Readings:                                                                  |
+|            |      |                                                             |                                                  |                                                                            |
+|            |      |                                                             | -   The 3 ingredients of an evolutionary process |                                                                            |
++------------+------+-------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
+| 2025-04-30 | 4    | **ABMs: Basics**                                            | -   Basic design principles of AMBs in R         | Readings:                                                                  |
+|            |      |                                                             |                                                  |                                                                            |
+|            |      |                                                             | -   ODD-Protocol                                 | -   [@grimm2020]                                                           |
+|            |      |                                                             |                                                  |                                                                            |
+|            |      |                                                             | -   A simple ABM with ChatGPT                    |                                                                            |
++------------+------+-------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
+| 2025-05-07 | 5    | **Evolutionary ABMs: Basics**                               | -   Learning                                     | Readings:                                                                  |
+|            |      |                                                             |                                                  |                                                                            |
+|            |      |                                                             | -   Mutation                                     |                                                                            |
++------------+------+-------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
+| 2025-05-14 | 6    | **Evolutionary ABMs: Complex Simulations**                  | -   Errors & noise                               | Readings:                                                                  |
+|            |      |                                                             |                                                  |                                                                            |
+|            |      |                                                             | -   Strategy space                               |                                                                            |
+|            |      |                                                             |                                                  |                                                                            |
+|            |      |                                                             | -   RC vs. Bounded Rationality                   |                                                                            |
++------------+------+-------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
+| 2025-05-21 | 7    | **Diffusion: Basics**                                       | -   Simple & complex contagion                   | Readings:                                                                  |
+|            |      |                                                             | -   SIS/SIR/SIRD                                 |                                                                            |
+|            |      |                                                             | -   Network structures                           |                                                                            |
++------------+------+-------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
+| 2025-05-28 | 8    | **Diffusion: Dispersion,Robustness & Sensitivity Analysis** | -   How to deal with randomness                  | Readings:                                                                  |
+|            |      |                                                             |                                                  |                                                                            |
+|            |      |                                                             | -   Discussions                                  |                                                                            |
+|            |      |                                                             |                                                  |                                                                            |
+|            |      |                                                             | -   Term Paper ideas                             |                                                                            |
++------------+------+-------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
+| 2025-06-04 | 9    | **Diffusion: Calibration**                                  | -   Input, model & output realism                | Readings:                                                                  |
+|            |      |                                                             |                                                  |                                                                            |
+|            |      |                                                             | -   How to do calibrate a model                  |                                                                            |
++------------+------+-------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
+| 2025-06-11 | 10   | **Machine Learning: Basics**                                | -   Set up a simple machine learning (ML)        | Readings:                                                                  |
+|            |      |                                                             |                                                  |                                                                            |
+|            |      |                                                             | -   Precision & recall                           |                                                                            |
+|            |      |                                                             |                                                  |                                                                            |
+|            |      |                                                             | -   Cross-validation                             |                                                                            |
++------------+------+-------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
+| 2025-06-18 | 11   | **Open Lab Session**                                        | -   Q&A                                          | Readings:                                                                  |
+|            |      |                                                             |                                                  |                                                                            |
+|            |      |                                                             | -   Discussions                                  |                                                                            |
+|            |      |                                                             |                                                  |                                                                            |
+|            |      |                                                             | -   Term Paper ideas                             |                                                                            |
++------------+------+-------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
+| 2025-06-25 | 12   | **Statistical Power, Randomization, Running an Experiment** | -   Statistical power via formula and simulation | Readings:                                                                  |
+|            |      |                                                             |                                                  |                                                                            |
+|            |      |                                                             | -   How to increase statistical power?           | Additional material:                                                       |
+|            |      |                                                             |                                                  |                                                                            |
+|            |      |                                                             | -   Problems, challenges, and more problems      | -   <https://egap.org/resource/10-things-to-know-about-statistical-power/> |
+|            |      |                                                             |                                                  |                                                                            |
+|            |      |                                                             |                                                  | -   <https://egap.org/resource/10-things-to-know-about-randomization/>     |
++------------+------+-------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
+| 2025-07-02 | 13   | **Summary & Term Paper Presentation I**                     |                                                  |                                                                            |
++------------+------+-------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
+| 2025-07-09 | 14   | **Term Paper Presentation II**                              |                                                  |                                                                            |
++------------+------+-------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
+
+: {.hover}
