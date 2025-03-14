@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Course Overview – ES &amp; CSS</title>
+<title>Week 09 – ES &amp; CSS</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,26 +20,40 @@ width: 0.8em;
 margin: 0 0.8em 0.2em -1em;  vertical-align: middle;
 }
 
-div.csl-bib-body { }
-div.csl-entry {
-clear: both;
-margin-bottom: 0em;
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
 }
-.hanging-indent div.csl-entry {
-margin-left:2em;
-text-indent:-2em;
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
-div.csl-left-margin {
-min-width:2em;
-float:left;
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
 }
-div.csl-right-inline {
-margin-left:2em;
-padding-left:1em;
+pre.numberSource { margin-left: 3em; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-div.csl-indent {
-margin-left: 2em;
-}</style>
+</style>
 
 
 <script>const headroomChanged = new CustomEvent("quarto-hrChanged", {
@@ -4921,14 +4935,14 @@ background: #e7d6e6;
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-right">
-      <h1 class="title">Course Overview</h1>
-            <p class="subtitle lead">Contact, Syllabus, Guidelines, KI-Usage</p>
+    <div class="quarto-title column-page">
+      <div class="quarto-title-block"><div><h1 class="title">Week 09</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+            <p class="subtitle lead">-</p>
                       </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page-right">
+  <div class="quarto-title-meta column-page">
 
       
       <div>
@@ -4944,292 +4958,24 @@ background: #e7d6e6;
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Contents</h2>
-   
-  <ul>
-  <li><a href="#about-me" id="toc-about-me" class="nav-link active" data-scroll-target="#about-me">About me</a></li>
-  <li><a href="#course-goals" id="toc-course-goals" class="nav-link" data-scroll-target="#course-goals">Course Goals</a></li>
-  <li><a href="#requirements" id="toc-requirements" class="nav-link" data-scroll-target="#requirements">Requirements</a></li>
-  <li><a href="#syllabus" id="toc-syllabus" class="nav-link" data-scroll-target="#syllabus">Syllabus</a></li>
-  <li><a href="#course-material" id="toc-course-material" class="nav-link" data-scroll-target="#course-material">Course Material</a></li>
-  </ul>
-</nav>
-</nav>
+  
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-right" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
 
 
 
 
 
-<p>Welcome to the Computational Social Science (CSS) seminar! This hands-on course explores how social network analysis and geo/spatial data can enhance our understanding of society. Using R, we will learn techniques for visualizing, analyzing, and integrating these data types with existing datasets—such as survey or experimental data — to gain deeper insights into social phenomena.</p>
-<div id="custom-block">
-<p><strong>General Information</strong></p>
-<table class="caption-top table">
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Monday, weekly</td>
-<td>15:15 - 16:45</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">GWZ, H2 1.15</td>
-<td>Start: 4/7/25</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Our focus will be twofold:</p>
-<ol type="1">
-<li><p><strong>Social Network Analysis:</strong> Understanding relationships and structures in network data, applying visualization techniques, and conducting empirical analyses.</p></li>
-<li><p><strong>Geo/Spatial Data Analysis:</strong> Examining spatial patterns and dependencies, and leveraging location-based data for social science research.</p></li>
-</ol>
-<p>By combining these data sources with traditional and emerging approaches—including text data (next Semester with Felix) and simulated data (this semester with Sascha) —we will explore innovative ways to study societal dynamics. Throughout the seminar, we will engage with inspiring case studies and hands-on applications to develop our own research perspectives.</p>
-<p>This course provides both conceptual and technical foundations for working with computational methods in the social sciences, empowering participants to extend existing datasets and refine their analytical toolkit.</p>
-<section id="about-me" class="level1">
-<h1>About me</h1>
-<ul>
-<li><p>Forschungsgebiet</p></li>
-<li><p>Masterarbeit über Netztwerke</p></li>
-<li><p>Erreichbarkeit und Sprechstunde</p></li>
-</ul>
-</section>
-<section id="course-goals" class="level1">
-<h1>Course Goals</h1>
-</section>
-<section id="requirements" class="level1">
-<h1>Requirements</h1>
-</section>
-<section id="syllabus" class="level1">
-<h1>Syllabus</h1>
-<table class="table-hover caption-top table">
-<thead>
-<tr class="header">
-<th>Date</th>
-<th>Week</th>
-<th>Subject</th>
-<th>Content</th>
-<th>Literature and Materials</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>07.04.2025</td>
-<td>1</td>
-<td><strong>Kick-Off</strong></td>
-<td><ul>
-<li><p>Introduction</p></li>
-<li><p>Course Setup and Structure</p>
-<ul>
-<li><p>Background Materials</p></li>
-<li><p>Data Overview</p></li>
-</ul></li>
-<li><p>R-Refresher</p></li>
-</ul></td>
-<td><ul>
-<li><p>Basic R von Veronika Batzdörfer</p></li>
-<li><p><a href="https://missing.csail.mit.edu/" class="uri">https://missing.csail.mit.edu/</a></p></li>
-</ul></td>
-</tr>
-<tr class="even">
-<td>14.04.2025</td>
-<td>2</td>
-<td><strong>Networkanalysis in R</strong></td>
-<td><ul>
-<li><p>Social Networks</p></li>
-<li><p>Introduction to Social Networkanalysis in R</p>
-<ul>
-<li><p>Representation of networks</p></li>
-<li><p>Network Attributes</p></li>
-</ul></li>
-<li><p>Handling missing data</p></li>
-</ul></td>
-<td><p><a href="https://inarwhal.github.io/NetworkAnalysisR-book/ch5-Network-Visualization-R.html#ch5-Network-Visualization-R">Network Data in R</a></p>
-<p>Wasserman und Faust</p>
-<p><a href="https://visiblenetworklabs.com/guides/social-network-analysis-101/">Social Network Analysis 101: Ultimate Guide - Visible Network Labs</a></p>
-<ul>
-<li>Ausgabe 1. Übungsblatt</li>
-</ul></td>
-</tr>
-<tr class="odd">
-<td>21.04.2025</td>
-<td>3</td>
-<td><strong>no lecture (Ostermontag)</strong></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>28.04.2025</td>
-<td>4</td>
-<td><strong><em>Key Metrics and theoretical Insight</em></strong></td>
-<td><ul>
-<li><p>Descriptives</p></li>
-<li><p>Centrality and Assortavity</p></li>
-<li><p>Homophily</p></li>
-<li><p>Hierarchy</p></li>
-</ul></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>05.05.2025</td>
-<td>5</td>
-<td><strong>Network Visualisation</strong></td>
-<td><ul>
-<li><p>Visualisation basics</p></li>
-<li><p>Interactive visualisation</p></li>
-</ul></td>
-<td><p>Zschache</p>
-<p><a href="https://github.com/lalessan/comsocsci2024/wiki">Properties of real life netwirks</a></p></td>
-</tr>
-<tr class="even">
-<td>12.05.2025</td>
-<td>6</td>
-<td><strong>Community Detection &amp; Structural Comparison</strong></td>
-<td></td>
-<td><p>Aufgaben in Yans (Linköping) Skript</p>
-<p>Rossweil: infomap</p>
-<p>PNAS - Algorithmen</p>
-<p>Eigene Masterarbeit</p></td>
-</tr>
-<tr class="odd">
-<td>19.05.2025</td>
-<td>7</td>
-<td><strong>Statistical Models</strong> <strong>&amp; Case Studies</strong></td>
-<td><ul>
-<li>ERGMs</li>
-</ul></td>
-<td><p>I<a href="https://eehh-stanford.github.io/SNA-workshop/ergm-intro.html">ntroduction to ERGMs | Social Network Analysis for Anthropologists</a></p>
-<ul>
-<li><p><a href="https://www.youtube.com/watch?v=-YpwsdRKt8Q">SpiegelMining – Reverse Engineering von Spiegel-Online (33c3)</a></p></li>
-<li><p><span class="citation" data-cites="bodaghiTheaterFakeNews2022">(<a href="#ref-bodaghiTheaterFakeNews2022" role="doc-biblioref">Bodaghi and Oliveira 2022</a>)</span></p></li>
-<li><p>Internationale Flugverbindungen</p></li>
-<li><p>Verbreitung - ABM</p></li>
-<li><p>Zune Lehmann aus Kopenhagen</p></li>
-</ul></td>
-</tr>
-<tr class="even">
-<td>26.05.2025</td>
-<td>8</td>
-<td><strong>Open Lab Session</strong></td>
-<td><ul>
-<li><p>Q&amp;A</p></li>
-<li><p>Discussions</p></li>
-<li><p>Term Paper ideas</p></li>
-</ul></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>02.06.2025</td>
-<td>9</td>
-<td><strong>Geo-Data Analysis</strong></td>
-<td><ul>
-<li><p>Introduction to spatial data</p></li>
-<li><p>Basics in R</p></li>
-</ul></td>
-<td><p><span class="citation" data-cites="loganMakingPlaceSpace2012">(<a href="#ref-loganMakingPlaceSpace2012" role="doc-biblioref">Logan 2012</a>)</span>]</p>
-<p><span class="citation" data-cites="criado-perezInvisibleWomenData2019">(<a href="#ref-criado-perezInvisibleWomenData2019" role="doc-biblioref">Criado-Perez 2019</a>)</span></p>
-<ul>
-<li><p>Open Street Map Data</p></li>
-<li><p>GIS-Daten</p></li>
-<li><p>sf-package</p></li>
-<li><p><a href="https://cengel.github.io/R-spatial/intro.html">Using Spatial Data with</a></p></li>
-</ul></td>
-</tr>
-<tr class="even">
-<td>09.06.2025</td>
-<td>10</td>
-<td><strong>no lecture (Pfingstmontag)</strong></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>16.06.2025</td>
-<td>11</td>
-<td><p>Spatial data visualisation in R</p>
-<p>Spatial Inference</p></td>
-<td><ul>
-<li><p>Visualisation</p></li>
-<li><p>Spatial inference</p></li>
-</ul></td>
-<td><ul>
-<li>Wetterdaten auf Surveyanswers oder so</li>
-</ul></td>
-</tr>
-<tr class="even">
-<td>23.06.2025</td>
-<td>12</td>
-<td>Case Studies in Geodata Analysis</td>
-<td></td>
-<td><p><a href="https://www.science.org/doi/10.1126/sciadv.aao5948#supplementary-materials">CA Bail - Using Internet search data to examine the relationship between anti-Muslim and pro -Isis sentiment in US counties</a></p>
-<ul>
-<li>Supplementary Material</li>
-</ul>
-<p>Read at home, rather discussion of method, usability, etc.</p>
-<p>Around the world - with discussion</p>
-<ul>
-<li>GIS-Daten Stichprobenziehung</li>
-</ul></td>
-</tr>
-<tr class="odd">
-<td>30.06.2025</td>
-<td>13</td>
-<td>Open Science and Computational Social Science: Tools, Ethics, and Best Practices<br>
-</td>
-<td></td>
-<td><p><a href="https://github.com/czymaraclass/CSS_WS24">Kurs von Christian</a></p>
-<p>- Github,<br>
-- Quarto<br>
--</p>
-<p>OSF, etc.</p>
-<p>Best Practices, Ethische Herausforderungen, etc.</p>
-<ul>
-<li>Diskussion</li>
-</ul>
-<p>Raum für ganz kurze Inputvorträge, falls sich schon Gruppen gebildet haben</p>
-<ul>
-<li>Open Science</li>
-</ul></td>
-</tr>
-<tr class="even">
-<td>07.07.2025</td>
-<td>14</td>
-<td><strong>Presentations and discussion term paper</strong></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="course-material" class="level1">
-<h1>Course Material</h1>
-<ul>
-<li><p>Felix Lennert</p></li>
-<li><p>Christian Czymara</p></li>
-<li><p>Veronika Batzdörfer</p></li>
-<li><p>Till Hovestadt</p></li>
-<li><p>Johannes Zschache</p></li>
-</ul>
 
 
+<!-- -->
 
-</section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-bodaghiTheaterFakeNews2022" class="csl-entry" role="listitem">
-Bodaghi, Amirhosein, and Jonice Oliveira. 2022. <span>“The Theater of Fake News Spreading, Who Plays Which Role? <span>A</span> Study on Real Graphs of Spreading on <span>Twitter</span>.”</span> <em>Expert Systems with Applications</em> 189 (March): 116110. <a href="https://doi.org/10.1016/j.eswa.2021.116110">https://doi.org/10.1016/j.eswa.2021.116110</a>.
-</div>
-<div id="ref-criado-perezInvisibleWomenData2019" class="csl-entry" role="listitem">
-Criado-Perez, Caroline. 2019. <em>Invisible Women: Data Bias in a World Designed for Men</em>. New York: Abrams Press.
-</div>
-<div id="ref-loganMakingPlaceSpace2012" class="csl-entry" role="listitem">
-Logan, John R. 2012. <span>“Making a <span>Place</span> for <span>Space</span>: <span>Spatial Thinking</span> in <span>Social Science</span>.”</span> <em>Annual Review of Sociology</em> 38 (1): 507–24. <a href="https://doi.org/10.1146/annurev-soc-071811-145531">https://doi.org/10.1146/annurev-soc-071811-145531</a>.
-</div>
-</div></section><section class="quarto-appendix-contents" id="quarto-copyright"><h2 class="anchored quarto-appendix-heading">Copyright</h2><div class="quarto-appendix-contents"><div>Copyright Leonie Steinbrinker, 2024. All Rights Reserved</div></div></section></div></main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-copyright"><h2 class="anchored quarto-appendix-heading">Copyright</h2><div class="quarto-appendix-contents"><div>Copyright Leonie Steinbrinker, 2024. All Rights Reserved</div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -5317,6 +5063,57 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       container: window.document.getElementById('quarto-embedded-source-code-modal')
     });
     clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
@@ -5646,7 +5443,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class>
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;Week 09&quot;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> &quot;-&quot;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 
 
