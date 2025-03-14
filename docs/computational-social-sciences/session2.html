@@ -4956,7 +4956,7 @@ window.Quarto = {
 };
 </script>
 
-<style type="text/css">#sidebar {position: fixed;right: 20px; top: 100px; width: 250px; padding: 15px;background-color: #f8f9fa;border: 1px solid #e8bff7;border-radius: 8px;box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);}#custom-block {background-color: #f8f9fa;padding: 15px;border: 1px solid #e8bff7;border-radius: 8px;margin-bottom: 15px;}#toc {margin-top: 15px; }.content {width: 80%; margin-left: 5%; }#toc {width: 20%; margin-left: 0; }strong, b {color: #967bb6; }h1, h2, h3, h4, h5, h6 {color: #76448a; }</style>
+<style type="text/css">#sidebar {position: fixed;right: 20px; top: 100px; width: 250px; padding: 15px;background-color: #f8f9fa;border: 1px solid #e8bff7;border-radius: 8px;box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);}#custom-block {background-color: #f8f9fa;padding: 15px;border: 1px solid #e8bff7;border-radius: 8px;margin-bottom: 15px;}#toc {margin-top: 15px; }.content {width: 80%; margin-left: 5%; }#toc {width: 20%; margin-left: 0; }strong, b {color: #967bb6; }h1, h2, h3, h4, h5, h6 {color: #76448a; }.student-exercise {background-color: rgba(216, 179, 230, 0.6); padding: 15px;border: 2px solid rgba(168, 95, 197, 0.8); border-radius: 8px;margin-bottom: 15px;color: rgba(74, 35, 90, 0.9); font-weight: bold;}.student-exercise h2 {color: rgba(74, 35, 90, 1); }</style>
 </head>
 
 <body class="floating nav-fixed">
@@ -4981,6 +4981,22 @@ window.Quarto = {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-general-information" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">General Information</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-general-information">    
+        <li class="dropdown-header">Anti-Discrimination Policy</li>
+        <li>
+    <a class="dropdown-item" href="../general-information/exam.html">
+ <span class="dropdown-text">Course Assessment</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../general-information/ai_usage.html">
+ <span class="dropdown-text">AI-Usage</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-experimental-sociology" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Experimental Sociology</span>
     </a>
@@ -5001,12 +5017,16 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-computational-social-sciences">    
         <li>
+    <a class="dropdown-item" href="../computational-social-sciences/css_overview.html">
+ <span class="dropdown-text">Course Overview</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../computational-social-sciences/session1.html">
- <span class="dropdown-text">Session 1</span></a>
+ <span class="dropdown-text">Session 1 - Kickoff</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../computational-social-sciences/session2.html">
- <span class="dropdown-text">Session 2</span></a>
+ <span class="dropdown-text">Session 2 - SNA</span></a>
   </li>  
     </ul>
   </li>
@@ -5033,7 +5053,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">3/10/25</p>
+        <p class="date">3/14/25</p>
       </div>
     </div>
     
@@ -5050,6 +5070,7 @@ window.Quarto = {
   <ul>
   <li><a href="#social-networks" id="toc-social-networks" class="nav-link active" data-scroll-target="#social-networks">Social networks</a>
   <ul class="collapse">
+  <li><a href="#social-network-analysis" id="toc-social-network-analysis" class="nav-link" data-scroll-target="#social-network-analysis">Social Network Analysis</a></li>
   <li><a href="#types-of-social-networks" id="toc-types-of-social-networks" class="nav-link" data-scroll-target="#types-of-social-networks">Types of social networks</a>
   <ul class="collapse">
   <li><a href="#directed-networks" id="toc-directed-networks" class="nav-link" data-scroll-target="#directed-networks">Directed Networks</a></li>
@@ -5058,7 +5079,11 @@ window.Quarto = {
   </ul></li>
   <li><a href="#social-network-analysis-sna-in-r" id="toc-social-network-analysis-sna-in-r" class="nav-link" data-scroll-target="#social-network-analysis-sna-in-r">Social network analysis (SNA) in R</a>
   <ul class="collapse">
-  <li><a href="#network-representations" id="toc-network-representations" class="nav-link" data-scroll-target="#network-representations">Network representations</a></li>
+  <li><a href="#from-ties-to-graphs" id="toc-from-ties-to-graphs" class="nav-link" data-scroll-target="#from-ties-to-graphs">From ties to graphs</a></li>
+  <li><a href="#network-representations" id="toc-network-representations" class="nav-link" data-scroll-target="#network-representations">Network representations</a>
+  <ul class="collapse">
+  <li><a href="#adjacency-matrices" id="toc-adjacency-matrices" class="nav-link" data-scroll-target="#adjacency-matrices">Adjacency matrices</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -5083,7 +5108,7 @@ window.Quarto = {
 <li><strong>Role- and position-based relationships</strong> (e.g., hierarchies, affiliations, or professional connections)</li>
 <li><strong>Resource-transfer relationships</strong> (e.g., exchange of information, goods, or support)</li>
 </ul>
-<p>Networks are commonly visualised by <strong>nodes</strong> (usually circles), representing the actors and <strong>edges</strong> (lines or arrows) , representing the relationships.</p>
+<p>Networks are commonly visualised in plots by <strong>nodes</strong> (usually circles), representing the actors and <strong>edges</strong> (lines or arrows) , representing the relationships.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(igraph)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggraph)</span>
@@ -5115,9 +5140,17 @@ window.Quarto = {
 <figcaption>Social network with nodes and edges</figcaption>
 </figure>
 </div>
+<section id="social-network-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="social-network-analysis">Social Network Analysis</h2>
+<p>(Content from Omar Lizardo)</p>
+<p>When we speak about social network analysis from a sociological view, there are two broad aspects, that we most commonly talk about.</p>
+<p>For one we talk about concepts that we refer to as <em>network theories</em>, meaning theories and ideas about how people behave in social embeddings and how networks themselves “behave”. Questions, that are central to this are, where do network relations come from, how are they formed, what consequences do they have for the people involved?</p>
 <section id="excercise" class="level4">
 <h4 class="anchored" data-anchor-id="excercise">Excercise</h4>
-<p>Reflect briefly on the occasions, where in the past you have been confronted with social networks. In what theoretical concepts of sociology is the embedding of actors of central importance?</p>
+<p>Reflect briefly on the occasions, where in the past you have been confronted with social networks theories. In what theoretical concepts of sociology is the embedding of actors of central importance?</p>
+<p>The other big branch focuses mostly on the description of networks and on how to measure various network properties. It links social network contexts to a quantitative representation.</p>
+<p>In this class we will try to have a look at both “Faces” of social network analysis. We will learn some of the basic concepts and how they connect to measurable network properties.</p>
+</section>
 </section>
 <section id="types-of-social-networks" class="level2">
 <h2 class="anchored" data-anchor-id="types-of-social-networks">Types of social networks</h2>
@@ -5141,7 +5174,7 @@ window.Quarto = {
 <p><strong>Examples:</strong><br>
 - <strong>Mutual friendships</strong>: In many studies, friendship networks are assumed to be undirected, meaning if A considers B a friend, B also considers A a friend (although this is not always the case in reality).<br>
 - <strong>Co-authorship networks</strong>: If two researchers have co-authored a paper together, the connection exists for both equally.<br>
-- <strong>Collaboration networks</strong>: In corporate or scientific collaborations, individuals or institutions work together on projects, making the relationship inherently bidirectional.</p>
+- <strong>Collaboration networks</strong>: In corporate or scientific collaborations, individuals or institutions work together on projects, making the relationship inherently bidirectional. - <strong>Classmates</strong></p>
 <p>In practice, the choice between directed and undirected networks depends on the research question. If directionality is crucial (e.g., influence, hierarchy, or information flow), a <strong>directed network</strong> is necessary. However, if the goal is to analyze overall connectivity, <strong>undirected networks</strong> provide a simpler approach.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)  <span class="co"># For arranging plots</span></span>
@@ -5183,8 +5216,22 @@ window.Quarto = {
 </section>
 <section id="social-network-analysis-sna-in-r" class="level1">
 <h1>Social network analysis (SNA) in R</h1>
+<section id="from-ties-to-graphs" class="level2">
+<h2 class="anchored" data-anchor-id="from-ties-to-graphs">From ties to graphs</h2>
+<p>Imagine you where to plot all relationships of all people in the world. Of course, this is just not possible, as the measurement but also the representation would be too complex. Thus we need some kind of (theoretical) bounds, that make the analysis of networks possible.</p>
+<p>In social network analysis, we use <strong>graphs</strong> to represent social networks. We borrow graphs from the mathematical <strong>graph theory</strong> which also provides us with a definition.</p>
+<p>A graph is a set <span class="math inline">\(G\)</span> and thus a collection of entities.</p>
+<p>** Einfügen Inhalte aus Set theory**</p>
+<p>In the case of graphs, the entities inside the set are a set of vertices and a seperate set of edges.</p>
+<p><span class="math display">\[
+G = \{V, E\}
+\]</span></p>
+</section>
 <section id="network-representations" class="level2">
-
+<h2 class="anchored" data-anchor-id="network-representations">Network representations</h2>
+<section id="adjacency-matrices" class="level3">
+<h3 class="anchored" data-anchor-id="adjacency-matrices">Adjacency matrices</h3>
+<p>In graph theory and computer science an adjacencyy matric is a matrix used to represent a finite graph. The elements of a matrix indicate whether pairs of vertices are adjacent (or not) in the graph.</p>
 
 
 <!-- -->
@@ -5192,8 +5239,9 @@ window.Quarto = {
 
 </section>
 </section>
+</section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Network representations</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-wassermanSocialNetworkAnalysis2009" class="csl-entry" role="listitem">
 Wasserman, Stanley, and Katherine Faust. 2009. <em>Social Network Analysis: Methods and Applications</em>. 18. print. Structural Analysis in the Social Sciences 8. Cambridge: Cambridge Univ. Press.
 </div>
@@ -5709,7 +5757,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Role- and position-based relationships** (e.g., hierarchies, affiliations, or professional connections)</span>
 <span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Resource-transfer relationships** (e.g., exchange of information, goods, or support)</span>
 <span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>Networks are commonly visualised by **nodes** (usually circles), representing the actors and **edges** (lines or arrows) , representing the relationships.</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>Networks are commonly visualised in plots by **nodes** (usually circles), representing the actors and **edges** (lines or arrows) , representing the relationships.</span>
 <span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(igraph)</span>
@@ -5742,83 +5790,121 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a><span class="al">![Social network with nodes and edges](Graphics/definition.png)</span></span>
 <span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Excercise</span></span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a><span class="fu">## Social Network Analysis</span></span>
 <span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>Reflect briefly on the occasions, where in the past you have been confronted with social networks. In what theoretical concepts of sociology is the embedding of actors of central importance?</span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>(Content from Omar Lizardo)</span>
 <span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a><span class="fu">## Types of social networks</span></span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>When we speak about social network analysis from a sociological view, there are two broad aspects, that we most commonly talk about. </span>
 <span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>In social network analysis, we distinguish between **directed** and **undirected** networks. In most real-world cases, **directed networks** are more realistic because relationships are often asymmetric. However, **undirected networks** are easier to analyze mathematically and computationally.</span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>For one we talk about concepts that we refer to as *network theories*, meaning theories and ideas about how people behave in social embeddings and how networks themselves &quot;behave&quot;. Questions, that are central to this are, where do network relations come from, how are they formed, what consequences do they have for the people involved?</span>
 <span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a><span class="fu">### Directed Networks</span></span>
-<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>Directed networks represent relationships where the connection has a defined direction. These relationships do not necessarily have to be reciprocal.</span>
-<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>\forall A,B \in V:(A \to B) \not\Rightarrow (B \to A)</span>
-<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Excercise</span></span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>Reflect briefly on the occasions, where in the past you have been confronted with social networks theories. In what theoretical concepts of sociology is the embedding of actors of central importance?</span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>The other big branch focuses mostly on the description of networks and on how to measure various network properties. It links social network contexts to a quantitative representation. </span>
 <span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>**Examples:**\</span>
-<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Social media interactions**: On Twitter or Instagram, one user can follow another without being followed back.\</span>
-<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Communication networks**: E-Mails, phone calls or other forms of communication, can be sent out or received, thus defining a direction.</span>
-<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a><span class="fu">### Undirected Networks</span></span>
-<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a>Undirected networks assume that if a connection exists, it is inherently mutual. These networks are simpler to analyze since they do not require considering directionality.</span>
-<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a>\forall A, B \in V: (A \leftrightarrow B) \Rightarrow (B \leftrightarrow A)</span>
-<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a>**Examples:**\</span>
-<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Mutual friendships**: In many studies, friendship networks are assumed to be undirected, meaning if A considers B a friend, B also considers A a friend (although this is not always the case in reality).\</span>
-<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Co-authorship networks**: If two researchers have co-authored a paper together, the connection exists for both equally.\</span>
-<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Collaboration networks**: In corporate or scientific collaborations, individuals or institutions work together on projects, making the relationship inherently bidirectional.</span>
-<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a>In practice, the choice between directed and undirected networks depends on the research question. If directionality is crucial (e.g., influence, hierarchy, or information flow), a **directed network** is necessary. However, if the goal is to analyze overall connectivity, **undirected networks** provide a simpler approach.</span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>In this class we will try to have a look at both &quot;Faces&quot; of social network analysis. We will learn some of the basic concepts and how they connect to measurable network properties. </span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a><span class="fu">## Types of social networks</span></span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a>In social network analysis, we distinguish between **directed** and **undirected** networks. In most real-world cases, **directed networks** are more realistic because relationships are often asymmetric. However, **undirected networks** are easier to analyze mathematically and computationally.</span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a><span class="fu">### Directed Networks</span></span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a>Directed networks represent relationships where the connection has a defined direction. These relationships do not necessarily have to be reciprocal.</span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a>\forall A,B \in V:(A \to B) \not\Rightarrow (B \to A)</span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a>**Examples:**\</span>
+<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Social media interactions**: On Twitter or Instagram, one user can follow another without being followed back.\</span>
+<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Communication networks**: E-Mails, phone calls or other forms of communication, can be sent out or received, thus defining a direction.</span>
 <span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb3-117"><a href="#cb3-117" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)  <span class="co"># For arranging plots</span></span>
-<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a random graph with 30 nodes and 50 edges</span></span>
-<span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a>g2 <span class="ot">&lt;-</span> <span class="fu">erdos.renyi.game</span>(<span class="at">n =</span> <span class="dv">60</span>, <span class="at">p.or.m =</span> <span class="dv">70</span>, <span class="at">type =</span> <span class="st">&quot;gnm&quot;</span>, <span class="at">directed =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign random colors to nodes</span></span>
-<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(g2)<span class="sc">$</span>color <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>), <span class="fu">vcount</span>(g2), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign random sizes to nodes</span></span>
-<span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(g2)<span class="sc">$</span>size <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">5</span><span class="sc">:</span><span class="dv">12</span>, <span class="fu">vcount</span>(g2), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Plot the network using ggraph</span></span>
-<span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggraph</span>(g, <span class="at">layout =</span> <span class="st">&quot;fr&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb3-131"><a href="#cb3-131" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_edge_link</span>(<span class="at">color =</span> <span class="st">&quot;lightgray&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_node_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> size, <span class="at">color =</span> color), <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a>      <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span> <span class="ot">=</span> <span class="st">&quot;#967bb6&quot;</span>, <span class="st">&quot;green&quot;</span> <span class="ot">=</span> <span class="st">&quot;#e8bff7&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_void</span>() <span class="sc">+</span></span>
-<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
-<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggtitle</span>(<span class="st">&quot;Undirected Network&quot;</span>)</span>
-<span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the directed network plot</span></span>
-<span id="cb3-139"><a href="#cb3-139" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggraph</span>(g2, <span class="at">layout =</span> <span class="st">&quot;fr&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb3-140"><a href="#cb3-140" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link</span>(<span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">1.5</span>, <span class="st">&quot;mm&quot;</span>), <span class="at">type =</span> <span class="st">&quot;closed&quot;</span>), <span class="at">color =</span> <span class="st">&quot;lightgray&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb3-141"><a href="#cb3-141" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> size, <span class="at">color =</span> color), <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb3-142"><a href="#cb3-142" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span> <span class="ot">=</span> <span class="st">&quot;#967bb6&quot;</span>, <span class="st">&quot;green&quot;</span> <span class="ot">=</span> <span class="st">&quot;#e8bff7&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb3-143"><a href="#cb3-143" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
-<span id="cb3-144"><a href="#cb3-144" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
-<span id="cb3-145"><a href="#cb3-145" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Directed Network&quot;</span>)</span>
-<span id="cb3-146"><a href="#cb3-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-147"><a href="#cb3-147" aria-hidden="true" tabindex="-1"></a><span class="co"># Arrange the two plots side by side</span></span>
-<span id="cb3-148"><a href="#cb3-148" aria-hidden="true" tabindex="-1"></a>p1 <span class="sc">+</span> p2</span>
-<span id="cb3-149"><a href="#cb3-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-150"><a href="#cb3-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-151"><a href="#cb3-151" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-152"><a href="#cb3-152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-153"><a href="#cb3-153" aria-hidden="true" tabindex="-1"></a><span class="al">![](Graphics/undirected_directed.png)</span></span>
-<span id="cb3-154"><a href="#cb3-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-155"><a href="#cb3-155" aria-hidden="true" tabindex="-1"></a><span class="fu"># Social network analysis (SNA) in R</span></span>
-<span id="cb3-156"><a href="#cb3-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-157"><a href="#cb3-157" aria-hidden="true" tabindex="-1"></a><span class="fu">## Network representations</span></span>
+<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a><span class="fu">### Undirected Networks</span></span>
+<span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a>Undirected networks assume that if a connection exists, it is inherently mutual. These networks are simpler to analyze since they do not require considering directionality.</span>
+<span id="cb3-117"><a href="#cb3-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a>\forall A, B \in V: (A \leftrightarrow B) \Rightarrow (B \leftrightarrow A)</span>
+<span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a>**Examples:**\</span>
+<span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Mutual friendships**: In many studies, friendship networks are assumed to be undirected, meaning if A considers B a friend, B also considers A a friend (although this is not always the case in reality).\</span>
+<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Co-authorship networks**: If two researchers have co-authored a paper together, the connection exists for both equally.\</span>
+<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Collaboration networks**: In corporate or scientific collaborations, individuals or institutions work together on projects, making the relationship inherently bidirectional.</span>
+<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Classmates**</span>
+<span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a>In practice, the choice between directed and undirected networks depends on the research question. If directionality is crucial (e.g., influence, hierarchy, or information flow), a **directed network** is necessary. However, if the goal is to analyze overall connectivity, **undirected networks** provide a simpler approach.</span>
+<span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)  <span class="co"># For arranging plots</span></span>
+<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a random graph with 30 nodes and 50 edges</span></span>
+<span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a>g2 <span class="ot">&lt;-</span> <span class="fu">erdos.renyi.game</span>(<span class="at">n =</span> <span class="dv">60</span>, <span class="at">p.or.m =</span> <span class="dv">70</span>, <span class="at">type =</span> <span class="st">&quot;gnm&quot;</span>, <span class="at">directed =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-139"><a href="#cb3-139" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign random colors to nodes</span></span>
+<span id="cb3-140"><a href="#cb3-140" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(g2)<span class="sc">$</span>color <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>), <span class="fu">vcount</span>(g2), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-141"><a href="#cb3-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-142"><a href="#cb3-142" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign random sizes to nodes</span></span>
+<span id="cb3-143"><a href="#cb3-143" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(g2)<span class="sc">$</span>size <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">5</span><span class="sc">:</span><span class="dv">12</span>, <span class="fu">vcount</span>(g2), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-144"><a href="#cb3-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-145"><a href="#cb3-145" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Plot the network using ggraph</span></span>
+<span id="cb3-146"><a href="#cb3-146" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggraph</span>(g, <span class="at">layout =</span> <span class="st">&quot;fr&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb3-147"><a href="#cb3-147" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_edge_link</span>(<span class="at">color =</span> <span class="st">&quot;lightgray&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb3-148"><a href="#cb3-148" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_node_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> size, <span class="at">color =</span> color), <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb3-149"><a href="#cb3-149" aria-hidden="true" tabindex="-1"></a>      <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span> <span class="ot">=</span> <span class="st">&quot;#967bb6&quot;</span>, <span class="st">&quot;green&quot;</span> <span class="ot">=</span> <span class="st">&quot;#e8bff7&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb3-150"><a href="#cb3-150" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb3-151"><a href="#cb3-151" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
+<span id="cb3-152"><a href="#cb3-152" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggtitle</span>(<span class="st">&quot;Undirected Network&quot;</span>)</span>
+<span id="cb3-153"><a href="#cb3-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-154"><a href="#cb3-154" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the directed network plot</span></span>
+<span id="cb3-155"><a href="#cb3-155" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggraph</span>(g2, <span class="at">layout =</span> <span class="st">&quot;fr&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb3-156"><a href="#cb3-156" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link</span>(<span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">1.5</span>, <span class="st">&quot;mm&quot;</span>), <span class="at">type =</span> <span class="st">&quot;closed&quot;</span>), <span class="at">color =</span> <span class="st">&quot;lightgray&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb3-157"><a href="#cb3-157" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> size, <span class="at">color =</span> color), <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb3-158"><a href="#cb3-158" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span> <span class="ot">=</span> <span class="st">&quot;#967bb6&quot;</span>, <span class="st">&quot;green&quot;</span> <span class="ot">=</span> <span class="st">&quot;#e8bff7&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb3-159"><a href="#cb3-159" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb3-160"><a href="#cb3-160" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
+<span id="cb3-161"><a href="#cb3-161" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Directed Network&quot;</span>)</span>
+<span id="cb3-162"><a href="#cb3-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-163"><a href="#cb3-163" aria-hidden="true" tabindex="-1"></a><span class="co"># Arrange the two plots side by side</span></span>
+<span id="cb3-164"><a href="#cb3-164" aria-hidden="true" tabindex="-1"></a>p1 <span class="sc">+</span> p2</span>
+<span id="cb3-165"><a href="#cb3-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-166"><a href="#cb3-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-167"><a href="#cb3-167" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-168"><a href="#cb3-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-169"><a href="#cb3-169" aria-hidden="true" tabindex="-1"></a><span class="al">![](Graphics/undirected_directed.png)</span></span>
+<span id="cb3-170"><a href="#cb3-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-171"><a href="#cb3-171" aria-hidden="true" tabindex="-1"></a><span class="fu"># Social network analysis (SNA) in R</span></span>
+<span id="cb3-172"><a href="#cb3-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-173"><a href="#cb3-173" aria-hidden="true" tabindex="-1"></a><span class="fu">## From ties to graphs</span></span>
+<span id="cb3-174"><a href="#cb3-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-175"><a href="#cb3-175" aria-hidden="true" tabindex="-1"></a>Imagine you where to plot all relationships of all people in the world. Of course, this is just not possible, as the measurement but also the representation would be too complex. Thus we need some kind of (theoretical) bounds, that make the analysis of networks possible. </span>
+<span id="cb3-176"><a href="#cb3-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-177"><a href="#cb3-177" aria-hidden="true" tabindex="-1"></a>In social network analysis, we use **graphs** to represent social networks. We borrow graphs from the mathematical **graph theory** which also provides us with a definition. </span>
+<span id="cb3-178"><a href="#cb3-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-179"><a href="#cb3-179" aria-hidden="true" tabindex="-1"></a>A graph is a set $G$ and thus a collection of entities.</span>
+<span id="cb3-180"><a href="#cb3-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-181"><a href="#cb3-181" aria-hidden="true" tabindex="-1"></a>** Einfügen Inhalte aus Set theory**</span>
+<span id="cb3-182"><a href="#cb3-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-183"><a href="#cb3-183" aria-hidden="true" tabindex="-1"></a>In the case of graphs, the entities inside the set are a set of vertices and a seperate set of edges.</span>
+<span id="cb3-184"><a href="#cb3-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-185"><a href="#cb3-185" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb3-186"><a href="#cb3-186" aria-hidden="true" tabindex="-1"></a>G = <span class="sc">\{</span>V, E<span class="sc">\}</span></span>
+<span id="cb3-187"><a href="#cb3-187" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb3-188"><a href="#cb3-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-189"><a href="#cb3-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-190"><a href="#cb3-190" aria-hidden="true" tabindex="-1"></a><span class="fu">## Network representations</span></span>
+<span id="cb3-191"><a href="#cb3-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-192"><a href="#cb3-192" aria-hidden="true" tabindex="-1"></a><span class="fu">### Adjacency matrices</span></span>
+<span id="cb3-193"><a href="#cb3-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-194"><a href="#cb3-194" aria-hidden="true" tabindex="-1"></a>In graph theory and computer science an adjacencyy matric is a matrix used to represent a finite graph.</span>
+<span id="cb3-195"><a href="#cb3-195" aria-hidden="true" tabindex="-1"></a>The elements of a matrix indicate whether pairs of vertices are adjacent (or not) in the graph.</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

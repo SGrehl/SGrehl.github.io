@@ -33,7 +33,7 @@ editor: visual
 
 Of course, you are allowed to use tools like ChatGPT, Elicit, Copilot, or Canva to facilitate your tasks, to have content explained again, or to receive suggestions and inspiration, just as we do.
 
-However, in order to ensure that our work adheres to the principles of good scientific practice and to clarify our expectations regarding the use of these tools, we have compiled a few points below that should be considered
+However, in order to ensure that our work adheres to the principles of good scientific practice and to clarify our expectations regarding the use of these tools, we have compiled a few points below that should be considered.
 
 ## Responsibility for Content
 
@@ -53,11 +53,27 @@ Everything you submit, send, or publish under your name is your responsibility. 
 
 This issue arises from the way data and algorithms are used to train AI models. If the data used to train these models is biased or reflects social inequalities, the resulting AI model will also show these biases. This can lead to AI models reinforcing and perpetuating existing prejudices and discriminatory practices without being noticed.
 
+::: {layout-ncol="3"}
+
+![Model prompt: Scientist](Graphics/Scientist.jpg){group="my-gallery" width="300"}
+
+![Model prompt: Scientist](Graphics/Scientist2.jpg){group="my-gallery" width="300"}
+
+![Model prompt: Social Scientist](Graphics/Social%20Scientist.jpg){group="my-gallery" width="300"}
+
+![Model prompt: Social Scientist](Graphics/SocialScientist2.jpg){group="my-gallery" width="300"}
+
+![Model prompt: Computational Social Scientist](Graphics/Computationalsocialscientist.jpg){group="my-gallery" width="300"}
+
+![Model prompt: Computational Social Scientist](Graphics/Computationalsocialscientist2.jpg){group="my-gallery" width="300"}
+
+:::
+
 ## Environmental Impacts
 
 Large-scale AI deploymens are hosted in data centers, which have a significant toll on the planet [@AIHasEnvironmental2024].
 
-![The Chemetall Foot Lithium Operation in Clayton Valley, Nevada (Image by PDTillman, Wikipedia Commons)](Graphics/lithium mine.jpg)
+![The Chemetall Foot Lithium Operation in Clayton Valley, Nevada (Image by PDTillman, Wikipedia Commons)](Graphics/lithium%20mine.jpg){width="2000"}
 
 For example:
 
@@ -73,17 +89,103 @@ For example:
 
 -   A request made through ChatGPT consumes about 10-times the electricity of a Google search.
 
-## 
-
-## Reflection questions: 
+## Reflection questions:
 
 1.  What is your attitude on the usage of generative AI in class? What are further issues we encounter, when tolerating or not tolerating AI in class?
-    1.  	Copyright
+    1.  Copyright
+
     2.  Privacy
+
     3.  Value of human labor
+
     4.  Data exploitation
+
     5.  Shift of power
 2.  What can we do together to ensure an appropriate behavior with AI in class?
     1.  Collect tools we use, so everybody has the same chances, etc.
 
 # Collection of AI-Tools
+
+<html lang="de">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI-Tools Übersicht</title>
+
+<link href="https://unpkg.com/tabulator-tables/dist/css/tabulator.min.css" rel="stylesheet">
+
+```{=html}
+<script src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js"></script>
+```
+
+</head>
+
+<body>
+
+<h2>AI-Tools Übersicht</h2>
+
+::: {#table}
+:::
+
+<button onclick="addRow()">
+
+Neues Tool hinzufügen
+
+</button>
+
+<button onclick="saveData()">
+
+Daten speichern
+
+</button>
+
+```{=html}
+<script>
+        let tableData = [];
+
+        async function loadData() {
+            try {
+                let response = await fetch('data.json');
+                tableData = await response.json();
+                table.setData(tableData);
+            } catch (error) {
+                console.log("Daten konnten nicht geladen werden:", error);
+            }
+        }
+
+        var table = new Tabulator("#table", {
+            data: tableData,
+            layout: "fitColumns",
+            columns: [
+                { title: "Name des AI-Tools", field: "tool", editor: "input" },
+                { title: "Verwendungszweck", field: "task", editor: "input" },
+                { formatter: "buttonCross", width: 40, align: "center", cellClick: function(e, cell) { cell.getRow().delete(); } }
+            ]
+        });
+
+        function addRow() {
+            table.addRow({ tool: "", task: "" });
+        }
+
+        function saveData() {
+            let data = table.getData();
+            fetch('save.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            }).then(response => response.text())
+              .then(result => alert("Daten gespeichert!"))
+              .catch(error => console.log("Fehler beim Speichern:", error));
+        }
+
+        loadData();
+    </script>
+```
+
+</body>
+
+</html>

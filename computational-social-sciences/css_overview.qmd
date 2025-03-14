@@ -189,3 +189,5 @@ This course provides both conceptual and technical foundations for working with 
 -   Till Hovestadt
 
 -   Johannes Zschache
+
+-   Omar Lizardo
