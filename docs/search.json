@@ -9,7 +9,7 @@
   {
     "objectID": "general-information/anti_dis.html",
     "href": "general-information/anti_dis.html",
-    "title": "Guidelines on AI-Usage",
+    "title": "Anti-Discrimination Policy",
     "section": "",
     "text": "Guidelines"
   },
@@ -219,22 +219,22 @@
   {
     "objectID": "general-information/exam.html",
     "href": "general-information/exam.html",
-    "title": "Assessment Details",
+    "title": "Course Assessment",
     "section": "",
     "text": "Every two weeks, in one of the courses, we will assign you a problem set (Übungsblatt). You will typically have at least one week to complete and submit your solutions.\n\n\n\n\n\n\n\n\nWeek\nCourse\nTopics\n\n\n\n\n2\nCSS\ntba\n\n\n4\nCSS\ntba\n\n\n6\nES\ntba\n\n\n8\nCSS\ntba\n\n\n10\nES\ntba\n\n\n12\nES\ntba"
   },
   {
     "objectID": "general-information/exam.html#general-information",
     "href": "general-information/exam.html#general-information",
-    "title": "Assessment Details",
+    "title": "Course Assessment",
     "section": "General Information",
     "text": "General Information\n\nLength: 4,500 words (± 10%, approximately 15 pages, excluding the title page, references, and tables)\nFormatting:\n\n12 pt font size\n1.5 line spacing\nJustified text alignment\n\nLanguage: German or English (American or British)\nStructure: Write it like a scientific paper. Include an abstract, but no table of contents. Ensure that your figures are informative and that tables are compact and free from redundancies.\nTone: Use precise and professional scientific language. Clearly motivate your work and place it within the context of existing literature."
   },
   {
     "objectID": "general-information/exam.html#topic",
     "href": "general-information/exam.html#topic",
-    "title": "Assessment Details",
+    "title": "Course Assessment",
     "section": "Topic",
-    "text": "Topic\nYou are essentially free to choose any topic that connects to one of our courses. However, keep in mind that different types of projects will naturally require different levels of effort for different parts of the term paper.\n\nThe more complex your data acquisition is, the less complex your data analysis can be. In theory, there could even be extreme cases where a very complex data acquisition process means that no data analysis is required (e.g., if the script runs for months scraping data that cannot be used before the end of the semester).\nOn the other hand, if you use an existing dataset (where data preparation is straightforward), we will expect a more in-depth and sophisticated statistical analysis.\n\nIn general: talk to us — we will help you determine whether your project is too ambitious or too simple, where to focus your effort, and how to balance the workload. Also, keep in mind that your term paper can be the foundation for a larger, more complex project (e.g., your master’s thesis).\n\n\n\n\n\n\n\nField\nPossible topics\n\n\n\n\nExperimental sociolgy in general\n\nWrite a detailed pre-registration plan for an experiment.\n\n\n\nAgent-based models\n\nWrite a new, simple ABM.\nReproduce and modify an existing ABM.\nExamine an existing ABM in depth (e.g. sensitivity analysis)\n\n\n\nCSS in general\n\nAnalyse existing data.\nScrape or combine new datasets (and analyze them).\n\n\n\nNetworks\n\nUse existing network data and apply it to a new problem.\nGenerate a new network dataset.\n\n\n\nSpatial data\n\nUse existing spatial data and apply it to a new problem.\nGenerate a new spatial dataset."
+    "text": "Topic\nYou are essentially free to choose any topic that connects to one of our courses. However, keep in mind that different types of projects will naturally require different levels of effort for different parts of the term paper.\n\nThe more complex your data acquisition is, the less complex your data analysis can be. In theory, there could even be extreme cases where a very complex data acquisition process means that no data analysis is required (e.g., if the script runs for months scraping data that cannot be used before the end of the semester).\nOn the other hand, if you use an existing dataset (where data preparation is straightforward), we will expect a more in-depth and sophisticated statistical analysis.\n\nIn general: talk to us — we will help you determine whether your project is too ambitious or too simple, where to focus your effort, and how to balance the workload. Also, keep in mind that your term paper can be the foundation for a larger, more complex project (e.g., your master’s thesis).\n\n\n\n\n\n\n\nField\nPossible topics\n\n\n\n\nES in general\n\nWrite a detailed pre-registration plan for an experiment.\n\n\n\nAgent-based models\n\nWrite a new, simple ABM.\nReproduce and modify an existing ABM.\nExamine an existing ABM in depth (e.g. sensitivity analysis)\n\n\n\nCSS in general\n\nAnalyse existing data.\nScrape or combine new datasets (and analyze them).\n\n\n\nNetworks\n\nUse existing network data and apply it to a new problem.\nGenerate a new network dataset.\n\n\n\nSpatial data\n\nUse existing spatial data and apply it to a new problem.\nGenerate a new spatial dataset."
   }
 ]
