@@ -14,13 +14,6 @@
     "text": "Guidelines"
   },
   {
-    "objectID": "experimental-sociology/session2.html",
-    "href": "experimental-sociology/session2.html",
-    "title": "Experimental Sociology - Session 2: TBA",
-    "section": "",
-    "text": "Session 2: TBA\nWelcome to the second session of Experimental Sociology."
-  },
-  {
     "objectID": "experimental-sociology/es_overview.html",
     "href": "experimental-sociology/es_overview.html",
     "title": "Course Overview",
@@ -32,47 +25,89 @@
     "href": "experimental-sociology/es_overview.html#footnotes",
     "title": "Course Overview",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nA good tip from someone who’s spent hours raging over broken code: The problem is 99.99999% of the time sitting in front of the screen. You probably made a silly mistake and just aren’t spotting it right now. ChatGPT changed my life — just ask it where the error is, and it will usually confront you with your embarrassingly obvious mistake (not embarrassing at all — just joking!).↩︎"
+    "text": "Footnotes\n\n\nA good tip from someone who’s spent hours raging over broken code: The problem is 99.99999% of the time sitting in front of the screen. You probably made a silly mistake and just aren’t spotting it right now. Keep calm, drink some tea and relax. In this respect, ChatGPT changed my life — just ask it where the error is, and it will usually confront you with your obvious mistake.↩︎"
   },
   {
-    "objectID": "computational-social-sciences/session1.html",
-    "href": "computational-social-sciences/session1.html",
-    "title": "Session 1 - Kick-Off",
+    "objectID": "computational-social-sciences/week13.html",
+    "href": "computational-social-sciences/week13.html",
+    "title": "Week 13",
+    "section": "",
+    "text": "CopyrightCopyright Leonie Steinbrinker, 2024. All Rights Reserved"
+  },
+  {
+    "objectID": "computational-social-sciences/week11.html",
+    "href": "computational-social-sciences/week11.html",
+    "title": "Week 11",
+    "section": "",
+    "text": "CopyrightCopyright Leonie Steinbrinker, 2024. All Rights Reserved"
+  },
+  {
+    "objectID": "computational-social-sciences/week09.html",
+    "href": "computational-social-sciences/week09.html",
+    "title": "Week 09",
+    "section": "",
+    "text": "CopyrightCopyright Leonie Steinbrinker, 2024. All Rights Reserved"
+  },
+  {
+    "objectID": "computational-social-sciences/week07.html",
+    "href": "computational-social-sciences/week07.html",
+    "title": "Week 07",
+    "section": "",
+    "text": "CopyrightCopyright Leonie Steinbrinker, 2024. All Rights Reserved"
+  },
+  {
+    "objectID": "computational-social-sciences/week05.html",
+    "href": "computational-social-sciences/week05.html",
+    "title": "Week 05",
+    "section": "",
+    "text": "CopyrightCopyright Leonie Steinbrinker, 2024. All Rights Reserved"
+  },
+  {
+    "objectID": "computational-social-sciences/week03.html",
+    "href": "computational-social-sciences/week03.html",
+    "title": "Week 03",
+    "section": "",
+    "text": "CopyrightCopyright Leonie Steinbrinker, 2024. All Rights Reserved"
+  },
+  {
+    "objectID": "computational-social-sciences/week01.html",
+    "href": "computational-social-sciences/week01.html",
+    "title": "Week 01 - Kick-Off",
     "section": "",
     "text": "Welcome to the first session of Computational Social Sciences!\nToday, we will go over the plan for the semester, including:\nLooking forward to a great semester with you all!"
   },
   {
-    "objectID": "computational-social-sciences/session1.html#getting-started",
-    "href": "computational-social-sciences/session1.html#getting-started",
-    "title": "Session 1 - Kick-Off",
+    "objectID": "computational-social-sciences/week01.html#getting-started",
+    "href": "computational-social-sciences/week01.html#getting-started",
+    "title": "Week 01 - Kick-Off",
     "section": "Getting started",
     "text": "Getting started\n\nInstallation\nIn case you haven`t installed R and RStudio\n\nInstall R\nInstall RStudio\n\nThis is the easiest way, you are of course allowed to use other source code editors (like VSCode, Eclipse, PyCharm, Vim, Emacs or any other preference you might have). I will show the examples in class using RStudio though.\n\n\nStart a new file\nCreate a new R Script, R Notebook, or Quarto document:\n\nGo to the menu bar and click on File.\nSelect New File.\nChoose the type of file you want to create (R Script, R Notebook, or Quarto document).\n\nWorking directory\n\n# Find the current workind directory (where inputs are found and output are send)\ngetwd()\n\n# Change the current working directory\nsetwd(\"C://your/file/path\")\n\nWhen we analyze data in R usually we also depend on functions, other users and developers have written, which are usually stored in so called packages. Packages can be installed and called like this:\n\ninstall.packages(\"igraph\")\n\nlibrary(igraph)\n\n\nAccessing help files\n\n# Get help of a particular function\nhelp(rnorm)\n# or\n?rnorm\n\n# Search te help files for a word or a phrase (if you don't know the name of the function)\nhelp.search(\"weighted mean\")\n# or\n??\"weighted mean\"\n\n# Find help for a package\nhelp(package=igraph)\n\n\n\n\nAtomic classes in R\nAtomic in this case means the data is of size = 1.\n\n\n\nName\nDescription\nExample\n\n\n\n\ninteger\nWhole numbers\n5\n\n\nnumeric\nDecimal numbers\n4.2\n\n\nlogic\nBoolean values\nTRUE, FALSE\n\n\ncharacter\nText or string values\n\"Hello\"\n\n\nNA\nMissing value indicator\nNA\n\n\nNULL\nMissing object indicator\nNULL\n\n\nNaN\nNot a number (e.g. 0/0)\nNaN\n\n\nInf\nPositive or negative infinity\nInf, -Inf\n\n\n\nChecking types\n\nint &lt;- 5L #capital L forces integer-storage\nnum &lt;- 42.1\nlog &lt;- TRUE\nchar &lt;- \"Hello\"\n\nclass(int)\nclass(num)\nclass(log)\nclass(char)\n\n\n\nBasic Operations\n\nStorage of values\nValues can be stored in Variables. The name of a variable starts with a letter and may consist of any sequence of letters, numbers, dot or underline characters.\n\n# assigning values to variables\na &lt;- 15.7\na\na + 10\na / 10\nround(a)\n\n# storing results in new variables\nb &lt;- round(a)\n\n\n\nArithmetic operations\n\n# Addition\n2 + 7\n\n# Substraction\n4 - 2\n\n# Multiplication\n5 * 2\n\n# Division\n8 / 2\n\n# Natural log\nlog(2)\n\n# Exponentation\n2^3\n\n# Exponential\nexp(7)\n\n# Round to nearest integer\nfloor(4.8)\nceiling(4.8)\n\n# Round\nround(7.5)\n\n\n\nLogical operations\n\n# is equal?\nb == a\n\n# is unequal?\nb != a\n\n# is greater?\nb &gt; a\n\n# is smaller?\nb &lt; a\n\n# is greater or equal?\nb &gt;= a\n\n# is smaller or equal?\nb &lt;= a\n\n\n# Further logical operations\n(3 &gt; 2) & (4 &gt; 1)   # AND\n(3 &gt; 5) | (1 &gt; 4)   # OR\n!TRUE  # NOT"
   },
   {
-    "objectID": "computational-social-sciences/session1.html#classes-of-data-in-r",
-    "href": "computational-social-sciences/session1.html#classes-of-data-in-r",
-    "title": "Session 1 - Kick-Off",
+    "objectID": "computational-social-sciences/week01.html#classes-of-data-in-r",
+    "href": "computational-social-sciences/week01.html#classes-of-data-in-r",
+    "title": "Week 01 - Kick-Off",
     "section": "Classes of Data in R",
     "text": "Classes of Data in R\nR has several classes that define how data is structured and handled. Just to name a few:\n\n\n\n\n\n\n\n\nClass\nDescription\nExample\n\n\n\n\nvector\nBasic 1D array of elements of one type\nc(1, 2, 3)\n\n\nfactor\nCategorical data with levels\nfactor(c(\"low\", \"high\"))\n\n\nmatrix\n2D array with elements of one type\nmatrix(1:9, nrow = 3)\n\n\narray\nMulti-dimensional generalization of matrix\narray(1:12, dim = c(2,3,2))\n\n\nlist\nCollection of different types of objects\nlist(name=\"Alice\", age=25)\n\n\ndata.frame\nTabular data, columns can have different types\ndata.frame(a=1:3, b=c(\"x\",\"y\",\"z\"))\n\n\ntibble\nEnhanced version of a data frame\ntibble::tibble(a=1:3, b=c(\"x\",\"y\",\"z\"))\n\n\n\n\nVectors\nA vector is a simple data structure, that can store multiple elements of the same type. You can create a vector using the c() function.\n\n\n\n\n\n\nNote\n\n\n\nTo ensure, that all elements in a vector are of the same type, R will coerce the elements to the most general type. For example, if you combine a numeric and a character, the numeric will be coerced to a character.\n\n\n\nages &lt;- c(25, 30, 35, 40)\nnames &lt;- c(\"Albert\", \"Berta\", \"Charlie\", \"Dora\")\nsociologists &lt;- c(TRUE, FALSE, TRUE, FALSE)\n\n\nIndexication\nR indices start counting at 1, not at 0 like in many other programming languages. You can access elements of a vector, matrix, or data frame by using square brackets [].\n\n# Accessing elements of a vector\nages[1]\nnames[2]\nsociologists[3]\nages[c(1,4)] # First and fourth element\nnames[-1] #  All but the first element\nnames[names == \"Tom\"] #  All elements with the name \"Tom\"\nages[names == \"Tom\"] # Age of the person with the name \"Tom\"\n\n\nShort Exercise:\n\nWhat are the names of the sociologists?\nWhat are the ages of the non-sociologists?\nAre Berta and Charlie sociologists?\n\n\n\n\n\nMatrices\nMatrices are two-dimensional arrays with elements of the same type. You can create a matrix using the matrix() function.\n\nM &lt;- matrix(c(11, 0, 3, 3, 5, 1, 7, 1, 0),\n      nrow = 3)\nM\n\nN &lt;- matrix(1:9,\n      nrow = 3)\nN\n\n\nIndexication\n\nM[1, 2] # First row, second column\nM[1, ]   # First row\nM[, 2]   # Second column\n\n# name the row of a matrix\nrownames(M) &lt;- c(\"A\", \"B\", \"C\")\n\n# name the column of a matrix\ncolnames(M) &lt;- c(\"A\", \"B\", \"C\")\n\n\n\n\nData frames\nData frames are one of the most common data structures in R. They are two-dimensional objects, with rows and columns. Each column can have a different type. You can create a data frame using the data.frame() function.\n\ndf_friends &lt;- data.frame(name = names, \n                         religious = religious, \n                         age = ages)\ndf_friends\n\n\nIndexication\n\ndf_friends[3,]   # Dritte Zeile\n\ndf_friends[,2]   # Zweite Spalte\n\ndf_friends[3,2]  # Drittes Element in der zweiten Spalte\n\ndf_friends$name  # Zugriff auf eine Spalte per Namen\n\n\n\nAdd variables\n\nyear_of_birth &lt;- 2025 - df_friends$age\ndf_friends$birth_year &lt;- year_of_birth\n\ndf_friends$city &lt;- c(\"Leipzig\", \"Leipzig\", \"Berlin\", \"Leipzig\")\ndf_friends\n\n\n\n\nLists\nLists are collections of different types of objects. You can create a list using the list() function.\n\nfriends_list &lt;- list(\n  name = df_friends$name,\n  age = df_friends$age,\n  city = df_friends$city,\n  birth_year = df_friends$birth_year,\n  sociologists = df_friends$sociologists\n)\n\nfriends_list\n\n\nIndexication\n\nfriends_list$name # Index via name\nfriends_list[[1]] # Index via position\n\n\n# Further indexing\n\nlist_of_list &lt;- list(\n  l1 = friends_list,\n  l2 = list(\"something else\",\n            c(1:1000))\n)\n\nlist_of_lists$l1$name \nlist_of_lists[[1]][[1]] \nlist_of_lists[[2]]"
   },
   {
-    "objectID": "computational-social-sciences/session1.html#operations",
-    "href": "computational-social-sciences/session1.html#operations",
-    "title": "Session 1 - Kick-Off",
+    "objectID": "computational-social-sciences/week01.html#operations",
+    "href": "computational-social-sciences/week01.html#operations",
+    "title": "Week 01 - Kick-Off",
     "section": "Operations",
     "text": "Operations\nWe can perform several operations on different classes of vectors or variables. If we want to call variables we use the name of the object followed by the $ sign and the name of the variable.\n\n# give mimum value\nmin(vec)\n\n# give maximum value\nmax(vec)\n\n# give mean value\nmean(vec)\n\n# give median value\nmedian(vec)\n\n# give standard deviation\nsd(vec)\n\n# give sum of all values\nsum(vec)\n\n# give length of vector\nlength(vec)\n\n# give range of vector\nrange(vec)\n\n# give quantile of vector\nquantile(vec)\n\n# give unique values of vector\nunique(vec)\n\n# give number of unique values\nlength(unique(vec))\n\n# give frequency of values\ntable(vec)\n\n# This works also with variables. \nmean(my_data$score)"
   },
   {
-    "objectID": "computational-social-sciences/session1.html#control-structures",
-    "href": "computational-social-sciences/session1.html#control-structures",
-    "title": "Session 1 - Kick-Off",
+    "objectID": "computational-social-sciences/week01.html#control-structures",
+    "href": "computational-social-sciences/week01.html#control-structures",
+    "title": "Week 01 - Kick-Off",
     "section": "Control structures",
     "text": "Control structures\nControl structures are used to control the flow of a program. They include loops and conditional statements.\n\n\n\n\n\n\nTip\n\n\n\nThere are two tips, that will make your programming game a whole lot easier: 1. Don`t repeat yourself: If you find yourself writing the same code over and over again, you should consider automating your task. 2. Divide and conquer: If you have a complex task, break it down into smaller, more manageable parts.\n\n\n\nIf-loops\nA if-loop is useful to discern between different cases. The syntax is as follows\nIf (condition) {\n# do something\n} else {\n# do something else\n}\nIf the condition (logical value) is true, the code in the first block will be executed. Otherwise, the code in the second block will be executed.\n\nx &lt;- 10\n\nif (x &gt; 0) {\n  print(TRUE)\n} else {\n  print(FALSE)\n}\n\nFor simple vector-based operations, you can use the ifelse() function. It has the following structure: ifelse(condition, value if true, value if false).\n\nbirthyear &lt;- c(1991, 1984, 1969, 2004, 1988, 2007, 1996)\n\nifelse(birthyear &lt; 1996, \"other\", \"Generation Z\")\n\n\n\nLoops\nThere are two main types of loops in R: for and while loops. 1. for (i in I) {code execution}: The for loop is used to iterate over a sequence of values in a set. 2. while (condition) {code execution}: The while loop is used to execute a block of code as long as a condition is true.\nExample: Compute how long a person still has to work until retirement (for-loop)\n\nages &lt;- c(21, 29, 61, 72, 12)\n\nfor (i in ages) {\n  if (i &gt;= 67) {\n    print(\"retired\")\n  }\n  if (i &lt; 18) {\n    print(\"in education\")\n  }\n  if (i &gt; 18 & i &lt; 67) {\n    rest &lt;- 67 - i\n    print(rest)\n  }\n}\n\nExample: Compute how long a person can drink, staying below a certain alcohol level and not spending more than a certain amount of money (while-loop)\n\nmoney &lt;- 25\nalcohol &lt;- 0\n\nwhile (money &gt;= 3 & alcohol &lt; 1.2) {\n    \n    money &lt;- money - 3\n    alcohol &lt;- alcohol + 0.3\n    \n    print(paste0(\"Money spent: \", money))\n    print(paste0(\"Alcohol in blood: \", alcohol))\n       \n}\n\n\n\nFunctions\nSometimes, we want to repeat a certain task multiple times. In this case, we can write a function. Functions are blocks of code that perform a specific task. They can take arguments as input and return a value as output. The syntax follows: function_name &lt;- function(argument) {function body}\nWhen doing this, the function is loaded as an object to the global environment.\n\n# Creating and using functions\nmy_function &lt;- function(x) {\n  \n  y &lt;- x^2 + 3\n\n  return(y)\n}\n\nmy_function(5)  # Example usage\n\nApply functions The family of apply functions is used to apply a function to the rows or columns of a matrix or data frame. The most common functions are apply(), lapply(), sapply(), and tapply(). In principle, they are a more efficient variant of for-loops running a function FUN over a vector or list X. Most often, we use lapply() which returns a list of outputs (one entry per part in X).\n\nnums &lt;- c(1:10)\nnew_nums &lt;- lapply(X = nums, # run over nums\n                   FUN = my_function) # run my_function\n                   \n\nnew_nums"
   },
   {
-    "objectID": "computational-social-sciences/session1.html#global-environment",
-    "href": "computational-social-sciences/session1.html#global-environment",
-    "title": "Session 1 - Kick-Off",
+    "objectID": "computational-social-sciences/week01.html#global-environment",
+    "href": "computational-social-sciences/week01.html#global-environment",
+    "title": "Week 01 - Kick-Off",
     "section": "Global environment",
     "text": "Global environment\nThe global environment is the workspace of R. It contains all objects that you have created during your session. You can see all objects in the global environment in the upper right corner of RStudio. You can also list all objects in the global environment using the ls() function.\n\nls()\n\n# delete specific object\nrm(df_friends)\n\n# delete global environment\nrm(list = ls())\n\n# Save objects in global environment\n# Save data\nsave(df_friends, file = \"files/df_friends.RData\")\n\n# Load data\nload(\"files/df_friends.RData\")\n\nThats about it. If you have any questions during the semester, feel free to ask! You can also always come back to this document to refresh your memory.\n\nHomework\nPlease install the packages igraph, ggplot2, ggraph, intergraph, sand, devtools, and UserNetR in your R environment. You can do this by running the following code:\n\ninstall.packages(\"igraph\")\ninstall.packages(\"igraphdata\")\ninstall.packages(\"ggplot2\")\n\ninstall.packages(\"sand\")\ninstall.packages(\"devtools\")\nlibrary(devtools)\ninstall_github(\"DougLuke/UserNetR\")\ninstall.packages(\"intergraph\")"
   },
@@ -84,23 +119,65 @@
     "text": "Welcome to the Computational Social Science (CSS) seminar! This hands-on course explores how social network analysis and geo/spatial data can enhance our understanding of society. Using R, we will learn techniques for visualizing, analyzing, and integrating these data types with existing datasets—such as survey or experimental data — to gain deeper insights into social phenomena.\n\nGeneral Information\n\n\n\nMonday, weekly\n15:15 - 16:45\n\n\nGWZ, H2 1.15\nStart: 4/7/25\n\n\n\n\nOur focus will be twofold:\n\nSocial Network Analysis: Understanding relationships and structures in network data, applying visualization techniques, and conducting empirical analyses.\nGeo/Spatial Data Analysis: Examining spatial patterns and dependencies, and leveraging location-based data for social science research.\n\nBy combining these data sources with traditional and emerging approaches—including text data (next Semester with Felix) and simulated data (this semester with Sascha) —we will explore innovative ways to study societal dynamics. Throughout the seminar, we will engage with inspiring case studies and hands-on applications to develop our own research perspectives.\nThis course provides both conceptual and technical foundations for working with computational methods in the social sciences, empowering participants to extend existing datasets and refine their analytical toolkit.\n\nAbout me\n\nForschungsgebiet\nMasterarbeit über Netztwerke\nErreichbarkeit und Sprechstunde\n\n\n\nCourse Goals\n\n\nRequirements\n\n\nSyllabus\n\n\n\nDate\nWeek\nSubject\nContent\nLiterature and Materials\n\n\n\n\n07.04.2025\n1\nKick-Off\n\nIntroduction\nCourse Setup and Structure\n\nBackground Materials\nData Overview\n\nR-Refresher\n\n\nBasic R von Veronika Batzdörfer\nhttps://missing.csail.mit.edu/\n\n\n\n14.04.2025\n2\nNetworkanalysis in R\n\nSocial Networks\nIntroduction to Social Networkanalysis in R\n\nRepresentation of networks\nNetwork Attributes\n\nHandling missing data\n\nNetwork Data in R\nWasserman und Faust\nSocial Network Analysis 101: Ultimate Guide - Visible Network Labs\n\nAusgabe 1. Übungsblatt\n\n\n\n21.04.2025\n3\nno lecture (Ostermontag)\n\n\n\n\n28.04.2025\n4\nKey Metrics and theoretical Insight\n\nDescriptives\nCentrality and Assortavity\nHomophily\nHierarchy\n\n\n\n\n05.05.2025\n5\nNetwork Visualisation\n\nVisualisation basics\nInteractive visualisation\n\nZschache\nProperties of real life netwirks\n\n\n12.05.2025\n6\nCommunity Detection & Structural Comparison\n\nAufgaben in Yans (Linköping) Skript\nRossweil: infomap\nPNAS - Algorithmen\nEigene Masterarbeit\n\n\n19.05.2025\n7\nStatistical Models & Case Studies\n\nERGMs\n\nIntroduction to ERGMs | Social Network Analysis for Anthropologists\n\nSpiegelMining – Reverse Engineering von Spiegel-Online (33c3)\n(Bodaghi and Oliveira 2022)\nInternationale Flugverbindungen\nVerbreitung - ABM\nZune Lehmann aus Kopenhagen\n\n\n\n26.05.2025\n8\nOpen Lab Session\n\nQ&A\nDiscussions\nTerm Paper ideas\n\n\n\n\n02.06.2025\n9\nGeo-Data Analysis\n\nIntroduction to spatial data\nBasics in R\n\n(Logan 2012)]\n(Criado-Perez 2019)\n\nOpen Street Map Data\nGIS-Daten\nsf-package\nUsing Spatial Data with\n\n\n\n09.06.2025\n10\nno lecture (Pfingstmontag)\n\n\n\n\n16.06.2025\n11\nSpatial data visualisation in R\nSpatial Inference\n\nVisualisation\nSpatial inference\n\n\nWetterdaten auf Surveyanswers oder so\n\n\n\n23.06.2025\n12\nCase Studies in Geodata Analysis\n\nCA Bail - Using Internet search data to examine the relationship between anti-Muslim and pro -Isis sentiment in US counties\n\nSupplementary Material\n\nRead at home, rather discussion of method, usability, etc.\nAround the world - with discussion\n\nGIS-Daten Stichprobenziehung\n\n\n\n30.06.2025\n13\nOpen Science and Computational Social Science: Tools, Ethics, and Best Practices\n\n\nKurs von Christian\n- Github,\n- Quarto\n-\nOSF, etc.\nBest Practices, Ethische Herausforderungen, etc.\n\nDiskussion\n\nRaum für ganz kurze Inputvorträge, falls sich schon Gruppen gebildet haben\n\nOpen Science\n\n\n\n07.07.2025\n14\nPresentations and discussion term paper\n\n\n\n\n\n\n\nCourse Material\n\nFelix Lennert\nChristian Czymara\nVeronika Batzdörfer\nTill Hovestadt\nJohannes Zschache\n\n\n\n\n\n\nReferences\n\nBodaghi, Amirhosein, and Jonice Oliveira. 2022. “The Theater of Fake News Spreading, Who Plays Which Role? A Study on Real Graphs of Spreading on Twitter.” Expert Systems with Applications 189 (March): 116110. https://doi.org/10.1016/j.eswa.2021.116110.\n\n\nCriado-Perez, Caroline. 2019. Invisible Women: Data Bias in a World Designed for Men. New York: Abrams Press.\n\n\nLogan, John R. 2012. “Making a Place for Space: Spatial Thinking in Social Science.” Annual Review of Sociology 38 (1): 507–24. https://doi.org/10.1146/annurev-soc-071811-145531.\n\nCopyrightCopyright Leonie Steinbrinker, 2024. All Rights Reserved"
   },
   {
-    "objectID": "computational-social-sciences/session2.html",
-    "href": "computational-social-sciences/session2.html",
-    "title": "Session 02 - Social Network Analysis",
+    "objectID": "computational-social-sciences/week02.html",
+    "href": "computational-social-sciences/week02.html",
+    "title": "Week 02 - Social Network Analysis",
     "section": "",
     "text": "Welcome to the second session of the seminar Computational Social Sciences"
   },
   {
-    "objectID": "computational-social-sciences/session2.html#types-of-social-networks",
-    "href": "computational-social-sciences/session2.html#types-of-social-networks",
-    "title": "Session 02 - Social Network Analysis",
+    "objectID": "computational-social-sciences/week02.html#types-of-social-networks",
+    "href": "computational-social-sciences/week02.html#types-of-social-networks",
+    "title": "Week 02 - Social Network Analysis",
     "section": "Types of social networks",
     "text": "Types of social networks\nIn social network analysis, we distinguish between directed and undirected networks. In most real-world cases, directed networks are more realistic because relationships are often asymmetric. However, undirected networks are easier to analyze mathematically and computationally.\n\nDirected Networks\nDirected networks represent relationships where the connection has a defined direction. These relationships do not necessarily have to be reciprocal.\n\\[\n\\forall A,B \\in V:(A \\to B) \\not\\Rightarrow (B \\to A)\n\\]\nExamples:\n- Social media interactions: On Twitter or Instagram, one user can follow another without being followed back.\n- Communication networks: E-Mails, phone calls or other forms of communication, can be sent out or received, thus defining a direction.\n\n\nUndirected Networks\nUndirected networks assume that if a connection exists, it is inherently mutual. These networks are simpler to analyze since they do not require considering directionality.\n\\[\n\\forall A, B \\in V: (A \\leftrightarrow B) \\Rightarrow (B \\leftrightarrow A)\n\\]\nExamples:\n- Mutual friendships: In many studies, friendship networks are assumed to be undirected, meaning if A considers B a friend, B also considers A a friend (although this is not always the case in reality).\n- Co-authorship networks: If two researchers have co-authored a paper together, the connection exists for both equally.\n- Collaboration networks: In corporate or scientific collaborations, individuals or institutions work together on projects, making the relationship inherently bidirectional.\nIn practice, the choice between directed and undirected networks depends on the research question. If directionality is crucial (e.g., influence, hierarchy, or information flow), a directed network is necessary. However, if the goal is to analyze overall connectivity, undirected networks provide a simpler approach.\n\nlibrary(patchwork)  # For arranging plots\n\n\n# Generate a random graph with 30 nodes and 50 edges\ng2 &lt;- erdos.renyi.game(n = 60, p.or.m = 70, type = \"gnm\", directed = TRUE)\n\n# Assign random colors to nodes\nV(g2)$color &lt;- sample(c(\"blue\", \"green\"), vcount(g2), replace = TRUE)\n\n# Assign random sizes to nodes\nV(g2)$size &lt;- sample(5:12, vcount(g2), replace = TRUE)\n\n  # Plot the network using ggraph\np1 &lt;- ggraph(g, layout = \"fr\") + \n      geom_edge_link(color = \"lightgray\", alpha = 0.5) +\n      geom_node_point(aes(size = size, color = color), alpha = 0.8) +\n      scale_color_manual(values = c(\"blue\" = \"#967bb6\", \"green\" = \"#e8bff7\")) +\n      theme_void() +\n      theme(legend.position = \"none\") +\n      ggtitle(\"Undirected Network\")\n\n# Create the directed network plot\np2 &lt;- ggraph(g2, layout = \"fr\") + \n  geom_edge_link(arrow = arrow(length = unit(1.5, \"mm\"), type = \"closed\"), color = \"lightgray\", alpha = 0.5) +\n  geom_node_point(aes(size = size, color = color), alpha = 0.8) +\n  scale_color_manual(values = c(\"blue\" = \"#967bb6\", \"green\" = \"#e8bff7\")) +\n  theme_void() +\n  theme(legend.position = \"none\") +\n  ggtitle(\"Directed Network\")\n\n# Arrange the two plots side by side\np1 + p2"
   },
   {
-    "objectID": "experimental-sociology/session1.html",
-    "href": "experimental-sociology/session1.html",
-    "title": "Experimental Sociology - Session 1: Introduction",
+    "objectID": "computational-social-sciences/week04.html",
+    "href": "computational-social-sciences/week04.html",
+    "title": "Week 04",
+    "section": "",
+    "text": "CopyrightCopyright Leonie Steinbrinker, 2024. All Rights Reserved"
+  },
+  {
+    "objectID": "computational-social-sciences/week06.html",
+    "href": "computational-social-sciences/week06.html",
+    "title": "Week 06",
+    "section": "",
+    "text": "CopyrightCopyright Leonie Steinbrinker, 2024. All Rights Reserved"
+  },
+  {
+    "objectID": "computational-social-sciences/week08.html",
+    "href": "computational-social-sciences/week08.html",
+    "title": "Week 08",
+    "section": "",
+    "text": "CopyrightCopyright Leonie Steinbrinker, 2024. All Rights Reserved"
+  },
+  {
+    "objectID": "computational-social-sciences/week10.html",
+    "href": "computational-social-sciences/week10.html",
+    "title": "Week 10",
+    "section": "",
+    "text": "CopyrightCopyright Leonie Steinbrinker, 2024. All Rights Reserved"
+  },
+  {
+    "objectID": "computational-social-sciences/week12.html",
+    "href": "computational-social-sciences/week12.html",
+    "title": "Week 12",
+    "section": "",
+    "text": "CopyrightCopyright Leonie Steinbrinker, 2024. All Rights Reserved"
+  },
+  {
+    "objectID": "computational-social-sciences/week14.html",
+    "href": "computational-social-sciences/week14.html",
+    "title": "Week 14",
+    "section": "",
+    "text": "CopyrightCopyright Leonie Steinbrinker, 2024. All Rights Reserved"
+  },
+  {
+    "objectID": "experimental-sociology/week01.html",
+    "href": "experimental-sociology/week01.html",
+    "title": "Experimental Sociology - Week 1",
     "section": "",
     "text": "Session 1: Introduction\nWelcome to the first session of Experimental Sociology. Here we will cover the basics of experimental design in social research.\nContent for session 1 goes here…"
   },

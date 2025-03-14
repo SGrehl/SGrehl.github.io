@@ -1,9 +1,5 @@
 ---
 title: "Guidelines on AI-Usage"
-date: today
-date-format: short
-title-block-banner: true
-editor: visual
 ---
 
 # Guidelines
