@@ -3,3 +3,5 @@ title: "Anti-Discrimination Policy"
 ---
 
 # Guidelines
+
+![](Graphics/disc.png)

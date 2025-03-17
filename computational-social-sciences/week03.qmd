@@ -1,4 +1,15 @@
 ---
 title: "Week 03"
-subtitle: "-"
+subtitle: "Key metrics and theoretical insight"
 ---
+
+# Network concepts
+
+Complete networks
+
+Cliques
+
+Path
+
+Dyads
+

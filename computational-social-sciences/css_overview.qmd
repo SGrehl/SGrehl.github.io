@@ -180,6 +180,10 @@ This course provides both conceptual and technical foundations for working with 
 
 # Course Material
 
+Where to find materials
+
+Different blocks (student-exercise) in class (tips) out of class
+
 \- contents come from:
 
 -   Felix Lennert

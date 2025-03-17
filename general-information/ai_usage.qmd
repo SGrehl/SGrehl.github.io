@@ -1,32 +1,5 @@
 ---
 title: "Guidelines on AI-Usage"
-date: today
-date-format: short
-title-block-banner: true
-format:
-  html:
-    theme: cerulian
-    toc: true
-    toc-title: Contents
-    toc-location: left
-    page-layout: full
-    html-math method: katex
-    code-fold: false
-    code-tools: true
-    code-block-bg: true
-    code-block-border-left: "#31BAE9"
-    highlight-style: github
-    eval: false
-    results: hide
-    embed-resources: true
-    self-contained-math: true
-    bibliography-style: apa
-    link-citation: true
-    lightbox:
-      loop: true
-      match: auto
-copyright: "Copyright Leonie Steinbrinker, 2024. All Rights Reserved"      
-editor: visual
 ---
 
 # Use of AI
@@ -73,7 +46,11 @@ This issue arises from the way data and algorithms are used to train AI models. 
 
 Large-scale AI deploymens are hosted in data centers, which have a significant toll on the planet [@AIHasEnvironmental2024].
 
+<<<<<<< HEAD
 ![The Chemetall Foot Lithium Operation in Clayton Valley, Nevada (Image by PDTillman, Wikipedia Commons)](Graphics/lithium%20mine.jpg){width="2000"}
+=======
+![The Chemetall Foot Lithium Operation in Clayton Valley, Nevada (Image by PDTillman, Wikipedia Commons)](Graphics/lithium%20mine.jpg)
+>>>>>>> a9df660be73cedb9112929f65c5b389ede7341fc
 
 For example:
 
@@ -89,10 +66,23 @@ For example:
 
 -   A request made through ChatGPT consumes about 10-times the electricity of a Google search.
 
+<<<<<<< HEAD
 ## Reflection questions:
 
 1.  What is your attitude on the usage of generative AI in class? What are further issues we encounter, when tolerating or not tolerating AI in class?
     1.  Copyright
+=======
+## 
+
+## Reflection questions:
+
+1.  What is your attitude on the usage of generative AI in class? What are further issues we encounter, when tolerating or not tolerating AI in class?
+    1.  
+
+        ```         
+         Copyright
+        ```
+>>>>>>> a9df660be73cedb9112929f65c5b389ede7341fc
 
     2.  Privacy
 
