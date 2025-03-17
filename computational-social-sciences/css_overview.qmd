@@ -180,6 +180,8 @@ This course provides both conceptual and technical foundations for working with 
 
 # Course Material
 
+\- contents come from:
+
 -   Felix Lennert
 
 -   Christian Czymara

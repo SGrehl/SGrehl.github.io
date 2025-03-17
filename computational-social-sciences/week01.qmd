@@ -1,34 +1,6 @@
 ---
-title: "Session 1 - Kick-Off"
+title: "Week 01 - Kick-Off"
 subtitle: "Course Setup, Introduction and R-refresher"
-date: today
-date-format: short
-title-block-banner: "#e7d6e6"
-format:
-  html:
-    theme: cerulian
-    toc: true
-    toc-title: Contents
-    toc-location: left
-    page-layout: full
-    html-math method: katex
-    code-fold: false
-    code-tools: true
-    code-block-bg: "FBCCD1"
-    code-block-border-left: "#e7d6e6"
-    highlight-style: atom-one
-    eval: false
-    results: show
-    embed-resources: true
-    self-contained-math: true
-    bibliography: CSS.bib
-    bibliography-style: apa
-    link-citation: true
-    lightbox:
-      loop: true
-      match: auto
-css: styles.css
-copyright: "Copyright Leonie Steinbrinker, 2024. All Rights Reserved"
 ---
 
 Welcome to the first session of **Computational Social Sciences**!
@@ -49,9 +21,17 @@ Looking forward to a great semester with you all!
 
 Online Umfrage zu verschiedenen Random-Themen und Soziologie Abschluss mit Interessen und Erwartungen
 
-# R-Refresher
+# **R**efresher
 
-R is a statistical programming language and environment. It includes thousands of packages for data management, analasys and visualisation. It supports high quality graphic. It is free and open source, there is a large community of R users and developers. Usually new statistical and analytical techniques are quickly available in R
+R is a statistical programming language and environment. It includes thousands of packages for data management, analasys and visualisation. It supports high quality graphic. It is **free and open source**, there is a large community of R users and developers. Usually new statistical and analytical techniques are quickly available in R.
+
+R is modular through the use of opackages, and it keeps on expanding
+
+Can be used for all steps in the research process (data collection, processing, exploration, analysis and reporting/ publishing)
+
+Keeps groing with cool community groups
+
+R-Ladies, R Consortium, rOpenSci, etc.
 
 New functions can be written and checked by other users
 
@@ -71,6 +51,8 @@ In case you haven\`t installed R and RStudio
 
 1.  Install **R**
 2.  Install **RStudio**
+
+![R-Meme (PsyTeachR)](Graphics/R_meme.png)
 
 This is the easiest way, you are of course allowed to use other source code editors (like `VSCode`, `Eclipse`, `PyCharm`, `Vim`, `Emacs` or any other preference you might have). I will show the examples in class using RStudio though.
 
@@ -149,7 +131,7 @@ class(char)
 
 ```
 
-### Basic Operations 
+### Basic Operations
 
 #### Storage of values
 
@@ -234,7 +216,7 @@ b <= a
 R has several classes that define how data is structured and handled. Just to name a few:
 
 | Class | Description | Example |
-|-----------------|--------------------------------------|-----------------|
+|------------------|-------------------------------------|------------------|
 | vector | Basic 1D array of elements of one type | `c(1, 2, 3)` |
 | factor | Categorical data with levels | `factor(c("low", "high"))` |
 | matrix | 2D array with elements of one type | `matrix(1:9, nrow = 3)` |
@@ -251,7 +233,6 @@ A vector is a simple data structure, that can store multiple elements of the sam
 To ensure, that all elements in a vector are of the same type, R will coerce the elements to the most general type. For example, if you combine a numeric and a character, the numeric will be coerced to a character.
 :::
 
-
 ```{r}
 ages <- c(25, 30, 35, 40)
 names <- c("Albert", "Berta", "Charlie", "Dora")
@@ -259,7 +240,6 @@ sociologists <- c(TRUE, FALSE, TRUE, FALSE)
 ```
 
 ##### Indexication
-
 
 **R indices start counting at 1**, not at 0 like in many other programming languages. You can access elements of a vector, matrix, or data frame by using square brackets `[]`.
 
@@ -277,10 +257,10 @@ ages[names == "Tom"] # Age of the person with the name "Tom"
 
 ::: student-exercise
 **Short Exercise:**
- 
+
 1.  What are the names of the sociologists?
 2.  What are the ages of the non-sociologists?
-2.  Are Berta and Charlie sociologists?
+3.  Are Berta and Charlie sociologists?
 :::
 
 #### Matrices
@@ -383,6 +363,8 @@ list_of_lists[[2]]
 
 ```
 
+![Unlist-meme (R-Memes for Statistical Friendss - Facebook 2017)](Graphics/unlist_meme.png){width="250"}
+
 ## Operations
 
 We can perform several operations on different classes of vectors or variables. If we want to call variables we use the name of the object followed by the `$` sign and the name of the variable.
@@ -428,7 +410,6 @@ table(vec)
 mean(my_data$score)
 
 ```
-
 
 ## Control structures
 
@@ -581,3 +562,5 @@ install_github("DougLuke/UserNetR")
 install.packages("intergraph")
 ```
 :::
+
+# Further **R**esources

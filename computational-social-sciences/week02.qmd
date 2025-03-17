@@ -1,34 +1,6 @@
 ---
-title: "Session 02 - Social Network Analysis"
+title: "Week 02 - Social Network Analysis"
 subtitle: "Network representations and basic manipulations in R"
-date: today
-date-format: short
-title-block-banner: "#e7d6e6"
-format:
-  html:
-    theme: cerulian
-    toc: true
-    toc-title: Contents
-    toc-location: left
-    page-layout: full
-    html-math method: katex
-    code-fold: false
-    code-tools: true
-    code-block-bg: true
-    code-block-border-left: "#e7d6e6"
-    highlight-style: atom-one
-    eval: false
-    results: hide
-    embed-resources: true
-    self-contained-math: true
-    bibliography: CSS.bib
-    bibliography-style: apa
-    link-citation: true
-    lightbox:
-      loop: true
-      match: auto
-css: styles.css
-copyright: "Copyright Leonie Steinbrinker, 2024. All Rights Reserved"      
 ---
 
 Welcome to the second session of the seminar **Computational Social Sciences**
@@ -174,7 +146,7 @@ Imagine you where to plot all relationships of all people in the world. Of cours
 
 In social network analysis, we use **graphs** to represent social networks. We borrow graphs from the mathematical **graph theory** which also provides us with a definition. 
 
-A graph is basically a set $G$.
+A graph is a set $G$ and thus a collection of entities.
 
 ** Einfügen Inhalte aus Set theory**
 
@@ -184,9 +156,6 @@ $$
 G = \{V, E\}
 $$
 
-### Types of graphs 
-
-Relations of sets
 
 ## Network representations
 
@@ -194,9 +163,5 @@ Relations of sets
 
 In graph theory and computer science an adjacencyy matric is a matrix used to represent a finite graph.
 The elements of a matrix indicate whether pairs of vertices are adjacent (or not) in the graph.
-
-### Graphs
-
-I am not fully sure yet concerning the structure of this class
 
 
