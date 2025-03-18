@@ -1,8 +1,7 @@
 project:
   type: website
-date: today
-date-format: short
-title-block-banner: "#e7d6e6"
+date-format: "MMM D, YYYY"
+title-block-banner: "#ecc3c8"
 format:
   html:
     theme: cerulian
@@ -13,8 +12,8 @@ format:
     html-math method: katex
     code-fold: true
     code-tools: true
-    code-block-bg: "FBCCD1"
-    code-block-border-left: "#e7d6e6"
+    code-block-bg: "#E6FE6FA"
+    code-block-border-left: "#ecc3c8"
     highlight-style: atom-one
     eval: false
     results: show
@@ -27,4 +26,4 @@ format:
       loop: true
       match: auto
 css: styles.css
-copyright: "Copyright Leonie Steinbrinker, 2024. All Rights Reserved"
+copyright: "Copyright Leonie Steinbrinker, 2025. All Rights Reserved"

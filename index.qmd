@@ -1,8 +1,8 @@
 ---
   title: "Experimental Sociology and Computational Social Sciences"
   subtitle: "Summer term 2025"
-  date: today
-  date-format: short
+  date: "04/07/2025"
+  date-format: long
   title-block-banner: true
   format:
     html:
@@ -24,50 +24,61 @@
       lightbox:
         loop: true
         match: auto
-  editor: visual
 ---
-  
+
 # Announcements
 
+::: callout-note
 Stay tuned for important updates and module news.
+:::
 
 # Overview
 
-Welcome to the module \"Experimental Sociology and Computational Social Sciences 2025\""! Here you will find the two courses, most of the materials (except the papers and books used in the course) and so on.
+Welcome to the module "Experimental Sociology and Computational Social Sciences 2025! Here you will find the two courses, most of the materials (except the papers and books used in the course) and so on.
 
-- **General Information**
-- **Experimental Sociology**
-- **Computational Social Sciences**
+-   **General Information**
+    -   Course Assesment
+    -   AI-Usage
+    -   Anti-Discrimination Policy
+-   **Experimental Sociology**
+    -   Lecture Contents
+-   **Computational Social Sciences**
+    -   Lecture Contents
 
 Use the navigation bar to explore course sessions and read the latest announcements.
 
+# Format
 
-:::: {.columns}
+xx
 
-::: {.column}
+# Requirements
+
+xx
+
+# Contact Information
+
+::::::: columns
+:::: column
 ::: {.callout-tip collapse="false" title="Experimental Sociology - Basic Information"}
-
-|||
-|:--------------|:--------------------------------------------|
-| Lecturer:     | Dr. Sascha Grehl                            | 
-| Start:        | 2025-04-09                                  | 
-| Seminar:      | Thursday, 11:15 – 12:45                     | 
-| Location:     | GWZ, H2 1.15                                | 
-| Office Hours: | by appointment, <sascha.grehl@uni-leipzig.de>| 
+|  |  |
+|:-----------------------------------|:-----------------------------------|
+| Lecturer: | Dr. Sascha Grehl |
+| Start: | 2025-04-09 |
+| Seminar: | Thursday, 11:15 – 12:45 |
+| Location: | GWZ, H2 1.15 |
+| Office Hours: | by appointment, [sascha.grehl\@uni-leipzig.de](mailto:sascha.grehl@uni-leipzig.de){.email} |
 :::
+::::
 
-::: 
-
-:::{.column}
+:::: column
 ::: {.callout-tip collapse="false" title="Computational Social Sciences - Basic Information"}
-
-|||
-|:--------------|:--------------------------------------------|
-| Lecturer:     | MA, Leonie Steinbrinker                             | 
-| Start:        | 2025-04-07                                          | 
-| Seminar:      | Thuesday, 15:15 - 16:45                             | 
-| Location:     | GWZ, H2 1.15                                        | 
-| Office Hours: | by appointment, <leonie.steinbrinker@uni-leipzig.de>| 
+|  |  |
+|:-----------------------------------|:-----------------------------------|
+| Lecturer: | MA, Leonie Steinbrinker |
+| Start: | 2025-04-07 |
+| Seminar: | Thuesday, 15:15 - 16:45 |
+| Location: | GWZ, H2 1.15 |
+| Office Hours: | by appointment, [leonie.steinbrinker\@uni-leipzig.de](mailto:leonie.steinbrinker@uni-leipzig.de){.email} |
 :::
-:::
-:::
+::::
+:::::::

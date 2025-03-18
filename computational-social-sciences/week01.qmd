@@ -565,5 +565,7 @@ install.packages("intergraph")
 
 # Further **R**esources
 
+Basic R von Veronika Batzdörfer
 
+https://missing.csail.mit.edu/
 

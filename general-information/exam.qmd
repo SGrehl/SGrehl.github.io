@@ -4,13 +4,10 @@ title: "Course Assessment"
 
 # Pre-examination requirement (Prüfungsvorleistung):
 
-Every two weeks, in one of the courses, we will assign you a problem set (*Übungsblatt*). You will typically have at least one week to complete and submit your solutions.
+Every two weeks, in one of the courses, we will assign you a problem set (*Übungsblatt*). You will typically have at least one week to complete and submit your solutions. You can hand in your solutions either as a Markdown or a Quarto Skript.
 
-<<<<<<< HEAD
-Abgabe als Markdown oder Quarto file
 
-## Sonderregelung: Nutzung von KI für Prüfungsinhalte
-=======
+
 +--------------+--------------+------------------------------+
 | Week         | Course       | Topics                       |
 +==============+==============+==============================+
@@ -77,6 +74,5 @@ In general: **talk to us** — we will help you determine whether your project i
 +--------------------+------------------------------------------------------------------+
 
 # Use of AI for the problem sets and the term paper
->>>>>>> a9df660be73cedb9112929f65c5b389ede7341fc
 
 If you chose to use AI-Applications for assignments that you hand in in this course, please document what and for what tasks you applied help. You can either do this by writing a statement of your own or you could also use AI-documentation tools like the [**AI-Usage-Cards**](https://ai-cards.org/) by the University of Göttingen.

@@ -54,9 +54,10 @@ p1 <-ggraph(g, layout = "fr") +
 
 One of these aspects revolves around **network theories**, which explore how individuals behave within social contexts and how networks themselves evolve and function. Central questions in this area include: Where do network relationships originate? How are they formed? And what are the implications and consequences of these relationships for the people involved [@lizardoSocialNetworksIntroduction2023]?
 
-#### Excercise
 
 ::: student-exercise
+## Exercise
+
 Reflect briefly on the occasions, where in the past you have been confronted with social networks theories. In what theoretical concepts of sociology is the embedding of actors of central importance?
 :::
 
@@ -86,7 +87,7 @@ By using set theory, we can rigorously define different types of graphs, operati
 **Sets** are collections of distinct **elements**. The order and repitition of elements in a set does not matter.
 
 | Symbol | Usage | Interpretation in Graphs |
-|-----------------|-----------------|--------------------------------------|
+|------------------------|------------------------|------------------------|
 | $\emptyset$ | $\{\}$ | Empty set (e.g., a graph with no edges) |
 | $\cup$ | $A \cup B$ | Union of sets (e.g., merging vertex or edge sets) |
 | $\cap$ | $A \cap B$ | Intersection of sets (e.g., common neighbors) |
@@ -234,7 +235,7 @@ We can convert from an adjacency matrix to a adjacency list in the way that we i
 With even bigger networks it might be useful to even store networks in an edge list, where each edge is represented as a pair (or triplet in weighted graphs) indicating a connection between two nodes.
 
 |   | directed | undirected |
-|--------------------------|------------------------|-----------------------|
+|------------------------|------------------------|------------------------|
 | V | 1, 2, 3, 4, 5, 6, 7 | 1, 2, 3, 4, 5, 6, 7 |
 | E | (1,4), (1,7), (2,3), (2,7), (3,6), (5,7), (4,1), (6,1), (3,2), (5,2), (4,3), (6,3), (5,4), (6,5) | (1,4), (1,6), (1,7), (2,3), (2,5), (2,7), (3,2), (3,4), (3,6), (4,1), (4,3), (4,5), (5,2), (5,4), (5,6), (5,7), (6,1), (6,3), (6,5), (6,7), (7,1), (7,2), (7,5), (7,6) |
 
@@ -277,7 +278,8 @@ M <- matrix(c( 0, 1, 0, 0, 0,
                0, 0, 1, 0, 0,
                1, 1, 0, 0, 1,
                0, 1, 0, 0, 0,
-               0, 1, 1, 0, 0), nrow = 5, byrow=TRUE)                 
+               0, 1, 1, 0, 0), nrow = 5, byrow=TRUE)
+
 g <- graph.adjacency(M, mode = "directed")
 
 # Graph descriptives

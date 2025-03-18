@@ -1,37 +1,10 @@
 ---
 title: "Course Overview"
-subtitle: "Contact, Syllabus, Guidelines, KI-Usage"
-date: today
-date-format: short
-title-block-banner: "#e7d6e6"
-format:
-  html:
-    theme: cerulian
-    toc: true
-    toc-title: Contents
-    toc-location: left
-    page-layout: full
-    html-math method: katex
-    code-fold: false
-    code-tools: false
-    code-block-bg: true
-    code-block-border-left: "#e7d6e6"
-    highlight-style: atom-one
-    eval: false
-    results: hide
-    embed-resources: true
-    self-contained-math: true
-    bibliography: CSS.bib
-    bibliography-style: apa
-    link-citation: true
-    lightbox:
-      loop: true
-      match: auto
-css: styles.css
-copyright: "Copyright Leonie Steinbrinker, 2024. All Rights Reserved"
+subtitle: "Contact, Syllabus, Guidelines and Materials"
+date: "04/07/2025"
 ---
 
-Welcome to the Computational Social Science (CSS) seminar! This hands-on course explores how social network analysis and geo/spatial data can enhance our understanding of society. Using R, we will learn techniques for visualizing, analyzing, and integrating these data types with existing datasets—such as survey or experimental data — to gain deeper insights into social phenomena.
+**Welcome to the Computational Social Science (CSS) seminar**! This hands-on course explores how social network analysis and geo/spatial data can enhance our understanding of society. Using R, we will learn techniques for visualizing, analyzing, and integrating these data types with existing datasets—such as survey or experimental data — to gain deeper insights into social phenomena.
 
 ::: {#custom-block}
 **General Information**
@@ -41,6 +14,8 @@ Welcome to the Computational Social Science (CSS) seminar! This hands-on course 
 | Monday, weekly | 15:15 - 16:45 |
 | GWZ, H2 1.15   | Start: 4/7/25 |
 :::
+
+# Course Setup and Goals
 
 Our focus will be twofold:
 
@@ -52,148 +27,134 @@ By combining these data sources with traditional and emerging approaches—inclu
 
 This course provides both conceptual and technical foundations for working with computational methods in the social sciences, empowering participants to extend existing datasets and refine their analytical toolkit.
 
-# About me
-
--   Forschungsgebiet
-
--   Masterarbeit über Netztwerke
-
--   Erreichbarkeit und Sprechstunde
-
-# Course Goals
-
-# Requirements
+By the end of this semester, you will be able to understand, analyze, and visualize network and spatial data types. You will gain the skills to effectively apply these methods to your own research questions, enabling you to generate insightful and impactful results. This course provides hands-on knowledge that you can use both in academic research and beyond.
 
 # Syllabus
 
-+------------+--------+-----------------------------------------------------------------------------------+-------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Date       | Week   | Subject                                                                           | Content                                         | Literature and Materials                                                                                                                                                                                  |
-+============+========+===================================================================================+=================================================+===========================================================================================================================================================================================================+
-| 07.04.2025 | 1      | **Kick-Off**                                                                      | -   Introduction                                | -   Basic R von Veronika Batzdörfer                                                                                                                                                                       |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   | -   Course Setup and Structure                  | -   <https://missing.csail.mit.edu/>                                                                                                                                                                      |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   |     -   Background Materials                    |                                                                                                                                                                                                           |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   |     -   Data Overview                           |                                                                                                                                                                                                           |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   | -   R-Refresher                                 |                                                                                                                                                                                                           |
-+------------+--------+-----------------------------------------------------------------------------------+-------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| 14.04.2025 | 2      | **Networkanalysis in R**                                                          | -   Social Networks                             | [Network Data in R](https://inarwhal.github.io/NetworkAnalysisR-book/ch5-Network-Visualization-R.html#ch5-Network-Visualization-R)                                                                        |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   | -   Introduction to Social Networkanalysis in R | Wasserman und Faust                                                                                                                                                                                       |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   |     -   Representation of networks              | [Social Network Analysis 101: Ultimate Guide - Visible Network Labs](https://visiblenetworklabs.com/guides/social-network-analysis-101/)                                                                  |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   |     -   Network Attributes                      | -   Ausgabe 1. Übungsblatt                                                                                                                                                                                |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   | -   Handling missing data                       |                                                                                                                                                                                                           |
-+------------+--------+-----------------------------------------------------------------------------------+-------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| 21.04.2025 | 3      | **no lecture (Ostermontag)**                                                      |                                                 |                                                                                                                                                                                                           |
-+------------+--------+-----------------------------------------------------------------------------------+-------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| 28.04.2025 | 4      | ***Key Metrics and theoretical Insight***                                         | -   Descriptives                                |                                                                                                                                                                                                           |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   | -   Centrality and Assortavity                  |                                                                                                                                                                                                           |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   | -   Homophily                                   |                                                                                                                                                                                                           |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   | -   Hierarchy                                   |                                                                                                                                                                                                           |
-+------------+--------+-----------------------------------------------------------------------------------+-------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| 05.05.2025 | 5      | **Network Visualisation**                                                         | -   Visualisation basics                        | Zschache                                                                                                                                                                                                  |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   | -   Interactive visualisation                   | [Properties of real life netwirks](https://github.com/lalessan/comsocsci2024/wiki)                                                                                                                        |
-+------------+--------+-----------------------------------------------------------------------------------+-------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| 12.05.2025 | 6      | **Community Detection & Structural Comparison**                                   |                                                 | Aufgaben in Yans (Linköping) Skript                                                                                                                                                                       |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   |                                                 | Rossweil: infomap                                                                                                                                                                                         |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   |                                                 | PNAS - Algorithmen                                                                                                                                                                                        |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   |                                                 | Eigene Masterarbeit                                                                                                                                                                                       |
-+------------+--------+-----------------------------------------------------------------------------------+-------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| 19.05.2025 | 7      | **Statistical Models** **& Case Studies**                                         | -   ERGMs                                       | I[ntroduction to ERGMs \| Social Network Analysis for Anthropologists](https://eehh-stanford.github.io/SNA-workshop/ergm-intro.html)                                                                      |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   |                                                 | -   [SpiegelMining – Reverse Engineering von Spiegel-Online (33c3)](https://www.youtube.com/watch?v=-YpwsdRKt8Q)                                                                                          |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   |                                                 | -   [@bodaghiTheaterFakeNews2022]                                                                                                                                                                         |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   |                                                 | -   Internationale Flugverbindungen                                                                                                                                                                       |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   |                                                 | -   Verbreitung - ABM                                                                                                                                                                                     |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   |                                                 | -   Zune Lehmann aus Kopenhagen                                                                                                                                                                           |
-+------------+--------+-----------------------------------------------------------------------------------+-------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| 26.05.2025 | 8      | **Open Lab Session**                                                              | -   Q&A                                         |                                                                                                                                                                                                           |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   | -   Discussions                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   | -   Term Paper ideas                            |                                                                                                                                                                                                           |
-+------------+--------+-----------------------------------------------------------------------------------+-------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| 02.06.2025 | 9      | **Geo-Data Analysis**                                                             | -   Introduction to spatial data                | [@loganMakingPlaceSpace2012]\]                                                                                                                                                                            |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   | -   Basics in R                                 | [@criado-perezInvisibleWomenData2019]                                                                                                                                                                     |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   |                                                 | -   Open Street Map Data                                                                                                                                                                                  |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   |                                                 | -   GIS-Daten                                                                                                                                                                                             |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   |                                                 | -   sf-package                                                                                                                                                                                            |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   |                                                 | -   [Using Spatial Data with](https://cengel.github.io/R-spatial/intro.html)                                                                                                                              |
-+------------+--------+-----------------------------------------------------------------------------------+-------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| 09.06.2025 | 10     | **no lecture (Pfingstmontag)**                                                    |                                                 |                                                                                                                                                                                                           |
-+------------+--------+-----------------------------------------------------------------------------------+-------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| 16.06.2025 | 11     | Spatial data visualisation in R                                                   | -   Visualisation                               | -   Wetterdaten auf Surveyanswers oder so                                                                                                                                                                 |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        | Spatial Inference                                                                 | -   Spatial inference                           |                                                                                                                                                                                                           |
-+------------+--------+-----------------------------------------------------------------------------------+-------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| 23.06.2025 | 12     | Case Studies in Geodata Analysis                                                  |                                                 | [CA Bail - Using Internet search data to examine the relationship between anti-Muslim and pro -Isis sentiment in US counties](https://www.science.org/doi/10.1126/sciadv.aao5948#supplementary-materials) |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   |                                                 | -   Supplementary Material                                                                                                                                                                                |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   |                                                 | Read at home, rather discussion of method, usability, etc.                                                                                                                                                |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   |                                                 | Around the world - with discussion                                                                                                                                                                        |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   |                                                 | -   GIS-Daten Stichprobenziehung                                                                                                                                                                          |
-+------------+--------+-----------------------------------------------------------------------------------+-------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| 30.06.2025 | 13     | Open Science and Computational Social Science: Tools, Ethics, and Best Practices\ |                                                 | [Kurs von Christian](https://github.com/czymaraclass/CSS_WS24)                                                                                                                                            |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   |                                                 | \- Github,\                                                                                                                                                                                               |
-|            |        |                                                                                   |                                                 | - Quarto\                                                                                                                                                                                                 |
-|            |        |                                                                                   |                                                 | -                                                                                                                                                                                                         |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   |                                                 | OSF, etc.                                                                                                                                                                                                 |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   |                                                 | Best Practices, Ethische Herausforderungen, etc.                                                                                                                                                          |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   |                                                 | -   Diskussion                                                                                                                                                                                            |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   |                                                 | Raum für ganz kurze Inputvorträge, falls sich schon Gruppen gebildet haben                                                                                                                                |
-|            |        |                                                                                   |                                                 |                                                                                                                                                                                                           |
-|            |        |                                                                                   |                                                 | -   Open Science                                                                                                                                                                                          |
-+------------+--------+-----------------------------------------------------------------------------------+-------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| 07.07.2025 | 14     | **Presentations and discussion term paper**                                       |                                                 |                                                                                                                                                                                                           |
-+------------+--------+-----------------------------------------------------------------------------------+-------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+::::: {tbl}
++----------+----------+-------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------------------------------------+
+| Week     | Date     | Subject                                         | Content                            | Readings                                                                                                     |
++==========+==========+=================================================+====================================+==============================================================================================================+
+| **1**    | 07.04.   | **Kick-Off**                                    | -   Introduction                   |                                                                                                              |
+|          |          |                                                 |                                    |                                                                                                              |
+|          |          |                                                 | -   Course Setup and Structure     |                                                                                                              |
+|          |          |                                                 |                                    |                                                                                                              |
+|          |          |                                                 | -   **R**efresher                  |                                                                                                              |
++----------+----------+-------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------------------------------------+
+| **2**    | 14.04.   | **Networkanalysis in R**                        | -   Social Networks                |                                                                                                              |
+|          |          |                                                 |                                    |                                                                                                              |
+|          |          |                                                 | -   Introduction to SNA in R       |                                                                                                              |
+|          |          |                                                 |                                    |                                                                                                              |
+|          |          |                                                 |     -   Representation of networks |                                                                                                              |
+|          |          |                                                 |                                    |                                                                                                              |
+|          |          |                                                 |     -   Network Attributes         |                                                                                                              |
+|          |          |                                                 |                                    |                                                                                                              |
+|          |          |                                                 | -   Data Overview                  |                                                                                                              |
++----------+----------+-------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------------------------------------+
+| ***3***  | *21.04.* | ***no lecture (Ostermontag)***                  |                                    |                                                                                                              |
++----------+----------+-------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------------------------------------+
+| **4**    | 28.04.   | **Key Metrics and theoretical Insight**         | -   Descriptives                   |                                                                                                              |
+|          |          |                                                 |                                    |                                                                                                              |
+|          |          |                                                 | -   Centrality and Assortavity     |                                                                                                              |
+|          |          |                                                 |                                    |                                                                                                              |
+|          |          |                                                 | -   Homophily                      |                                                                                                              |
+|          |          |                                                 |                                    |                                                                                                              |
+|          |          |                                                 | -   Hierarchy                      |                                                                                                              |
++----------+----------+-------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------------------------------------+
+| **5**    | 05.05.   | **Network Visualisation**                       | -   Visualisation basics           |                                                                                                              |
+|          |          |                                                 |                                    |                                                                                                              |
+|          |          |                                                 | -   Interactive visualisation      |                                                                                                              |
++----------+----------+-------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------------------------------------+
+| **6**    | 12.05.   | **Community Detection & Structural Comparison** |                                    |                                                                                                              |
++----------+----------+-------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------------------------------------+
+| **7**    | 19.05.   | **Statistical Models** **& Case Studies**       | -   ERGMs                          | [SpiegelMining – Reverse Engineering von Spiegel-Online (33c3)](https://www.youtube.com/watch?v=-YpwsdRKt8Q) |
+|          |          |                                                 |                                    |                                                                                                              |
+|          |          |                                                 |                                    | [@bodaghiTheaterFakeNews2022]                                                                                |
++----------+----------+-------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------------------------------------+
+| **8**    | 26.05.   | **Open Lab Session**                            | -   Q&A                            |                                                                                                              |
+|          |          |                                                 |                                    |                                                                                                              |
+|          |          |                                                 | -   Discussions                    |                                                                                                              |
+|          |          |                                                 |                                    |                                                                                                              |
+|          |          |                                                 | -   Term Paper ideas               |                                                                                                              |
++----------+----------+-------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------------------------------------+
+| **9**    | 02.06.   | **Geo-Data Analysis**                           | -   Introduction to spatial data   | [@loganMakingPlaceSpace2012]                                                                                 |
+|          |          |                                                 |                                    |                                                                                                              |
+|          |          |                                                 | -   Basics in R                    | [@criado-perezInvisibleWomenData2019]                                                                        |
++----------+----------+-------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------------------------------------+
+| ***10*** | *09.06.* | ***no lecture (Pfingstmontag)***                |                                    |                                                                                                              |
++----------+----------+-------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------------------------------------+
+| **11**   | 16.06.   | **Spatial data visualisation in R**             | -   Visualisation                  |                                                                                                              |
+|          |          |                                                 |                                    |                                                                                                              |
+|          |          |                                                 | -   Spatial inference              |                                                                                                              |
++----------+----------+-------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------------------------------------+
+| **12**   | 23.06.   | **Case Studies in Geodata Analysis**            |                                    | [@bailUsingInternetSearch2018]                                                                               |
++----------+----------+-------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------------------------------------+
+| **13**   | 30.06.   | Open Science and CSS\                           | -   Tools                          |                                                                                                              |
+|          |          |                                                 |                                    |                                                                                                              |
+|          |          |                                                 | -   Challenges                     |                                                                                                              |
+|          |          |                                                 |                                    |                                                                                                              |
+|          |          |                                                 | -   Best Practices                 |                                                                                                              |
++----------+----------+-------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------------------------------------+
+| **14**   | 07.07.   | **Presentations and term paper discussion**     |                                    |                                                                                                              |
++----------+----------+-------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------------------------------------+
 
 : {.hover}
 
-# Course Material
+# Course Materials and Structure
 
-Where to find materials
+All materials required for the completion of this course can be found on this website. Literature references (when openly available) are linked directly; otherwise, the PDFs will be uploaded to our Moodle course.
 
-Different blocks (student-exercise) in class (tips) out of class
+The Pre-examination requirements will be available under the "Course Assessment" tab, while the lecture content for each week will be uploaded in the "Computational Social Science" folder.
 
-\- contents come from:
+During the lectures, you may encounter the following block:
 
--   Felix Lennert
+:::{#custom-block}
+This usually indicates some additional information included for your reference.
+:::
 
--   Christian Czymara
+If you see this block:
 
--   Veronika Batzdörfer
+::: {.student-exercise}
+This marks an in-class discussion and/or reflection exercise.
+:::
 
--   Till Hovestadt
+# Acknowledgements
 
--   Johannes Zschache
+While creating this course, I have drawn inspiration from several courses taught by Felix Lennert, Till Hovestadt, Johannes Zschache, Omar Lizardo. Below is a table listing the courses, institutions, and links for further reference (if available). If you are interested in diving deeper into the topics, I encourage you to explore these resources and courses.
 
--   Omar Lizardo
++----------------------------+---------------------+-------------------------------+-------------------------------------------------+
+| Course Name                | Institution         | Instructor                    | Course Link (if available)                      |
++============================+=====================+===============================+=================================================+
+| Social Networks            | UCLA                | Omar Lizardo /& Isaac Jilbert | <https://olizardo.github.io/networks-textbook/> |
++----------------------------+---------------------+-------------------------------+-------------------------------------------------+
+| Toolbox CSS                | Universität Leipzig | Felix Lennert                 | <https://fellennert.github.io/toolbox_css/>     |
++----------------------------+---------------------+-------------------------------+-------------------------------------------------+
+| Empirische Netzwerkanalyse | Universität Leipzig | Johannes Zschache             |                                                 |
++----------------------------+---------------------+-------------------------------+-------------------------------------------------+
+| SNA mit R                  | Universität Leipzig | Till Hovestadt                |                                                 |
++----------------------------+---------------------+-------------------------------+-------------------------------------------------+
+
+Additionally, parts of the content for this course were created with the assistance of GitHub Copilot, ChatGPT, and ChatAI. Please note that while these tools have contributed to the development of the course materials, the final content and structure have been carefully curated and tailored for this course.
+
+# Data Inspiration
+
+If you find cool datasets during this course (or at any point tbh) I'd be happy if you share it with me - and I will update the list!
+
+[networks-science-course](https://chatox.github.io/networks-science-course/practicum/data/)
+
+[UserNetR](https://github.com/DougLuke/UserNetR/tree/master)
+
+[Network Repository](https://networkrepository.com/network-data.php)
+
+[Stanford Large Network Dataset Collection](https://snap.stanford.edu/data/)
+
+[UCI Network Data Repository](https://networkdata.ics.uci.edu/resources.php)
+
+[AMiner Datasets for Social Network Analysis](https://www.aminer.org/data-sna)
+
+[Newman Network Data Repository](https://websites.umich.edu/~mejn/netdata/)
+
+[Gephi Network Data Repository](https://github.com/gephi/gephi/wiki/Datasets)
+
+[RSiena Data Sets](https://www.stats.ox.ac.uk/~snijders/siena/)
+:::::

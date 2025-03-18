@@ -25,6 +25,4 @@ format:
     lightbox:
       loop: true
       match: auto
-
-editor: visual
 css: styles.css
