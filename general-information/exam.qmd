@@ -38,6 +38,7 @@ At the end of the semester, you are expected to write a term paper (*Hausarbeit*
 -   **Language:** German or English (American or British)
 -   **Structure:** Write it like a scientific paper. Include an abstract, but [no table of contents]{.underline}. Ensure that your figures are informative and that tables are compact and free from redundancies.
 -   **Tone:** Use precise and professional scientific language. Clearly motivate your work and place it within the context of existing literature.
+-   **Deadline: TBA**
 
 ## Topic
 
