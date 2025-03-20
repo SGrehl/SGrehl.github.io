@@ -1,9 +1,9 @@
 ---
 title: "Course Overview"
-subtitle: "Contact, Syllabus, Guidelines, KI-Usage"
+subtitle: "Course Goals & Structure, Requirements & Syllabus"
 ---
 
-# Overview
+# 🌍 Overview
 
 Welcome to the **Experimental Sociology (ES)** seminar!
 
@@ -18,7 +18,7 @@ In this course, we will explore how analytical and computational tools can be us
 | GWZ, H2 1.15      | Start: 2025-04-09 |
 :::
 
-# Focus
+# 🔍 Focus
 
 Our focus will be twofold:
 
@@ -26,7 +26,7 @@ Our focus will be twofold:
 
 2.  **Planning an experiment:** How can ABMs help us improve the statistical power of our experiments, save time and money, and make smarter design decisions (e.g., number of participants, treatment structure)?
 
-# Format
+# 🧩 Course Structure
 
 We’ll be following a **flipped classroom** strategy:
 
@@ -36,7 +36,7 @@ We’ll be following a **flipped classroom** strategy:
 
 -   Expect a mix of hands-on coding, small-group discussions, and the occasional productive chaos when things don’t work as expected (that’s part of the learning process!).
 
-# Course Goals
+# 🎯 Course Goals
 
 By the end of this course, you should be able to:
 
@@ -46,7 +46,7 @@ By the end of this course, you should be able to:
 -   Understand how to fine-tune experimental design to increase statistical power.
 -   Reflect on the broader implications of experimental sociology and agent-based modeling in real-world research.
 
-# Requirements
+# 🛠️ Requirements
 
 -   Most importantly: Sociological curiosity – An interest in social behavior and experiments is essential. If you’re not genuinely curious about how people behave and why, this course might not be for you! -
 -   Basic R programming skills – You should be comfortable reading and understanding R code (including functions). You don’t need to be an expert, but you should know the basics.
@@ -56,78 +56,84 @@ By the end of this course, you should be able to:
 
 [^1]: *A good tip from someone who’s spent hours raging over broken code:* The problem is 99.99999% of the time sitting **in front of the screen**. You probably made a silly mistake and just aren’t spotting it right now. Keep calm, drink some tea and relax. In this respect, ChatGPT changed my life — just ask it where the error is, and it will usually confront you with your obvious mistake.
 
-# Syllabus
+# 📖 Weekly Readings
 
-+------------+----------+-------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
-| Date       | Week     | Subject                                                     | Content                                          | Literature and Materials                                                   |
-+============+==========+=============================================================+==================================================+============================================================================+
-| 2025-04-09 | 1        | **Kick-Off**                                                | -   Introduction                                 | Readings:                                                                  |
-|            |          |                                                             |                                                  |                                                                            |
-|            |          |                                                             | -   Course setup and structure                   |                                                                            |
-+------------+----------+-------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
-| 2025-04-16 | 2        | **Analytical Solutions & Hypotheses**                       | -   Why analytical solutions?                    | Readings:                                                                  |
-|            |          |                                                             |                                                  |                                                                            |
-|            |          |                                                             | -   Game Theory                                  |                                                                            |
-|            |          |                                                             |                                                  |                                                                            |
-|            |          |                                                             | -   Differential Equations                       |                                                                            |
-+------------+----------+-------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
-| 2025-04-23 | 3        | **Game Theory & Evolutionary Game Theory**                  | -   General Principles                           | Readings:                                                                  |
-|            |          |                                                             |                                                  |                                                                            |
-|            |          |                                                             | -   The 3 ingredients of an evolutionary process |                                                                            |
-+------------+----------+-------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
-| 2025-04-30 | 4        | **ABMs: Basics**                                            | -   Basic design principles of AMBs in R         | Readings:                                                                  |
-|            |          |                                                             |                                                  |                                                                            |
-|            |          |                                                             | -   ODD-Protocol                                 | -   [@grimm2020]                                                           |
-|            |          |                                                             |                                                  |                                                                            |
-|            |          |                                                             | -   A simple ABM with ChatGPT                    |                                                                            |
-+------------+----------+-------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
-| 2025-05-07 | 5        | **Evolutionary ABMs: Basics**                               | -   Learning                                     | Readings:                                                                  |
-|            |          |                                                             |                                                  |                                                                            |
-|            |          |                                                             | -   Mutation                                     |                                                                            |
-+------------+----------+-------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
-| 2025-05-14 | 6        | **Evolutionary ABMs: Complex Simulations**                  | -   Errors & noise                               | Readings:                                                                  |
-|            |          |                                                             |                                                  |                                                                            |
-|            |          |                                                             | -   Strategy space                               |                                                                            |
-|            |          |                                                             |                                                  |                                                                            |
-|            |          |                                                             | -   RC vs. Bounded Rationality                   |                                                                            |
-+------------+----------+-------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
-| 2025-05-21 | 7        | **Diffusion: Basics**                                       | -   Simple & complex contagion                   | Readings:                                                                  |
-|            |          |                                                             | -   SIS/SIR/SIRD                                 |                                                                            |
-|            |          |                                                             | -   Network structures                           |                                                                            |
-+------------+----------+-------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
-| 2025-05-28 | 8        | **Diffusion: Dispersion,Robustness & Sensitivity Analysis** | -   How to deal with randomness                  | Readings:                                                                  |
-|            |          |                                                             |                                                  |                                                                            |
-|            |          |                                                             | -   Discussions                                  |                                                                            |
-|            |          |                                                             |                                                  |                                                                            |
-|            |          |                                                             | -   Term Paper ideas                             |                                                                            |
-+------------+----------+-------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
-| 2025-06-04 | 9        | **Diffusion: Calibration**                                  | -   Input, model & output realism                | Readings:                                                                  |
-|            |          |                                                             |                                                  |                                                                            |
-|            |          |                                                             | -   How to do calibrate a model                  |                                                                            |
-+------------+----------+-------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
-| 2025-06-11 | 10       | **Machine Learning: Basics**                                | -   Set up a simple machine learning (ML)        | Readings:                                                                  |
-|            |          |                                                             |                                                  |                                                                            |
-|            |          |                                                             | -   Precision & recall                           |                                                                            |
-|            |          |                                                             |                                                  |                                                                            |
-|            |          |                                                             | -   Cross-validation                             |                                                                            |
-+------------+----------+-------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
-| 2025-06-18 | 11       | **Open Lab Session**                                        | -   Q&A                                          | Readings:                                                                  |
-|            |          |                                                             |                                                  |                                                                            |
-|            |          |                                                             | -   Discussions                                  |                                                                            |
-|            |          |                                                             |                                                  |                                                                            |
-|            |          |                                                             | -   Term Paper ideas                             |                                                                            |
-+------------+----------+-------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
-| 2025-06-25 | 12       | **Statistical Power, Randomization, Running an Experiment** | -   Statistical power via formula and simulation | Readings:                                                                  |
-|            |          |                                                             |                                                  |                                                                            |
-|            |          |                                                             | -   How to increase statistical power?           | Additional material:                                                       |
-|            |          |                                                             |                                                  |                                                                            |
-|            |          |                                                             | -   Problems, challenges, and more problems      | -   <https://egap.org/resource/10-things-to-know-about-statistical-power/> |
-|            |          |                                                             |                                                  |                                                                            |
-|            |          |                                                             |                                                  | -   <https://egap.org/resource/10-things-to-know-about-randomization/>     |
-+------------+----------+-------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
-| 2025-07-02 | 13       | **Summary & Term Paper Presentation I**                     |                                                  |                                                                            |
-+------------+----------+-------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
-| 2025-07-09 | 14       | **Term Paper Presentation II**                              |                                                  |                                                                            |
-+------------+----------+-------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
+Course materials will be provided weekly. Read at your own pace, and bring questions or ideas to the seminar! If some of the literature is not
+
+# 🗓️ Syllabus
+
++------------+-----------+----------------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
+| Date       | Week      | Subject                                                              | Content                                          | Literature and Materials                                                   |
++============+===========+======================================================================+==================================================+============================================================================+
+| 2025-04-09 | 1         | **Kick-Off**                                                         | -   Introduction                                 | Readings:                                                                  |
+|            |           |                                                                      |                                                  |                                                                            |
+|            |           |                                                                      | -   Course setup and structure                   |                                                                            |
+|            |           |                                                                      |                                                  |                                                                            |
+|            |           |                                                                      | -   What is the merit of an analytical solution? |                                                                            |
+|            |           |                                                                      |                                                  |                                                                            |
+|            |           |                                                                      | -   What are ABMs?                               |                                                                            |
++------------+-----------+----------------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
+| 2025-04-16 | 2         | **Analytical Methods:** **Game Theory**                              | -   Why analytical solutions?                    | Readings:                                                                  |
+|            |           |                                                                      |                                                  |                                                                            |
+|            |           |                                                                      | -   Game Theory                                  |                                                                            |
++------------+-----------+----------------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
+| 2025-04-23 | 3         | **Analytical Methods: Ecological Models & Evolutionary Game Theory** | -   Differential Equations                       | Readings:                                                                  |
+|            |           |                                                                      |                                                  |                                                                            |
+|            |           |                                                                      | -   The 3 ingredients of an evolutionary process |                                                                            |
++------------+-----------+----------------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
+| 2025-04-30 | 4         | **ABMs: Basics**                                                     | -   Basic design principles of AMBs in R         | Readings:                                                                  |
+|            |           |                                                                      |                                                  |                                                                            |
+|            |           |                                                                      | -   ODD-Protocol                                 | -   [@grimm2020]                                                           |
+|            |           |                                                                      |                                                  |                                                                            |
+|            |           |                                                                      | -   A simple ABM with ChatGPT                    |                                                                            |
++------------+-----------+----------------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
+| 2025-05-07 | 5         | **Evolutionary ABMs: Basics**                                        | -   Learning                                     | Readings:                                                                  |
+|            |           |                                                                      |                                                  |                                                                            |
+|            |           |                                                                      | -   Mutation                                     |                                                                            |
++------------+-----------+----------------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
+| 2025-05-14 | 6         | **Evolutionary ABMs: Complex Simulations**                           | -   Errors & noise                               | Readings:                                                                  |
+|            |           |                                                                      |                                                  |                                                                            |
+|            |           |                                                                      | -   Strategy space                               |                                                                            |
+|            |           |                                                                      |                                                  |                                                                            |
+|            |           |                                                                      | -   RC vs. Bounded Rationality                   |                                                                            |
++------------+-----------+----------------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
+| 2025-05-21 | 7         | **Diffusion: Basics**                                                | -   Simple & complex contagion                   | Readings:                                                                  |
+|            |           |                                                                      | -   SIS/SIR/SIRD                                 |                                                                            |
+|            |           |                                                                      | -   Network structures                           |                                                                            |
++------------+-----------+----------------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
+| 2025-05-28 | 8         | **Diffusion: Dispersion,Robustness & Sensitivity Analysis**          | -   How to deal with randomness                  | Readings:                                                                  |
+|            |           |                                                                      |                                                  |                                                                            |
+|            |           |                                                                      | -   Discussions                                  |                                                                            |
+|            |           |                                                                      |                                                  |                                                                            |
+|            |           |                                                                      | -   Term Paper ideas                             |                                                                            |
++------------+-----------+----------------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
+| 2025-06-04 | 9         | **Diffusion: Calibration**                                           | -   Input, model & output realism                | Readings:                                                                  |
+|            |           |                                                                      |                                                  |                                                                            |
+|            |           |                                                                      | -   How to do calibrate a model                  |                                                                            |
++------------+-----------+----------------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
+| 2025-06-11 | 10        | **Machine Learning: Basics**                                         | -   Set up a simple machine learning (ML)        | Readings:                                                                  |
+|            |           |                                                                      |                                                  |                                                                            |
+|            |           |                                                                      | -   Precision & recall                           |                                                                            |
+|            |           |                                                                      |                                                  |                                                                            |
+|            |           |                                                                      | -   Cross-validation                             |                                                                            |
++------------+-----------+----------------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
+| 2025-06-18 | 11        | **Open Lab Session**                                                 | -   Q&A                                          | Readings:                                                                  |
+|            |           |                                                                      |                                                  |                                                                            |
+|            |           |                                                                      | -   Discussions                                  |                                                                            |
+|            |           |                                                                      |                                                  |                                                                            |
+|            |           |                                                                      | -   Term Paper ideas                             |                                                                            |
++------------+-----------+----------------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
+| 2025-06-25 | 12        | **Statistical Power, Randomization, Running an Experiment**          | -   Statistical power via formula and simulation | Readings:                                                                  |
+|            |           |                                                                      |                                                  |                                                                            |
+|            |           |                                                                      | -   How to increase statistical power?           | Additional material:                                                       |
+|            |           |                                                                      |                                                  |                                                                            |
+|            |           |                                                                      | -   Problems, challenges, and more problems      | -   <https://egap.org/resource/10-things-to-know-about-statistical-power/> |
+|            |           |                                                                      |                                                  |                                                                            |
+|            |           |                                                                      |                                                  | -   <https://egap.org/resource/10-things-to-know-about-randomization/>     |
++------------+-----------+----------------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
+| 2025-07-02 | 13        | **Summary & Term Paper Presentation I**                              |                                                  |                                                                            |
++------------+-----------+----------------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
+| 2025-07-09 | 14        | **Term Paper Presentation II**                                       |                                                  |                                                                            |
++------------+-----------+----------------------------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------+
 
 : {.hover}

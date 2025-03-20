@@ -3,7 +3,7 @@ project:
 
 date: today
 date-format: short
-title-block-banner: "#5791b5"
+title-block-banner: true
 
 format:
   html:
@@ -12,22 +12,18 @@ format:
     toc-title: Contents
     toc-location: left
     page-layout: full
-    html-math:
-      method: katex
+    html-math method: katex
     code-fold: false
-    code-tools: true
-    code-block-bg: "FBCCD1"
-    code-block-border-left: "#39e3a7"
-    highlight-style: atom-one
+    code-tools: false
+    highlight-style: github
     eval: false
-    results: show
+    results: hide
     embed-resources: true
     self-contained-math: true
-    bibliography: ES.bib
     bibliography-style: apa
     link-citation: true
     lightbox:
       loop: true
       match: auto
-
-css: ../computational-social-sciences/styles.css
+      
+editor: visual

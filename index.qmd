@@ -30,7 +30,6 @@
 
 ::: callout-note
 Some of the material (due to copyright issues) can be found at [moodle](https://moodle2.uni-leipzig.de/course/view.php?id=53760){.external target="_blank"}. The password is provided in the sessions of the first week.
-
 :::
 
 # Overview
@@ -41,9 +40,9 @@ Welcome to the module "Experimental Sociology and Computational Social Sciences 
     -   Course Assesment
     -   AI-Usage
     -   Anti-Discrimination Policy
--   **[Experimental Sociology](experimental-sociology/es_overview.html) **
+-   [**Experimental Sociology**](experimental-sociology/es_overview.html)
     -   Lecture Contents
--   **[Computational Social Sciences](experimental-sociology/css_overview.qmd)**
+-   [**Computational Social Sciences**](experimental-sociology/css_overview.html)
     -   Lecture Contents
 
 Use the navigation bar to explore course sessions and read the latest announcements.
@@ -55,8 +54,9 @@ xx
 # Formal Requirements
 
 In order to sucessfully complete the course the following requirements are to be met:
-- **Pre-examination requirement (*Prüfungsvorleistung*)**: At least 50% of the points in the 6 problem sets (*Übungsblätter*)
-- **Course assessment (*Prüfungsleistung*)**: The final grade is determined by the assessment of the term paper. (*Hausarbeit*).
+
+-   **Pre-examination requirement (*Prüfungsvorleistung*)**: At least 50% of the points in the 6 problem sets (*Übungsblätter*)
+-   **Course assessment (*Prüfungsleistung*)**: The final grade is determined by the assessment of the term paper. (*Hausarbeit*).
 
 # Contact Information
 
@@ -64,7 +64,7 @@ In order to sucessfully complete the course the following requirements are to be
 :::: column
 ::: {.callout-tip collapse="false" title="Experimental Sociology - Basic Information"}
 |  |  |
-|:-----------------------------------|:-----------------------------------|
+|:---|:---|
 | Lecturer: | Dr. Sascha Grehl |
 | Start: | 2025-04-09 |
 | Seminar: | Thursday, 11:15 – 12:45 |
@@ -76,7 +76,7 @@ In order to sucessfully complete the course the following requirements are to be
 :::: column
 ::: {.callout-tip collapse="false" title="Computational Social Sciences - Basic Information"}
 |  |  |
-|:-----------------------------------|:-----------------------------------|
+|:---|:---|
 | Lecturer: | MA, Leonie Steinbrinker |
 | Start: | 2025-04-07 |
 | Seminar: | Thuesday, 15:15 - 16:45 |
