@@ -1,4 +1,3 @@
-
 project:
   type: website
   output-dir: docs
@@ -13,6 +12,10 @@ website:
         menu:
           - text: "Course Assessment"
             href: general-information/exam.qmd
+          - text: "Scientific Computing"
+            href: general-information/sc.qmd        
+          - text: "Data & Mode"
+            href: general-information/data.qmd   
           - text: "AI-Usage"
             href: general-information/ai_usage.qmd
           - text: "Anti-Discrimination Policy"
@@ -85,3 +88,5 @@ website:
 format:
   html:
     theme: cosmo
+    includes:
+      before-body: _menu.html

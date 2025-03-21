@@ -1,5 +1,6 @@
 ---
 title: "Guidelines on AI-Usage"
+date: "2025-03-21"
 ---
 
 # Use of AI
@@ -31,7 +32,7 @@ This issue arises from the way data and algorithms are used to train AI models. 
 
 ![Model prompt: Scientist](Graphics/Scientist2.jpg){group="my-gallery" width="300"}
 
-![Model prompt: Social Scientist](Graphics/Social Scientist.jpg){group="my-gallery" width="300"}
+![Model prompt: Social Scientist](Graphics/Social%20Scientist.jpg){group="my-gallery" width="300"}
 
 ![Model prompt: Social Scientist](Graphics/SocialScientist2.jpg){group="my-gallery" width="300"}
 
@@ -44,7 +45,7 @@ This issue arises from the way data and algorithms are used to train AI models. 
 
 Large-scale AI deploymens are hosted in data centers, which have a significant toll on the planet [@AIHasEnvironmental2024].
 
-![The Chemetall Foot Lithium Operation in Clayton Valley, Nevada (Image by PDTillman, Wikipedia Commons)](Graphics/lithium mine.jpg){width="350"}
+![The Chemetall Foot Lithium Operation in Clayton Valley, Nevada (Image by PDTillman, Wikipedia Commons)](Graphics/lithium%20mine.jpg){width="350"}
 
 **For example**:
 
@@ -61,11 +62,9 @@ Large-scale AI deploymens are hosted in data centers, which have a significant t
 -   A request made through ChatGPT consumes about 10-times the electricity of a Google search.
 
 ::: {#custom-block}
-
 ## Reflection
 
 1.  What is your attitude on the usage of generative AI in class? What are further issues we encounter, when we are tolerating (or not tolerating) AI in class?
-
 
 2.  What can we do together to ensure an appropriate behavior with AI in class?
 :::

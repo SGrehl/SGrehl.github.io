@@ -1,6 +1,6 @@
 ---
 title: "Scientific Computing"
-date: 2025-03-21
+date: "2025-03-21"
 ---
 
 ::: callout-note
@@ -335,7 +335,7 @@ table(unlist(results))
 
 Reproducibility is crucial in computational social science. When using parallel processing, managing random seeds properly ensures consistent and reproducible results. The example below demonstrates how different seed-setting approaches affect the reproducibility of parallel computations using the `parallel` package in R.
 
-``` R
+``` r
 library(parallel)
 
 # Define seed and tasks
@@ -402,7 +402,7 @@ Parallelization across multiple nodes involves specialized setups, typically man
 
 First, create an R script (`script_run_sim.R`) that can handle task-specific input arguments:
 
-``` R
+``` r
 args     <- commandArgs(trailingOnly = TRUE)
 task_id  <- as.numeric(args[1]) 
 
