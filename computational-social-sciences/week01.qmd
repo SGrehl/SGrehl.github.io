@@ -19,29 +19,24 @@ Looking forward to a great semester with you all!
 
 # Introduction round
 
-Online Umfrage zu verschiedenen Random-Themen und Soziologie Abschluss mit Interessen und Erwartungen
+We will go one by one: 
+
+1. Name
+2. Place (and field) of Bachelor studies
+3. Favorite vegetable
+4. Pre-knowledge of R, social network analysis and spatial data analysis
+5. General sociological field of interest
 
 # **R**efresher
 
-R is a statistical programming language and environment. It includes thousands of packages for data management, analasys and visualisation. It supports high quality graphic. It is **free and open source**, there is a large community of R users and developers. Usually new statistical and analytical techniques are quickly available in R.
+R is a powerful programming language for statistics, data analysis, and visualization – and best of all, **it’s completely free and open-source!** This means that new functions and packages are constantly being developed by the community, and the latest statistical methods often become available in R first.  
 
-R is modular through the use of opackages, and it keeps on expanding
+One of R’s biggest strengths is its flexibility. Thanks to its **modular package system**, you can easily extend its functionality depending on your needs. Whether you’re collecting, processing, exploring, analyzing, or reporting data, R has you covered at every step of the research process.  
 
-Can be used for all steps in the research process (data collection, processing, exploration, analysis and reporting/ publishing)
+R also has an amazing and active community, with groups like **R-Ladies, R Consortium, and rOpenSci** helping to expand and improve it. If you ever need to customize something, you can even write your own functions and share them with others!  
 
-Keeps groing with cool community groups
+Let’s dive in! 🚀  
 
-R-Ladies, R Consortium, rOpenSci, etc.
-
-New functions can be written and checked by other users
-
-Support for network analysis in R and geodata analysis in R (various packages: network, igraph, intergraph, sna, ergm, RSiena), etc.
-
-For further informations see Cheat Sheets
-
--   [RStudio IDE Cheatsheet](https://rstudio.github.io/cheatsheets/rstudio-ide.pdf)
-
--   [Publish and Share with Quarto](https://rstudio.github.io/cheatsheets/quarto.pdf)
 
 ## Getting started
 
@@ -255,7 +250,7 @@ ages[names == "Tom"] # Age of the person with the name "Tom"
 
 ```
 
-::: student-exercise
+::: {.student-exercise}
 **Short Exercise:**
 
 1.  What are the names of the sociologists?
@@ -415,8 +410,10 @@ mean(my_data$score)
 
 Control structures are used to control the flow of a program. They include loops and conditional statements.
 
-::: callout-tip
-There are two tips, that will make your programming game a whole lot easier: 1. Don\`t repeat yourself: If you find yourself writing the same code over and over again, you should consider automating your task. 2. Divide and conquer: If you have a complex task, break it down into smaller, more manageable parts.
+::: {.callout-tip}
+There are two tips, that will make your programming game a whole lot easier:
+1. Don\`t repeat yourself: If you find yourself writing the same code over and over again, you should consider automating your task.
+2. Divide and conquer: If you have a complex task, break it down into smaller, more manageable parts.
 :::
 
 #### If-loops
@@ -543,10 +540,13 @@ load("files/df_friends.RData")
 
 ```
 
-Thats about it. If you have any questions during the semester, feel free to ask! You can also always come back to this document to refresh your memory.
+That is about it. If you have any questions during the semester, feel free to ask! You can also always come back to this document to refresh your memory.
 
-::: student-exercise
+
+
+::: {.student-exercise}
 **Homework**
+Next to the reading of the upcoming week, please 
 
 Please install the packages `igraph`, `ggplot2`, `ggraph`, `intergraph`, `sand`, `devtools`, and `UserNetR` in your R environment. You can do this by running the following code:
 
@@ -565,7 +565,17 @@ install.packages("intergraph")
 
 # Further **R**esources
 
-Basic R von Veronika Batzdörfer
+As always: If you know cool materials or find it during the path of this course, don't hesitate to send it to me!
+
+
+If you need a further overview - Check out these cheat sheets:
+
+- [RStudio IDE Cheatsheet](https://rstudio.github.io/cheatsheets/rstudio-ide.pdf)  
+- [Publish and Share with Quarto](https://rstudio.github.io/cheatsheets/quarto.pdf)  
+
+Or if you are generally interested in coding and understanding R:
 
 https://missing.csail.mit.edu/
+
+
 

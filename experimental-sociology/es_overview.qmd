@@ -26,15 +26,7 @@ Our focus will be twofold:
 
 2.  **Planning an experiment:** How can ABMs help us improve the statistical power of our experiments, save time and money, and make smarter design decisions (e.g., number of participants, treatment structure)?
 
-# 🧩 Course Structure
 
-We’ll be following a **flipped classroom** strategy:
-
--   During the week, you’ll study the core concepts at your own pace — whether at home, in the library, or even in the park (it’s the summer term after all!).
-
--   At the beginning of each seminar, we’ll clear up any open questions before diving into **active problem-solving** and **programming**.
-
--   Expect a mix of hands-on coding, small-group discussions, and the occasional productive chaos when things don’t work as expected (that’s part of the learning process!).
 
 # 🎯 Course Goals
 
@@ -46,15 +38,7 @@ By the end of this course, you should be able to:
 -   Understand how to fine-tune experimental design to increase statistical power.
 -   Reflect on the broader implications of experimental sociology and agent-based modeling in real-world research.
 
-# 🛠️ Requirements
 
--   Most importantly: Sociological curiosity – An interest in social behavior and experiments is essential. If you’re not genuinely curious about how people behave and why, this course might not be for you! -
--   Basic R programming skills – You should be comfortable reading and understanding R code (including functions). You don’t need to be an expert, but you should know the basics.
--   Laptop – Make sure you have R and RStudio installed and running. If you don’t have a laptop (yes, this can happen!), don’t hesitate to contact me (sascha.grehl\@uni-leipzig.de) — we’ll work something out.
--   Paper and pen – Digital or analog, as long as you can sketch out your ideas and map your thoughts. -
--   A sense of humor – Things will break, code will crash, and unexpected results will happen — that’s all part of the process.[^1]
-
-[^1]: *A good tip from someone who’s spent hours raging over broken code:* The problem is 99.99999% of the time sitting **in front of the screen**. You probably made a silly mistake and just aren’t spotting it right now. Keep calm, drink some tea and relax. In this respect, ChatGPT changed my life — just ask it where the error is, and it will usually confront you with your obvious mistake.
 
 # 📖 Weekly Readings
 

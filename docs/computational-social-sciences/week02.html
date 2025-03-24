@@ -4990,6 +4990,14 @@ window.Quarto = {
  <span class="dropdown-text">Course Assessment</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../general-information/sc.html">
+ <span class="dropdown-text">Scientific Computing</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../general-information/data.html">
+ <span class="dropdown-text">Data &amp; Mode</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../general-information/ai_usage.html">
  <span class="dropdown-text">AI-Usage</span></a>
   </li>  
@@ -5074,62 +5082,6 @@ window.Quarto = {
         <li>
     <a class="dropdown-item" href="../computational-social-sciences/css_overview.html">
  <span class="dropdown-text">Course Overview</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../computational-social-sciences/week01.html">
- <span class="dropdown-text">Week 01</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../computational-social-sciences/week02.html">
- <span class="dropdown-text">Week 02</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../computational-social-sciences/week03.html">
- <span class="dropdown-text">Week 03</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../computational-social-sciences/week04.html">
- <span class="dropdown-text">Week 04</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../computational-social-sciences/week05.html">
- <span class="dropdown-text">Week 05</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../computational-social-sciences/week06.html">
- <span class="dropdown-text">Week 06</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../computational-social-sciences/week07.html">
- <span class="dropdown-text">Week 07</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../computational-social-sciences/week08.html">
- <span class="dropdown-text">Week 08</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../computational-social-sciences/week09.html">
- <span class="dropdown-text">Week 09</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../computational-social-sciences/week10.html">
- <span class="dropdown-text">Week 10</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../computational-social-sciences/week11.html">
- <span class="dropdown-text">Week 11</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../computational-social-sciences/week12.html">
- <span class="dropdown-text">Week 12</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../computational-social-sciences/week13.html">
- <span class="dropdown-text">Week 13</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../computational-social-sciences/week14.html">
- <span class="dropdown-text">Week 14</span></a>
   </li>  
     </ul>
   </li>
@@ -5341,7 +5293,7 @@ G = \{V, E\}
 - <strong>Social media interactions</strong>: On Twitter or Instagram, one user can follow another without being followed back.<br>
 - <strong>Communication networks</strong>: E-Mails, phone calls or other forms of communication, can be sent out or received, thus defining a direction.</p>
 <p><strong>Note</strong>: In a <strong>directed graph</strong>, the edges are <strong>ordered</strong>, meaning the edge ( (a, b) ) is <strong>not</strong> the same as ( (b, a) ). The direction of the edge matters, and there is a one-way connection from ( a ) to ( b ) (but not necessarily the other way around).</p>
-<div>
+<div id="custom-block">
 <p>Edges in directed graphs are representations of ordered pairs (<strong>tuples</strong>), where the order of the vertices does matter. We can write these as <span class="math inline">\(E = \{(a,b), (b, c), (c, d), (d, a)\}\)</span>.</p>
 </div>
 </section>
@@ -5506,7 +5458,7 @@ A_{ij} =
 </tr>
 </tbody>
 </table>
-<div>
+<div id="custom-block">
 <p><strong>Tip:</strong></p>
 <ul>
 <li>Use an adjacency matrix if you need fast edge lookups.</li>
@@ -5598,7 +5550,7 @@ A_{ij} =
 <section id="creating-a-graph-from-formula" class="level3">
 <h3 class="anchored" data-anchor-id="creating-a-graph-from-formula">Creating a graph from formula</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">graph.formula</span>(<span class="dv">1</span><span class="sc">--</span><span class="dv">2</span>, <span class="dv">2</span><span class="sc">--</span><span class="dv">3</span>, <span class="dv">3</span><span class="sc">--</span><span class="dv">5</span>, <span class="dv">4</span><span class="sc">--</span><span class="dv">2</span>, <span class="dv">1</span><span class="sc">--</span><span class="dv">3</span>, <span class="dv">2</span><span class="sc">--</span><span class="dv">5</span>)</span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">graph_from_literal</span>(<span class="dv">1</span><span class="sc">--</span><span class="dv">2</span>, <span class="dv">2</span><span class="sc">--</span><span class="dv">3</span>, <span class="dv">3</span><span class="sc">--</span><span class="dv">5</span>, <span class="dv">4</span><span class="sc">--</span><span class="dv">2</span>, <span class="dv">1</span><span class="sc">--</span><span class="dv">3</span>, <span class="dv">2</span><span class="sc">--</span><span class="dv">5</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(g)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -6193,7 +6145,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>One of these aspects revolves around **network theories**, which explore how individuals behave within social contexts and how networks themselves evolve and function. Central questions in this area include: Where do network relationships originate? How are they formed? And what are the implications and consequences of these relationships for the people involved <span class="co">[</span><span class="ot">@lizardoSocialNetworksIntroduction2023</span><span class="co">]</span>?</span>
 <span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>::: student-exercise</span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>::: {.student-exercise}</span>
 <span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercise</span></span>
 <span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a>Reflect briefly on the occasions, where in the past you have been confronted with social networks theories. In what theoretical concepts of sociology is the embedding of actors of central importance?</span>
@@ -6255,11 +6207,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb9-117"><a href="#cb9-117" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-118"><a href="#cb9-118" aria-hidden="true" tabindex="-1"></a>**Note**: In a **directed graph**, the edges are **ordered**, meaning the edge ( (a, b) ) is **not** the same as ( (b, a) ). The direction of the edge matters, and there is a one-way connection from ( a ) to ( b ) (but not necessarily the other way around).</span>
 <span id="cb9-119"><a href="#cb9-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-120"><a href="#cb9-120" aria-hidden="true" tabindex="-1"></a>&lt;div&gt;</span>
+<span id="cb9-120"><a href="#cb9-120" aria-hidden="true" tabindex="-1"></a>::: {#custom-block}</span>
 <span id="cb9-121"><a href="#cb9-121" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-122"><a href="#cb9-122" aria-hidden="true" tabindex="-1"></a>Edges in directed graphs are representations of ordered pairs (**tuples**), where the order of the vertices does matter. We can write these as $E = <span class="sc">\{</span>(a,b), (b, c), (c, d), (d, a)<span class="sc">\}</span>$.</span>
 <span id="cb9-123"><a href="#cb9-123" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-124"><a href="#cb9-124" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span>
+<span id="cb9-124"><a href="#cb9-124" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb9-125"><a href="#cb9-125" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-126"><a href="#cb9-126" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Undirected Networks</span></span>
 <span id="cb9-127"><a href="#cb9-127" aria-hidden="true" tabindex="-1"></a></span>
@@ -6342,7 +6294,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb9-206"><a href="#cb9-206" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-207"><a href="#cb9-207" aria-hidden="true" tabindex="-1"></a>For an **undirected graph**, the adjacency matrix is **symmetric**, meaning $A_{ij} = A_{ji}$. In contrast, for a **directed graph**, the matrix is generally **asymmetric**, where $A_{ij} = 1$ indicates a directed edge from node $i$ to node $j$, but not necessarily vice versa.</span>
 <span id="cb9-208"><a href="#cb9-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-209"><a href="#cb9-209" aria-hidden="true" tabindex="-1"></a><span class="al">![Representation as adjacency matrices](Graphics/adjacency%20matrices.png)</span></span>
+<span id="cb9-209"><a href="#cb9-209" aria-hidden="true" tabindex="-1"></a><span class="al">![Representation as adjacency matrices](Graphics/adjacency matrices.png)</span></span>
 <span id="cb9-210"><a href="#cb9-210" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-211"><a href="#cb9-211" aria-hidden="true" tabindex="-1"></a>&lt;div&gt;</span>
 <span id="cb9-212"><a href="#cb9-212" aria-hidden="true" tabindex="-1"></a></span>
@@ -6377,7 +6329,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb9-241"><a href="#cb9-241" aria-hidden="true" tabindex="-1"></a>| V | 1, 2, 3, 4, 5, 6, 7 | 1, 2, 3, 4, 5, 6, 7 |</span>
 <span id="cb9-242"><a href="#cb9-242" aria-hidden="true" tabindex="-1"></a>| E | (1,4), (1,7), (2,3), (2,7), (3,6), (5,7), (4,1), (6,1), (3,2), (5,2), (4,3), (6,3), (5,4), (6,5) | (1,4), (1,6), (1,7), (2,3), (2,5), (2,7), (3,2), (3,4), (3,6), (4,1), (4,3), (4,5), (5,2), (5,4), (5,6), (5,7), (6,1), (6,3), (6,5), (6,7), (7,1), (7,2), (7,5), (7,6) |</span>
 <span id="cb9-243"><a href="#cb9-243" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-244"><a href="#cb9-244" aria-hidden="true" tabindex="-1"></a>&lt;div&gt;</span>
+<span id="cb9-244"><a href="#cb9-244" aria-hidden="true" tabindex="-1"></a>::: {#custom-block}</span>
 <span id="cb9-245"><a href="#cb9-245" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-246"><a href="#cb9-246" aria-hidden="true" tabindex="-1"></a>**Tip:**</span>
 <span id="cb9-247"><a href="#cb9-247" aria-hidden="true" tabindex="-1"></a></span>
@@ -6385,7 +6337,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb9-249"><a href="#cb9-249" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Use an adjacency list for efficient traversal in sparse graphs.</span>
 <span id="cb9-250"><a href="#cb9-250" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Use an edge list when edges are dynamic or when importing/exporting graph data.</span>
 <span id="cb9-251"><a href="#cb9-251" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-252"><a href="#cb9-252" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span>
+<span id="cb9-252"><a href="#cb9-252" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb9-253"><a href="#cb9-253" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-254"><a href="#cb9-254" aria-hidden="true" tabindex="-1"></a><span class="fu"># Getting started in R</span></span>
 <span id="cb9-255"><a href="#cb9-255" aria-hidden="true" tabindex="-1"></a></span>
@@ -6487,7 +6439,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb9-359"><a href="#cb9-359" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-362"><a href="#cb9-362" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb9-363"><a href="#cb9-363" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb9-364"><a href="#cb9-364" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">graph.formula</span>(<span class="dv">1</span><span class="sc">--</span><span class="dv">2</span>, <span class="dv">2</span><span class="sc">--</span><span class="dv">3</span>, <span class="dv">3</span><span class="sc">--</span><span class="dv">5</span>, <span class="dv">4</span><span class="sc">--</span><span class="dv">2</span>, <span class="dv">1</span><span class="sc">--</span><span class="dv">3</span>, <span class="dv">2</span><span class="sc">--</span><span class="dv">5</span>)</span>
+<span id="cb9-364"><a href="#cb9-364" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">graph_from_literal</span>(<span class="dv">1</span><span class="sc">--</span><span class="dv">2</span>, <span class="dv">2</span><span class="sc">--</span><span class="dv">3</span>, <span class="dv">3</span><span class="sc">--</span><span class="dv">5</span>, <span class="dv">4</span><span class="sc">--</span><span class="dv">2</span>, <span class="dv">1</span><span class="sc">--</span><span class="dv">3</span>, <span class="dv">2</span><span class="sc">--</span><span class="dv">5</span>)</span>
 <span id="cb9-365"><a href="#cb9-365" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-366"><a href="#cb9-366" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(g)</span>
 <span id="cb9-367"><a href="#cb9-367" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>

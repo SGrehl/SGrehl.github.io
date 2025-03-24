@@ -4,7 +4,7 @@ subtitle: "Contact, Syllabus, Guidelines and Materials"
 date: "04/07/2025"
 ---
 
-**Welcome to the Computational Social Science (CSS) seminar**! This hands-on course explores how social network analysis and geo/spatial data can enhance our understanding of society. Using R, we will learn techniques for visualizing, analyzing, and integrating these data types with existing datasets—such as survey or experimental data — to gain deeper insights into social phenomena.
+**Welcome to the Computational Social Science (CSS) seminar**! This hands-on course explores how social network analysis and geo/spatial data can enhance our understanding of society. Using R, we will learn techniques for visualizing, analyzing, and integrating these data types with existing datasets — such as survey or experimental data — to gain deeper insights into social phenomena.
 
 ::: {#custom-block}
 **General Information**
@@ -15,7 +15,7 @@ date: "04/07/2025"
 | GWZ, H2 1.15   | Start: 4/7/25 |
 :::
 
-# Course Setup and Goals
+# 🔎 Focus
 
 Our focus will be twofold:
 
@@ -23,13 +23,15 @@ Our focus will be twofold:
 
 2.  **Geo/Spatial Data Analysis:** Examining spatial patterns and dependencies, and leveraging location-based data for social science research.
 
+# 🏁 Goals
+
 By combining these data sources with traditional and emerging approaches—including text data (next Semester with Felix) and simulated data (this semester with Sascha) —we will explore innovative ways to study societal dynamics. Throughout the seminar, we will engage with inspiring case studies and hands-on applications to develop our own research perspectives.
 
 This course provides both conceptual and technical foundations for working with computational methods in the social sciences, empowering participants to extend existing datasets and refine their analytical toolkit.
 
 By the end of this semester, you will be able to understand, analyze, and visualize network and spatial data types. You will gain the skills to effectively apply these methods to your own research questions, enabling you to generate insightful and impactful results. This course provides hands-on knowledge that you can use both in academic research and beyond.
 
-# Syllabus
+# 📆 Syllabus
 
 ::::: {tbl}
 +----------+----------+-------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------------------------------------+
@@ -100,7 +102,7 @@ By the end of this semester, you will be able to understand, analyze, and visual
 
 : {.hover}
 
-# Course Materials and Structure
+# 🗂️ Course Materials and Structure
 
 All materials required for the completion of this course can be found on this website. Literature references (when openly available) are linked directly; otherwise, the PDFs will be uploaded to our Moodle course.
 
@@ -118,7 +120,7 @@ If you see this block:
 This marks an in-class discussion and/or reflection exercise.
 :::
 
-# Acknowledgements
+# 💐 Acknowledgements
 
 While creating this course, I have drawn inspiration from several courses taught by Felix Lennert, Till Hovestadt, Johannes Zschache, Omar Lizardo. Below is a table listing the courses, institutions, and links for further reference (if available). If you are interested in diving deeper into the topics, I encourage you to explore these resources and courses.
 
@@ -136,7 +138,7 @@ While creating this course, I have drawn inspiration from several courses taught
 
 Additionally, parts of the content for this course were created with the assistance of GitHub Copilot, ChatGPT, and ChatAI. Please note that while these tools have contributed to the development of the course materials, the final content and structure have been carefully curated and tailored for this course.
 
-# Data Inspiration
+# 💾 Data Inspiration
 
 If you find cool datasets during this course (or at any point tbh) I'd be happy if you share it with me - and I will update the list!
 

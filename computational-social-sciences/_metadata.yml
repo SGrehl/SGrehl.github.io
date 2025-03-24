@@ -26,4 +26,5 @@ format:
       loop: true
       match: auto
 css: styles.css
+editor: source
 copyright: "Copyright Leonie Steinbrinker, 2025. All Rights Reserved"
