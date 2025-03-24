@@ -1,4 +1,102 @@
 ---
   title: "Experimental Sociology - Week 2"
-  subtitle: "TBA"
+  subtitle: "Analytical Solutions & Hypotheses"
 ---
+
+This week is about 
+
+## 🎯 Learning Goals
+
+By the end of this week, you should:
+
+-   Know the difference between **hypotheses** and **propositions**.
+
+-   Understand why **analytical solutions are valuable** in the social sciences.
+
+-   Recognize the **limitations of analytical solutions** when applied to complex social situations.
+
+-   Be able to model a simple social interaction using **Game Theory**.
+
+-   Understand how introducing **bounded rationality** increases complexity.
+
+# Propositions & Hypotheses
+
+Proposition: Universal statement about the relationship between one or more concepts
+Hypothesis: Singular statement, derived from propositions, concretely related to investigation
+- Social capital increases academic success 
+- The higher the parents' educational attainment, the better the children's German score
+Important: We test hypotheses, not propositions. In order to test them we have to run (in the ideal case) experiments! 
+
+# Derivation of a hypothesis
+
+## 
+
+### 🧠 Why Analytical Solutions Matter
+
+Analytical solutions (often expressed as equations) are the **gold standard** in science because:
+
+-   They provide **precise** answers.
+
+-   They allow for **clear causal interpretation**.
+
+-   They have a high **objectivity, transparency and reproducibility**.
+
+-   They are often **computationally fast**.
+
+
+### 🚧 **Shortcomings of Analytical Solutions**
+
+However, in the social sciences, analytical solutions can become difficult because:
+
+Reality too complex to be captured analytically in its entirety
+Theories (and the respective equations) can capture only partial aspects of reality. Yet, 
+Sometimes we want a complex, multifaceted analysis
+Combination of theories not necessarily analytically compatible or manageable
+
+-   Models of social behavior often become too **complex** to solve analytically.
+
+-   Human behavior introduces **noise** and **irrationality**.
+
+Therefore we will look in two weeks at another approach, namly numerical solutions (e.g. simulations). 
+
+# 🎲 Modeling Social Situations
+
+A first step to derive of a analyitical 
+
+## Game Theory
+
+Game theory offers a structured approach to modeling social situations:
+
+-   **Players** – Agents making decisions.
+
+-   **Strategies** – Options available to the players.
+
+-   **Payoffs** – Outcomes based on strategy combinations.
+
+👉 *Example:* The Prisoner's Dilemma – A simple two-player game that reveals the challenge of cooperation and competition.
+
+## 🔎 **Bounded Rationality**
+
+-   Classical game theory assumes **perfectly rational actors**.
+
+-   In reality, humans often make decisions based on incomplete information and cognitive limitations (bounded rationality).
+
+-   Introducing bounded rationality increases complexity — solutions become harder to compute.
+
+# 🏋️ **Pre-Class Assignment**
+
+1.  Read the assigned material (TBA).
+
+2.  Solve the following simple problem:
+
+    -   Imagine a coordination problem between two firms deciding whether to invest in a new market. Create a simple payoff matrix and identify the Nash equilibrium.
+
+    -   Then, modify the problem by introducing **bounded rationality** (e.g., one firm lacks full information). How does the equilibrium change?
+
+3.  Bring your results and any questions to the seminar.
+
+# 🔖 **Suggested Readings**
+
+-   Osborne, M.J. (2004). *An Introduction to Game Theory* – Chapter 2
+
+-   Gigerenzer, G. & Selten, R. (2002). *Bounded Rationality: The Adaptive Toolbox* – Introductory chapter

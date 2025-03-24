@@ -3,9 +3,122 @@
   subtitle: "Introduction"
 ---
 
-# Session 1: Introduction
+# Formal Stuff
 
-Welcome to the first session of **Experimental Sociology**. Here we will cover the basics of experimental design in social research.
+## 🔍 What is Experimental Sociology?
 
-*Content for session 1 goes here...*
-  
+In short: it's about **understanding social behavior through controlled experiments**. We'll also integrate analytical thinking and computational methods—such as game-theoretical equilibrium and agent-based modeling (ABM)—to help you formulate better research questions, optimize experimental design, and effectively utilize available resources. Essentially, computational methods serve as tools to enhance and refine your experimental designs, maximizing the quality and efficiency of your research.
+
+## 🧩 Course Structure
+
+We'll follow a **flipped classroom** approach: - **Before class**: You'll read materials and familiarize yourself with key concepts. - **In class**: Engage actively in discussions, solve problems, and apply concepts practically.
+
+## 📌 Main Topics
+
+-   Analytical thinking and hypothesis generation
+-   Agent-based models (ABM): creating, modifying, and calibrating simulations
+-   Experimental design: optimizing experiments, improving statistical power, and addressing real-world research challenges
+-   Machine learning basics: practical implementation
+
+## 📖 Weekly Readings
+
+Course materials will be provided weekly. Read at your own pace, and bring questions or ideas to the seminar!
+
+## 🎯 Goals
+
+By the end of this course, you'll: - Understand how to model social processes analytically and computationally. - Design, program, and utilize agent-based models (ABMs). - Improve experimental design efficiency using computational methods.
+
+## 🛠️ Requirements
+
+-   Sociological curiosity
+-   Basic R programming knowledge
+-   Laptop with R and RStudio installed
+-   A good sense of humor
+
+## 🗣️ Communication
+
+Got questions or ideas? Talk to us anytime—we're your collaborators, not just instructors.
+
+Let's enjoy this journey and make some discoveries together!
+
+# Basics
+
+This is an unconventional course, maybe unique in its design. While the main topic is experimental sociology. I am sure you all now what an experiment looks like
+
+## Experiments in the Social Sciences
+
+In the ideal world we have:
+
+-   We have a hypothesis regarding the effect of a independent treatment on a dependent variable.
+
+-   We plan an experiment to test this hypothesis
+
+    -   The experiment has at least one treatment and a control group.
+
+    -   Only independent treatment is changed while everything else is kept similar.
+
+    -   Assignment to TG or CG is randomly.
+
+    -   We measure the dependent variable after the different treatment occured.
+
+-   We decide whether the reject the hypothesis or keep it.
+
+Yet, often it is not that easy.
+
+## Problems of Experiments in the Social Sciences
+
+In this course we will look at some of the problems (some you already have tackled in your former studies (Experiments not possible), others you will tackle in the "Kausalanalyse". So we will focus on a very specific part.
+
+-   How to derive hypothesis
+
+-   How to plan a good and efficienct experiment.
+
+    -   How to make the expected effects strong?
+    -   How to know what to test?
+    -   How to do with limited money more?
+    -   How to save the researches time?
+    -   How to save the subjects time?
+
+# Agent-based Modeling
+
+Special case of microsimulation Basic idea Modeling of entities & their interaction Environment Individuals or groups (=actors) Possess properties Interacting with environment & other actors Start from an initial setting (e.g. composition of actors) Through interaction the model changes over time.
+
+Draw conclusions from these results
+
+## Basic Process
+
+An ABM is
+
+## ![Basic steps for a agent-based model.](images/clipboard-4137121222.png)Example of an Interaction at Time 𝑡
+
+![](images/clipboard-3033617992.png)
+
+## Advantages of ABMs
+
+### Advantages for Modeling
+
+See also Manzo (2022)
+
+Granularity - No level of detail specified a priori - Heterogeneity easy to implement
+
+Generalizability - Can contain multiple approaches and formalisms simultaneously
+
+Flexibility - Open for all theoretical ideas / approaches - Approaches can be added / removed individually \### Advatages in Contrast to Empirical Studies
+
+Disadvantages of studies with real actors (= people) - Costly - Difficult to collect/implement - Unethical
+
+ABMs as an alternative - Hypotheses can be tested as proof-of-concept - Crucial factors can be identified (cf. sensitivity analysis) - Irrelevant factors can be identified
+
+**However, does not replace empirical confirmation!**
+
+Use insights of ABM to develop tailored studies
+
+### Other Advantages
+
+Automated - Effects of changed parameters/other formalisms, do not have to be calculated, but can be implemented automatically
+
+Educational aspects - Visualizations are more memorable and help convey information faster - Learners can do hands-on learning for themselves by “playing around”
+
+# Course Program
+
+\<enter the syllabus here\>
