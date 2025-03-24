@@ -55,7 +55,7 @@ p1 <-ggraph(g, layout = "fr") +
 One of these aspects revolves around **network theories**, which explore how individuals behave within social contexts and how networks themselves evolve and function. Central questions in this area include: Where do network relationships originate? How are they formed? And what are the implications and consequences of these relationships for the people involved [@lizardoSocialNetworksIntroduction2023]?
 
 
-::: student-exercise
+::: {.student-exercise}
 ## Exercise
 
 Reflect briefly on the occasions, where in the past you have been confronted with social networks theories. In what theoretical concepts of sociology is the embedding of actors of central importance?
@@ -117,11 +117,11 @@ $$
 
 **Note**: In a **directed graph**, the edges are **ordered**, meaning the edge ( (a, b) ) is **not** the same as ( (b, a) ). The direction of the edge matters, and there is a one-way connection from ( a ) to ( b ) (but not necessarily the other way around).
 
-<div>
+::: {#custom-block}
 
 Edges in directed graphs are representations of ordered pairs (**tuples**), where the order of the vertices does matter. We can write these as $E = \{(a,b), (b, c), (c, d), (d, a)\}$.
 
-</div>
+:::
 
 #### Undirected Networks
 
@@ -204,7 +204,7 @@ $$
 
 For an **undirected graph**, the adjacency matrix is **symmetric**, meaning $A_{ij} = A_{ji}$. In contrast, for a **directed graph**, the matrix is generally **asymmetric**, where $A_{ij} = 1$ indicates a directed edge from node $i$ to node $j$, but not necessarily vice versa.
 
-![Representation as adjacency matrices](Graphics/adjacency%20matrices.png)
+![Representation as adjacency matrices](Graphics/adjacency matrices.png)
 
 <div>
 
@@ -239,7 +239,7 @@ With even bigger networks it might be useful to even store networks in an edge l
 | V | 1, 2, 3, 4, 5, 6, 7 | 1, 2, 3, 4, 5, 6, 7 |
 | E | (1,4), (1,7), (2,3), (2,7), (3,6), (5,7), (4,1), (6,1), (3,2), (5,2), (4,3), (6,3), (5,4), (6,5) | (1,4), (1,6), (1,7), (2,3), (2,5), (2,7), (3,2), (3,4), (3,6), (4,1), (4,3), (4,5), (5,2), (5,4), (5,6), (5,7), (6,1), (6,3), (6,5), (6,7), (7,1), (7,2), (7,5), (7,6) |
 
-<div>
+::: {#custom-block}
 
 **Tip:**
 
@@ -247,7 +247,7 @@ With even bigger networks it might be useful to even store networks in an edge l
 -   Use an adjacency list for efficient traversal in sparse graphs.
 -   Use an edge list when edges are dynamic or when importing/exporting graph data.
 
-</div>
+:::
 
 # Getting started in R
 
@@ -349,7 +349,7 @@ plot(h)
 
 ```{r}
 #| code-fold: false
-g <- graph.formula(1--2, 2--3, 3--5, 4--2, 1--3, 2--5)
+g <- graph_from_literal(1--2, 2--3, 3--5, 4--2, 1--3, 2--5)
 
 plot(g)
 ```
