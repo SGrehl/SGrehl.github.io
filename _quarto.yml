@@ -14,7 +14,7 @@ website:
             href: general-information/exam.qmd
           - text: "Scientific Computing"
             href: general-information/sc.qmd        
-          - text: "Data & Mode"
+          - text: "Data Sources"
             href: general-information/data.qmd   
           - text: "AI-Usage"
             href: general-information/ai_usage.qmd

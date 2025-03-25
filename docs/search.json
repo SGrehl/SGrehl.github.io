@@ -7,6 +7,13 @@
     "text": "Note\n\n\n\nSome of the material (due to copyright issues) can be found at moodle. The password is provided in the sessions of the first week."
   },
   {
+    "objectID": "index.html#footnotes",
+    "href": "index.html#footnotes",
+    "title": "Experimental Sociology and Computational Social Sciences",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nA good tip from someone who’s spent hours raging over broken code: The problem is 99.99999% of the time sitting in front of the screen. You probably made a silly mistake and just aren’t spotting it right now. Keep calm, drink some tea and relax. In this respect, ChatGPT changed my life — just ask it where the error is, and it will usually confront you with your obvious mistake.↩︎"
+  },
+  {
     "objectID": "general-information/exam.html",
     "href": "general-information/exam.html",
     "title": "Course Assessment",
@@ -74,14 +81,7 @@
     "href": "experimental-sociology/es_overview.html",
     "title": "Course Overview",
     "section": "",
-    "text": "Welcome to the Experimental Sociology (ES) seminar!\nIn this course, we will explore how analytical and computational tools can be used to derive experimental research questions, optimize experimental design, and plan necessary observations more effectively. Together, we’ll bridge the gap between theory and practice, using simulations and agent-based models (ABMs) to enhance the quality and efficiency of sociological research.\n\nGeneral Information\n\n\n\nWednesday, weekly\n11:15 - 12:45\n\n\nGWZ, H2 1.15\nStart: 2025-04-09"
-  },
-  {
-    "objectID": "experimental-sociology/es_overview.html#footnotes",
-    "href": "experimental-sociology/es_overview.html#footnotes",
-    "title": "Course Overview",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nA good tip from someone who’s spent hours raging over broken code: The problem is 99.99999% of the time sitting in front of the screen. You probably made a silly mistake and just aren’t spotting it right now. Keep calm, drink some tea and relax. In this respect, ChatGPT changed my life — just ask it where the error is, and it will usually confront you with your obvious mistake.↩︎"
+    "text": "🌍 Overview\nWelcome to the Experimental Sociology (ES) seminar!\nIn this course, we will explore how analytical and computational tools can be used to derive experimental research questions, optimize experimental design, and plan necessary observations more effectively. Together, we’ll bridge the gap between theory and practice, using simulations and agent-based models (ABMs) to enhance the quality and efficiency of sociological research.\n\nGeneral Information\n\n\n\nWednesday, weekly\n11:15 - 12:45\n\n\nGWZ, H2 1.15\nStart: 2025-04-09\n\n\n\n\n\n\n🔍 Focus\nOur focus will be twofold:\n\nHypothesis derivation: How can analytical tools and agent-based models (ABMs) help us derive meaningful hypotheses and design better experiments?\nPlanning an experiment: How can ABMs help us improve the statistical power of our experiments, save time and money, and make smarter design decisions (e.g., number of participants, treatment structure)?\n\n\n\n🎯 Course Goals\nBy the end of this course, you should be able to:\n\nModel a social problem so that it can be tackled analytically or via an ABM.\nProgram a simple ABM (either from scratch or with the help of an LLM).\nUse ABMs to design experiments — including determining the number of participants needed to detect a given effect size and setting up meaningful treatments.\nUnderstand how to fine-tune experimental design to increase statistical power.\nReflect on the broader implications of experimental sociology and agent-based modeling in real-world research.\n\n\n\n📖 Weekly Readings\nCourse materials will be provided weekly. Read at your own pace, and bring questions or ideas to the seminar! If some of the literature is not\n\n\n🗓️ Syllabus\n\n\n\nDate\nWeek\nSubject\nContent\nLiterature and Materials\n\n\n\n\n2025-04-09\n1\nKick-Off\n\nIntroduction\nCourse setup and structure\nWhat is the merit of an analytical solution?\nWhat are ABMs?\n\nReadings:\n\n\n2025-04-16\n2\nAnalytical Methods: Game Theory\n\nWhy analytical solutions?\nGame Theory\n\nReadings:\n\n\n2025-04-23\n3\nAnalytical Methods: Ecological Models & Evolutionary Game Theory\n\nDifferential Equations\nThe 3 ingredients of an evolutionary process\n\nReadings:\n\n\n2025-04-30\n4\nABMs: Basics\n\nBasic design principles of AMBs in R\nODD-Protocol\nA simple ABM with ChatGPT\n\nReadings:\n\n(Grimm et al. 2020)\n\n\n\n2025-05-07\n5\nEvolutionary ABMs: Basics\n\nLearning\nMutation\n\nReadings:\n\n\n2025-05-14\n6\nEvolutionary ABMs: Complex Simulations\n\nErrors & noise\nStrategy space\nRC vs. Bounded Rationality\n\nReadings:\n\n\n2025-05-21\n7\nDiffusion: Basics\n\nSimple & complex contagion\nSIS/SIR/SIRD\nNetwork structures\n\nReadings:\n\n\n2025-05-28\n8\nDiffusion: Dispersion,Robustness & Sensitivity Analysis\n\nHow to deal with randomness\nDiscussions\nTerm Paper ideas\n\nReadings:\n\n\n2025-06-04\n9\nDiffusion: Calibration\n\nInput, model & output realism\nHow to do calibrate a model\n\nReadings:\n\n\n2025-06-11\n10\nMachine Learning: Basics\n\nSet up a simple machine learning (ML)\nPrecision & recall\nCross-validation\n\nReadings:\n\n\n2025-06-18\n11\nOpen Lab Session\n\nQ&A\nDiscussions\nTerm Paper ideas\n\nReadings:\n\n\n2025-06-25\n12\nStatistical Power, Randomization, Running an Experiment\n\nStatistical power via formula and simulation\nHow to increase statistical power?\nProblems, challenges, and more problems\n\nReadings:\nAdditional material:\n\nhttps://egap.org/resource/10-things-to-know-about-statistical-power/\nhttps://egap.org/resource/10-things-to-know-about-randomization/\n\n\n\n2025-07-02\n13\nSummary & Term Paper Presentation I\n\n\n\n\n2025-07-09\n14\nTerm Paper Presentation II\n\n\n\n\n\n\n\n\n\n\n\n\nReferences\n\nGrimm, Volker, Steven F. Railsback, Christian E. Vincenot, Uta Berger, Cara Gallagher, Donald L. DeAngelis, Bruce Edmonds, et al. 2020. “The ODD Protocol for Describing Agent-Based and Other Simulation Models: A Second Update to Improve Clarity, Replication, and Structural Realism.” Journal of Artificial Societies and Social Simulation 23 (2): 7. https://doi.org/10.18564/jasss.4259."
   },
   {
     "objectID": "computational-social-sciences/week13.html",
@@ -165,7 +165,7 @@
     "href": "computational-social-sciences/week01.html#global-environment",
     "title": "Week 01 - Kick-Off",
     "section": "Global environment",
-    "text": "Global environment\nThe global environment is the workspace of R. It contains all objects that you have created during your session. You can see all objects in the global environment in the upper right corner of RStudio. You can also list all objects in the global environment using the ls() function.\n\n\nCode\nls()\n\n# delete specific object\nrm(df_friends)\n\n# delete global environment\nrm(list = ls())\n\n# Save objects in global environment\n# Save data\nsave(df_friends, file = \"files/df_friends.RData\")\n\n# Load data\nload(\"files/df_friends.RData\")\n\n\nThats about it. If you have any questions during the semester, feel free to ask! You can also always come back to this document to refresh your memory.\n\nHomework\nPlease install the packages igraph, ggplot2, ggraph, intergraph, sand, devtools, and UserNetR in your R environment. You can do this by running the following code:\n\n\nCode\ninstall.packages(\"igraph\")\ninstall.packages(\"igraphdata\")\ninstall.packages(\"ggplot2\")\n\ninstall.packages(\"sand\")\ninstall.packages(\"devtools\")\nlibrary(devtools)\ninstall_github(\"DougLuke/UserNetR\")\ninstall.packages(\"intergraph\")"
+    "text": "Global environment\nThe global environment is the workspace of R. It contains all objects that you have created during your session. You can see all objects in the global environment in the upper right corner of RStudio. You can also list all objects in the global environment using the ls() function.\n\n\nCode\nls()\n\n# delete specific object\nrm(df_friends)\n\n# delete global environment\nrm(list = ls())\n\n# Save objects in global environment\n# Save data\nsave(df_friends, file = \"files/df_friends.RData\")\n\n# Load data\nload(\"files/df_friends.RData\")\n\n\nThat is about it. If you have any questions during the semester, feel free to ask! You can also always come back to this document to refresh your memory.\n\nHomework Next to the reading of the upcoming week, please\nPlease install the packages igraph, ggplot2, ggraph, intergraph, sand, devtools, and UserNetR in your R environment. You can do this by running the following code:\n\n\nCode\ninstall.packages(\"igraph\")\ninstall.packages(\"igraphdata\")\ninstall.packages(\"ggplot2\")\n\ninstall.packages(\"sand\")\ninstall.packages(\"devtools\")\nlibrary(devtools)\ninstall_github(\"DougLuke/UserNetR\")\ninstall.packages(\"intergraph\")"
   },
   {
     "objectID": "computational-social-sciences/css_overview.html",
@@ -460,12 +460,5 @@
     "title": "Scientific Computing",
     "section": "Troubleshooting",
     "text": "Troubleshooting\nIf your code suddenly stops working even though it was running fine before, and you’re not sure why, check the status of the services or the specific nodes involved. Sometimes the issue is simply due to cluster problems."
-  },
-  {
-    "objectID": "index.html#footnotes",
-    "href": "index.html#footnotes",
-    "title": "Experimental Sociology and Computational Social Sciences",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nA good tip from someone who’s spent hours raging over broken code: The problem is 99.99999% of the time sitting in front of the screen. You probably made a silly mistake and just aren’t spotting it right now. Keep calm, drink some tea and relax. In this respect, ChatGPT changed my life — just ask it where the error is, and it will usually confront you with your obvious mistake.↩︎"
   }
 ]

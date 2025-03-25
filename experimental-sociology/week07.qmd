@@ -1,4 +1,5 @@
 ---
   title: "Experimental Sociology - Week 7"
   subtitle: "TBA"
+  date: "2025-03-21"
 ---
