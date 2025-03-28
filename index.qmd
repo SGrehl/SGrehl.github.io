@@ -32,6 +32,10 @@
 Some of the material (due to copyright issues) can be found at [moodle](https://moodle2.uni-leipzig.de/course/view.php?id=53760){.external target="_blank"}. The password is provided in the sessions of the first week.
 :::
 
+::: callout-note
+If you wish to attend this course and have it recognised as part of your studies, please complete this [retroactive module enrolment form](https://www.sozphil.uni-leipzig.de/fileadmin/Fakult%C3%A4t_SozPhil/Fakult%C3%A4t/Dateien/Helpdesk/Modulanmeldung_SoSe25.pdf) and bring it with you within the first four weeks.
+:::
+
 # 🔍 Overview
 
 Welcome to the module "Experimental Sociology and Computational Social Sciences 2025! Here you will find the two courses, most of the materials (except copyright protected papers and books used in the course) and so on.
