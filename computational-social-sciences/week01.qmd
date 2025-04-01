@@ -224,7 +224,7 @@ R has several classes that define how data is structured and handled. Just to na
 
 A vector is a simple data structure, that can store multiple elements of the same type. You can create a vector using the `c()` function.
 
-::: callout-note
+::: {.callout-note}
 To ensure, that all elements in a vector are of the same type, R will coerce the elements to the most general type. For example, if you combine a numeric and a character, the numeric will be coerced to a character.
 :::
 
@@ -413,6 +413,7 @@ Control structures are used to control the flow of a program. They include loops
 ::: {.callout-tip}
 There are two tips, that will make your programming game a whole lot easier:
 1. Don\`t repeat yourself: If you find yourself writing the same code over and over again, you should consider automating your task.
+
 2. Divide and conquer: If you have a complex task, break it down into smaller, more manageable parts.
 :::
 
@@ -571,9 +572,11 @@ As always: If you know cool materials or find it during the path of this course,
 If you need a further overview - Check out these cheat sheets:
 
 - [RStudio IDE Cheatsheet](https://rstudio.github.io/cheatsheets/rstudio-ide.pdf)  
-- [Publish and Share with Quarto](https://rstudio.github.io/cheatsheets/quarto.pdf)  
+- [Publish and Share with Quarto](https://rstudio.github.io/cheatsheets/quarto.pdf)
+- [R for Datascience] (https://r4ds.had.co.nz/)
 
-Or if you are generally interested in coding and understanding R:
+# Python Resources
+Or if you are generally interested in coding (in Python):
 
 https://missing.csail.mit.edu/
 

@@ -379,3 +379,21 @@ E(g)$weight <- c(1.2, 2.3, 1.8, 3.0, 2.1, 1.5)
 
 plot(g, edge.width = E(g)$weight)  # Visualizing edge weights
 ```
+
+
+## Descriptives
+
+[@wilsonIntroductionGraphTheory2009]
+
+- Complete network
+- Subgraph
+- Path
+- Clique
+- etc.
+
+### Data-Collection
+
+[@rawlingsHowAreSocial2023]
+
+
+## Data collection

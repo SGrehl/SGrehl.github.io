@@ -1,15 +1,10 @@
 ---
 title: "Week 03"
-subtitle: "Key metrics and theoretical insight"
+subtitle: "No class"
 ---
 
-# Network concepts
 
-Complete networks
+::: {#custom-block}
+# Easter Eggs in Data Science
 
-Cliques
-
-Path
-
-Dyads
-
+:::

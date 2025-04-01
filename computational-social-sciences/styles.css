@@ -73,3 +73,14 @@ ul {
 ul li {
   margin-bottom: 2px; /* Adjust as needed */
 }
+
+/* Weniger Zeilenabstand für Bulletpoints in Quarto-Tabellen */
+table td ul {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 1rem; /* Optional: Beibehaltung der Einrückung */
+}
+
+table td li {
+  line-height: 1.2; /* Verringert den Zeilenabstand */
+}

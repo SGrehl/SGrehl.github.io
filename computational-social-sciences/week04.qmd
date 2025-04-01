@@ -1,4 +1,20 @@
 ---
 title: "Week 04"
-subtitle: "-"
+subtitle: "Theoretical Insights"
 ---
+
+
+# Short recapture
+
+# Network concepts
+
+Complete networks
+
+Cliques
+
+Path
+
+Dyads
+
+
+# Theoretical Insights from Network Data
