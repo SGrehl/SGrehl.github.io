@@ -50,9 +50,9 @@ p1 <-ggraph(g, layout = "fr") +
 
 # Social Network Analysis
 
-(Content from Omar Lizardo) In the context of social network analysis from a sociological perspective, we typically discuss two broad aspects.
+In the context of social network analysis from a sociological perspective, we typically discuss two broad aspects.
 
-One of these aspects revolves around **network theories**, which explore how individuals behave within social contexts and how networks themselves evolve and function. Central questions in this area include: Where do network relationships originate? How are they formed? And what are the implications and consequences of these relationships for the people involved [@lizardoSocialNetworksIntroduction2023]?
+One of these aspects revolves around **network theories**, which explore how individuals behave within social contexts and how networks themselves evolve and function. Central questions in this area include: Where do network relationships originate? How are they formed? And what are the implications and consequences of these relationships for the people involved [@lizardoSocialNetworksIntroduction2023]
 
 
 ::: {.student-exercise}
@@ -136,7 +136,12 @@ $$
 - **Co-authorship networks**: If two researchers have co-authored a paper together, the connection exists for both equally.\
 - **Collaboration networks**: In corporate or scientific collaborations, individuals or institutions work together on projects, making the relationship inherently bidirectional. - **Classmates**
 
+::: {#custom-block}
 **Note**: In an **undirected graph**, the edges are **unordered**, meaning the edge ( {a, b} ) is the same as ( {b, a} ). The connection between ( a ) and ( b ) has no direction, and this is reflected by the use of **unordered pairs** in the edge set.
+
+A graph $E$ where there are no multiple edges and where each edge is an unordered pair ${a,b}$ with $a /neq b$ is also called a **simple graph**$
+:::
+
 
 In practice, the choice between directed and undirected networks depends on the research question. If directionality is crucial (e.g., influence, hierarchy, or information flow), a **directed network** is necessary. However, if the goal is to analyze overall connectivity, **undirected networks** provide a simpler approach.
 
@@ -189,7 +194,11 @@ This is why, alongside graphical representations, there are other, mathematicall
 
 #### Adjacency matrices
 
-To analyize large networks effectively, we often use **adjacency matrices**. An adjancey matrix $A$ is a square matrix used to represent a finite graph. Each row and column correspond to a node in a network. The entries of the matrix indicate whether a connection exists between two nodes.
+**Adjacency**: We say that two vertices v and w of a graph G are adjacent if there is an edge joining them, and the vertices v and w are then incident with such an edge. Similarly, two distinct edges e and f are adjacent if they have a vertex in common.[@wilsonIntroductionGraphTheory2009]
+
+![Adjacency](Graphics/adjacency.png)
+
+To analyze large networks effectively, we often use **adjacency matrices**. An adjacency matrix $A$ is a square matrix used to represent a finite graph. Each row and column correspond to a node in a network. The entries of the matrix indicate whether a connection exists between two nodes.
 
 In the simplest form, the matrix contains binary values:
 
@@ -206,11 +215,12 @@ For an **undirected graph**, the adjacency matrix is **symmetric**, meaning $A_{
 
 ![Representation as adjacency matrices](Graphics/adjacency matrices.png)
 
-<div>
+::: {#custom-block}
 
 By using different values than 0 and 1 in $A$ , we can also represent a weight of a connection (e.g strength of a friendship, the frequency of interaction or any other meaningful measure of connection intensity).
 
-</div>
+:::
+
 
 #### Adjacency lists
 
@@ -289,8 +299,8 @@ V(g)  # List nodes
 E(g)  # List edges
 
 get.edgelist(g)  # Convert to edge list
-get.adjacency(g) # Get adjacency matrix
-get.adjlist(g, mode = "out") # Get adjacency list
+as_adjacency_matrix(g) # Get adjacency matrix
+as_adj_list(g, mode = "out") # Get adjacency list
 
 vcount(g)  # Count vertices
 ecount(g)  # Count edges
@@ -311,9 +321,9 @@ summary(ug)
 V(ug)
 E(ug)
 
-get.edgelist(ug)
-get.adjacency(ug)
-get.adjlist(ug, mode = "out")
+as_edgelist(ug)
+as_adjacency_matrix(ug)
+as_adj_list(ug, mode = "out")
 
 vcount(ug)
 ecount(ug)
@@ -326,7 +336,7 @@ plot(ug)
 ```{r}
 #| code-fold: false
 
-get.adjacency(g)  # Retrieve adjacency matrix
+as_adjacency_matrix(g)  # Retrieve adjacency matrix
 g[]  # Print entire adjacency matrix
 g[2,1]  # Check if an edge exists from node 2 to 1
 g[1,2]  # Check edge from node 1 to 2
@@ -340,12 +350,12 @@ sum(g[2,])  # Count outgoing connections from node 2
 #| code-fold: false
 
 edgelist <- rbind(c(1,2), c(1,3), c(2,3), c(2,4), c(3,2), c(5,3))
-h <- graph.edgelist(edgelist)
+h <- graph_from_edgelist(edgelist)
 
 plot(h)
 ```
 
-### Creating a graph from formula
+### Creating a graph from Formula
 
 ```{r}
 #| code-fold: false
@@ -381,19 +391,146 @@ plot(g, edge.width = E(g)$weight)  # Visualizing edge weights
 ```
 
 
-## Descriptives
+# Notions for network description
 
-[@wilsonIntroductionGraphTheory2009]
-
-- Complete network
-- Subgraph
-- Path
-- Clique
-- etc.
-
-### Data-Collection
-
-[@rawlingsHowAreSocial2023]
+::: {#custom-block}
+The language of graph Theory is not Standard - all authors have their own terminology Some use the term 'graph' for what we call a simple graph, or for a graph with directed edges, or for a graph with infinitely many vertices or edges. In this case the notion is taken from [@wilsonIntroductionGraphTheory2009].
+:::
 
 
-## Data collection
+```{r}
+G <- graph_from_literal(v--w, u--w, v--u, u--w, w--z, a --b)
+
+plot(G,
+     vertex.color="lavender",
+     vertex.frame.color="gray",
+     vertex.label.color="black"
+     )
+```
+
+![Example of a simple graph](Graphics/vocabulary.png)
+
+
+Consider this simple graph $G$ with:
+
+- $V(G) = \{w, v, u, z, a, b\}$
+
+- $E(G) = \{ \{v,w\}, \{v,u\}, \{u,w\}, \{w,z\}, \{a,b\}$
+
+This graph has two **components** (disconnected parts).
+
+
+
+A **walk** is a way of traveling from one vertex to another, following a sequence of edges. 
+
+- **Path**: A walk in which no vertex appears more than once.
+
+- **Cycle**: A walk that starts and ends at the same vertex.
+
+Example:
+
+- Walk: $ (w \to u \to v \to w \to z) $ (length = 4)
+
+- Path: $ ( v \to w \to z \to R )$ (length = 3)
+
+- Cycle:$ ( w \to u \to v \to w)$
+
+
+A **connected graph** is a graph where there exists a path between any two vertices.
+
+A **disconnected graph** has multiple **components**, meaning some vertices are not reachable from others.
+
+
+A **complete graph** $K_n$ is a simple graph where each pair of distinct vertices is connected by an edge. It has:
+
+$$
+|E(K_n)| = \frac{n(n-1)}{2}
+$$
+
+edges.
+
+
+# Data collection
+
+There are many different forms of data collection for socia network data. Options to collect data include Small Group questionnaires, large-scale Surveys, face-to-face observations, scraping of Websites, APIs or digital Archives.
+The choice of collection strategy has to be informed by the focus of research and available data sources. Almost always, when we are collecting network data, we are bounded by place and time where we have to make reasonable decisions in order to restrict our node set [@rawlingsHowAreSocial2023].
+
+Colection strategies can broadly be structured in Local and Global collection strategies.
+
+
+**Local (Egocentric Networks)**
+- Focused around a particular node (**ego**).
+- Provides insights into individual behavior and immediate social environment.
+- Reduces challenges of defining network boundaries.
+- **Limitations**:
+  - Does not capture broader network structures.
+  - Hard to infer global properties like paths, centrality, or clustering coefficients.
+  
+
+**Global (Sociocentric Networks)**
+- Captures **all nodes and their relationships** within a specific setting (e.g., a school, company, or online platform).
+- Allows measurement of **network-wide properties** (e.g., degree distribution, network diameter, clustering).
+- **Limitations**:
+  - **Data collection is expensive** and often requires complete participation.
+  - **Boundary setting is crucial** to avoid biased conclusions.
+
+Given the collection approach, there are different modes of collecting the data like the **Nominalist Approach**, which is based on observable links between actors
+
+e.g.:
+  
+**Co-authorship networks** derived from Web of Science or Scopus.
+
+- **Possible Biases**:
+  - Over representation of English-language journals.
+  - Exclusion of informal collaborations
+  - Exclusion of fast and slow science
+
+
+**Facebook-Connections**
+
+- **Possible Biases**
+  - Some individuals have significantly more interactions recorded due to higher usage (e.g., social media users with high posting frequency).
+  - Group-Accounts
+  
+and the **Realist Approach**, which is based on self-reported relationships 
+(e.g., surveys asking individuals to list friends).
+
+- **Challenges**:
+  - **Memory limitations** (people forget connections).
+  - **Subjective definitions** of relationships (e.g., what constitutes a “friend”?).
+
+
+
+## Missing data and imputation
+
+![Consequences of hidden network data](Graphics/consequences of missing network data.png)
+
+Missing data in networks can bias results, particularly in global networks where completeness is crucial. Given the data collection choice and context, there can be different types of missing data:
+
+- **Missing Nodes**: Some actors are absent due to nonresponse or other issues (e.g., students absent during a survey).
+- **Missing Edges**: Some relationships are not captured (e.g., weak ties not reported).
+
+::: {#custom-block}
+Every form of data collection is prone to have some kinds of missing data, or inherent biases. Dealing with the possible consequences of the selected form of data collection and reporting possible biases and missings transparently is thus part of good scientific practice.
+:::
+
+# Imputation Strategies
+
+![Imputation options](Graphics/imputation options.png)
+
+[@rawlingsHowAreSocial2023, page 82]
+
+- **Listwise Deletion**:
+  - Removes missing nodes.
+  - **Risk**: Can introduce bias, particularly if central nodes are missing.
+- **Simple Imputation**:
+  - Uses known information to fill gaps (e.g., adding a node if others mention it).
+    - Asymetric
+    - Symmetric
+    - Probabilistic
+- **Model-Based Imputation**:
+  - Using **machine learning** or statistical models to infer missing ties.
+  - Can incorporate attributes like race, gender, or past interactions.
+
+
+

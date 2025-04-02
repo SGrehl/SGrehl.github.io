@@ -1,4 +1,12 @@
 ---
 title: "Week 05"
-subtitle: "-"
+subtitle: "Network visualisation"
 ---
+
+
+# Basic visuaisation
+
+# Interactive visualisation
+
+[@rawlingsHowAreSocial2023a]
+
