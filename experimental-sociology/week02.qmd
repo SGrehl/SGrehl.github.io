@@ -3,7 +3,9 @@
   subtitle: "Analytical Solutions & Hypotheses"
 ---
 
-This week is about 
+# Introduction
+
+This week we will deal with analytical solutions and how we can use them to derive hypotheses in detail.
 
 ## 🎯 Learning Goals
 
@@ -17,19 +19,13 @@ By the end of this week, you should:
 
 -   Be able to model a simple social interaction using **Game Theory**.
 
--   Understand how introducing **bounded rationality** increases complexity.
+-   Understand how to introduce **bounded rationality**.
 
 # Propositions & Hypotheses
 
-Proposition: Universal statement about the relationship between one or more concepts
-Hypothesis: Singular statement, derived from propositions, concretely related to investigation
-- Social capital increases academic success 
-- The higher the parents' educational attainment, the better the children's German score
-Important: We test hypotheses, not propositions. In order to test them we have to run (in the ideal case) experiments! 
+Proposition: Universal statement about the relationship between one or more concepts Hypothesis: Singular statement, derived from propositions, concretely related to investigation - Social capital increases academic success - The higher the parents' educational attainment, the better the children's German score Important: We test hypotheses, not propositions. In order to test them we have to run (in the ideal case) experiments!
 
-# Derivation of a hypothesis
-
-## 
+## Derivation of a hypothesis
 
 ### 🧠 Why Analytical Solutions Matter
 
@@ -43,25 +39,21 @@ Analytical solutions (often expressed as equations) are the **gold standard** in
 
 -   They are often **computationally fast**.
 
-
 ### 🚧 **Shortcomings of Analytical Solutions**
 
 However, in the social sciences, analytical solutions can become difficult because:
 
-Reality too complex to be captured analytically in its entirety
-Theories (and the respective equations) can capture only partial aspects of reality. Yet, 
-Sometimes we want a complex, multifaceted analysis
-Combination of theories not necessarily analytically compatible or manageable
+Reality too complex to be captured analytically in its entirety Theories (and the respective equations) can capture only partial aspects of reality. Yet, Sometimes we want a complex, multifaceted analysis Combination of theories not necessarily analytically compatible or manageable
 
 -   Models of social behavior often become too **complex** to solve analytically.
 
 -   Human behavior introduces **noise** and **irrationality**.
 
-Therefore we will look in two weeks at another approach, namly numerical solutions (e.g. simulations). 
+Therefore we will look in two weeks at another approach, namly numerical solutions (e.g. simulations).
 
 # 🎲 Modeling Social Situations
 
-A first step to derive of a analyitical 
+A first step to derive of a analyitical solution is to set up a model, that later can be analyzed. For this pourpse we will use a very straight forward model namely decision and game theory.
 
 ## Game Theory
 
@@ -82,6 +74,28 @@ Game theory offers a structured approach to modeling social situations:
 -   In reality, humans often make decisions based on incomplete information and cognitive limitations (bounded rationality).
 
 -   Introducing bounded rationality increases complexity — solutions become harder to compute.
+
+    ## 🎲 Game Theory – Modeling Social Situations
+
+    **Game theory** provides a structured framework: - **Players** – Decision-makers. - **Strategies** – Options available. - **Payoffs** – Outcomes based on strategy combinations.
+
+    ### Example: The Prisoner’s Dilemma
+
+    -   Cooperation vs. defection.
+    -   Payoffs depend on combined strategies.
+    -   Nash equilibrium as a solution concept.
+
+    ------------------------------------------------------------------------
+
+    ## 🤯 Bounded Rationality
+
+    -   Classical game theory assumes **perfect rationality**.
+    -   Bounded rationality = Limited information + Cognitive limitations.
+    -   Makes solutions more complex and realistic.
+
+    ------------------------------------------------------------------------
+
+    ## 
 
 # 🏋️ **Pre-Class Assignment**
 

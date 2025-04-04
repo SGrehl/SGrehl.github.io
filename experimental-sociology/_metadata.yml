@@ -2,7 +2,7 @@ project:
   type: website
 
 date: today
-date-format: short
+date-format: iso
 title-block-banner: "#5791b5"
 
 format:
@@ -23,11 +23,13 @@ format:
     results: show
     embed-resources: true
     self-contained-math: true
-    bibliography: ES.bib
+    bibliography: references.bib
     bibliography-style: apa
     link-citation: true
     lightbox:
       loop: true
       match: auto
 
-css: ../computational-social-sciences/styles.css
+css: styles.css
+
+copyright: "Copyright Sascha Grehl, 2025. All Rights Reserved"

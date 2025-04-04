@@ -1,125 +1,652 @@
 ---
-  title: "Experimental Sociology - Week 1"
+  title: "Experimental Sociology - Week 01"
   subtitle: "Introduction"
-  date: "2025-03-21"
+  date: "2025-04-09"
+  bibliography: references.bib
+  format:
+    html:
+      output-file: week01.html
+    revealjs:
+      incremental: true   
+      width: 1200
+      height: 700
+      slide-level: 3
+      output-file: slides01.html
+      css: my_revealjs.css
+      title-slide-attributes: 
+        data-background-image: https://upload.wikimedia.org/wikipedia/commons/4/4e/Universit%C3%A4t_Leipzig_logo.svg
+        data-background-size: 25%
+        data-background-position: 100% 2% 
 ---
 
-# Formal Stuff
+# Course Overview
 
-## 🔍 What is Experimental Sociology?
+::: {.content-hidden when-format="revealjs"}
+Welcome to the course! This week's readings are heavily based on the slides presented during the first week. If you plan to attend (or have already attended) the session, you may notice that much of the material will feel familiar or even redundant. However, reviewing these readings can help reinforce key concepts.
+:::
 
-In short: it's about **understanding social behavior through controlled experiments**. We'll also integrate analytical thinking and computational methods—such as game-theoretical equilibrium and agent-based modeling (ABM)—to help you formulate better research questions, optimize experimental design, and effectively utilize available resources. Essentially, computational methods serve as tools to enhance and refine your experimental designs, maximizing the quality and efficiency of your research.
+## 🔍 What is This Course About?
+
+-   Hands on course that combines ES & CSS.
+-   Integrate analytical and computational methods:
+    -   **Analytical methods** – game theory & differential equations.
+    -   **Computational methods** – agent-based models (ABMs).
+-   These methods help us:
+    -   Derive **hypotheses**.
+    -   Enhance **experimental design**.
+
+## 🏁 Goals
+
+By the end of this course, you'll:
+
+-   Understand how to model social situation analytically and computationally.
+-   Design, program, and modify ABMs.
+-   Derive theoretical guided (and empirically calibrated) hypotheses.
+-   Improve experimental design using analytical & computational methods.
 
 ## 🧩 Course Structure
 
-We'll follow a **flipped classroom** approach: - **Before class**: You'll read materials and familiarize yourself with key concepts. - **In class**: Engage actively in discussions, solve problems, and apply concepts practically.
+-   **Flipped Classroom Approach:**
+    -   🏠 **Before class**: Read and study core concepts at your own pace.
+    -   🏫 **In class**: Discuss, solve problems, and apply concepts.
+-   Mix of:
+    -   Hands-on coding.
+    -   Group work & discussions.
+    -   Problem-solving.
 
-## 📌 Main Topics
+## 📖 Weekly Readings & Exercises
 
--   Analytical thinking and hypothesis generation
--   Agent-based models (ABM): creating, modifying, and calibrating simulations
--   Experimental design: optimizing experiments, improving statistical power, and addressing real-world research challenges
--   Machine learning basics: practical implementation
+-   Materials provided weekly at [sgrehl.github.io](https://sgrehl.github.io/).
+-   Some material might also be at [moodle](https://moodle2.uni-leipzig.de/course/view.php?id=53760).
 
-## 📖 Weekly Readings
+::: {.content-visible when-format="revealjs"}
+-   Moodle password: ilovecss
+:::
 
-Course materials will be provided weekly. Read at your own pace, and bring questions or ideas to the seminar!
-
-## 🎯 Goals
-
-By the end of this course, you'll: - Understand how to model social processes analytically and computationally. - Design, program, and utilize agent-based models (ABMs). - Improve experimental design efficiency using computational methods.
+-   Read and engage with the assigned texts.
+-   Try to solve the exercises.
+-   Come to class prepared with questions and insights.
 
 ## 🛠️ Requirements
 
--   Sociological curiosity
--   Basic R programming knowledge
--   Laptop with R and RStudio installed
--   A good sense of humor
+-   **Sociological curiosity**
+-   **Laptop** – R and RStudio installed.
+-   **Basic R programming knowledge** – Comfortable with the basic, [tidyverse](https://www.tidyverse.org/learn/) & [functions](https://r4ds.had.co.nz/functions.html).
+-   **A sense of humor** – Things will break, code will crash, and the unexpected will happen.
 
 ## 🗣️ Communication
 
-Got questions or ideas? Talk to us anytime—we're your collaborators, not just instructors.
+-   Open communication is key – feel free to talk to us anytime.
+-   Questions or ideas? Reach out – we're collaborators, not just instructors.
+-   This course is newly designed, so your feedback matters.
 
-Let's enjoy this journey and make some discoveries together!
+## 🗓️ Course Program {.smaller}
 
-# Basics
+Our schedule:
 
-This is an unconventional course, maybe unique in its design. While the main topic is experimental sociology. I am sure you all now what an experiment looks like
+-   Week 1: Introduction
+-   Week 2–3: Analytical Solutions & (Evolutionary) Game Theory
+-   Week 4: ABMs: Basics
+-   Week 5–6: Evolutionary ABMs
+-   Week 7–9: Sensitivity Analysis & Calibration
+-   Week 10: **Machine Learning Basics**
+-   Week 11: **Open Lab Session**
+-   Week 12: Statistical Power & Experimental Design
+-   Week 13–14: Term Paper Presentations
 
-## Experiments in the Social Sciences
+:::: {.content-visible when-format="revealjs"}
+::: central
+Questions?
+:::
+::::
 
-In the ideal world we have:
+# Progress in the Social Sciences
 
--   We have a hypothesis regarding the effect of a independent treatment on a dependent variable.
+## 🔬 The Ideal Research Process
 
--   We plan an experiment to test this hypothesis
+1.  💡 We have a **hypothesis** about the effect of a treatment on a dependent variable.
+2.  🧪 We run an **experiment**.
+3.  📊 We estimate **statistical models** & adapt our knowledge.
 
-    -   The experiment has at least one treatment and a control group.
+::: fragment
+**Problems**
+:::
 
-    -   Only independent treatment is changed while everything else is kept similar.
+-   How to derive good hypotheses?
+-   How to efficiently test hypotheses?
 
-    -   Assignment to TG or CG is randomly.
+## 🎓 From a Theory to a Hypothesis
 
-    -   We measure the dependent variable after the different treatment occured.
+-   **Theory**: A systematically organized set of interrelated statements that explains and predicts phenomena [@braun2008].
+-   **Model**: An representation of a formalized theory to address a specific problem.
+-   **Proposition**: Universal statement about the relationship between one or more concepts.
+-   **Hypothesis**: A specific, testable prediction.
 
--   We decide whether the reject the hypothesis or keep it.
+## 🍪 Example
 
-Yet, often it is not that easy.
+-   **Theory**: Economic theory of Rational Choice.
+-   **Model:** Model of supply and demand.
+-   **Proposition**: When the price of a normal good rises, the demand for it falls.
+-   **Hypothesis:** If the price of rice rises, the demand for rice falls.
 
-## Problems of Experiments in the Social Sciences
+:::: fragment
+::: callout-caution
+Experiments test hypotheses, not propositions.
+:::
+::::
 
-In this course we will look at some of the problems (some you already have tackled in your former studies (Experiments not possible), others you will tackle in the "Kausalanalyse". So we will focus on a very specific part.
+## 🤔 Deriving a Hypothesis {.smaller}
 
--   How to derive hypothesis
+In science, there are several key methods for deriving a hypothesis:
 
--   How to plan a good and efficienct experiment.
+-   **Logical Reasoning**\
+    → Deductions based on existing theoretical assumptions and prior knowledge.
 
-    -   How to make the expected effects strong?
-    -   How to know what to test?
-    -   How to do with limited money more?
-    -   How to save the researches time?
-    -   How to save the subjects time?
+-   **Formalized Model**\
+    → Using structured frameworks or mathematical representations to explore implications.
 
-# Agent-based Modeling
+-   **Simulation**\
+    → Simulating individual entities to observe emergent patterns within complex systems.
 
-Special case of microsimulation Basic idea Modeling of entities & their interaction Environment Individuals or groups (=actors) Possess properties Interacting with environment & other actors Start from an initial setting (e.g. composition of actors) Through interaction the model changes over time.
+::: fragment
+Let's examine the strengths and limitations of each approach.
+:::
 
-Draw conclusions from these results
+## 🎭 Tocqueville Paradox {.smaller}
 
-## Basic Process
+Why does an **objective improvement in social conditions** lead to **greater dissatisfaction** [@tocqueville2004 [1835]]?
 
-An ABM is
+::: fragment
+@stouffer1949 proposed an explanation based on **logical arguments**:
+:::
 
-## ![Basic steps for a agent-based model.](images/clipboard-4137121222.png)Example of an Interaction at Time 𝑡
+-   Social change creates new opportunities for upward mobility (promotion).
+-   **Being promoted** is better than **not applying** for promotion.
+-   However, applying comes with costs – time, effort, risk of rejection:
+    -   Therefore, **not applying** is better than **being rejected**.
+-   As more people apply and only some succeed, dissatisfaction grows among those who fail.
 
-![](images/clipboard-3033617992.png)
+::: fragment
+*Dissatisfaction increases when objective conditions improve, because rising expectations aren't met for a majority.*
+:::
 
-## Advantages of ABMs
+### Tocqueville Paradox -- A Closer Look
 
-### Advantages for Modeling
+Not every social improvement triggers the Tocqueville Paradox.
 
-See also Manzo (2022)
+::: fragment
+So, **when** and **why** does it occur? Let’s explore:
+:::
 
-Granularity - No level of detail specified a priori - Heterogeneity easy to implement
+-   A TP is triggered if: **rejected \> promoted**.
+-   A person is more likely to apply ...
+    -   The more the **benefits outweigh the costs,**
+    -   The greater the perceived **chances of success**.
+-   **Success** increases when:
+    -   **More positions** for promotion are available,
+    -   **Fewer** others are **applying**.
 
-Generalizability - Can contain multiple approaches and formalisms simultaneously
+### Tocqueville Paradox -- DAG
 
-Flexibility - Open for all theoretical ideas / approaches - Approaches can be added / removed individually \### Advatages in Contrast to Empirical Studies
+Given this, we can derive a directed acyclic graph (DAG) representing the dynamics of the Paradox:
 
-Disadvantages of studies with real actors (= people) - Costly - Difficult to collect/implement - Unethical
+::: fragment
+![Proposed effect of benefits, costs, and positions on success probability.](images/clipboard-517026373.png){#fig-tocqueville-dag fig-align="center" width="500"}
+:::
 
-ABMs as an alternative - Hypotheses can be tested as proof-of-concept - Crucial factors can be identified (cf. sensitivity analysis) - Irrelevant factors can be identified
+::: fragment
+The overall effect of increasing vacancies on success is **ambiguous** it depends on **how applicants respond**, as their behavior is **interdependent**!
+:::
 
-**However, does not replace empirical confirmation!**
+### Formalized Model of Relative Frustration
 
-Use insights of ABM to develop tailored studies
+@boudon1977 developed the **model of relative frustration**, offering a game-theoretical perspective on promotion dynamics:
 
-### Other Advantages
+-   $f$ be the share of positions available for promotion,
+-   $b$ the benefit of being promoted, and
+-   $c$ the cost of applying for a promotion.
 
-Automated - Effects of changed parameters/other formalisms, do not have to be calculated, but can be implemented automatically
+::: fragment
+Using a mixed-strategy Nash equilibrium, @boudon1977 derives the following result:
+:::
 
-Educational aspects - Visualizations are more memorable and help convey information faster - Learners can do hands-on learning for themselves by “playing around”
+::: fragment
+The **optimal probability of applying**: $p = min \left( 1, f \cdot \frac{b}{c} \right)$
+:::
 
-# Course Program
+### Tocqueville Paradox -- Visualization
 
-\<enter the syllabus here\>
+::: {.content-visible when-format="revealjs"}
+<iframe src="https://sgrehl.shinyapps.io/boudon/" width="100%" height="600px" frameborder="1">
+
+</iframe>
+:::
+
+::: {.content-hidden when-format="revealjs"}
+![The impact of the benefit-cost ratio on the number of successful and unsuccessful applicants.](images/clipboard-1575754773.png){#fig-torqueville-sim fig-alt="The impact of the benefit-cost ratio on the number of successful and unsuccessful applicants."}
+
+We can already gain significant insights by visually inspecting the graphs presented in Figure \@fig-torqueville-sim. While the following observations can be formally derived from the underlying model, we will forego a detailed mathematical proof and instead highlight the intuitions they convey.
+
+First, we observe that a **necessary condition** for a Tocqueville Paradox to emerge is that $f<0.5$ that is, the number of available opportunities (or vacancies) must be relatively scarce. Second, we find that only when the **benefit-cost ratio** satisfies $\frac{b}{c} > 2$, the share of **unsuccessful applicants** increases more sharply than the share of successful ones — a pattern that signals rising frustration in the presence of increasing opportunities.
+
+Moreover, the **peak in the ratio of unsuccessful to successful individuals** shifts **leftward** as the benefit $b$ increases. In other words, the more attractive the opportunity, the **earlier** dissatisfaction peaks, relative to the overall number of opportunities. This dynamic illustrates a core intuition of the Tocqueville Paradox: improvements can amplify frustration under specific structural conditions.
+
+Even if precise empirical estimation of parameters such as $b$ (benefit) and $c$ (cost) proves difficult in real-world settings, the model allows us to formulate testable hypotheses. For instance, we might expect that in societies where perceived benefits of mobility are high, frustration and perceived injustice may arise **earlier** in the process of social improvement — especially when structural bottlenecks (low $f$) persist. Thus, the model offers a powerful lens to explore the **nonlinear relationship** between opportunity structures and subjective perceptions of fairness or progress.
+:::
+
+## 🔑 Take-Away so Far {.smaller}
+
+Logical Conclusions:
+
+-   **Simple and straightforward**: They offer an accessible method for deriving predictions.
+
+-   **Limited precision**: When verbal arguments point in different directions, their combined implications may become **ambiguous**, even if each argument is logically valid.
+
+::: fragment
+Formalized Models:
+:::
+
+-   **More complex**: Constructing these models requires a deeper level of analysis and rigor.
+-   **Higher precision**: They can yield more nuanced and detailed predictions.
+
+## ⚙️ Limitations with Formalized Models
+
+-   **Oversimplification**: Often reduce complex social realities to a few theoretical assumptions.
+
+-   **Homogeneity Assumption**: Often assumes little to no individual variation or social diversity.
+
+-   **Analytical Challenges with Complexity**: Addressing the above limitations often increases analytical complexity, potentially hindering the derivation of clear predictions [@balzer2001].
+
+::: fragment
+But wait! There is a solution!
+:::
+
+# Agent-Based Modeling (ABM)
+
+## **🧪 What is ABM?**
+
+:::: {.content-visible when-format="revealjs"}
+A microsimulation approach that models how individual behaviors and circumstances shape complex, collective outcomes [cf. @manzo2022].
+
+::: fragment
+**Core Components:**
+:::
+
+-   **Agents**\
+    → Individuals or groups with defined properties and decision rules.
+
+-   **Environment**\
+    → The context or space in which agents operate (e.g., the network structure).
+
+-   **Rules**\
+    → Governing interactions, outcomes, and adaptation over time.
+::::
+
+::: {.content-hidden when-format="revealjs"}
+Agent-Based Modeling (ABM) is a **microsimulation approach** used to explore how the actions and interactions of individual entities give rise to complex, collective patterns. Rather than modeling society or systems as a set of equations or averages, ABM starts at the micro level — with the behaviors, decisions, and characteristics of individual **agents**. These agents may represent people, groups, firms, or any other relevant unit of analysis, and each is defined by specific properties and decision rules that determine how they act and respond within the simulation.
+
+At the heart of ABM are three key components:
+
+-   **Agents**: These are **autonomous decision-makers** with **individual traits**. Each agent can (to a certain extend) perceive its surroundings, follow specific rules, and adapt over time. The diversity of agents allows for the modeling of heterogeneity — a crucial aspect of real-world social systems.
+
+-   **Environment**: This refers to the **structured context** in which agents operate. It can be a spatial grid, a social **network**, or any abstract space that constrains or facilitates interaction. The environment shapes how agents encounter one another and can evolve as the simulation progresses. Note that even in simulations where no environment is explicitly defined, it is **often present implicitly** — for example, in the form of a complete network that connects every agent to every other.
+
+-   **Rules**: Rules define how agents behave, interact, and adapt within the environment. They specify **who interacts with whom** — for instance, whether an agent engages with all connected peers or only one at a time — and **how those interactions unfold**. Crucially, rules capture the logic by which individual decisions translate into system-level outcomes, often through **interdependent behaviors** where one agent’s actions influence others. Another important class of rules concerns **adaptation**: how agents change over time, such as updating their opinions, strategies, or even entering or exiting the system. These rules may be **simple or complex**, **deterministic or stochastic**, and together they are the engine that drives the model’s dynamic evolution.
+
+By simulating many agents acting simultaneously over successive time steps, ABM allows researchers to observe **emergent phenomena** — collective patterns that are not directly programmed into the model but arise from local interactions. This makes ABM a powerful tool for investigating social dynamics, policy impacts, and systemic risks in fields ranging from sociology and economics to epidemiology and political science.
+:::
+
+### A Schematic Example of an ABM
+
+![Basic steps for a agent-based model.](images/clipboard-4137121222.png){#fig-abm-schema fig-alt="A flowchart illustrating the basic steps of an Agent-Based Model (ABM) simulation cycle:      Start: \"Modeling of the entities, their relationships and properties.\"      → Then: \"Initialize entities.\"      → Then: Enter loop starting with \"System state at time t.\"      → Then: \"Interaction of (all) objects at time t.\"      → Then: Decision diamond: \"t ← t + 1, t < t*?\"          If no: → End with \"Stop at time t*\".          If yes: → Loop back to \"System state at time t. (A note in blue says: \"Other conditions possible)\"" fig-align="center" width="600"}
+
+### 🧲 Example – The Schelling Model
+
+```{=html}
+<script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
+<script src="js/schelling.js"></script>
+```
+
+::::: simulation
+::: settings
+<input type="button" class="command" id="reset" value="Reset">
+
+<input type="button" class="command" id="start" value="Start">
+
+<input type="button" class="command" id="stop" value="Stop">
+
+<input type="button" class="command" id="step" value="Step">
+
+<label for="similar">Similar: [0]{#similar-value}%</label>
+
+<input type="range" id="similar" min="0" max="100" value="30">
+
+<label for="red-blue">Red/Blue: [0]{#red-blue-value}</label>
+
+<input type="range" id="red-blue" min="0" max="100" value="50">
+
+<label for="empty">Empty: [0]{#empty-value}%</label>
+
+<input type="range" id="empty" min="0" max="100" value="10">
+
+<label for="size">Size: [0]{#size-value}</label>
+
+<input type="range" id="size" min="10" max="80" value="50">
+
+<label for="delay">Delay: [0]{#delay-value}ms</label>
+
+<input type="range" id="delay" min="0" max="3000" value="100">
+:::
+
+::: results
+```{=html}
+<table class="board" width="500" height="500">
+	<tbody>
+		<tr>
+			<td>Your browser must support JavaScript for
+			the simulation to work.</td>
+		</tr>
+	</tbody>
+</table>
+```
+
+<p>Round: [0]{#round}</p>
+
+<p>Satisfied: [0 %]{#satisfied}</p>
+
+(This example is based on @schelling1978, and builds extensively on the earlier work of [Frank McCown](http://nifty.stanford.edu/2014/mccown-schelling-model-segregation/))
+:::
+:::::
+
+### ❓Typical Research Questions
+
+::: {.content-hidden when-format="revealjs"}
+​When employing an agent-based model (ABM), researchers typically aim to address multiple research questions. These models are instrumental in exploring how individual agent behaviors and interactions give rise to complex system-level patterns. In the case of the Schelling Model, for instance, such questions might include:
+:::
+
+-   What factors influence ...
+    -   ... whether the model terminates?
+    -   ... how long (on average) it take to reach termination?
+    -   ... how high the level of satisfaction or segregation is at termination or in the long run?
+-   What hypotheses can we derive from that for the real world?
+
+## 🚀 Advantages of ABM
+
+@casini2016 lists a number of advantages:
+
+-   **Flexibility**:
+    -   No fixed assumptions on agents, behaviors, or structures.
+    -   Components (mechanisms) can be added or removed individually.
+-   **Granularity**:
+    -   Modelers can define detail level for each element.
+-   **Generality**:
+    -   Supports multiple modeling formalisms.
+
+### ⏱️ Time in ABMs
+
+::: {.content-visible when-format="revealjs"}
+-   **Dynamic Evolution**:\
+    ABMs simulate systems evolving incrementally over time.
+-   **Pathway Analysis**:\
+    Trace trajectories leading to outcomes, not just end states.
+-   **Activation Sequences**:\
+    Order of rule activation can influence outcomes; it's adjustable.
+-   **Temporal Structuring**:\
+    Different schedules (days vs. hours) might yield different macro patterns.
+:::
+
+::: {.content-hidden when-format="revealjs"}
+**Dynamic Evolution**: ABMs inherently simulate systems that evolve step-by-step over time, capturing the progression of processes at each stage.
+
+**Pathway Analysis**: Beyond merely predicting end states (e.g., Nash equilibria), ABMs provide insights into the pathways leading to these outcomes, offering a comprehensive understanding of social developments.
+
+**Activation Sequences**: The sequence in which agents act can significantly influence model outcomes. Researchers have the flexibility to experiment with different activation orders to observe varying effects.
+
+**Temporal Structuring**: Time within ABMs can be explicitly configured. By adjusting temporal parameters and schedules (e.g., hours instead of days), diverse macro-level patterns can emerge, enhancing our understanding of temporal influences on system behavior.
+:::
+
+### 🧪 Advantages of ABMs Over Empirical Studies
+
+👥 **Studies with real actors**:
+
+-   Costly and time-consuming.
+-   Difficult to execute.
+-   Sometimes unethical.
+
+::: fragment
+💻 **ABMs** as an alternative:
+:::
+
+-   Test hypotheses as **proof of concept**.
+-   Identify crucial and irrelevant factors.
+-   [Does NOT replace empirical confirmation]{style="color: red"} — use insights to design better real-world studies.
+
+### 🔍 Other Advantages
+
+-   **Automated:**\
+    Effects of changed parameters/other formalisms, do not have to be calculated, but can be implemented automatically.
+-   **Educational**:\
+    Visualizations aid understanding.**\
+    **Students can explore ABMs directly.
+
+## ⚠️ Limitations and Challenges of ABMs {.smaller}
+
+📉 **Methodological Disadvantages**
+
+-   **Limited Functional Transparency**: Functional relationships are typically *estimated*, not *analytically derived*.
+
+-   **Computational Intensity**: ABMs are *slower* and more resource-demanding than analytical solutions.
+
+::: fragment
+🛠️ **Practical Challenges**
+:::
+
+-   **Reproducibility Concerns**: *Lack of transparency* if source code is not open or clearly documented (seeding!).
+
+-   **Assumption Bias**: Model outcomes may *reflect embedded assumptions* rather than emergent behavior.
+
+-   **"Garbage In, Garbage Out"**: Poorly specified models yield misleading results [see also @grimm2020].
+
+# Types & Aims of ABMs
+
+## 🧠 Abstract ABMs
+
+**Main Goal:** Gain **theoretical insights** into complex systems by simplifying reality.
+
+**Design Principles:**
+
+-   **KISS ("Keep It Simple, Stupid!")**:\
+    Emphasizes simplicity to focus on fundamental mechanisms.
+-   **Parsimonious Models**:\
+    Utilize minimal parameters and rules.
+-   **Non-Empirical Parameterization**:\
+    Parameters are set without direct empirical calibration.
+
+### Abstract ABMs II
+
+**Objectives:**
+
+-   Observe general process dynamics to understand underlying mechanisms.
+-   Derive logical implications from simplified scenarios.
+-   Use heuristics to inspire new theoretical insights.
+
+### **Example: Schelling's Segregation Model**
+
+-   **Simplifications:**
+    -   Represents residential areas as a 2D grid.
+    -   Defines agent (un)happiness based on neighboring agents' group identity.
+-   **Limitations:**
+    -   Real-world residential patterns are more complex than a 2D grid.
+    -   Factors influencing (un)happiness extend beyond immediate neighbors.
+-   **Value:**
+    -   Despite simplifications, the model provides profound insights into how individual preferences can lead to collective segregation patterns.
+
+## 📊 Data-Driven ABMs
+
+**Main Goal:** Achieve **realistic simulations** that mirror empirical phenomena.
+
+**Design Principles:**
+
+-   **KIDS ("Keep It Descriptive, Stupid!")**: Prioritizes detailed, descriptive accuracy.
+
+-   **Empirical Parameterization**: Model parameters are calibrated using real-world data.
+
+-   **Replication of Empirical Observations**: Aims to reproduce observed phenomena through micro-founded simulations.
+
+-   **Iterative Adjustment**: Continuously refines parameters and structures to align model outcomes with empirical data.
+
+### Example: Diffusion of Innovation {.smaller}
+
+-   **Context:** Studied how innovations spread among farmers in Sweden [@hägerstrand1965]
+-   **Assumptions:**
+    -   Adoption likelihood decreases with geographic distance.
+    -   Natural barriers (e.g., lakes, mountains) impede communication and diffusion.
+-   **Incorporated Data:**
+    -   Actual geographic features of the study area.
+    -   Population distribution and initial locations of adopters.
+-   **Objective:**
+    Simulate the diffusion trajectory of innovations.
+-   **Methodology:**
+    -   Adjusted model parameters until simulated diffusion matched observed patterns.
+
+![](images/clipboard-2258837400.png){#fig-heage fig-alt="Idealizatoin of a province in Sweden" fig-align="center"}
+
+## 🎯 Types of Realism in ABMs
+
+1.  **Input Realism:**
+    -   Do model parameters accurately reflect empirical data?
+
+2.  **Model Realism:**
+    -   Are the mechanisms and processes within the model theoretically and empirically grounded?
+    -   *Note:* Direct validation is challenging; often inferred through ...
+
+3.  **Output Realism:**
+    -   Do the model's results align with real-world observations?
+    -   *Significance:* To be prioritized because it is the one we can best empirically test.
+
+### Types of Realism
+
+![](images/clipboard-2984186190.png)
+
+### Types of Realism - Example
+
+![](images/clipboard-2731342530.png)
+
+## Choosing the Right Tool for the Problem
+
+Not every problem requires complex or computationally intensive methods. In fact, applying sophisticated tools to simple problems can:
+
+-   Introduce unnecessary complexity
+
+-   Waste computational resources
+
+-   Obscure understanding
+
+-   Create the illusion of rigor where none is needed
+
+## Practical Considerations
+
+When selecting a method, ask yourself:
+
+-   **Is there an analytical solution?** If so, is it straightforward and more efficient?
+
+-   Does the complexity of the method match the complexity of the problem?
+
+-   What are the trade-offs between clarity and sophistication?
+
+------------------------------------------------------------------------
+
+### Monte Carlo Multiplication
+
+```{=html}
+<script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
+<script src="js/monte_carlo_multiply.js"></script>
+```
+
+:::::: simulation
+::: settings
+<label for="rectWidth">First Number (0-10): </label>
+
+<input type="number" id="rectWidth" value="6" min="0" max="10">
+
+<label for="rectHeight">Second Number (0-10): </label>
+
+<input type="number" id="rectHeight" value="4" min="0" max="10">
+
+<button id="StartMC">
+
+Simulate
+
+</button>
+:::
+
+:::: results
+::: {#results}
+:::
+
+<canvas id="simulationCanvas" width="400" height="400">
+
+</canvas>
+::::
+::::::
+
+:::: {.content-hidden when-format="revealjs"}
+Here, I present a Monte Carlo simulation that estimates the area of a rectangle on a 10×10 canvas. In essence, it's a roundabout way to perform a simple multiplication — calculating width × height.
+
+Instead of multiplying two numbers directly, this approach randomly "throws darts" at the canvas and counts how many land inside the rectangle to estimate its area. It’s a textbook example of using a powerful technique where it's absolutely not needed — a beautifully inefficient solution to a trivial problem.
+
+This simulation serves as a reminder:
+
+::: callout-tip
+🧠 Just because you can use a simulation it doesn't mean you should.
+:::
+
+Please consider whether you truly need a simulation — or if you might just need a calculator.
+
+```{r}
+# Define canvas dimensions
+canvas_width <- 10
+canvas_height <- 10
+
+# Define the rectangle dimensions based on our two numbers
+number_1 <- 6
+number_2 <- 4
+
+# Number of simulation points ("darts")
+n_points <- 10000
+
+# Set seed for reproducibility
+set.seed(42)
+
+# Generate random points uniformly distributed over the canvas
+x <- runif(n_points, min = 0, max = canvas_width)
+y <- runif(n_points, min = 0, max = canvas_height)
+
+# Determine which points fall inside the number_2
+inside <- (x <= number_1) & (y <= number_2)
+
+# Estimate the area of the rectangle using the Monte Carlo method
+estimated_area <- (sum(inside) / n_points) * (canvas_width * canvas_height)
+
+# Calculate the true area of the rectangle
+true_area <- number_1 * number_2
+
+# Print the results
+cat("Estimated Area:", estimated_area, "\n")
+cat("True Area:", true_area, "\n")
+
+text_label <- paste("Estimate:", round(estimated_area, 2))
+
+# Plot the simulation: points inside the rectangle in blue, outside in red
+plot(x, y, col = ifelse(inside, "blue", "red"), pch = 20,
+     xlab = "X", ylab = "Y",
+     main = paste0("Monte Carlo Simulation for Multiplying ", number_1, " and ", number_2, "\n (", text_label, ")" ))
+
+# Draw the rectangle for reference
+rect(0, 0, number_1, number_2, border = "green", lwd = 2)
+```
+::::
+
+## Fun to look at
+
+<https://phasenetwork.org/case-studies/>

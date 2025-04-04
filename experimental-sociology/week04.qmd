@@ -1,5 +1,10 @@
 ---
-  title: "Experimental Sociology - Week 4"
-  subtitle: "TBA"
+  title: "Experimental Sociology - Week 04"
+  subtitle: "Agent-based Models: Basics"
   date: "2025-03-21"
+  bibliography: references.bib
 ---
+
+> ,,§1. Soziologie \[..\] soll heißen: eine Wissenschaft, welche soziales Handeln deutend verstehen und dadurch in seinem Ablauf und seinen Wirkungen ursächlich erklären will.” [@weber1972 : 1]
+
+> ,,Man kann spekulieren, dass sich Weber heute der Computersimulationen bedienen und 'deutend verstehen' in 'simulierend verstehen' abändern würde.” [@lindenberg1971: 100]
