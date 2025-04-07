@@ -1,3 +1,8 @@
+.reveal .slides section.level2,
+.reveal .slides section.level3 {
+  top: 0 !important;
+}
+
 .reveal.smaller .slides section {
   font-size:0.85em
 }

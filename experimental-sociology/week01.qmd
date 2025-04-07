@@ -10,6 +10,7 @@
       incremental: true   
       width: 1200
       height: 700
+      center: false
       slide-level: 3
       output-file: slides01.html
       css: my_revealjs.css
@@ -60,7 +61,7 @@ By the end of this course, you'll:
 -   Some material might also be at [moodle](https://moodle2.uni-leipzig.de/course/view.php?id=53760).
 
 ::: {.content-visible when-format="revealjs"}
--   Moodle password: ilovecss
+-   Moodle password: \############
 :::
 
 -   Read and engage with the assigned texts.
@@ -94,6 +95,8 @@ Our schedule:
 -   Week 12: Statistical Power & Experimental Design
 -   Week 13–14: Term Paper Presentations
 
+------------------------------------------------------------------------
+
 :::: {.content-visible when-format="revealjs"}
 ::: central
 Questions?
@@ -104,6 +107,50 @@ Questions?
 
 ## 🔬 The Ideal Research Process
 
+::: {.content-hidden when-format="revealjs"}
+Understanding how we advance knowledge in the social sciences begins with appreciating the **ideal research process** — a structured journey from theoretical intuition to empirical evidence.
+
+1.  **Formulating a Hypothesis**\
+    We begin by developing a hypothesis — a testable prediction about how a treatment (or independent variable) influences a particular outcome (dependent variable).
+
+2.  **Running an Experiment**\
+    This hypothesis is then put to the test through experimental or quasi-experimental methods, ideally involving random assignment to control for confounding variables.
+
+3.  **Estimating Models and Updating Knowledge**\
+    After collecting data, we estimate statistical models to assess the evidence for our hypothesis, refining our theories and expectations based on what we find.
+
+Despite this structured approach, there are two common challenges that often arise — both theoretical and practical.
+
+### 💡 **How do we derive *good* hypotheses?**
+
+A hypothesis is only as useful as the theoretical or conceptual reasoning behind it. If our hypotheses are vague, unfounded, or derived from shallow intuition, the resulting research may lack insight — even if it’s statistically sound.
+
+**Example:**\
+Consider the question of how social networks influence behavior. A well-formulated hypothesis might ask:
+
+> *Does a highly clustered network structure lead to slower diffusion of innovation compared to a randomly connected one?*
+
+This hypothesis is grounded in theory (network structure influences social learning and peer pressure) and is specific enough to test. But deriving it requires conceptual clarity about the mechanisms at play — and that's not always straightforward.
+
+### 📏 How do we *efficiently* test hypotheses?
+
+Even when we have a good hypothesis, testing it can be statistically inefficient or infeasible. Many social phenomena are characterized by high variability, making it difficult to detect even meaningful effects.
+
+**Example:**\
+Suppose we hypothesize that increasing individuals’ income by 5% through a policy intervention leads to greater life satisfaction. But income data typically shows **high variance** — a wide spread in earnings across the population. In this case, a small treatment effect might be entirely obscured by the underlying noise.
+
+To design a valid test, we would need to estimate:
+
+-   How large the effect must be to be statistically detectable?
+
+-   How large the sample size must be to achieve sufficient power?
+
+Without this, we risk running studies that are underpowered and inconclusive — even if our hypothesis is correct.
+
+Both problems highlight the importance of combining **strong theoretical reasoning** with **careful experimental design**. The future of social science progress lies not just in collecting more data, but in asking sharper questions and designing better tests.
+:::
+
+:::: {.content-visible when-format="revealjs"}
 1.  💡 We have a **hypothesis** about the effect of a treatment on a dependent variable.
 2.  🧪 We run an **experiment**.
 3.  📊 We estimate **statistical models** & adapt our knowledge.
@@ -114,6 +161,7 @@ Questions?
 
 -   How to derive good hypotheses?
 -   How to efficiently test hypotheses?
+::::
 
 ## 🎓 From a Theory to a Hypothesis
 
@@ -138,6 +186,10 @@ Experiments test hypotheses, not propositions.
 ## 🤔 Deriving a Hypothesis {.smaller}
 
 In science, there are several key methods for deriving a hypothesis:
+
+::: {.content-hidden when-format="revealjs"}
+![Three distinct approaches to hypothesis generation, as outlined by @barrera2024 [52f].](images/clipboard-1146235161.png){#fig-hypotheses-driven}
+:::
 
 -   **Logical Reasoning**\
     → Deductions based on existing theoretical assumptions and prior knowledge.
@@ -191,7 +243,7 @@ So, **when** and **why** does it occur? Let’s explore:
 Given this, we can derive a directed acyclic graph (DAG) representing the dynamics of the Paradox:
 
 ::: fragment
-![Proposed effect of benefits, costs, and positions on success probability.](images/clipboard-517026373.png){#fig-tocqueville-dag fig-align="center" width="500"}
+![Proposed effect of benefits, costs, and positions on success probability. A Tocqueville Paradox occurs if the probabilty of sucess is under 50%.](images/clipboard-517026373.png){#fig-tocqueville-dag fig-align="center" width="500"}
 :::
 
 ::: fragment
@@ -335,7 +387,7 @@ By simulating many agents acting simultaneously over successive time steps, ABM 
 
 <label for="delay">Delay: [0]{#delay-value}ms</label>
 
-<input type="range" id="delay" min="0" max="3000" value="100">
+<input type="range" id="delay" min="0" max="2000" value="100" step="50">
 :::
 
 ::: results
@@ -354,7 +406,7 @@ By simulating many agents acting simultaneously over successive time steps, ABM 
 
 <p>Satisfied: [0 %]{#satisfied}</p>
 
-(This example is based on @schelling1978, and builds extensively on the earlier work of [Frank McCown](http://nifty.stanford.edu/2014/mccown-schelling-model-segregation/))
+(This example is based on @schelling1971, and builds extensively on the earlier work of [Frank McCown](http://nifty.stanford.edu/2014/mccown-schelling-model-segregation/))
 :::
 :::::
 
@@ -407,7 +459,7 @@ By simulating many agents acting simultaneously over successive time steps, ABM 
 
 ### 🧪 Advantages of ABMs Over Empirical Studies
 
-👥 **Studies with real actors**:
+👥 **Studies** with real agents (i.e., humans):
 
 -   Costly and time-consuming.
 -   Difficult to execute.
@@ -418,7 +470,7 @@ By simulating many agents acting simultaneously over successive time steps, ABM 
 :::
 
 -   Test hypotheses as **proof of concept**.
--   Identify crucial and irrelevant factors.
+-   Identify **crucial and irrelevant factors**.
 -   [Does NOT replace empirical confirmation]{style="color: red"} — use insights to design better real-world studies.
 
 ### 🔍 Other Advantages
@@ -453,7 +505,9 @@ By simulating many agents acting simultaneously over successive time steps, ABM 
 
 **Main Goal:** Gain **theoretical insights** into complex systems by simplifying reality.
 
+::: fragment
 **Design Principles:**
+:::
 
 -   **KISS ("Keep It Simple, Stupid!")**:\
     Emphasizes simplicity to focus on fundamental mechanisms.
@@ -475,66 +529,80 @@ By simulating many agents acting simultaneously over successive time steps, ABM 
 -   **Simplifications:**
     -   Represents residential areas as a 2D grid.
     -   Defines agent (un)happiness based on neighboring agents' group identity.
--   **Limitations:**
-    -   Real-world residential patterns are more complex than a 2D grid.
-    -   Factors influencing (un)happiness extend beyond immediate neighbors.
 -   **Value:**
     -   Despite simplifications, the model provides profound insights into how individual preferences can lead to collective segregation patterns.
 
 ## 📊 Data-Driven ABMs
 
-**Main Goal:** Achieve **realistic simulations** that mirror empirical phenomena.
+**Main Goal:** **Realistic simulations** that mirror empirical phenomena.
 
+::: fragment
 **Design Principles:**
+:::
 
 -   **KIDS ("Keep It Descriptive, Stupid!")**: Prioritizes detailed, descriptive accuracy.
-
 -   **Empirical Parameterization**: Model parameters are calibrated using real-world data.
-
 -   **Replication of Empirical Observations**: Aims to reproduce observed phenomena through micro-founded simulations.
-
 -   **Iterative Adjustment**: Continuously refines parameters and structures to align model outcomes with empirical data.
+
+### Data-Driven ABMs II
+
+**Objectives:**
+
+-   Explain concrete phenomena by grounding models in observed data.
+
+-   Validate model behavior against empirical patterns to increase credibility and predictive accuracy.
+
+-   Use simulation as a testing ground for theory under real-world constraints.
+
+-   Support policy-making or intervention design by modeling counterfactuals and scenario outcomes.
 
 ### Example: Diffusion of Innovation {.smaller}
 
 -   **Context:** Studied how innovations spread among farmers in Sweden [@hägerstrand1965]
 -   **Assumptions:**
     -   Adoption likelihood decreases with geographic distance.
-    -   Natural barriers (e.g., lakes, mountains) impede communication and diffusion.
+    -   Natural barriers (e.g., lakes, mountains) impede diffusion.
 -   **Incorporated Data:**
     -   Actual geographic features of the study area.
     -   Population distribution and initial locations of adopters.
--   **Objective:**
-    Simulate the diffusion trajectory of innovations.
+-   **Objective:** Simulate the diffusion trajectory of innovations.
 -   **Methodology:**
     -   Adjusted model parameters until simulated diffusion matched observed patterns.
 
-![](images/clipboard-2258837400.png){#fig-heage fig-alt="Idealizatoin of a province in Sweden" fig-align="center"}
+### Example: Diffusion of Innovation II
+
+![Idealisation of a province in Sweden. Reconstruction of the Model of @hägerstrand1965.](images/clipboard-2258837400.png){#fig-heage fig-alt="Idealizatoin of a province in Sweden" fig-align="center"}
+
 
 ## 🎯 Types of Realism in ABMs
 
 1.  **Input Realism:**
     -   Do model parameters accurately reflect empirical data?
-
 2.  **Model Realism:**
     -   Are the mechanisms and processes within the model theoretically and empirically grounded?
     -   *Note:* Direct validation is challenging; often inferred through ...
-
 3.  **Output Realism:**
     -   Do the model's results align with real-world observations?
     -   *Significance:* To be prioritized because it is the one we can best empirically test.
 
 ### Types of Realism
 
-![](images/clipboard-2984186190.png)
+![Schematics of the different types of realism.](images/clipboard-2984186190.png){#fig-realism-structure}
 
 ### Types of Realism - Example
 
-![](images/clipboard-2731342530.png)
+![Examples for the different types of realism.](images/clipboard-2731342530.png){#fig-realism-example}
 
-## Choosing the Right Tool for the Problem
+# Final Thoughts
 
-Not every problem requires complex or computationally intensive methods. In fact, applying sophisticated tools to simple problems can:
+## Choosing the Right Tool
+
+::: {.content-hidden when-format="revealjs"}
+Finally, let us briefly draw our attention to one more problem. If you have been paying attention so far, you might get the impression that there is a strict hierarchy with regard to the approaches considered for hypothesis derivation and that simulations are the non-plus-ultra. However, as just mentioned, this is also associated with a number of disadvantages.
+:::
+
+Not every problem requires a complex and computationally intensive simulation. In fact, applying sophisticated tools to simple problems can:
 
 -   Introduce unnecessary complexity
 
@@ -544,7 +612,7 @@ Not every problem requires complex or computationally intensive methods. In fact
 
 -   Create the illusion of rigor where none is needed
 
-## Practical Considerations
+### Practical Considerations
 
 When selecting a method, ask yourself:
 
@@ -552,7 +620,7 @@ When selecting a method, ask yourself:
 
 -   Does the complexity of the method match the complexity of the problem?
 
--   What are the trade-offs between clarity and sophistication?
+-   What are the trade-offs?
 
 ------------------------------------------------------------------------
 
@@ -593,9 +661,7 @@ Simulate
 :::: {.content-hidden when-format="revealjs"}
 Here, I present a Monte Carlo simulation that estimates the area of a rectangle on a 10×10 canvas. In essence, it's a roundabout way to perform a simple multiplication — calculating width × height.
 
-Instead of multiplying two numbers directly, this approach randomly "throws darts" at the canvas and counts how many land inside the rectangle to estimate its area. It’s a textbook example of using a powerful technique where it's absolutely not needed — a beautifully inefficient solution to a trivial problem.
-
-This simulation serves as a reminder:
+Instead of multiplying two numbers directly, this approach randomly "throws darts" at the canvas and counts how many land inside the rectangle to estimate its area. It’s a textbook example of using a powerful technique where it's absolutely not needed. This simulation serves as a reminder:
 
 ::: callout-tip
 🧠 Just because you can use a simulation it doesn't mean you should.
@@ -647,6 +713,14 @@ rect(0, 0, number_1, number_2, border = "green", lwd = 2)
 ```
 ::::
 
-## Fun to look at
 
-<https://phasenetwork.org/case-studies/>
+------------------------------------------------------------------------
+
+:::: {.content-visible when-format="revealjs"}
+::: central
+Thank you!
+:::
+::::
+
+------------------------------------------------------------------------
+
