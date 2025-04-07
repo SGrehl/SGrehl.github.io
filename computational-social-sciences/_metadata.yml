@@ -1,7 +1,7 @@
 project:
   type: website
 date-format: "MMM D, YYYY"
-title-block-banner: "#ecc3c8"
+title-block-banner: "#F88379"
 format:
   html:
     theme: cerulian
@@ -11,7 +11,8 @@ format:
     page-layout: full
     html-math method: katex
     code-fold: true
-    code-tools: true
+    code-tools:
+      source: false
     code-block-bg: "#E6FE6FA"
     code-block-border-left: "#ecc3c8"
     highlight-style: atom-one

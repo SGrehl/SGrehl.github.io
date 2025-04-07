@@ -1,6 +1,9 @@
 ---
 title: "Week 01 - Kick-Off"
 subtitle: "Course Setup, Introduction and R-refresher"
+format:
+    html:
+      output-file: week01.html
 ---
 
 Welcome to the first session of **Computational Social Sciences**!
@@ -47,7 +50,7 @@ In case you haven\`t installed R and RStudio
 1.  Install **R**
 2.  Install **RStudio**
 
-![R-Meme (PsyTeachR)](Graphics/R_meme.png)
+![R-Meme (PsyTeachR)](Graphics/R_meme.png){fig-align="left"}
 
 This is the easiest way, you are of course allowed to use other source code editors (like `VSCode`, `Eclipse`, `PyCharm`, `Vim`, `Emacs` or any other preference you might have). I will show the examples in class using RStudio though.
 
@@ -59,10 +62,10 @@ Create a new R Script, R Notebook, or Quarto document:
 2.  Select `New File`.
 3.  Choose the type of file you want to create (R Script, R Notebook, or Quarto document).
 
-Working directory
+**Working directory**:
 
 ```{r}
-# Find the current workind directory (where inputs are found and output are send)
+# Find the current working directory (where inputs are found and output are send)
 getwd()
 
 # Change the current working directory
@@ -70,7 +73,7 @@ setwd("C://your/file/path")
 
 ```
 
-When we analyze data in R usually we also depend on functions, other users and developers have written, which are usually stored in so called `packages`. Packages can be installed and called like this:
+When we analyze data in R usually we also depend on **functions**, other users and developers have written, which are usually stored in so called `packages`. Packages can be installed and called like this:
 
 ```{r}
 install.packages("igraph")
@@ -96,6 +99,45 @@ help(package=igraph)
 
 ```
 
+:::{#custom-block}
+There are three fundamental principles that in my point of view help to understand R.
+
+1. **Everything that exists in R is an object!** [@chambersExtending2017]
+
+In R, all data, from simple numbers to complex models, is treated as an object. This means that every peace of data or function can be stored, manipulated, and passed around. An object can represent variables, functions, or even entire datasets.
+
+2. **Everything that happens in R is the result of a function call** [@chambersExtending2017]
+
+Whether you are performing basic arithmetic or fitting a stochastic model, every action in R is initiated by a function. This means that every operation can be seen as calling a function that takes input and produces an output. This functional nature of R ensures consistency in how tasks are executed.
+
+
+```{r}
+# Example: 
+a <- 5
+
+a
+
+# Function behavior
+a <- function(a = 5) { 
+      a 
+    }
+
+a()
+```
+
+
+3. **Names have objects; objects don't have names** [@hadleywickhamRstatsItsSurprisingly2016]
+
+In R, you don’t *assign values to variables* or *store 5 in x*. Variables in R are not boxes; they don’t contain objects. Instead, you *assign (the variable name) x to 5* or *bind x to 5*. Assignment is simply the association of a name with an object. Any given object may have many names associated with it. At a given instant, a name refers to only one object. Over time, the object a name refers to may vary. [@doaneThreeDeepTruths2018].
+
+
+
+![Twitter 2016: \@hadleywickham](Graphics/objects.png){fig-align="left"}
+
+:::
+
+
+
 ### Atomic classes in R
 
 Atomic in this case means the data is of size = 1.
@@ -111,7 +153,7 @@ Atomic in this case means the data is of size = 1.
 | NaN       | Not a number (e.g. 0/0)       | `NaN`           |
 | Inf       | Positive or negative infinity | `Inf`, `-Inf`   |
 
-Checking types
+Checking types:
 
 ```{r}
 int <- 5L #capital L forces integer-storage
@@ -224,7 +266,7 @@ R has several classes that define how data is structured and handled. Just to na
 
 A vector is a simple data structure, that can store multiple elements of the same type. You can create a vector using the `c()` function.
 
-::: {.callout-note}
+::: {#custom-block}
 To ensure, that all elements in a vector are of the same type, R will coerce the elements to the most general type. For example, if you combine a numeric and a character, the numeric will be coerced to a character.
 :::
 
@@ -236,7 +278,8 @@ sociologists <- c(TRUE, FALSE, TRUE, FALSE)
 
 ##### Indexication
 
-**R indices start counting at 1**, not at 0 like in many other programming languages. You can access elements of a vector, matrix, or data frame by using square brackets `[]`.
+**R indices start counting at 1**, not at 0 like in many other programming languages.
+You can access elements of a vector, matrix, or data frame by using square brackets `[]`.
 
 ```{r}
 # Accessing elements of a vector
@@ -257,6 +300,17 @@ ages[names == "Tom"] # Age of the person with the name "Tom"
 2.  What are the ages of the non-sociologists?
 3.  Are Berta and Charlie sociologists?
 :::
+
+#### Factors
+
+Factors are vectors that represent categorical data. They can be ordered (e.g. low, medium, high) or unordered (female, male, divers). Underlying they are represented by numbers. 
+
+::: {#custom-block}
+Factors are especially important for modelling functions like 'lm' and 'glm'.
+:::
+
+
+
 
 #### Matrices
 
@@ -339,9 +393,11 @@ friends_list
 
 ##### Indexication
 
+
 ```{r}
 friends_list$name # Index via name
-friends_list[[1]] # Index via position
+friends_list[1] # gives list(list())
+friends_list[[1]] # Index via position | gives objects in list
 
 
 # Further indexing
@@ -352,13 +408,16 @@ list_of_list <- list(
             c(1:1000))
 )
 
+# If you want to go deeper in the structure, you can use more [[]]. 
 list_of_lists$l1$name 
-list_of_lists[[1]][[1]] 
+list_of_lists[[1]][[1]] # first element from first list
 list_of_lists[[2]]
 
 ```
 
-![Unlist-meme (R-Memes for Statistical Friendss - Facebook 2017)](Graphics/unlist_meme.png){width="250"}
+In addition to this positive indexication, we can also use negative indices. For example 'friends_list[-1]' gives all elements, but the first.
+
+![Unlist-meme (R-Memes for Statistical Friendss - Facebook 2017)](Graphics/unlist_meme.png){width="250" fig-align="left"}
 
 ## Operations
 
@@ -410,10 +469,12 @@ mean(my_data$score)
 
 Control structures are used to control the flow of a program. They include loops and conditional statements.
 
-::: {.callout-tip}
-There are two tips, that will make your programming game a whole lot easier:
-1. Don\`t repeat yourself: If you find yourself writing the same code over and over again, you should consider automating your task.
+::: {#custom-block}
+**Tip**:
 
+There are two tips, that will make your programming game a whole lot easier:
+
+1. Don\`t repeat yourself: If you find yourself writing the same code over and over again, you should consider automating your task.
 2. Divide and conquer: If you have a complex task, break it down into smaller, more manageable parts.
 :::
 
@@ -421,11 +482,13 @@ There are two tips, that will make your programming game a whole lot easier:
 
 A if-loop is useful to discern between different cases. The syntax is as follows
 
+
 If (condition) {\
 \# do something\
 } else {\
 \# do something else\
 }
+
 
 If the condition (**logical value**) is true, the code in the first block will be executed. Otherwise, the code in the second block will be executed.
 
@@ -519,6 +582,36 @@ new_nums
 
 ```
 
+::: {.student-exercise}
+**Exercise**:
+
+The Institute of Sociologys latest acquisition is an intelligent coffee machine that uses its own algorithm to determine the order in which employees are served coffee. Unfortunately, the machine's code is written in R - and someone has accidentally introduced a bug so at the moment nobody is getting any coffee out of it 😔.  Can we fix it?
+
+The machine processes a list of employees (Stephan, Sascha, Leo, Julius and Felix), where each entry is a vector with three values. 
+
+- The number of cups of coffee already drunk.
+- Their individual caffeine tolerance (number between 1 and 10)
+- Whether they are currently tired. Each coffee brings a 40% chance of feeling more awake afterwards.
+
+
+The machine should apply the following rules. 
+
+1. if someone has drunk more cups than their tolerance, they will not get another cup of coffee.
+2. if someone is tired, they are given coffee until they are awake (after a maximum of three cups) or until their tolerance is exceeded.
+3. everyone else gets another cup.
+
+The function should output a new list with the updated coffee values and the new awake status and say whether the persons have received a coffee and whether they will get another one on the next attempt.
+
+Leo can take 4 cups of coffee, Stephan 4,
+Sascha 7, Julius 9 and Felix 2 [^1]. Everybody has had two coffees already but are still feeling pretty tired. 
+
+
+**Work in teams to rewrite the algorithm!**
+
+[^1]: Names and caffeine tolerance are defined at random.
+:::
+
+
 ## Global environment
 
 The global environment is the workspace of R. It contains all objects that you have created during your session. You can see all objects in the global environment in the upper right corner of RStudio. You can also list all objects in the global environment using the `ls()` function.
@@ -547,21 +640,9 @@ That is about it. If you have any questions during the semester, feel free to as
 
 ::: {.student-exercise}
 **Homework**
-Next to the reading of the upcoming week, please 
 
-Please install the packages `igraph`, `ggplot2`, `ggraph`, `intergraph`, `sand`, `devtools`, and `UserNetR` in your R environment. You can do this by running the following code:
+Please install the packages `igraph`, `ggplot2`, `ggraph` in your R environment.
 
-```{r}
-install.packages("igraph")
-install.packages("igraphdata")
-install.packages("ggplot2")
-
-install.packages("sand")
-install.packages("devtools")
-library(devtools)
-install_github("DougLuke/UserNetR")
-install.packages("intergraph")
-```
 :::
 
 # Further **R**esources
@@ -575,8 +656,8 @@ If you need a further overview - Check out these cheat sheets:
 - [Publish and Share with Quarto](https://rstudio.github.io/cheatsheets/quarto.pdf)
 - [R for Datascience] (https://r4ds.had.co.nz/)
 
-# Python Resources
-Or if you are generally interested in coding (in Python):
+
+Or if you are generally interested in coding (*in Python*):
 
 https://missing.csail.mit.edu/
 

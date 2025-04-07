@@ -14,6 +14,7 @@
   background-color: #f8f9fa;
   padding: 15px;
   border: 1px solid #e8bff7;
+  border-left: 4px solid #967bb6; /* Add this line for the left border */
   border-radius: 8px;
   margin-bottom: 15px;
 }
