@@ -11,7 +11,7 @@
 }
 
 #custom-block {
-  background-color: #f8f9fa;
+  background-color: rgba(150, 123, 182, 0.1);
   padding: 15px;
   border: 1px solid #e8bff7;
   border-left: 4px solid #967bb6; /* Add this line for the left border */
@@ -84,4 +84,12 @@ table td ul {
 
 table td li {
   line-height: 1.2; /* Verringert den Zeilenabstand */
+}
+
+
+/* Optional: inline code styling too */
+code {
+  background-color: rgba(240, 128, 128, 0.2); /* lighter for inline code */
+  padding: 2px 4px;
+  border-radius: 4px;
 }

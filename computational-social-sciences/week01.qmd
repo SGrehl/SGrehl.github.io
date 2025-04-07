@@ -104,7 +104,7 @@ There are three fundamental principles that in my point of view help to understa
 
 1. **Everything that exists in R is an object!** [@chambersExtending2017]
 
-In R, all data, from simple numbers to complex models, is treated as an object. This means that every peace of data or function can be stored, manipulated, and passed around. An object can represent variables, functions, or even entire datasets.
+In R, all data, from simple numbers to complex models, is treated as an object. This means that every piece of data or function can be stored, manipulated, and passed around. An object can represent variables, functions, or even entire datasets.
 
 2. **Everything that happens in R is the result of a function call** [@chambersExtending2017]
 

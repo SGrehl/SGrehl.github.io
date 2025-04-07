@@ -13,7 +13,7 @@ format:
     code-fold: true
     code-tools:
       source: false
-    code-block-bg: "#E6FE6FA"
+    code-block-bg: "rgba(240, 128, 128, 0.05)"
     code-block-border-left: "#ecc3c8"
     highlight-style: atom-one
     eval: false

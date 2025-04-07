@@ -450,6 +450,9 @@ $$
 edges.
 
 
+Small worlds, Dichte, Diameter, Verteilung
+
+
 # Data collection
 
 There are many different forms of data collection for socia network data. Options to collect data include Small Group questionnaires, large-scale Surveys, face-to-face observations, scraping of Websites, APIs or digital Archives.
