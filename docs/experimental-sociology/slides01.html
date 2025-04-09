@@ -269,6 +269,17 @@
 <h1>Progress in the Social Sciences</h1>
 
 </section>
+<section id="learning-goals" class="title-slide slide level2 center">
+<h2>🎯 Learning Goals</h2>
+<p>By the end of this week, you should:</p>
+<ul>
+<li class="fragment"><p>Know the difference between <strong>hypotheses</strong> and <strong>propositions</strong>.</p></li>
+<li class="fragment"><p>Understand why <strong>analytical solutions are valuable</strong> in the social sciences.</p></li>
+<li class="fragment"><p>Recognize the <strong>limitations of analytical solutions</strong> when applied to complex social situations.</p></li>
+<li class="fragment"><p>What <strong>advantages and limitations agent-based simulations</strong> have.</p></li>
+</ul>
+</section>
+
 <section id="the-ideal-research-process" class="title-slide slide level2 center">
 <h2>🔬 The Ideal Research Process</h2>
 <ol type="1">
@@ -322,13 +333,13 @@
 
 <section id="deriving-a-hypothesis" class="title-slide slide level2 smaller center">
 <h2>🤔 Deriving a Hypothesis</h2>
-<p>In science, there are several key methods for deriving a hypothesis:</p>
+<p>Key methods for deriving hypotheses:</p>
 <ul>
 <li class="fragment"><p><strong>Logical Reasoning</strong><br>
 → Deductions based on existing theoretical assumptions and prior knowledge.</p></li>
 <li class="fragment"><p><strong>Formalized Model</strong><br>
 → Using structured frameworks or mathematical representations to explore implications.</p></li>
-<li class="fragment"><p><strong>Simulation</strong><br>
+<li class="fragment"><p><strong>Numerical Simulation</strong><br>
 → Simulating individual entities to observe emergent patterns within complex systems.</p></li>
 </ul>
 <div class="fragment">
@@ -427,20 +438,29 @@ Figure&nbsp;1: Proposed effect of benefits, costs, and positions on success prob
 </div>
 <ul>
 <li class="fragment"><strong>More complex</strong>: Constructing these models requires a deeper level of analysis and rigor.</li>
-<li class="fragment"><strong>Higher precision</strong>: They can yield more nuanced and detailed predictions.</li>
+</ul>
+<p><strong>Higher precision</strong>: They can yield more nuanced and detailed predictions.</p>
+</section>
+
+<section id="why-analytical-solutions-matter" class="title-slide slide level2 center">
+<h2>🧠 Why Analytical Solutions Matter</h2>
+<p>Analytical solutions (often expressed as equations) are the <strong>gold standard</strong> in science because:</p>
+<ul>
+<li class="fragment"><p>They provide <strong>precise</strong> answers.</p></li>
+<li class="fragment"><p>They allow for <strong>clear causal interpretation</strong>.</p></li>
+<li class="fragment"><p>They have a high <strong>objectivity, transparency and reproducibility</strong>.</p></li>
+<li class="fragment"><p>They are often <strong>computationally fast</strong>.</p></li>
 </ul>
 </section>
 
 <section id="limitations-with-formalized-models" class="title-slide slide level2 center">
 <h2>⚙️ Limitations with Formalized Models</h2>
+<p>However, in the social sciences, analytical solutions can become difficult because, often the social reality is too complex to be captured analytically in its entirety. Theories (and the respective equations) can capture only partial aspects of reality. Yet, Sometimes we want a complex, multifaceted analysis Combination of theories not necessarily analytically compatible or manageable</p>
 <ul>
-<li class="fragment"><p><strong>Oversimplification</strong>: Often reduce complex social realities to a few theoretical assumptions.</p></li>
-<li class="fragment"><p><strong>Homogeneity Assumption</strong>: Often assumes little to no individual variation or social diversity.</p></li>
-<li class="fragment"><p><strong>Analytical Challenges with Complexity</strong>: Addressing the above limitations often increases analytical complexity, potentially hindering the derivation of clear predictions <span class="citation" data-cites="balzer2001">(<a href="#/references" role="doc-biblioref" onclick="">Balzer, Brendel, and Hofmann 2001</a>)</span>.</p></li>
+<li class="fragment"><p>Models of social behavior often become too <strong>complex</strong> to solve analytically.</p></li>
+<li class="fragment"><p>Human behavior introduces <strong>noise</strong> and <strong>irrationality</strong>.</p></li>
 </ul>
-<div class="fragment">
-<p>But wait! There is a solution!</p>
-</div>
+<p>Therefore we will look in two weeks at another approach, namly numerical solutions (e.g.&nbsp;simulations).</p>
 </section>
 </section>
 <section>
@@ -623,22 +643,13 @@ Parameters are set without direct empirical calibration.</li>
 <p><strong>Objectives:</strong></p>
 <ul>
 <li class="fragment">Observe general process dynamics to understand underlying mechanisms.</li>
-<li class="fragment">Derive logical implications from simplified scenarios.</li>
-<li class="fragment">Use heuristics to inspire new theoretical insights.</li>
+<li class="fragment">Derive heuristics and logical implications.</li>
 </ul>
-</section>
-<section id="example-schellings-segregation-model" class="slide level3">
-<h3><strong>Example: Schelling’s Segregation Model</strong></h3>
+<p><strong>Example: Schelling’s Segregation Model</strong></p>
 <ul>
-<li class="fragment"><strong>Simplifications:</strong>
-<ul>
-<li class="fragment">Represents residential areas as a 2D grid.</li>
+<li class="fragment">Represents residential areas as a 2D grid</li>
 <li class="fragment">Defines agent (un)happiness based on neighboring agents’ group identity.</li>
-</ul></li>
-<li class="fragment"><strong>Value:</strong>
-<ul>
-<li class="fragment">Despite simplifications, the model provides profound insights into how individual preferences can lead to collective segregation patterns.</li>
-</ul></li>
+<li class="fragment"><strong>Value:</strong> Provides profound insights into how individual preferences can lead to collective segregation patterns.</li>
 </ul>
 </section>
 
@@ -650,9 +661,8 @@ Parameters are set without direct empirical calibration.</li>
 </div>
 <ul>
 <li class="fragment"><strong>KIDS (“Keep It Descriptive, Stupid!”)</strong>: Prioritizes detailed, descriptive accuracy.</li>
-<li class="fragment"><strong>Empirical Parameterization</strong>: Model parameters are calibrated using real-world data.</li>
 <li class="fragment"><strong>Replication of Empirical Observations</strong>: Aims to reproduce observed phenomena through micro-founded simulations.</li>
-<li class="fragment"><strong>Iterative Adjustment</strong>: Continuously refines parameters and structures to align model outcomes with empirical data.</li>
+<li class="fragment"><strong>Iterative Adjustment</strong>: Continuously calibrate parameters and structures to align model outcomes with empirical real-world data.</li>
 </ul>
 </section>
 <section id="data-driven-abms-ii" class="slide level3">
@@ -691,38 +701,6 @@ Parameters are set without direct empirical calibration.</li>
 
 <img data-src="images/clipboard-2258837400.png" class="quarto-figure quarto-figure-center r-stretch" alt="Idealizatoin of a province in Sweden" id="fig-heage"><p class="caption">
 Figure&nbsp;3: Idealisation of a province in Sweden. Reconstruction of the Model of <span class="citation" data-cites="hägerstrand1965">Hägerstrand (<a href="#/references" role="doc-biblioref" onclick="">1965</a>)</span>.
-</p></section>
-
-<section id="types-of-realism-in-abms" class="title-slide slide level2 center">
-<h2>🎯 Types of Realism in ABMs</h2>
-<ol type="1">
-<li class="fragment"><strong>Input Realism:</strong>
-<ul>
-<li class="fragment">Do model parameters accurately reflect empirical data?</li>
-</ul></li>
-<li class="fragment"><strong>Model Realism:</strong>
-<ul>
-<li class="fragment">Are the mechanisms and processes within the model theoretically and empirically grounded?</li>
-<li class="fragment"><em>Note:</em> Direct validation is challenging; often inferred through …</li>
-</ul></li>
-<li class="fragment"><strong>Output Realism:</strong>
-<ul>
-<li class="fragment">Do the model’s results align with real-world observations?</li>
-<li class="fragment"><em>Significance:</em> To be prioritized because it is the one we can best empirically test.</li>
-</ul></li>
-</ol>
-</section>
-<section id="types-of-realism" class="slide level3">
-<h3>Types of Realism</h3>
-
-<img data-src="images/clipboard-2984186190.png" class="r-stretch quarto-figure-center" id="fig-realism-structure"><p class="caption">
-Figure&nbsp;4: Schematics of the different types of realism.
-</p></section>
-<section id="types-of-realism---example" class="slide level3">
-<h3>Types of Realism - Example</h3>
-
-<img data-src="images/clipboard-2731342530.png" class="r-stretch quarto-figure-center" id="fig-realism-example"><p class="caption">
-Figure&nbsp;5: Examples for the different types of realism.
 </p></section>
 </section>
 <section>
@@ -783,9 +761,6 @@ Figure&nbsp;5: Examples for the different types of realism.
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-balzer2001" class="csl-entry" role="listitem">
-Balzer, Wolfgang, Karl R. Brendel, and Solveig Hofmann. 2001. <span>“Bad Arguments in the Comparison of Game Theory and Simulation in Social Studies.”</span> <em>Journal of Artificial Societies and Social Simulation</em> 4 (2).
-</div>
 <div id="ref-boudon1977" class="csl-entry" role="listitem">
 Boudon, Raymond. 1977. <em>The Unintended Consequences of Social Action</em>. London: Macmillan.
 </div>

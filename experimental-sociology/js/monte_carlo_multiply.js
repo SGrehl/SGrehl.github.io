@@ -49,4 +49,6 @@ $(function () {
 
     drawSimulation(width, height);
   });
+  
+  drawSimulation(6, 4);
 });

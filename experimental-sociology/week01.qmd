@@ -105,6 +105,18 @@ Questions?
 
 # Progress in the Social Sciences
 
+## 🎯 Learning Goals
+
+By the end of this week, you should:
+
+-   Know the difference between **hypotheses** and **propositions**.
+
+-   Understand why **analytical solutions are valuable** in the social sciences.
+
+-   Recognize the **limitations of analytical solutions** when applied to complex social situations.
+
+-   What **advantages and limitations agent-based simulations** have.
+
 ## 🔬 The Ideal Research Process
 
 ::: {.content-hidden when-format="revealjs"}
@@ -185,10 +197,16 @@ Experiments test hypotheses, not propositions.
 
 ## 🤔 Deriving a Hypothesis {.smaller}
 
-In science, there are several key methods for deriving a hypothesis:
-
 ::: {.content-hidden when-format="revealjs"}
+According to @barrera2024 [52f], three major approaches exist for deriving hypotheses, as illustrated in Figure @fig-hypotheses-driven.
+
 ![Three distinct approaches to hypothesis generation, as outlined by @barrera2024 [52f].](images/clipboard-1146235161.png){#fig-hypotheses-driven}
+
+Furthermore, I would like to distinguish model-driven approaches by whether they use a formal or a numerical methodology. Given that intuitive-driven approaches are less scientifically rigorous, we are left with three principal methods for deriving scientific hypotheses:
+:::
+
+::: {.content-visible when-format="revealjs"}
+Key methods for deriving hypotheses:
 :::
 
 -   **Logical Reasoning**\
@@ -197,7 +215,7 @@ In science, there are several key methods for deriving a hypothesis:
 -   **Formalized Model**\
     → Using structured frameworks or mathematical representations to explore implications.
 
--   **Simulation**\
+-   **Numerical Simulation**\
     → Simulating individual entities to observe emergent patterns within complex systems.
 
 ::: fragment
@@ -274,7 +292,7 @@ The **optimal probability of applying**: $p = min \left( 1, f \cdot \frac{b}{c} 
 </iframe>
 :::
 
-::: {.content-hidden when-format="revealjs"}
+:::: {.content-hidden when-format="revealjs"}
 ![The impact of the benefit-cost ratio on the number of successful and unsuccessful applicants.](images/clipboard-1575754773.png){#fig-torqueville-sim fig-alt="The impact of the benefit-cost ratio on the number of successful and unsuccessful applicants."}
 
 We can already gain significant insights by visually inspecting the graphs presented in Figure \@fig-torqueville-sim. While the following observations can be formally derived from the underlying model, we will forego a detailed mathematical proof and instead highlight the intuitions they convey.
@@ -284,7 +302,91 @@ First, we observe that a **necessary condition** for a Tocqueville Paradox to em
 Moreover, the **peak in the ratio of unsuccessful to successful individuals** shifts **leftward** as the benefit $b$ increases. In other words, the more attractive the opportunity, the **earlier** dissatisfaction peaks, relative to the overall number of opportunities. This dynamic illustrates a core intuition of the Tocqueville Paradox: improvements can amplify frustration under specific structural conditions.
 
 Even if precise empirical estimation of parameters such as $b$ (benefit) and $c$ (cost) proves difficult in real-world settings, the model allows us to formulate testable hypotheses. For instance, we might expect that in societies where perceived benefits of mobility are high, frustration and perceived injustice may arise **earlier** in the process of social improvement — especially when structural bottlenecks (low $f$) persist. Thus, the model offers a powerful lens to explore the **nonlinear relationship** between opportunity structures and subjective perceptions of fairness or progress.
+
+::: {.callout-tip collapse="true" title="Shiny code for this graph."}
+
+```{r}
+#| label: server.R
+## server.R
+library(shiny)
+library(tidyverse)
+
+shinyServer(function(input, output) {
+  
+  output$BoudonPlot <- renderPlot({
+    
+    mycolors = c("blue", "green", "red")
+    
+    cost <- 10
+    df <- data.frame(vacant=(0:100)/100) %>% 
+      rowwise() %>% 
+      mutate(applicants   = min(1, vacant * (input$benefit/input$cost)))  %>% 
+      mutate(successful   = vacant,
+             unsuccessful = applicants - vacant)
+    
+    # Reshape data to long format for ggplot
+    df_long <- df %>%
+      pivot_longer(cols = c(applicants, successful, unsuccessful), names_to = "type", values_to = "value")
+    
+    # Create ggplot
+    ggplot(df_long, aes(x = vacant, y = value, color = type)) +
+      geom_line(size = 1) + 
+      labs(
+        title = "Vacant Positions vs. Applicants and Unsuccessful",
+        x = expression(italic(f)),
+        y = "Share",
+        color = "Type"
+      ) +
+      scale_color_manual(values = mycolors) +
+      theme_minimal() + 
+      theme(
+        legend.text = element_text(size = 14),       # legend labels
+        legend.title = element_text(size = 16)       # legend title
+      )
+  })
+  
+})
+```
+
+```{r}
+#| label: ui.R
+## ui.R
+library(shiny)
+
+shinyUI(fluidPage(
+  
+  # Application title
+  titlePanel("Boudon's Model of Relative Frustration"),
+  
+  # Sidebar with a slider input for number of bins
+  sidebarLayout(
+    inputPanel(
+      sliderInput("benefit", 
+                  "Benefit:", 
+                  min = 10, 
+                  max = 50, 
+                  value = 25,
+                  step = 1,
+                  ),
+      sliderInput("cost", 
+                  "Cost:", 
+                  min = 1, 
+                  max = 10, 
+                  value = 10,
+                  step = 1,
+      )
+    ),
+    
+    # Show a plot of the generated distribution
+    mainPanel(
+      plotOutput("BoudonPlot")
+    )
+  )
+))
+```
 :::
+
+::::
 
 ## 🔑 Take-Away so Far {.smaller}
 
@@ -299,10 +401,34 @@ Formalized Models:
 :::
 
 -   **More complex**: Constructing these models requires a deeper level of analysis and rigor.
--   **Higher precision**: They can yield more nuanced and detailed predictions.
+
+**Higher precision**: They can yield more nuanced and detailed predictions.
+
+## 🧠 Why Analytical Solutions Matter
+
+Analytical solutions (often expressed as equations) are the **gold standard** in science because:
+
+-   They provide **precise** answers.
+
+-   They allow for **clear causal interpretation**.
+
+-   They have a high **objectivity, transparency and reproducibility**.
+
+-   They are often **computationally fast**.
 
 ## ⚙️ Limitations with Formalized Models
 
+::: {.content-visible when-format="revealjs"}
+However, in the social sciences, analytical solutions can become difficult because, often the social reality is too complex to be captured analytically in its entirety. Theories (and the respective equations) can capture only partial aspects of reality. Yet, Sometimes we want a complex, multifaceted analysis Combination of theories not necessarily analytically compatible or manageable
+
+-   Models of social behavior often become too **complex** to solve analytically.
+
+-   Human behavior introduces **noise** and **irrationality**.
+
+Therefore we will look in two weeks at another approach, namly numerical solutions (e.g. simulations).
+:::
+
+:::: {.content-hidden when-format="revealjs"}
 -   **Oversimplification**: Often reduce complex social realities to a few theoretical assumptions.
 
 -   **Homogeneity Assumption**: Often assumes little to no individual variation or social diversity.
@@ -312,6 +438,7 @@ Formalized Models:
 ::: fragment
 But wait! There is a solution!
 :::
+::::
 
 # Agent-Based Modeling (ABM)
 
@@ -521,16 +648,13 @@ By simulating many agents acting simultaneously over successive time steps, ABM 
 **Objectives:**
 
 -   Observe general process dynamics to understand underlying mechanisms.
--   Derive logical implications from simplified scenarios.
--   Use heuristics to inspire new theoretical insights.
+-   Derive heuristics and logical implications.
 
-### **Example: Schelling's Segregation Model**
+**Example: Schelling's Segregation Model**
 
--   **Simplifications:**
-    -   Represents residential areas as a 2D grid.
-    -   Defines agent (un)happiness based on neighboring agents' group identity.
--   **Value:**
-    -   Despite simplifications, the model provides profound insights into how individual preferences can lead to collective segregation patterns.
+-   Represents residential areas as a 2D grid
+-   Defines agent (un)happiness based on neighboring agents' group identity.
+-   **Value:** Provides profound insights into how individual preferences can lead to collective segregation patterns.
 
 ## 📊 Data-Driven ABMs
 
@@ -541,9 +665,8 @@ By simulating many agents acting simultaneously over successive time steps, ABM 
 :::
 
 -   **KIDS ("Keep It Descriptive, Stupid!")**: Prioritizes detailed, descriptive accuracy.
--   **Empirical Parameterization**: Model parameters are calibrated using real-world data.
 -   **Replication of Empirical Observations**: Aims to reproduce observed phenomena through micro-founded simulations.
--   **Iterative Adjustment**: Continuously refines parameters and structures to align model outcomes with empirical data.
+-   **Iterative Adjustment**: Continuously calibrate parameters and structures to align model outcomes with empirical real-world data.
 
 ### Data-Driven ABMs II
 
@@ -573,26 +696,6 @@ By simulating many agents acting simultaneously over successive time steps, ABM 
 ### Example: Diffusion of Innovation II
 
 ![Idealisation of a province in Sweden. Reconstruction of the Model of @hägerstrand1965.](images/clipboard-2258837400.png){#fig-heage fig-alt="Idealizatoin of a province in Sweden" fig-align="center"}
-
-
-## 🎯 Types of Realism in ABMs
-
-1.  **Input Realism:**
-    -   Do model parameters accurately reflect empirical data?
-2.  **Model Realism:**
-    -   Are the mechanisms and processes within the model theoretically and empirically grounded?
-    -   *Note:* Direct validation is challenging; often inferred through ...
-3.  **Output Realism:**
-    -   Do the model's results align with real-world observations?
-    -   *Significance:* To be prioritized because it is the one we can best empirically test.
-
-### Types of Realism
-
-![Schematics of the different types of realism.](images/clipboard-2984186190.png){#fig-realism-structure}
-
-### Types of Realism - Example
-
-![Examples for the different types of realism.](images/clipboard-2731342530.png){#fig-realism-example}
 
 # Final Thoughts
 
@@ -669,6 +772,8 @@ Instead of multiplying two numbers directly, this approach randomly "throws dart
 
 Please consider whether you truly need a simulation — or if you might just need a calculator.
 
+::: {.callout-tip collapse="true" title="R code for the Monte Carlo Muliplication."}
+
 ```{r}
 # Define canvas dimensions
 canvas_width <- 10
@@ -711,8 +816,9 @@ plot(x, y, col = ifelse(inside, "blue", "red"), pch = 20,
 # Draw the rectangle for reference
 rect(0, 0, number_1, number_2, border = "green", lwd = 2)
 ```
-::::
+:::
 
+::::
 
 ------------------------------------------------------------------------
 
@@ -723,4 +829,3 @@ Thank you!
 ::::
 
 ------------------------------------------------------------------------
-

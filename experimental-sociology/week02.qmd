@@ -1,116 +1,305 @@
 ---
-  title: "Experimental Sociology - Week 2"
-  subtitle: "Analytical Solutions & Hypotheses"
+  title: "Experimental Sociology - Week 02"
+  subtitle: "Analytical Methods: Decision & Game Theory"
+  bibliography: references.bib
 ---
 
-# Introduction
+In this chapter, we'll delve into the formal **representation** and **analysis** of social interactions through **decision theory** and **game theory**. Our aim is to provide you with the fundamental tools for analytically modeling a variety of social phenomena.
 
-This week we will deal with analytical solutions and how we can use them to derive hypotheses in detail.
+**Why decision theory and game theory?** First, these approaches align with **methodological individualism** in that they focus on the micro-level situations individuals face and use those insights to generate predictions at both the micro and macro levels. Second, these frameworks provide structured, systematic methods to **model social situations**, making it easier to navigate complex interactions. Finally, they also offer robust techniques for **analyzing these models** and deriving meaningful hypotheses. Nevertheless, while decision and game theory provide relatively simple, they are not the only valid approaches. Numerous modifications [e.g., prospect theory, @tversky1981, @tversky1992] and alternative frameworks [e.g., bounded rationality, @rubinstein1998] are readily available, and they should be employed whenever you believe the additional insights justify the added complexity.
+
+::: callout-tip
+This chapter is an **introduction**, rather than a comprehensive course in decision or game theory. If you’re already familiar with these concepts, the concise explanations in the info boxes might suffice as a refresher. For a more in-depth exploration, we recommend specialized resources such as @gilboa2010 for an accessible overview or @osborne2004 for a more rigorous, formal perspective.
+:::
 
 ## 🎯 Learning Goals
 
-By the end of this week, you should:
+By the end of this chapter, you should:
 
--   Know the difference between **hypotheses** and **propositions**.
+-   **Model** **simple social situations** using decision theory or game theory.
 
--   Understand why **analytical solutions are valuable** in the social sciences.
+-   **Analyze these situations** using appropriate analytical tools from **decision theory** or **game theory**.
 
--   Recognize the **limitations of analytical solutions** when applied to complex social situations.
+# Modelling Social Interactions
 
--   Be able to model a simple social interaction using **Game Theory**.
+Central to this process is understanding behavior—people’s actions have a direct bearing on how we address societal challenges. For example, consider the question, “How can we reduce discriminatory behavior?” Here, it’s clear that behavior itself is crucial: discrimination is enacted through observable actions. Yet, to combat discrimination effectively, researchers also investigate underlying attitudes (like prejudices or biases) and the cultural products (books, movies, music) that might indirectly influence discrimination.
 
--   Understand how to introduce **bounded rationality**.
+In many cases, we’re interested in a core outcome—such as shifting attitudes or assessing whether certain initiatives succeed or fail. However, these outcomes typically hinge on actual behavior: how people speak, what they consume, and how they respond to one another. Even when our primary focus isn’t directly on behavior, the factors shaping or driving that outcome often are forms of behavior themselves. Recognizing this central role of behavior is essential for fully understanding and tackling social problems.
 
-# Propositions & Hypotheses
+Decision theory and game theory emphasize the centrality of behavior but apply differently depending on the social context. **Decision theory** addresses situations where the outcome depends solely on thedecisions of an **individual actor**, without direct interference from others. For example, choosing whether to pursue higher education or immediately enter the labor market is primarily a personal decision that can be analyzed using decision theory. These situations are formally termed parametric ***decisions*** because the model predictions primarily depend on situational parameters.
 
-Proposition: Universal statement about the relationship between one or more concepts Hypothesis: Singular statement, derived from propositions, concretely related to investigation - Social capital increases academic success - The higher the parents' educational attainment, the better the children's German score Important: We test hypotheses, not propositions. In order to test them we have to run (in the ideal case) experiments!
+In contrast, **game theory** applies to scenarios where outcomes are influenced by the interactions of **multiple individuals** or groups, whose **decisions are interdependent**. This means no single actor has complete control over the outcome, adding a strategic dimension to their decision-making. Examples include negotiations, competitive markets, or voluncteering for a task. These situations are formally termed ***games*** due to their interactive and strategic nature.[^1]
 
-## Derivation of a hypothesis
+[^1]: Decision theory is sometimes referred to as *parametric decision theory*. Game theory, on the other hand, could actually be called *strategic decision theory*, since outcomes depend significantly on strategic considerations and the choices of others. Despite this, game theory retains its playful name from its origins in analyzing parlor games [@neumann1944]. A fitting testament to how tradition (and a dash of path dependence) can leave a lasting imprint on terminology.
 
-### 🧠 Why Analytical Solutions Matter
+Occasionally, categorizing a situation clearly as either a decision or a game may not be straightforward. Take, for instance, the choice of whether to attend university or join the workforce immediately. Initially, this might appear to be an individual decision. However, parental approval or financial support can significantly influence the outcome, suggesting elements of strategic interaction. As social scientists, we have the flexibility to model such scenarios either as decisions or as games, depending on which perspective best captures the dynamics involved. Making this choice entails analytical responsibility, as it shapes how we understand, analyze, and interpret the social situation. Later, we will examine an example that demonstrates how these contrasting approaches can yield markedly different predictions.
 
-Analytical solutions (often expressed as equations) are the **gold standard** in science because:
+::: callout-note
+In summary:
 
--   They provide **precise** answers.
+-   A **decision** involves a parametric choice of only **one actor** and is analyzed using **decision theory**.
 
--   They allow for **clear causal interpretation**.
+-   A **game** involves strategic interactions among **two or more actors** and is analyzed using **game theory**.
+:::
 
--   They have a high **objectivity, transparency and reproducibility**.
+## Behavior vs. Action
 
--   They are often **computationally fast**.
+Before proceeding further, let's clarify key concepts: **behavior** and **action**. Although these terms often appear interchangeable in everyday language, in social science they carry distinct meanings.
 
-### 🚧 **Shortcomings of Analytical Solutions**
+In many fields of social science, behavior is used broadly to describe any observable conduct that originates with the individual, while action typically refers to behavior resulting from a deliberate, goal-directed decision process [@elster2007,163f]. Non-intentional or automatic conduct—such as reflexes—would thus be excluded from action. However, it can be challenging to differentiate reflexive, automatic behavior from genuinely voluntary action in practice [@selten2002, @sumner2008]. For these reasons, we will not adopt this strict distinction based on intentionality.
 
-However, in the social sciences, analytical solutions can become difficult because:
+From an **empirical standpoint**, there is another point to consider: we often cannot observe an actor’s true intentions, only the outward behavior they display. For instance, imagine two sumo wrestlers in the same match. One might genuinely be trying to win, while the other might only appear to be making an effort but is secretly aiming to lose—perhaps due to gambling incentives or other pressures. Despite these different **underlying actions**, the **observable behavior** of both wrestlers may look nearly identical. As researchers, we typically see only the outcome (who won or lost) and perhaps some surface cues during the match; the wrestler’s concealed motivations or private calculations remain hidden.
 
-Reality too complex to be captured analytically in its entirety Theories (and the respective equations) can capture only partial aspects of reality. Yet, Sometimes we want a complex, multifaceted analysis Combination of theories not necessarily analytically compatible or manageable
+Nevertheless, even with these limitations, we can design models that distinguish between potential underlying actions. By analyzing patterns in outcomes, along with additional data [cf. @duggan2002], we may draw reasonable inferences about whether behaviors result from genuine intentions or ulterior motives.
 
--   Models of social behavior often become too **complex** to solve analytically.
+::: callout-note
+In this course, we will use the following terminology:
 
--   Human behavior introduces **noise** and **irrationality**.
+-   **Action** is what the actor deliberately aims to do. We often **cannot directly observe** this.
 
-Therefore we will look in two weeks at another approach, namly numerical solutions (e.g. simulations).
+-   **Behavior** is the **observable action** that researchers see. Different actions can lead to the **same** observed behavior.
 
-# 🎲 Modeling Social Situations
+Note, however, that this approach differs from distinctions found in other sources [e.g. @anscombe2000, @elster2007].
+:::
 
-A first step to derive of a analyitical solution is to set up a model, that later can be analyzed. For this pourpse we will use a very straight forward model namely decision and game theory.
+In many research contexts, however, we do not require a strict separation between these concepts; the broader category of observed behavior often suffices, unless we specifically need to focus on strategic or hidden intentions that could significantly alter our interpretation of outcomes.
 
-## Game Theory
+# Decision Theory
 
-Game theory offers a structured approach to modeling social situations:
+Decision theory provides a foundational toolkit for modelling individual choices under certainty and uncertainty. Because game theory builds on many of the same principles, it's helpful to begin by establishing a solid grasp of decision theory. We'll outline the fundamental elements and constraints of decision-making before examining more complex, strategic interactions.
 
--   **Players** – Agents making decisions.
+## Modelling
 
--   **Strategies** – Options available to the players.
+In order to model a decision, we need to know the fundamental components of decision theory. These are:
 
--   **Payoffs** – Outcomes based on strategy combinations.
+-   **Restrictions** (constraints and limitations influencing the range of possible actions),
 
-👉 *Example:* The Prisoner's Dilemma – A simple two-player game that reveals the challenge of cooperation and competition.
+-   **Preferences** (rankings or valuations of potential outcomes).
 
-## 🔎 **Bounded Rationality**
+-   **Beliefs** (subjective probabilities and expectations about uncertain states of the world),
 
--   Classical game theory assumes **perfectly rational actors**.
+In the following sections, we will explore each of these components individually and illustrate their importance through relevant examples.
 
--   In reality, humans often make decisions based on incomplete information and cognitive limitations (bounded rationality).
+### Restrictions
 
--   Introducing bounded rationality increases complexity — solutions become harder to compute.
+Restrictions can be divided into two main categories. The first addresses the actor’s own behavioral options—what actions are actually feasible in a given situation? The second covers external factors that may influence the actor yet lie outside of their direct control. From the first perspective, we derive the **action set**, and from the second, the **set of all possible states of the world**. We will examine each of these in detail. Finally, combining the action set with the states of the world yields the possible **consequences**, which we will also explore.
 
-    ## 🎲 Game Theory – Modeling Social Situations
+### Action set
 
-    **Game theory** provides a structured framework: - **Players** – Decision-makers. - **Strategies** – Options available. - **Payoffs** – Outcomes based on strategy combinations.
+**Restrictions** regarding the actor ask: *What range of possible actions do actors have in a given decision-making scenario?* These limitations can arise from numerous sources, including the actor’s resources, available information, and broader social or institutional constraints.
 
-    ### Example: The Prisoner’s Dilemma
+-   **Resources**: Money, time, effort, and technical know-how all help define the set of feasible actions. A student’s decision on where to study, for instance, can be constrained by scholarship opportunities, personal savings, or family responsibilities.
 
-    -   Cooperation vs. defection.
-    -   Payoffs depend on combined strategies.
-    -   Nash equilibrium as a solution concept.
+-   **Information and Knowledge**: Actors must have at least minimal awareness of their own possibilities, risks, and probable outcomes. A lack of information—like being unaware that a particular course of study exists—can effectively remove that option from the feasible set.
 
-    ------------------------------------------------------------------------
+-   **Social and Institutional Constraints**: Legal restrictions, cultural norms, or social sanctions can also limit the set of feasible actions. For example, certain forms of expression might be legally prohibited or socially stigmatized in a particular society.
 
-    ## 🤯 Bounded Rationality
+-   **Psychological Constraints**: Beyond purely external obstacles, actors may also face cognitive or emotional barriers, such as fear of failure or lack of self-efficacy. These personal obstacles can prevent them from pursuing otherwise feasible options.
 
-    -   Classical game theory assumes **perfect rationality**.
-    -   Bounded rationality = Limited information + Cognitive limitations.
-    -   Makes solutions more complex and realistic.
+Formally, we collect these limitations into a **feasible action set** , representing all the courses of action an actor can realistically pursue. When modeling a situation, it is crucial to define carefully. Overlooking relevant restrictions can lead to unrealistic models and poor predictions of actual behavior.
 
-    ------------------------------------------------------------------------
+Examples would be
 
-    ## 
+$$A= \left\{ \text{Write term paper in English}, \text{Write term paper in German}, \text{Write term paper in Klingon} \right\}$$
+
+or
+
+$$A= \left\{ \text{Summer clothes}, \text{winter clothes}, \text{rain clothes} \right\}$$
+
+Note that only **one** action can be chosen from the action set at a time. If an actor wants to wear rain clothes **and** summer clothes together, that combination must be defined as a **separate** option in the action set. In other words, actors cannot choose more than one action **simultaneously**.
+
+::: callout-note
+-   **One aspect of restrictions** refer to any factor that reduces an actor’s possible range of actions; they are **indirectly accounted** for by defining the actor’s **action set**.
+
+-   The **action set** includes all **feasible actions** that the actor can take in the modeled social situation. Only one action can be chosen at a time.
+:::
+
+### State of the world
+
+The second form of restriction asks: *What range of possible external factors can occur in the decision-making scenario?* A **state of the world**, denoted by $\omega$, is a concise description of all relevant external factors affecting a given situation and which the actor cannot control. Formally, we represent the set of all possible states $\omega$ as $\Omega$. For instance:
+
+$$\Omega = \left\{ \text{sunny weather}, \text{rainy weather} \right\}$$ if weather is the key external factor or
+
+$$\Omega = \left\{ \text{morning}, \text{noon} , \text{evening} \right\}$$ if the time of day matters.
+
+Likewise, only **one** state of the world can occur at a time. If you want to account for multiple external conditions—such as “rainy morning” versus “rainy evening”—each of these **combined** states must appear **separately** in the set of possible states. The model does not allow more than one state of the world **simultaneously**.
+
+If we have $|\Omega|=1$, meaning there is only a single possible state, this situation is referred to as **decision under certainty**, because the actor faces no uncertainty about external conditions. If $|\Omega|>1$, meaning there are at least two possible states, this situation is referred to as **decision under uncertainty**.
+
+::: callout-note
+-   A **state of the world** $\omega$ includes all external factors that are relevant for the modeled social situation.
+:::
+
+### Consequences
+
+Once we specify both the set of possible actions $A$ an actor may take and the set of possible states of the world $\Omega$, each combination of an action $a \in A$ and a state $\omega \in \Omega$ yields a distinct **consequence**, $x$. Thus, we can define the set of all possible consequences as:
+
+$$X=A \times \Omega$$This notation emphasizes that outcomes depend both on what the actor does (the chosen action) and on how external factors turn out (the actual state of the world). In Table @tbl-consequences illustrates how three actions and two states can combine to produce six potential **consequences**.
+
+|                                 |                   |                   |
+|---------------------------------|-------------------|-------------------|
+| **actions states of the world** | **sunny weather** | **rainy weather** |
+| **summer cloth**                | $x_{S,S}$         | $x_{S,R}$         |
+| **winter cloth**                | $x_{W,S}$         | $x_{W,R}$         |
+| **rain cloth**                  | $x_{R,S}$         | $x_{R,R}$         |
+
+: Combining actions and states to form consequences. {#tbl-consequences}
+
+::: callout-note
+-   **Consequences** are the **combination of** an actors **actions** and a **state of the world**.
+:::
+
+### Preferences
+
+In decision theory, **preferences** describe how an actor ranks or values potential outcomes (i.e. **consequences**). We typically use the notation $x \succsim y$ to indicate that outcome $x$ is **at least as preferred** as outcome $y$. This is called the **weak preference relation**. From it, we can derive two additional relations:
+
+-   The **strict preference relation** ($\succ$): where $x \succ y$ means a strict preference for $x$ over $y$.
+
+-   The **indifference relation** ($\sim$): where $x \sim y$ means that $x$ and $y$ are equally preferred.
+
+Because these two relations follow from the weak preference relation ($x \succ y \Leftrightarrow x \succsim y \land \neg ( y \succsim x)$ and $x \sim y \Leftrightarrow x \succsim y \land y \succsim x$), we typically define only the weak preference relation explicitly. The strict preference and indifference relations are then **implicitly** included.
+
+A **preference relation** is a form of [mathematical relations](https://en.wikipedia.org/wiki/Relation_(mathematics)) and must obey certain logical rules. For instance, it cannot simultaneously be true that $x \succsim y$ and $\neg (x \succsim y)$ hold at the same time (yet, it can be that $x \succsim y$ and $y \succsim x$ simultaneously hold, so make sure you understand the difference between these two notions). Beyond that, relations do not come with much rules. Yet, we may impose further **axioms** to capture how our imagined people (from which we later will derive a behavioral prediction) should react. For example, in many situations it seems quite sensible to model an actor how states $x \succ y$ and $y \succ z$, it should not be the case that $z \succ x$.[^2] Luckily, even a handful of such axioms can enable us to predict a wide range of behaviors.
+
+[^2]: In addition, if we fail to rule out such cases, our model may produce no predictions at all, effectively rendering it uninformative. I personally prefer a model that risks being wrong over one that cannot generate any predictions, because an incorrect but testable model can always be refined and improved.
+
+Moreover, having these axioms in place helps us **transform** an actor’s preferences into **utility values** (see next section), making it easier to use mathematical and statistical tools for analysis.
+
+#### Completeness, Transitivity, and Independence
+
+As we will see when we come to analyze a social situation, two axioms are very important for the case of certainty. In case of uncertainty we also need a two addtional axioms:
+
+1.  **Completeness**: For any two outcomes and , an actor can state whether is preferred to , is preferred to , or whether there is indifference between them . Formally, this means the actor never withholds a judgment between two outcomes.
+
+2.  **Transitivity**: If and , then it must also be that . This requirement rules out cyclical or contradictory preferences. Without transitivity, consistent decision-making becomes problematic.
+
+3.  **Continuity**: If $x\succsim y \succsim z$, then there exists a probability $p\in (0,1)$ such that $p\cdot x + (1-p) \cdot z \sim y$.[^3]
+
+4.  **Independence of Irrelevant Alternatives** (**IIA**): If $x \succsim y$ holds, it must also hold $p \cdot x + (1-p) \cdot z \succsim  p \cdot y + (1-p) \cdot z$ for each $z$ and $p \in (0,1)$. That is the irrelevant alternative $z$ should not influence the existing preference $x \succsim y$ because it . This axiom is especially relevant for decisions under **risk** or **uncertainty**.
+
+[^3]: Technically the "+" is somewhat troublesome in this context, since we cannot really "add" consequences $x$ and $z$ simply together. It is more like with probability $p$ the actor gets the consequence $x$ and with $(1-p)$ the actor gets $z$.
+
+When preferences satisfy **completeness** and **transitivity**, we say the actor has an **ordinal preference ordering**, which is sufficient for consistent decision-making in situation under certainty. If we also assume the **continuity and IIA** axiom, we can achieve a **cardinal preference ordering**, allowing us to quantify not only the **rank** of preferences but also their **relative strength**. This lays the groundwork for using a expected utility function, which can capture preferences for a lottery of uncertain events.
+
+### Utility
+
+A **utility function** assigns numerical values to outcomes while preserving the actor’s preference ranking. Once we introduce **expected utility**, this representation will help us systematically predict choices. We say that a utility function (u) **represents** a preference relation (\succsim) if, for all (x, y \in X),
+
+$$
+x\succsim y \Leftrightarrow u(x) \geq u(y)
+$$
+
+In other words, whenever $x$ is at least as preferred as $y$, uu must assign to $x$ a value at least as large as the one it assigns to $y$. In Table @tbl-utility-ordinal we see that the preferences $x\succ y \succ z$ are represented by the utility function $u$ and $v$, but not by $h$ as $h(y)>h(x)$ contradicts with $x\succ y$.
+
+| Assume $x\succ y \succ z$ | $x$ | $y$ | $z$   |
+|---------------------------|-----|-----|-------|
+| $u(\cdot)$                | 3   | 2   | 1     |
+| $v(\cdot)$                | 42  | 11  | -3.14 |
+| $h(\cdot)$                | 1   | 2   | 0     |
+
+: While $u$ and $v$ represent the given preferences, $h$ does not. {#tbl-utility-ordinal}
+
+With a utility function in hand, we have all the tools needed to analyze **decision situations under certainty**, where there is only one possible state of the world. However, if **uncertainty** exists (i.e., more than one possible state can occur), we need to introduce additional concepts before we can fully analyze those scenarios.
+
+::: callout-note
+-   A **utility function** assigns numerical values to any possible outcome. These numbers represent an actors preferences.
+-   
+:::
+
+### Expected Utility
+
+When decisions involve **uncertainty**—that is, more than one possible state of the world can occur with varying likelihoods—we apply the concept of **expected utility**. This approach extends the idea of a **utility function** from deterministic outcomes (under certainty) to **probabilistic mixtures** of outcomes, commonly referred to as **lotteries**.
+
+Consider the example in Table @tbl-expected-util, where the action “summer clothes” might result in the consequence (x\_{S,S}) (summer clothes + sunny weather) with probability (p), or (x\_{S,R}) (summer clothes + rainy weather) with probability (1 - p). Since the actor cannot know for sure which state of the world will occur, they face a lottery: a **random** outcome yielding utility 10 in sunny weather or 4 in rainy weather.
+
+|  |  |  |
+|--------------------------------|--------------------|--------------------|
+| **actions \\ states of the world** | **sunny weather (\$p\$)** | **rainy weather (\$1-p\$)** |
+| **summer clothes** | $u(x_{S,S})=10$ | $u(x_{S,R})=4$ |
+| **winter clothes** | $u(x_{W,S})=2$ | $u(x_{S,S})=3$ |
+| **rain clothes** | $u(x_{S,S})=5$ | $u(x_{S,S})=8$ |
+
+: Assumed preferences for a fictitious scenario. {#tbl-expected-util}
+
+In order to evaluate now how good this action is we must calculate the expected utility. Formally, suppose an actor faces a set of possible **states of the world** ($\omega \in \Omega$ ), each occurring with probability $p(\omega)$. The **expected utility** $EU$ of choosing $a$ is then:
+
+$$ \mathrm{EU}(a) = \sum_{\omega \in \Omega} p(\omega) \cdot u\bigl(x_{a,\omega}\bigr)$$
+
+::: callout-caution
+As noted earlier, **expected utility** relies on **cardinal preferences**, meaning that the four key axioms of rational choice (completeness, transitivity, continuity, and independence) must be satisfied. Under these assumptions, we can define a **von Neumann–Morgenstern (VNM) utility function**, which numerically represents an actor’s preferences in a way that preserves both their ranking and the intensity of those preferences.
+:::
+
+This framework provides a **straightforward method** to compare actions under uncertainty. Because each action can be viewed as a **lottery** (a probabilistic combination of outcomes), we say an actor **prefers** action $a$ over action $b$ if and only if:
+
+$$
+a\succsim b \Leftrightarrow EU(a)\geq EU(b).
+$$.
+
+::: callout-note
+-   While **utility** describes an actor’s valuation of a single **specific consequence**, **expected utility** extends that concept to an entire **lottery** (i.e., a scenario with multiple possible outcomes and corresponding probabilities). By weighting each potential consequence according to its probability, expected utility provides a way to compare and rank **actions**—not just individual outcomes—under uncertainty.
+:::
+
+### Beliefs
+
+Finally, **beliefs** refer to the **probability distribution** (,p,) that an actor assigns to each possible **state of the world**. We introduced this concept implicitly in the Expected Utility section. By definition, each probability $p(\omega)$ must be at least zero $(p(\omega) \ge 0)$ , and the sum of all probabilities across every possible state must equal one. That’s typically all we need to assume about beliefs at this stage.
+
+## Analyzing
+
+To analyze how an imaginary actor would behave in a given situation, we introduce a **choice function**, denoted by $C(\cdot )$. This function expresses our prediction of which action(s) an actor will choose from a given decision problem $D$, where $D\subset A$ represents the set of feasible actions available in that situation.
+
+### Decisions under certainty
+
+When the situation involves **certainty**—that is, there is only one possible state of the world—the actor knows exactly what consequence each action will lead to. In this case, we assume the actor simply chooses the action that results in the highest utility:\
+$$ C^\succsim(D) \;=\; \arg\max_{a \in D} \mathrm{EU}(a)=\arg\max_{a \in D} \mathrm{u}(x_{a,\omega}). $$
+
+Since there is no uncertainty, the best action is the one yielding the highest known outcome. For example, if we assume in Table @tbl-expected-util that $p=1$, that is, sunny weather is guaranteed, then the consequence of each action is known with certainty. Under these conditions, we can immediately predict that the actor would choose **summer clothes**, as they yield the highest utility (10) in sunny weather.
+
+### Decisions under uncertainty
+
+When the actor faces **uncertainty**—meaning that multiple states of the world are possible, each with its own probability —we use the concept of **expected utility**.
+
+The **Expected Utility Hypothesis** posits that the actor will choose the action that **maximizes expected utility**. Formally:
+
+$$ C^\succsim(D) \;=\; \arg\max_{a \in D} \mathrm{EU}(a). $$
+
+Let us assume in Table @tbl-expected-util that $p=0.5$, so both sunny and rainy weather are equally likely. We then calculate the expected utility for each action:
+
+-   $EU(\text{summer clothes}) = 0.5 \cdot 10 + 0.5 \cdot 4 = 7$,
+
+-   $EU(\text{winter clothes}) = 0.5 \cdot 2 + 0.5 \cdot 3 = 2.5$, and
+
+-   $EU(\text{rain clothes}) = 0.5 \cdot 5 + 0.5 \cdot 8 = 6.5$.
+
+In this case, the actor would choose summer clothes, since that action yields the highest expected utility.
+
+Note that, the use of numerical values to represent preferences sometimes draws criticism. Critics argue that we cannot realistically measure (nor can an outside observer precisely know) whether someone values one outcome at, say, 4 versus 3. This appears to impose a level of detail that is often unattainable in real-world studies. That critique is not unwarranted. However, as we will see later, in the vast majority of cases, precise numerical assessments of preferences are unnecessary. Even a rough ordinal understanding (e.g., which outcome is preferred over which) is sufficient for deriving most hypotheses and making meaningful predictions in practice.
+
+For example, we can analyze how changing the probability $p$ affects the actor’s decision. If $p$ increases, making sunny weather more likely, the expected utility of wearing **summer clothes** rises. Conversely, if decreases, making rainy weather more probable, the expected utility of wearing **rain clothes** becomes more attractive.
+
+In this way, even simple models can offer powerful insights into how beliefs and preferences shape decision-making.
+
+::: callout-note
+-   In short, decision-making under **certainty** is about picking the action that leads to the best known outcome, while decision-making under **uncertainty** is about choosing the action with the highest **expected utility**—a weighted average of possible outcomes, according to their probabilities.
+:::
+
+# Game Theory
+
+::: callout-warning
+UNDER CONSTRUCTION
+:::
 
 # 🏋️ **Pre-Class Assignment**
 
-1.  Read the assigned material (TBA).
+1.  Read the assigned materials.
 
-2.  Solve the following simple problem:
+2.  \[easy\] Look at Table @tbl-expected-util. Calculate the the expected utilities for each action if $p=0.25$.
 
-    -   Imagine a coordination problem between two firms deciding whether to invest in a new market. Create a simple payoff matrix and identify the Nash equilibrium.
+3.  \[easy\] Model a decision situation
 
-    -   Then, modify the problem by introducing **bounded rationality** (e.g., one firm lacks full information). How does the equilibrium change?
+4.  Remember the model of relative deprivation [@boudon1977]? There are only: costs $c$ if somebody applies for a promotion, benefits $b$ for they get the promotion, and the relative share of free positions $f$, all of these information are being common knowledge.
 
-3.  Bring your results and any questions to the seminar.
+    1.  \[easy\] Model this situation with $n=2$ and $f=.5$.
 
-# 🔖 **Suggested Readings**
+    2.  \[hard\] Try to derive the general function of p for any $n$ and $f$ .
 
--   Osborne, M.J. (2004). *An Introduction to Game Theory* – Chapter 2
-
--   Gigerenzer, G. & Selten, R. (2002). *Bounded Rationality: The Adaptive Toolbox* – Introductory chapter
+5.  Bring your results and any questions to the seminar.
