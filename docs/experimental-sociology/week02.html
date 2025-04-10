@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-04-09">
+<meta name="dcterms.date" content="2025-04-10">
 
 <title>Experimental Sociology - Week 02 – ES &amp; CSS</title>
 <style>
@@ -5141,7 +5141,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">2025-04-09</p>
+        <p class="date">2025-04-10</p>
       </div>
     </div>
     
@@ -5423,15 +5423,15 @@ Note
 </section>
 <section id="utility" class="level3">
 <h3 class="anchored" data-anchor-id="utility">Utility</h3>
-<p>A <strong>utility function</strong> assigns numerical values to outcomes while preserving the actor’s preference ranking. Once we introduce <strong>expected utility</strong>, this representation will help us systematically predict choices. We say that a utility function (u) <strong>represents</strong> a preference relation () if, for all (x, y X),</p>
+<p>A <strong>utility function</strong> assigns numerical values to outcomes while preserving the actor’s preference ranking. We say that a utility function <span class="math inline">\(u\)</span> <strong>represents</strong> a ordinal preference relation <span class="math inline">\(\succsim\)</span> if, for all <span class="math inline">\(x,y \in X\)</span> hold:</p>
 <p><span class="math display">\[
 x\succsim y \Leftrightarrow u(x) \geq u(y)
 \]</span></p>
-<p>In other words, whenever <span class="math inline">\(x\)</span> is at least as preferred as <span class="math inline">\(y\)</span>, uu must assign to <span class="math inline">\(x\)</span> a value at least as large as the one it assigns to <span class="math inline">\(y\)</span>. In Table <a href="#tbl-utility-ordinal" class="quarto-xref">Table 2</a> we see that the preferences <span class="math inline">\(x\succ y \succ z\)</span> are represented by the utility function <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span>, but not by <span class="math inline">\(h\)</span> as <span class="math inline">\(h(y)&gt;h(x)\)</span> contradicts with <span class="math inline">\(x\succ y\)</span>.</p>
+<p>In other words, whenever <span class="math inline">\(x\)</span> is at least as preferred as <span class="math inline">\(y\)</span>, <span class="math inline">\(u\)</span> must assign to <span class="math inline">\(x\)</span> a value at least as large as the one it assigns to <span class="math inline">\(y\)</span>. In Table <a href="#tbl-utility-ordinal" class="quarto-xref">Table 2</a> we see that the ordinal preferences <span class="math inline">\(x\succ y \succ z\)</span> are represented by the utility function <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span>, but not by <span class="math inline">\(h\)</span> as <span class="math inline">\(h(y)&gt;h(x)\)</span> contradicts with <span class="math inline">\(x\succ y\)</span>.</p>
 <div id="tbl-utility-ordinal" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-utility-ordinal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table 2: While <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> represent the given preferences, <span class="math inline">\(h\)</span> does not.
+Table 2: Ordinal preferences and thus ordinal utility functions. While <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> represent the given preferences, <span class="math inline">\(h\)</span> does not.
 </figcaption>
 <div aria-describedby="tbl-utility-ordinal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
@@ -5480,15 +5480,15 @@ Note
 <div class="callout-body-container callout-body">
 <ul>
 <li>A <strong>utility function</strong> assigns numerical values to any possible outcome. These numbers represent an actors preferences.</li>
-<li></li>
 </ul>
 </div>
 </div>
 </section>
 <section id="expected-utility" class="level3">
 <h3 class="anchored" data-anchor-id="expected-utility">Expected Utility</h3>
-<p>When decisions involve <strong>uncertainty</strong>—that is, more than one possible state of the world can occur with varying likelihoods—we apply the concept of <strong>expected utility</strong>. This approach extends the idea of a <strong>utility function</strong> from deterministic outcomes (under certainty) to <strong>probabilistic mixtures</strong> of outcomes, commonly referred to as <strong>lotteries</strong>.</p>
-<p>Consider the example in Table <a href="#tbl-expected-util" class="quarto-xref">Table 3</a>, where the action “summer clothes” might result in the consequence (x_{S,S}) (summer clothes + sunny weather) with probability (p), or (x_{S,R}) (summer clothes + rainy weather) with probability (1 - p). Since the actor cannot know for sure which state of the world will occur, they face a lottery: a <strong>random</strong> outcome yielding utility 10 in sunny weather or 4 in rainy weather.</p>
+<p>When decisions involve <strong>uncertainty</strong>, that is, more than one possible state of the world can occur with varying likelihoods, we apply the concept of <strong>expected utility</strong>. This approach extends the idea of a <strong>utility function</strong> from deterministic outcomes (under certainty) to <strong>probabilistic mixtures</strong> of outcomes, commonly referred to as <strong>lotteries</strong>.</p>
+<p>We represent a <strong>lottery</strong> as <span class="math inline">\([p_1,x_1;p_2,x_2]\)</span>. This means that if the lottery is chosen, the actor receives outcome <span class="math inline">\(x_1\)</span> with probability <span class="math inline">\(p_1\)</span>, and outcome <span class="math inline">\(x_2\)</span> with probability <span class="math inline">\(p_2\)</span>. Since probabilities must always add up to 1, in this case <span class="math inline">\(p_2=1-p_1\)</span>. In this way, choosing an action in an uncertain environment can be interpreted as selecting a lottery over possible consequences, each defined by the combination of an action and the state of the world that materializes. This framework enables us to evaluate and compare actions by considering the expected value of their outcomes.</p>
+<p>Consider the example in Table <a href="#tbl-expected-util" class="quarto-xref">Table 3</a>, where the action “summer clothes” might result in the consequence <span class="math inline">\(x_{S,S}\)</span> (summer clothes + sunny weather) with probability <span class="math inline">\(p\)</span>, or <span class="math inline">\(x_{S,R}\)</span> (summer clothes + rainy weather) with probability <span class="math inline">\(1 - p\)</span>. Since the actor cannot know for sure which state of the world will occur, they face a lottery: a <strong>random</strong> outcome yielding utility 10 in sunny weather or 4 in rainy weather.</p>
 <div id="tbl-expected-util" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-expected-util-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -5497,15 +5497,15 @@ Table 3: Assumed preferences for a fictitious scenario.
 <div aria-describedby="tbl-expected-util-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 44%">
-<col style="width: 27%">
-<col style="width: 27%">
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
 </colgroup>
 <tbody>
 <tr class="odd">
 <td><strong>actions \ states of the world</strong></td>
-<td><strong>sunny weather ($p$)</strong></td>
-<td><strong>rainy weather ($1-p$)</strong></td>
+<td><strong>sunny weather</strong> <span class="math inline">\((p)\)</span></td>
+<td><strong>rainy weather</strong> <span class="math inline">\((1-p)\)</span></td>
 </tr>
 <tr class="even">
 <td><strong>summer clothes</strong></td>
@@ -5688,7 +5688,7 @@ Tversky, Amos, and Daniel Kahneman. 1981. <span>“The Framing of Decisions and 
 <ol>
 <li id="fn1"><p>Decision theory is sometimes referred to as <em>parametric decision theory</em>. Game theory, on the other hand, could actually be called <em>strategic decision theory</em>, since outcomes depend significantly on strategic considerations and the choices of others. Despite this, game theory retains its playful name from its origins in analyzing parlor games <span class="citation" data-cites="neumann1944">(<a href="#ref-neumann1944" role="doc-biblioref">Neumann and Morgenstern 1944</a>)</span>. A fitting testament to how tradition (and a dash of path dependence) can leave a lasting imprint on terminology.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>In addition, if we fail to rule out such cases, our model may produce no predictions at all, effectively rendering it uninformative. I personally prefer a model that risks being wrong over one that cannot generate any predictions, because an incorrect but testable model can always be refined and improved.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Technically the “+” is somewhat troublesome in this context, since we cannot really “add” consequences <span class="math inline">\(x\)</span> and <span class="math inline">\(z\)</span> simply together. It is more like with probability <span class="math inline">\(p\)</span> the actor gets the consequence <span class="math inline">\(x\)</span> and with <span class="math inline">\((1-p)\)</span> the actor gets <span class="math inline">\(z\)</span>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Technically the “+” is somewhat troublesome in this context, since we cannot really “add” consequences <span class="math inline">\(x\)</span> and <span class="math inline">\(z\)</span> simply together. Basically we have here a lottery, where one gets with probability <span class="math inline">\(p\)</span> consequence <span class="math inline">\(x\)</span> and with <span class="math inline">\((1-p)\)</span> the consequence <span class="math inline">\(z\)</span> (see lotteries). The same is true for the next axiom (IIA).<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section><section class="quarto-appendix-contents" id="quarto-copyright"><h2 class="anchored quarto-appendix-heading">Copyright</h2><div class="quarto-appendix-contents"><div>Copyright Sascha Grehl, 2025. All Rights Reserved</div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -6338,19 +6338,19 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>**Independence of Irrelevant Alternatives** (**IIA**): If $x \succsim y$ holds, it must also hold $p \cdot x + (1-p) \cdot z \succsim  p \cdot y + (1-p) \cdot z$ for each $z$ and $p \in (0,1)$. That is the irrelevant alternative $z$ should not influence the existing preference $x \succsim y$ because it . This axiom is especially relevant for decisions under **risk** or **uncertainty**.</span>
 <span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a><span class="ot">[^3]: </span>Technically the &quot;+&quot; is somewhat troublesome in this context, since we cannot really &quot;add&quot; consequences $x$ and $z$ simply together. It is more like with probability $p$ the actor gets the consequence $x$ and with $(1-p)$ the actor gets $z$.</span>
+<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a><span class="ot">[^3]: </span>Technically the &quot;+&quot; is somewhat troublesome in this context, since we cannot really &quot;add&quot; consequences $x$ and $z$ simply together. Basically we have here a lottery, where one gets with probability $p$ consequence $x$ and with $(1-p)$ the consequence $z$ (see lotteries). The same is true for the next axiom (IIA).</span>
 <span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a>When preferences satisfy **completeness** and **transitivity**, we say the actor has an **ordinal preference ordering**, which is sufficient for consistent decision-making in situation under certainty. If we also assume the **continuity and IIA** axiom, we can achieve a **cardinal preference ordering**, allowing us to quantify not only the **rank** of preferences but also their **relative strength**. This lays the groundwork for using a expected utility function, which can capture preferences for a lottery of uncertain events.</span>
 <span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a><span class="fu">### Utility</span></span>
 <span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a>A **utility function** assigns numerical values to outcomes while preserving the actor’s preference ranking. Once we introduce **expected utility**, this representation will help us systematically predict choices. We say that a utility function (u) **represents** a preference relation (\succsim) if, for all (x, y \in X),</span>
+<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a>A **utility function** assigns numerical values to outcomes while preserving the actor’s preference ranking. We say that a utility function $u$ **represents** a ordinal preference relation $\succsim$ if, for all $x,y \in X$ hold:</span>
 <span id="cb1-187"><a href="#cb1-187" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-188"><a href="#cb1-188" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb1-189"><a href="#cb1-189" aria-hidden="true" tabindex="-1"></a>x\succsim y \Leftrightarrow u(x) \geq u(y)</span>
 <span id="cb1-190"><a href="#cb1-190" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb1-191"><a href="#cb1-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-192"><a href="#cb1-192" aria-hidden="true" tabindex="-1"></a>In other words, whenever $x$ is at least as preferred as $y$, uu must assign to $x$ a value at least as large as the one it assigns to $y$. In Table @tbl-utility-ordinal we see that the preferences $x\succ y \succ z$ are represented by the utility function $u$ and $v$, but not by $h$ as $h(y)&gt;h(x)$ contradicts with $x\succ y$.</span>
+<span id="cb1-192"><a href="#cb1-192" aria-hidden="true" tabindex="-1"></a>In other words, whenever $x$ is at least as preferred as $y$, $u$ must assign to $x$ a value at least as large as the one it assigns to $y$. In Table @tbl-utility-ordinal we see that the ordinal preferences $x\succ y \succ z$ are represented by the utility function $u$ and $v$, but not by $h$ as $h(y)&gt;h(x)$ contradicts with $x\succ y$.</span>
 <span id="cb1-193"><a href="#cb1-193" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-194"><a href="#cb1-194" aria-hidden="true" tabindex="-1"></a>| Assume $x\succ y \succ z$ | $x$ | $y$ | $z$   |</span>
 <span id="cb1-195"><a href="#cb1-195" aria-hidden="true" tabindex="-1"></a>|---------------------------|-----|-----|-------|</span>
@@ -6358,112 +6358,113 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-197"><a href="#cb1-197" aria-hidden="true" tabindex="-1"></a>| $v(\cdot)$                | 42  | 11  | -3.14 |</span>
 <span id="cb1-198"><a href="#cb1-198" aria-hidden="true" tabindex="-1"></a>| $h(\cdot)$                | 1   | 2   | 0     |</span>
 <span id="cb1-199"><a href="#cb1-199" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-200"><a href="#cb1-200" aria-hidden="true" tabindex="-1"></a>: While $u$ and $v$ represent the given preferences, $h$ does not. {#tbl-utility-ordinal}</span>
+<span id="cb1-200"><a href="#cb1-200" aria-hidden="true" tabindex="-1"></a>: Ordinal preferences and thus ordinal utility functions. While $u$ and $v$ represent the given preferences, $h$ does not. {#tbl-utility-ordinal}</span>
 <span id="cb1-201"><a href="#cb1-201" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-202"><a href="#cb1-202" aria-hidden="true" tabindex="-1"></a>With a utility function in hand, we have all the tools needed to analyze **decision situations under certainty**, where there is only one possible state of the world. However, if **uncertainty** exists (i.e., more than one possible state can occur), we need to introduce additional concepts before we can fully analyze those scenarios.</span>
 <span id="cb1-203"><a href="#cb1-203" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-204"><a href="#cb1-204" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
 <span id="cb1-205"><a href="#cb1-205" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>A **utility function** assigns numerical values to any possible outcome. These numbers represent an actors preferences.</span>
-<span id="cb1-206"><a href="#cb1-206" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span></span>
-<span id="cb1-207"><a href="#cb1-207" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-208"><a href="#cb1-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-209"><a href="#cb1-209" aria-hidden="true" tabindex="-1"></a><span class="fu">### Expected Utility</span></span>
-<span id="cb1-210"><a href="#cb1-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-211"><a href="#cb1-211" aria-hidden="true" tabindex="-1"></a>When decisions involve **uncertainty**—that is, more than one possible state of the world can occur with varying likelihoods—we apply the concept of **expected utility**. This approach extends the idea of a **utility function** from deterministic outcomes (under certainty) to **probabilistic mixtures** of outcomes, commonly referred to as **lotteries**.</span>
-<span id="cb1-212"><a href="#cb1-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-213"><a href="#cb1-213" aria-hidden="true" tabindex="-1"></a>Consider the example in Table @tbl-expected-util, where the action “summer clothes” might result in the consequence (x<span class="sc">\_</span>{S,S}) (summer clothes + sunny weather) with probability (p), or (x<span class="sc">\_</span>{S,R}) (summer clothes + rainy weather) with probability (1 - p). Since the actor cannot know for sure which state of the world will occur, they face a lottery: a **random** outcome yielding utility 10 in sunny weather or 4 in rainy weather.</span>
-<span id="cb1-214"><a href="#cb1-214" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-215"><a href="#cb1-215" aria-hidden="true" tabindex="-1"></a>|  |  |  |</span>
-<span id="cb1-216"><a href="#cb1-216" aria-hidden="true" tabindex="-1"></a>|--------------------------------|--------------------|--------------------|</span>
-<span id="cb1-217"><a href="#cb1-217" aria-hidden="true" tabindex="-1"></a>| **actions \\ states of the world** | **sunny weather (\$p\$)** | **rainy weather (\$1-p\$)** |</span>
-<span id="cb1-218"><a href="#cb1-218" aria-hidden="true" tabindex="-1"></a>| **summer clothes** | $u(x_{S,S})=10$ | $u(x_{S,R})=4$ |</span>
-<span id="cb1-219"><a href="#cb1-219" aria-hidden="true" tabindex="-1"></a>| **winter clothes** | $u(x_{W,S})=2$ | $u(x_{S,S})=3$ |</span>
-<span id="cb1-220"><a href="#cb1-220" aria-hidden="true" tabindex="-1"></a>| **rain clothes** | $u(x_{S,S})=5$ | $u(x_{S,S})=8$ |</span>
-<span id="cb1-221"><a href="#cb1-221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-222"><a href="#cb1-222" aria-hidden="true" tabindex="-1"></a>: Assumed preferences for a fictitious scenario. {#tbl-expected-util}</span>
-<span id="cb1-223"><a href="#cb1-223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-224"><a href="#cb1-224" aria-hidden="true" tabindex="-1"></a>In order to evaluate now how good this action is we must calculate the expected utility. Formally, suppose an actor faces a set of possible **states of the world** ($\omega \in \Omega$ ), each occurring with probability $p(\omega)$. The **expected utility** $EU$ of choosing $a$ is then:</span>
-<span id="cb1-225"><a href="#cb1-225" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-226"><a href="#cb1-226" aria-hidden="true" tabindex="-1"></a>$$ \mathrm{EU}(a) = \sum_{\omega \in \Omega} p(\omega) \cdot u\bigl(x_{a,\omega}\bigr)$$</span>
-<span id="cb1-227"><a href="#cb1-227" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-228"><a href="#cb1-228" aria-hidden="true" tabindex="-1"></a>::: callout-caution</span>
-<span id="cb1-229"><a href="#cb1-229" aria-hidden="true" tabindex="-1"></a>As noted earlier, **expected utility** relies on **cardinal preferences**, meaning that the four key axioms of rational choice (completeness, transitivity, continuity, and independence) must be satisfied. Under these assumptions, we can define a **von Neumann–Morgenstern (VNM) utility function**, which numerically represents an actor’s preferences in a way that preserves both their ranking and the intensity of those preferences.</span>
-<span id="cb1-230"><a href="#cb1-230" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-231"><a href="#cb1-231" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-232"><a href="#cb1-232" aria-hidden="true" tabindex="-1"></a>This framework provides a **straightforward method** to compare actions under uncertainty. Because each action can be viewed as a **lottery** (a probabilistic combination of outcomes), we say an actor **prefers** action $a$ over action $b$ if and only if:</span>
-<span id="cb1-233"><a href="#cb1-233" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-234"><a href="#cb1-234" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb1-235"><a href="#cb1-235" aria-hidden="true" tabindex="-1"></a>a\succsim b \Leftrightarrow EU(a)\geq EU(b).</span>
-<span id="cb1-236"><a href="#cb1-236" aria-hidden="true" tabindex="-1"></a>$$.</span>
-<span id="cb1-237"><a href="#cb1-237" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-238"><a href="#cb1-238" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
-<span id="cb1-239"><a href="#cb1-239" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>While **utility** describes an actor’s valuation of a single **specific consequence**, **expected utility** extends that concept to an entire **lottery** (i.e., a scenario with multiple possible outcomes and corresponding probabilities). By weighting each potential consequence according to its probability, expected utility provides a way to compare and rank **actions**—not just individual outcomes—under uncertainty.</span>
-<span id="cb1-240"><a href="#cb1-240" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-241"><a href="#cb1-241" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-242"><a href="#cb1-242" aria-hidden="true" tabindex="-1"></a><span class="fu">### Beliefs</span></span>
-<span id="cb1-243"><a href="#cb1-243" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-244"><a href="#cb1-244" aria-hidden="true" tabindex="-1"></a>Finally, **beliefs** refer to the **probability distribution** (,p,) that an actor assigns to each possible **state of the world**. We introduced this concept implicitly in the Expected Utility section. By definition, each probability $p(\omega)$ must be at least zero $(p(\omega) \ge 0)$ , and the sum of all probabilities across every possible state must equal one. That’s typically all we need to assume about beliefs at this stage.</span>
-<span id="cb1-245"><a href="#cb1-245" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-246"><a href="#cb1-246" aria-hidden="true" tabindex="-1"></a><span class="fu">## Analyzing</span></span>
-<span id="cb1-247"><a href="#cb1-247" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-248"><a href="#cb1-248" aria-hidden="true" tabindex="-1"></a>To analyze how an imaginary actor would behave in a given situation, we introduce a **choice function**, denoted by $C(\cdot )$. This function expresses our prediction of which action(s) an actor will choose from a given decision problem $D$, where $D\subset A$ represents the set of feasible actions available in that situation.</span>
-<span id="cb1-249"><a href="#cb1-249" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-250"><a href="#cb1-250" aria-hidden="true" tabindex="-1"></a><span class="fu">### Decisions under certainty</span></span>
-<span id="cb1-251"><a href="#cb1-251" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-252"><a href="#cb1-252" aria-hidden="true" tabindex="-1"></a>When the situation involves **certainty**—that is, there is only one possible state of the world—the actor knows exactly what consequence each action will lead to. In this case, we assume the actor simply chooses the action that results in the highest utility:\</span>
-<span id="cb1-253"><a href="#cb1-253" aria-hidden="true" tabindex="-1"></a>$$ C^\succsim(D) \;=\; \arg\max_{a \in D} \mathrm{EU}(a)=\arg\max_{a \in D} \mathrm{u}(x_{a,\omega}). $$</span>
-<span id="cb1-254"><a href="#cb1-254" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-255"><a href="#cb1-255" aria-hidden="true" tabindex="-1"></a>Since there is no uncertainty, the best action is the one yielding the highest known outcome. For example, if we assume in Table @tbl-expected-util that $p=1$, that is, sunny weather is guaranteed, then the consequence of each action is known with certainty. Under these conditions, we can immediately predict that the actor would choose **summer clothes**, as they yield the highest utility (10) in sunny weather.</span>
-<span id="cb1-256"><a href="#cb1-256" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-257"><a href="#cb1-257" aria-hidden="true" tabindex="-1"></a><span class="fu">### Decisions under uncertainty</span></span>
-<span id="cb1-258"><a href="#cb1-258" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-259"><a href="#cb1-259" aria-hidden="true" tabindex="-1"></a>When the actor faces **uncertainty**—meaning that multiple states of the world are possible, each with its own probability —we use the concept of **expected utility**.</span>
-<span id="cb1-260"><a href="#cb1-260" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-261"><a href="#cb1-261" aria-hidden="true" tabindex="-1"></a>The **Expected Utility Hypothesis** posits that the actor will choose the action that **maximizes expected utility**. Formally:</span>
-<span id="cb1-262"><a href="#cb1-262" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-263"><a href="#cb1-263" aria-hidden="true" tabindex="-1"></a>$$ C^\succsim(D) \;=\; \arg\max_{a \in D} \mathrm{EU}(a). $$</span>
-<span id="cb1-264"><a href="#cb1-264" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-265"><a href="#cb1-265" aria-hidden="true" tabindex="-1"></a>Let us assume in Table @tbl-expected-util that $p=0.5$, so both sunny and rainy weather are equally likely. We then calculate the expected utility for each action:</span>
-<span id="cb1-266"><a href="#cb1-266" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-267"><a href="#cb1-267" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$EU(\text{summer clothes}) = 0.5 \cdot 10 + 0.5 \cdot 4 = 7$,</span>
-<span id="cb1-268"><a href="#cb1-268" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-269"><a href="#cb1-269" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$EU(\text{winter clothes}) = 0.5 \cdot 2 + 0.5 \cdot 3 = 2.5$, and</span>
-<span id="cb1-270"><a href="#cb1-270" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-271"><a href="#cb1-271" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$EU(\text{rain clothes}) = 0.5 \cdot 5 + 0.5 \cdot 8 = 6.5$.</span>
-<span id="cb1-272"><a href="#cb1-272" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-273"><a href="#cb1-273" aria-hidden="true" tabindex="-1"></a>In this case, the actor would choose summer clothes, since that action yields the highest expected utility.</span>
-<span id="cb1-274"><a href="#cb1-274" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-275"><a href="#cb1-275" aria-hidden="true" tabindex="-1"></a>Note that, the use of numerical values to represent preferences sometimes draws criticism. Critics argue that we cannot realistically measure (nor can an outside observer precisely know) whether someone values one outcome at, say, 4 versus 3. This appears to impose a level of detail that is often unattainable in real-world studies. That critique is not unwarranted. However, as we will see later, in the vast majority of cases, precise numerical assessments of preferences are unnecessary. Even a rough ordinal understanding (e.g., which outcome is preferred over which) is sufficient for deriving most hypotheses and making meaningful predictions in practice.</span>
-<span id="cb1-276"><a href="#cb1-276" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-277"><a href="#cb1-277" aria-hidden="true" tabindex="-1"></a>For example, we can analyze how changing the probability $p$ affects the actor’s decision. If $p$ increases, making sunny weather more likely, the expected utility of wearing **summer clothes** rises. Conversely, if decreases, making rainy weather more probable, the expected utility of wearing **rain clothes** becomes more attractive.</span>
-<span id="cb1-278"><a href="#cb1-278" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-279"><a href="#cb1-279" aria-hidden="true" tabindex="-1"></a>In this way, even simple models can offer powerful insights into how beliefs and preferences shape decision-making.</span>
-<span id="cb1-280"><a href="#cb1-280" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-281"><a href="#cb1-281" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
-<span id="cb1-282"><a href="#cb1-282" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>In short, decision-making under **certainty** is about picking the action that leads to the best known outcome, while decision-making under **uncertainty** is about choosing the action with the highest **expected utility**—a weighted average of possible outcomes, according to their probabilities.</span>
-<span id="cb1-283"><a href="#cb1-283" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-284"><a href="#cb1-284" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-285"><a href="#cb1-285" aria-hidden="true" tabindex="-1"></a><span class="fu"># Game Theory</span></span>
-<span id="cb1-286"><a href="#cb1-286" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-287"><a href="#cb1-287" aria-hidden="true" tabindex="-1"></a>::: callout-warning</span>
-<span id="cb1-288"><a href="#cb1-288" aria-hidden="true" tabindex="-1"></a>UNDER CONSTRUCTION</span>
-<span id="cb1-289"><a href="#cb1-289" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-290"><a href="#cb1-290" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-291"><a href="#cb1-291" aria-hidden="true" tabindex="-1"></a><span class="fu"># 🏋️ **Pre-Class Assignment**</span></span>
-<span id="cb1-292"><a href="#cb1-292" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-293"><a href="#cb1-293" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Read the assigned materials.</span>
-<span id="cb1-294"><a href="#cb1-294" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-295"><a href="#cb1-295" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span><span class="sc">\[</span>easy<span class="sc">\]</span> Look at Table @tbl-expected-util. Calculate the the expected utilities for each action if $p=0.25$.</span>
-<span id="cb1-296"><a href="#cb1-296" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-297"><a href="#cb1-297" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span><span class="sc">\[</span>easy<span class="sc">\]</span> Model a decision situation</span>
-<span id="cb1-298"><a href="#cb1-298" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-299"><a href="#cb1-299" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>Remember the model of relative deprivation <span class="co">[</span><span class="ot">@boudon1977</span><span class="co">]</span>? There are only: costs $c$ if somebody applies for a promotion, benefits $b$ for they get the promotion, and the relative share of free positions $f$, all of these information are being common knowledge.</span>
-<span id="cb1-300"><a href="#cb1-300" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-301"><a href="#cb1-301" aria-hidden="true" tabindex="-1"></a><span class="ss">    1.  </span><span class="sc">\[</span>easy<span class="sc">\]</span> Model this situation with $n=2$ and $f=.5$.</span>
-<span id="cb1-302"><a href="#cb1-302" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-303"><a href="#cb1-303" aria-hidden="true" tabindex="-1"></a><span class="ss">    2.  </span><span class="sc">\[</span>hard<span class="sc">\]</span> Try to derive the general function of p for any $n$ and $f$ .</span>
-<span id="cb1-304"><a href="#cb1-304" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-305"><a href="#cb1-305" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>Bring your results and any questions to the seminar.</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></pre></div>
+<span id="cb1-206"><a href="#cb1-206" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-207"><a href="#cb1-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-208"><a href="#cb1-208" aria-hidden="true" tabindex="-1"></a><span class="fu">### Expected Utility</span></span>
+<span id="cb1-209"><a href="#cb1-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-210"><a href="#cb1-210" aria-hidden="true" tabindex="-1"></a>When decisions involve **uncertainty**, that is, more than one possible state of the world can occur with varying likelihoods, we apply the concept of **expected utility**. This approach extends the idea of a **utility function** from deterministic outcomes (under certainty) to **probabilistic mixtures** of outcomes, commonly referred to as **lotteries**.</span>
+<span id="cb1-211"><a href="#cb1-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-212"><a href="#cb1-212" aria-hidden="true" tabindex="-1"></a>We represent a **lottery** as $<span class="co">[</span><span class="ot">p_1,x_1;p_2,x_2</span><span class="co">]</span>$. This means that if the lottery is chosen, the actor receives outcome $x_1$ with probability $p_1$, and outcome $x_2$ with probability $p_2$. Since probabilities must always add up to 1, in this case $p_2=1-p_1$. In this way, choosing an action in an uncertain environment can be interpreted as selecting a lottery over possible consequences, each defined by the combination of an action and the state of the world that materializes. This framework enables us to evaluate and compare actions by considering the expected value of their outcomes.</span>
+<span id="cb1-213"><a href="#cb1-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-214"><a href="#cb1-214" aria-hidden="true" tabindex="-1"></a>Consider the example in Table @tbl-expected-util, where the action “summer clothes” might result in the consequence $x_{S,S}$ (summer clothes + sunny weather) with probability $p$, or $x_{S,R}$ (summer clothes + rainy weather) with probability $1 - p$. Since the actor cannot know for sure which state of the world will occur, they face a lottery: a **random** outcome yielding utility 10 in sunny weather or 4 in rainy weather.</span>
+<span id="cb1-215"><a href="#cb1-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-216"><a href="#cb1-216" aria-hidden="true" tabindex="-1"></a>|  |  |  |</span>
+<span id="cb1-217"><a href="#cb1-217" aria-hidden="true" tabindex="-1"></a>|----|----|----|</span>
+<span id="cb1-218"><a href="#cb1-218" aria-hidden="true" tabindex="-1"></a>| **actions \\ states of the world** | **sunny weather** $(p)$ | **rainy weather** $(1-p)$ |</span>
+<span id="cb1-219"><a href="#cb1-219" aria-hidden="true" tabindex="-1"></a>| **summer clothes** | $u(x_{S,S})=10$ | $u(x_{S,R})=4$ |</span>
+<span id="cb1-220"><a href="#cb1-220" aria-hidden="true" tabindex="-1"></a>| **winter clothes** | $u(x_{W,S})=2$ | $u(x_{S,S})=3$ |</span>
+<span id="cb1-221"><a href="#cb1-221" aria-hidden="true" tabindex="-1"></a>| **rain clothes** | $u(x_{S,S})=5$ | $u(x_{S,S})=8$ |</span>
+<span id="cb1-222"><a href="#cb1-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-223"><a href="#cb1-223" aria-hidden="true" tabindex="-1"></a>: Assumed preferences for a fictitious scenario. {#tbl-expected-util}</span>
+<span id="cb1-224"><a href="#cb1-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-225"><a href="#cb1-225" aria-hidden="true" tabindex="-1"></a>In order to evaluate now how good this action is we must calculate the expected utility. Formally, suppose an actor faces a set of possible **states of the world** ($\omega \in \Omega$ ), each occurring with probability $p(\omega)$. The **expected utility** $EU$ of choosing $a$ is then:</span>
+<span id="cb1-226"><a href="#cb1-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-227"><a href="#cb1-227" aria-hidden="true" tabindex="-1"></a>$$ \mathrm{EU}(a) = \sum_{\omega \in \Omega} p(\omega) \cdot u\bigl(x_{a,\omega}\bigr)$$</span>
+<span id="cb1-228"><a href="#cb1-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-229"><a href="#cb1-229" aria-hidden="true" tabindex="-1"></a>::: callout-caution</span>
+<span id="cb1-230"><a href="#cb1-230" aria-hidden="true" tabindex="-1"></a>As noted earlier, **expected utility** relies on **cardinal preferences**, meaning that the four key axioms of rational choice (completeness, transitivity, continuity, and independence) must be satisfied. Under these assumptions, we can define a **von Neumann–Morgenstern (VNM) utility function**, which numerically represents an actor’s preferences in a way that preserves both their ranking and the intensity of those preferences.</span>
+<span id="cb1-231"><a href="#cb1-231" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-232"><a href="#cb1-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-233"><a href="#cb1-233" aria-hidden="true" tabindex="-1"></a>This framework provides a **straightforward method** to compare actions under uncertainty. Because each action can be viewed as a **lottery** (a probabilistic combination of outcomes), we say an actor **prefers** action $a$ over action $b$ if and only if:</span>
+<span id="cb1-234"><a href="#cb1-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-235"><a href="#cb1-235" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-236"><a href="#cb1-236" aria-hidden="true" tabindex="-1"></a>a\succsim b \Leftrightarrow EU(a)\geq EU(b).</span>
+<span id="cb1-237"><a href="#cb1-237" aria-hidden="true" tabindex="-1"></a>$$.</span>
+<span id="cb1-238"><a href="#cb1-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-239"><a href="#cb1-239" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
+<span id="cb1-240"><a href="#cb1-240" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>While **utility** describes an actor’s valuation of a single **specific consequence**, **expected utility** extends that concept to an entire **lottery** (i.e., a scenario with multiple possible outcomes and corresponding probabilities). By weighting each potential consequence according to its probability, expected utility provides a way to compare and rank **actions**—not just individual outcomes—under uncertainty.</span>
+<span id="cb1-241"><a href="#cb1-241" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-242"><a href="#cb1-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-243"><a href="#cb1-243" aria-hidden="true" tabindex="-1"></a><span class="fu">### Beliefs</span></span>
+<span id="cb1-244"><a href="#cb1-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-245"><a href="#cb1-245" aria-hidden="true" tabindex="-1"></a>Finally, **beliefs** refer to the **probability distribution** (,p,) that an actor assigns to each possible **state of the world**. We introduced this concept implicitly in the Expected Utility section. By definition, each probability $p(\omega)$ must be at least zero $(p(\omega) \ge 0)$ , and the sum of all probabilities across every possible state must equal one. That’s typically all we need to assume about beliefs at this stage.</span>
+<span id="cb1-246"><a href="#cb1-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-247"><a href="#cb1-247" aria-hidden="true" tabindex="-1"></a><span class="fu">## Analyzing</span></span>
+<span id="cb1-248"><a href="#cb1-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-249"><a href="#cb1-249" aria-hidden="true" tabindex="-1"></a>To analyze how an imaginary actor would behave in a given situation, we introduce a **choice function**, denoted by $C(\cdot )$. This function expresses our prediction of which action(s) an actor will choose from a given decision problem $D$, where $D\subset A$ represents the set of feasible actions available in that situation.</span>
+<span id="cb1-250"><a href="#cb1-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-251"><a href="#cb1-251" aria-hidden="true" tabindex="-1"></a><span class="fu">### Decisions under certainty</span></span>
+<span id="cb1-252"><a href="#cb1-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-253"><a href="#cb1-253" aria-hidden="true" tabindex="-1"></a>When the situation involves **certainty**—that is, there is only one possible state of the world—the actor knows exactly what consequence each action will lead to. In this case, we assume the actor simply chooses the action that results in the highest utility:\</span>
+<span id="cb1-254"><a href="#cb1-254" aria-hidden="true" tabindex="-1"></a>$$ C^\succsim(D) \;=\; \arg\max_{a \in D} \mathrm{EU}(a)=\arg\max_{a \in D} \mathrm{u}(x_{a,\omega}). $$</span>
+<span id="cb1-255"><a href="#cb1-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-256"><a href="#cb1-256" aria-hidden="true" tabindex="-1"></a>Since there is no uncertainty, the best action is the one yielding the highest known outcome. For example, if we assume in Table @tbl-expected-util that $p=1$, that is, sunny weather is guaranteed, then the consequence of each action is known with certainty. Under these conditions, we can immediately predict that the actor would choose **summer clothes**, as they yield the highest utility (10) in sunny weather.</span>
+<span id="cb1-257"><a href="#cb1-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-258"><a href="#cb1-258" aria-hidden="true" tabindex="-1"></a><span class="fu">### Decisions under uncertainty</span></span>
+<span id="cb1-259"><a href="#cb1-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-260"><a href="#cb1-260" aria-hidden="true" tabindex="-1"></a>When the actor faces **uncertainty**—meaning that multiple states of the world are possible, each with its own probability —we use the concept of **expected utility**.</span>
+<span id="cb1-261"><a href="#cb1-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-262"><a href="#cb1-262" aria-hidden="true" tabindex="-1"></a>The **Expected Utility Hypothesis** posits that the actor will choose the action that **maximizes expected utility**. Formally:</span>
+<span id="cb1-263"><a href="#cb1-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-264"><a href="#cb1-264" aria-hidden="true" tabindex="-1"></a>$$ C^\succsim(D) \;=\; \arg\max_{a \in D} \mathrm{EU}(a). $$</span>
+<span id="cb1-265"><a href="#cb1-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-266"><a href="#cb1-266" aria-hidden="true" tabindex="-1"></a>Let us assume in Table @tbl-expected-util that $p=0.5$, so both sunny and rainy weather are equally likely. We then calculate the expected utility for each action:</span>
+<span id="cb1-267"><a href="#cb1-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-268"><a href="#cb1-268" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$EU(\text{summer clothes}) = 0.5 \cdot 10 + 0.5 \cdot 4 = 7$,</span>
+<span id="cb1-269"><a href="#cb1-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-270"><a href="#cb1-270" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$EU(\text{winter clothes}) = 0.5 \cdot 2 + 0.5 \cdot 3 = 2.5$, and</span>
+<span id="cb1-271"><a href="#cb1-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-272"><a href="#cb1-272" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$EU(\text{rain clothes}) = 0.5 \cdot 5 + 0.5 \cdot 8 = 6.5$.</span>
+<span id="cb1-273"><a href="#cb1-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-274"><a href="#cb1-274" aria-hidden="true" tabindex="-1"></a>In this case, the actor would choose summer clothes, since that action yields the highest expected utility.</span>
+<span id="cb1-275"><a href="#cb1-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-276"><a href="#cb1-276" aria-hidden="true" tabindex="-1"></a>Note that, the use of numerical values to represent preferences sometimes draws criticism. Critics argue that we cannot realistically measure (nor can an outside observer precisely know) whether someone values one outcome at, say, 4 versus 3. This appears to impose a level of detail that is often unattainable in real-world studies. That critique is not unwarranted. However, as we will see later, in the vast majority of cases, precise numerical assessments of preferences are unnecessary. Even a rough ordinal understanding (e.g., which outcome is preferred over which) is sufficient for deriving most hypotheses and making meaningful predictions in practice.</span>
+<span id="cb1-277"><a href="#cb1-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-278"><a href="#cb1-278" aria-hidden="true" tabindex="-1"></a>For example, we can analyze how changing the probability $p$ affects the actor’s decision. If $p$ increases, making sunny weather more likely, the expected utility of wearing **summer clothes** rises. Conversely, if decreases, making rainy weather more probable, the expected utility of wearing **rain clothes** becomes more attractive.</span>
+<span id="cb1-279"><a href="#cb1-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-280"><a href="#cb1-280" aria-hidden="true" tabindex="-1"></a>In this way, even simple models can offer powerful insights into how beliefs and preferences shape decision-making.</span>
+<span id="cb1-281"><a href="#cb1-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-282"><a href="#cb1-282" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
+<span id="cb1-283"><a href="#cb1-283" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>In short, decision-making under **certainty** is about picking the action that leads to the best known outcome, while decision-making under **uncertainty** is about choosing the action with the highest **expected utility**—a weighted average of possible outcomes, according to their probabilities.</span>
+<span id="cb1-284"><a href="#cb1-284" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-285"><a href="#cb1-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-286"><a href="#cb1-286" aria-hidden="true" tabindex="-1"></a><span class="fu"># Game Theory</span></span>
+<span id="cb1-287"><a href="#cb1-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-288"><a href="#cb1-288" aria-hidden="true" tabindex="-1"></a>::: callout-warning</span>
+<span id="cb1-289"><a href="#cb1-289" aria-hidden="true" tabindex="-1"></a>UNDER CONSTRUCTION</span>
+<span id="cb1-290"><a href="#cb1-290" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-291"><a href="#cb1-291" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-292"><a href="#cb1-292" aria-hidden="true" tabindex="-1"></a><span class="fu"># 🏋️ **Pre-Class Assignment**</span></span>
+<span id="cb1-293"><a href="#cb1-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-294"><a href="#cb1-294" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Read the assigned materials.</span>
+<span id="cb1-295"><a href="#cb1-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-296"><a href="#cb1-296" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span><span class="sc">\[</span>easy<span class="sc">\]</span> Look at Table @tbl-expected-util. Calculate the the expected utilities for each action if $p=0.25$.</span>
+<span id="cb1-297"><a href="#cb1-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-298"><a href="#cb1-298" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span><span class="sc">\[</span>easy<span class="sc">\]</span> Model a decision situation</span>
+<span id="cb1-299"><a href="#cb1-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-300"><a href="#cb1-300" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>Remember the model of relative deprivation <span class="co">[</span><span class="ot">@boudon1977</span><span class="co">]</span>? There are only: costs $c$ if somebody applies for a promotion, benefits $b$ for they get the promotion, and the relative share of free positions $f$, all of these information are being common knowledge.</span>
+<span id="cb1-301"><a href="#cb1-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-302"><a href="#cb1-302" aria-hidden="true" tabindex="-1"></a><span class="ss">    1.  </span><span class="sc">\[</span>easy<span class="sc">\]</span> Model this situation with $n=2$ and $f=.5$.</span>
+<span id="cb1-303"><a href="#cb1-303" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-304"><a href="#cb1-304" aria-hidden="true" tabindex="-1"></a><span class="ss">    2.  </span><span class="sc">\[</span>hard<span class="sc">\]</span> Try to derive the general function of p for any $n$ and $f$ .</span>
+<span id="cb1-305"><a href="#cb1-305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-306"><a href="#cb1-306" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>Bring your results and any questions to the seminar.</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

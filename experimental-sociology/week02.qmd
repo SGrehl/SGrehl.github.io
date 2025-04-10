@@ -177,19 +177,19 @@ As we will see when we come to analyze a social situation, two axioms are very i
 
 4.  **Independence of Irrelevant Alternatives** (**IIA**): If $x \succsim y$ holds, it must also hold $p \cdot x + (1-p) \cdot z \succsim  p \cdot y + (1-p) \cdot z$ for each $z$ and $p \in (0,1)$. That is the irrelevant alternative $z$ should not influence the existing preference $x \succsim y$ because it . This axiom is especially relevant for decisions under **risk** or **uncertainty**.
 
-[^3]: Technically the "+" is somewhat troublesome in this context, since we cannot really "add" consequences $x$ and $z$ simply together. It is more like with probability $p$ the actor gets the consequence $x$ and with $(1-p)$ the actor gets $z$.
+[^3]: Technically the "+" is somewhat troublesome in this context, since we cannot really "add" consequences $x$ and $z$ simply together. Basically we have here a lottery, where one gets with probability $p$ consequence $x$ and with $(1-p)$ the consequence $z$ (see lotteries). The same is true for the next axiom (IIA).
 
 When preferences satisfy **completeness** and **transitivity**, we say the actor has an **ordinal preference ordering**, which is sufficient for consistent decision-making in situation under certainty. If we also assume the **continuity and IIA** axiom, we can achieve a **cardinal preference ordering**, allowing us to quantify not only the **rank** of preferences but also their **relative strength**. This lays the groundwork for using a expected utility function, which can capture preferences for a lottery of uncertain events.
 
 ### Utility
 
-A **utility function** assigns numerical values to outcomes while preserving the actor’s preference ranking. Once we introduce **expected utility**, this representation will help us systematically predict choices. We say that a utility function (u) **represents** a preference relation (\succsim) if, for all (x, y \in X),
+A **utility function** assigns numerical values to outcomes while preserving the actor’s preference ranking. We say that a utility function $u$ **represents** a ordinal preference relation $\succsim$ if, for all $x,y \in X$ hold:
 
 $$
 x\succsim y \Leftrightarrow u(x) \geq u(y)
 $$
 
-In other words, whenever $x$ is at least as preferred as $y$, uu must assign to $x$ a value at least as large as the one it assigns to $y$. In Table @tbl-utility-ordinal we see that the preferences $x\succ y \succ z$ are represented by the utility function $u$ and $v$, but not by $h$ as $h(y)>h(x)$ contradicts with $x\succ y$.
+In other words, whenever $x$ is at least as preferred as $y$, $u$ must assign to $x$ a value at least as large as the one it assigns to $y$. In Table @tbl-utility-ordinal we see that the ordinal preferences $x\succ y \succ z$ are represented by the utility function $u$ and $v$, but not by $h$ as $h(y)>h(x)$ contradicts with $x\succ y$.
 
 | Assume $x\succ y \succ z$ | $x$ | $y$ | $z$   |
 |---------------------------|-----|-----|-------|
@@ -197,24 +197,25 @@ In other words, whenever $x$ is at least as preferred as $y$, uu must assign to 
 | $v(\cdot)$                | 42  | 11  | -3.14 |
 | $h(\cdot)$                | 1   | 2   | 0     |
 
-: While $u$ and $v$ represent the given preferences, $h$ does not. {#tbl-utility-ordinal}
+: Ordinal preferences and thus ordinal utility functions. While $u$ and $v$ represent the given preferences, $h$ does not. {#tbl-utility-ordinal}
 
 With a utility function in hand, we have all the tools needed to analyze **decision situations under certainty**, where there is only one possible state of the world. However, if **uncertainty** exists (i.e., more than one possible state can occur), we need to introduce additional concepts before we can fully analyze those scenarios.
 
 ::: callout-note
 -   A **utility function** assigns numerical values to any possible outcome. These numbers represent an actors preferences.
--   
 :::
 
 ### Expected Utility
 
-When decisions involve **uncertainty**—that is, more than one possible state of the world can occur with varying likelihoods—we apply the concept of **expected utility**. This approach extends the idea of a **utility function** from deterministic outcomes (under certainty) to **probabilistic mixtures** of outcomes, commonly referred to as **lotteries**.
+When decisions involve **uncertainty**, that is, more than one possible state of the world can occur with varying likelihoods, we apply the concept of **expected utility**. This approach extends the idea of a **utility function** from deterministic outcomes (under certainty) to **probabilistic mixtures** of outcomes, commonly referred to as **lotteries**.
 
-Consider the example in Table @tbl-expected-util, where the action “summer clothes” might result in the consequence (x\_{S,S}) (summer clothes + sunny weather) with probability (p), or (x\_{S,R}) (summer clothes + rainy weather) with probability (1 - p). Since the actor cannot know for sure which state of the world will occur, they face a lottery: a **random** outcome yielding utility 10 in sunny weather or 4 in rainy weather.
+We represent a **lottery** as $[p_1,x_1;p_2,x_2]$. This means that if the lottery is chosen, the actor receives outcome $x_1$ with probability $p_1$, and outcome $x_2$ with probability $p_2$. Since probabilities must always add up to 1, in this case $p_2=1-p_1$. In this way, choosing an action in an uncertain environment can be interpreted as selecting a lottery over possible consequences, each defined by the combination of an action and the state of the world that materializes. This framework enables us to evaluate and compare actions by considering the expected value of their outcomes.
+
+Consider the example in Table @tbl-expected-util, where the action “summer clothes” might result in the consequence $x_{S,S}$ (summer clothes + sunny weather) with probability $p$, or $x_{S,R}$ (summer clothes + rainy weather) with probability $1 - p$. Since the actor cannot know for sure which state of the world will occur, they face a lottery: a **random** outcome yielding utility 10 in sunny weather or 4 in rainy weather.
 
 |  |  |  |
-|--------------------------------|--------------------|--------------------|
-| **actions \\ states of the world** | **sunny weather (\$p\$)** | **rainy weather (\$1-p\$)** |
+|----|----|----|
+| **actions \\ states of the world** | **sunny weather** $(p)$ | **rainy weather** $(1-p)$ |
 | **summer clothes** | $u(x_{S,S})=10$ | $u(x_{S,R})=4$ |
 | **winter clothes** | $u(x_{W,S})=2$ | $u(x_{S,S})=3$ |
 | **rain clothes** | $u(x_{S,S})=5$ | $u(x_{S,S})=8$ |
