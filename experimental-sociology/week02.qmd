@@ -26,7 +26,7 @@ Central to this process is understanding behavior—people’s actions have a di
 
 In many cases, we’re interested in a core outcome—such as shifting attitudes or assessing whether certain initiatives succeed or fail. However, these outcomes typically hinge on actual behavior: how people speak, what they consume, and how they respond to one another. Even when our primary focus isn’t directly on behavior, the factors shaping or driving that outcome often are forms of behavior themselves. Recognizing this central role of behavior is essential for fully understanding and tackling social problems.
 
-Decision theory and game theory emphasize the centrality of behavior but apply differently depending on the social context. **Decision theory** addresses situations where the outcome depends solely on thedecisions of an **individual actor**, without direct interference from others. For example, choosing whether to pursue higher education or immediately enter the labor market is primarily a personal decision that can be analyzed using decision theory. These situations are formally termed parametric ***decisions*** because the model predictions primarily depend on situational parameters.
+Decision theory and game theory emphasize the centrality of behavior but apply differently depending on the social context. **Decision theory** addresses situations where the outcome depends solely on the decisions of an **individual actor**, without direct interference from others. For example, choosing whether to pursue higher education or immediately enter the labor market is primarily a personal decision that can be analyzed using decision theory. These situations are formally termed parametric ***decisions*** because the model predictions primarily depend on situational parameters.
 
 In contrast, **game theory** applies to scenarios where outcomes are influenced by the interactions of **multiple individuals** or groups, whose **decisions are interdependent**. This means no single actor has complete control over the outcome, adding a strategic dimension to their decision-making. Examples include negotiations, competitive markets, or voluncteering for a task. These situations are formally termed ***games*** due to their interactive and strategic nature.[^1]
 
@@ -211,16 +211,16 @@ When decisions involve **uncertainty**, that is, more than one possible state of
 
 We represent a **lottery** as $[p_1,x_1;p_2,x_2]$. This means that if the lottery is chosen, the actor receives outcome $x_1$ with probability $p_1$, and outcome $x_2$ with probability $p_2$. Since probabilities must always add up to 1, in this case $p_2=1-p_1$. In this way, choosing an action in an uncertain environment can be interpreted as selecting a lottery over possible consequences, each defined by the combination of an action and the state of the world that materializes. This framework enables us to evaluate and compare actions by considering the expected value of their outcomes.
 
-Consider the example in Table @tbl-expected-util, where the action “summer clothes” might result in the consequence $x_{S,S}$ (summer clothes + sunny weather) with probability $p$, or $x_{S,R}$ (summer clothes + rainy weather) with probability $1 - p$. Since the actor cannot know for sure which state of the world will occur, they face a lottery: a **random** outcome yielding utility 10 in sunny weather or 4 in rainy weather.
+Consider the example in Table @tbl-expected-util, which we will call **payoff-matrix**, where we combine the actions with the states of the world and assign them utility values. As we can see, the action “summer clothes” might result in the consequence $x_{S,S}$ (summer clothes + sunny weather) with probability $p$, or $x_{S,R}$ (summer clothes + rainy weather) with probability $1 - p$. Since the actor cannot know for sure which state of the world will occur, they face a lottery: a **random** outcome yielding utility 10 in sunny weather or 4 in rainy weather.
 
 |  |  |  |
-|----|----|----|
+|--------------------------------|--------------------|--------------------|
 | **actions \\ states of the world** | **sunny weather** $(p)$ | **rainy weather** $(1-p)$ |
 | **summer clothes** | $u(x_{S,S})=10$ | $u(x_{S,R})=4$ |
 | **winter clothes** | $u(x_{W,S})=2$ | $u(x_{S,S})=3$ |
 | **rain clothes** | $u(x_{S,S})=5$ | $u(x_{S,S})=8$ |
 
-: Assumed preferences for a fictitious scenario. {#tbl-expected-util}
+: Payoff matrix for a fictitious social scenario. {#tbl-expected-util}
 
 In order to evaluate now how good this action is we must calculate the expected utility. Formally, suppose an actor faces a set of possible **states of the world** ($\omega \in \Omega$ ), each occurring with probability $p(\omega)$. The **expected utility** $EU$ of choosing $a$ is then:
 
@@ -244,6 +244,10 @@ $$.
 
 Finally, **beliefs** refer to the **probability distribution** (,p,) that an actor assigns to each possible **state of the world**. We introduced this concept implicitly in the Expected Utility section. By definition, each probability $p(\omega)$ must be at least zero $(p(\omega) \ge 0)$ , and the sum of all probabilities across every possible state must equal one. That’s typically all we need to assume about beliefs at this stage.
 
+Note, that we always assume that actors are capable of assigning probabilities to states of the world—even if those probabilities are subjective. At first glance, this may seem unrealistic. However, people often have intuitive or "gut" feelings about how likely different outcomes are. In fact, there’s an entire literature on how to measure and formalize such intuitions as **subjective probabilities** [e.g., @savage1954].
+
+That said, we won’t delve deeper into the philosophical or psychological foundations of belief formation here. Instead, we will simply **assume** that actors assign probabilities to all relevant states and proceed on that basis.
+
 ## Analyzing
 
 To analyze how an imaginary actor would behave in a given situation, we introduce a **choice function**, denoted by $C(\cdot )$. This function expresses our prediction of which action(s) an actor will choose from a given decision problem $D$, where $D\subset A$ represents the set of feasible actions available in that situation.
@@ -254,6 +258,10 @@ When the situation involves **certainty**—that is, there is only one possible 
 $$ C^\succsim(D) \;=\; \arg\max_{a \in D} \mathrm{EU}(a)=\arg\max_{a \in D} \mathrm{u}(x_{a,\omega}). $$
 
 Since there is no uncertainty, the best action is the one yielding the highest known outcome. For example, if we assume in Table @tbl-expected-util that $p=1$, that is, sunny weather is guaranteed, then the consequence of each action is known with certainty. Under these conditions, we can immediately predict that the actor would choose **summer clothes**, as they yield the highest utility (10) in sunny weather.
+
+::: callout-note
+-   In situations of certainty, we predict that the **actor** will **choose** the **action that maximizes** their **utility**.
+:::
 
 ### Decisions under uncertainty
 
@@ -279,8 +287,80 @@ For example, we can analyze how changing the probability $p$ affects the actor�
 
 In this way, even simple models can offer powerful insights into how beliefs and preferences shape decision-making.
 
+**Full Example**
+
+Let’s put everything together in an applied example. Imagine someone deciding whether or not to buy a tram ticket. The first thing we have to do is to ask ourselfs: What are the possible **actions**, **states of the worlds**?
+
+-   **Actions**:
+
+    -   Buy ticket $a_t$,
+
+    -   Don’t buy ticket $a_{nt}$.
+
+-   **States of the world**:
+
+    -   Ticket inspection $\omega_i$, with probability $p$,
+
+    -   No ticket inspection $\omega_{ni}$, with probability $1-p$.
+
+We can now bring all the elements together into a structured **payoff matrix** to illustrate how expected utility applies in a real-world setting. Rather than assigning fixed numerical values, we define variables that represent key components of the situation. In Table @tbl-decision-ticket, we introduce a ticket price $T$, a fine $P$, and a status quo $Q$.
+
+To evaluate preferences, we assume a plausible ordinal ranking: $Q>-T>-F$. This suggests the actor prefers not paying and not getting caught ($Q$) over paying for the ticket ($-T$), but still much more than being fined ($-F$) .
+
+That said, this ranking is not set in stone. As a researcher, you may adopt alternative assumptions. For example, if riding without a ticket causes guilt, the outcome might instead be represented as $Q-G$, where $G$ reflects a emotional cost (guild) that reduces the utility of this outcome so that $-T>Q-G>-P$ holds, in which case buying a ticket is preferred in every scenario.
+
+In such a setup, we would say that action $a_t$ **dominates** action $a_{nt}$, because it performs better regardless of the state of the world. A dominated action is **never** chosen by a rational actor. Thus, our prediction becomes simple: the actor will always choose to buy a ticket.
+
+|  |  |  |
+|--------------------------------|--------------------|--------------------|
+| **actions \\ states of the world** | **Ticket inspection (**$p$) | **No ticket inspection** ($1-p$) |
+| **Buy ticket** | $-T$ | $-T$ |
+| **Don’t buy ticket** | $-F$ | $Q$ |
+
+: Payoff matrix for the ticket decision. {#tbl-decision-ticket}
+
+Let us come now back to our original assumptoion $Q>-T>-F$. Please make sure that in this case neither of the two strategies dominates the other, as in one case $a_t$ is better, in the other $a_{nt}$. We now want to determine whether the actor prefers buying a ticket over not buying a ticket, i.e., whether the preference relation\
+$$ a_t \succ a_{nt} $$\
+holds.
+
+To evaluate this, we use **expected utility**, which allows us to translate preference questions into comparisons of expected utilities. That is, the actor prefers buying a ticket if and only if:
+
+$$ \mathrm{EU}(a_t) > \mathrm{EU}(a_{nt}). $$
+
+This is often the central question we want to answer as researchers: under which conditions does an actor choose one action over another? So, now we can use the information from Table @tbl-decision-ticket, to replace these terms with:
+
+$$ p \cdot (-T) + (1-p) \cdot (-T) > p \cdot (-F) + (1-p) \cdot Q.$$
+
+The left side can easy reduced to:
+
+$$ -T > p \cdot (-F) + (1-p) \cdot Q.$$
+
+To make us the life somewhat easier lets use the tip (see box) and replace Q with 0.
+
+$$ -T > p \cdot (-F).$$ {#eq-dec-ticket}
+
+::: callout-tip
+VNM-utility values are on a interval scale but not ratio scale, that means they do not have a absolute point 0. We can use this shamelessly to our advantage. For example this means that without loss of generality we can at least replace to parameters in our payoff matrix with any two values we like (as long they respect our ordinal ranking). While it is not always useful to do this with two variables, it is almost always useful to do it at least once with one variable and replace it with 0 (especially, if we are not really interested in this variable).
+:::
+
+With inequality @eq-dec-ticket, we can now derive several testable hypotheses about behavior:
+
+1.  **Effect of ticket price (**$T$):\
+    If the price of the ticket $T$ increases, the left-hand side becomes **more negative**, making the inequality **less likely** to hold.\
+    ⟶ The actor becomes **less likely** to buy a ticket.
+
+2.  **Effect of fine (**$F$):\
+    If the fine $F$ increases, the right-hand side becomes **more negative** (since $-F$ becomes a larger negative number), making the inequality **more likely** to hold.\
+    ⟶ The actor becomes **more likely** to buy a ticket.
+
+3.  **Effect of inspection probability (**$p$):\
+    If the probability of inspection $p$ increases, the right-hand side puts **more weight** on the fine and **less on the benefit of avoiding payment**. As a result, the expected cost of not buying a ticket **increases**.\
+    ⟶ The actor becomes **more likely** to buy a ticket.
+
+Importantly, as researchers, we **do not need to know the exact numerical values** of $T$, $F$, or $Q$ to make meaningful predictions. As long as we have a reasonable **ordinal ranking**—such as $Q > -T > -F$—we can still analyze how changes in the environment (e.g., an increase in the fine $F$, a change in inspection probability $p$, or the introduction of guilt $G$) would influence decision-making. This kind of analysis can yield rich insights even when only rough preference orderings are available.
+
 ::: callout-note
--   In short, decision-making under **certainty** is about picking the action that leads to the best known outcome, while decision-making under **uncertainty** is about choosing the action with the highest **expected utility**—a weighted average of possible outcomes, according to their probabilities.
+-   Decision-making under **uncertainty** is about choosing the action with the highest **expected utility**—a weighted average of possible outcomes, according to their probabilities.
 :::
 
 # Game Theory
