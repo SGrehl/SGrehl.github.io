@@ -17,7 +17,6 @@ This chapter is an **introduction**, rather than a comprehensive course in decis
 By the end of this chapter, you should:
 
 -   **Model** **simple social situations** using decision theory or game theory.
-
 -   **Analyze these situations** using appropriate analytical tools from **decision theory** or **game theory**.
 
 # Modelling Social Interactions
@@ -38,7 +37,6 @@ Occasionally, categorizing a situation clearly as either a decision or a game ma
 In summary:
 
 -   A **decision** involves a parametric choice of only **one actor** and is analyzed using **decision theory**.
-
 -   A **game** involves strategic interactions among **two or more actors** and is analyzed using **game theory**.
 :::
 
@@ -56,7 +54,6 @@ Nevertheless, even with these limitations, we can design models that distinguish
 In this course, we will use the following terminology:
 
 -   **Action** is what the actor deliberately aims to do. We often **cannot directly observe** this.
-
 -   **Behavior** is the **observable action** that researchers see. Different actions can lead to the **same** observed behavior.
 
 Note, however, that this approach differs from distinctions found in other sources [e.g. @anscombe2000, @elster2007].
@@ -73,9 +70,7 @@ Decision theory provides a foundational toolkit for modelling individual choices
 In order to model a decision, we need to know the fundamental components of decision theory. These are:
 
 -   **Restrictions** (constraints and limitations influencing the range of possible actions),
-
 -   **Preferences** (rankings or valuations of potential outcomes).
-
 -   **Beliefs** (subjective probabilities and expectations about uncertain states of the world),
 
 In the following sections, we will explore each of these components individually and illustrate their importance through relevant examples.
@@ -89,11 +84,8 @@ Restrictions can be divided into two main categories. The first addresses the ac
 **Restrictions** regarding the actor ask: *What range of possible actions do actors have in a given decision-making scenario?* These limitations can arise from numerous sources, including the actor’s resources, available information, and broader social or institutional constraints.
 
 -   **Resources**: Money, time, effort, and technical know-how all help define the set of feasible actions. A student’s decision on where to study, for instance, can be constrained by scholarship opportunities, personal savings, or family responsibilities.
-
 -   **Information and Knowledge**: Actors must have at least minimal awareness of their own possibilities, risks, and probable outcomes. A lack of information—like being unaware that a particular course of study exists—can effectively remove that option from the feasible set.
-
 -   **Social and Institutional Constraints**: Legal restrictions, cultural norms, or social sanctions can also limit the set of feasible actions. For example, certain forms of expression might be legally prohibited or socially stigmatized in a particular society.
-
 -   **Psychological Constraints**: Beyond purely external obstacles, actors may also face cognitive or emotional barriers, such as fear of failure or lack of self-efficacy. These personal obstacles can prevent them from pursuing otherwise feasible options.
 
 Formally, we collect these limitations into a **feasible action set** , representing all the courses of action an actor can realistically pursue. When modeling a situation, it is crucial to define carefully. Overlooking relevant restrictions can lead to unrealistic models and poor predictions of actual behavior.
@@ -274,9 +266,7 @@ $$ C^\succsim(D) \;=\; \arg\max_{a \in D} \mathrm{EU}(a). $$
 Let us assume in Table @tbl-expected-util that $p=0.5$, so both sunny and rainy weather are equally likely. We then calculate the expected utility for each action:
 
 -   $EU(\text{summer clothes}) = 0.5 \cdot 10 + 0.5 \cdot 4 = 7$,
-
 -   $EU(\text{winter clothes}) = 0.5 \cdot 2 + 0.5 \cdot 3 = 2.5$, and
-
 -   $EU(\text{rain clothes}) = 0.5 \cdot 5 + 0.5 \cdot 8 = 6.5$.
 
 In this case, the actor would choose summer clothes, since that action yields the highest expected utility.
@@ -292,15 +282,10 @@ In this way, even simple models can offer powerful insights into how beliefs and
 Let’s put everything together in an applied example. Imagine someone deciding whether or not to buy a tram ticket. The first thing we have to do is to ask ourselfs: What are the possible **actions**, **states of the worlds**?
 
 -   **Actions**:
-
     -   Buy ticket $a_t$,
-
     -   Don’t buy ticket $a_{nt}$.
-
 -   **States of the world**:
-
     -   Ticket inspection $\omega_i$, with probability $p$,
-
     -   No ticket inspection $\omega_{ni}$, with probability $1-p$.
 
 We can now bring all the elements together into a structured **payoff matrix** to illustrate how expected utility applies in a real-world setting. Rather than assigning fixed numerical values, we define variables that represent key components of the situation. In Table @tbl-decision-ticket, we introduce a ticket price $T$, a fine $P$, and a status quo $Q$.
@@ -340,7 +325,7 @@ To make us the life somewhat easier lets use the tip (see box) and replace Q wit
 $$ -T > p \cdot (-F).$$ {#eq-dec-ticket}
 
 ::: callout-tip
-VNM-utility values are on a interval scale but not ratio scale, that means they do not have a absolute point 0. We can use this shamelessly to our advantage. For example this means that without loss of generality we can at least replace to parameters in our payoff matrix with any two values we like (as long they respect our ordinal ranking). While it is not always useful to do this with two variables, it is almost always useful to do it at least once with one variable and replace it with 0 (especially, if we are not really interested in this variable).
+VNM utility values are measured on an interval scale, not a ratio scale. This means they lack an absolute zero point. We can exploit this property to our advantage. Specifically, without loss of generality, we can freely assign any two values to two entries in our payoff matrix—as long as the ordinal ranking is preserved. Although it’s not always necessary to redefine two variables, it is almost always useful to fix at least one variable to zero, particularly if that variable is not of central interest. This simplification can make analysis more convenient without affecting the underlying preferences.
 :::
 
 With inequality @eq-dec-ticket, we can now derive several testable hypotheses about behavior:
@@ -365,9 +350,129 @@ Importantly, as researchers, we **do not need to know the exact numerical values
 
 # Game Theory
 
-::: callout-warning
-UNDER CONSTRUCTION
-:::
+**Game theory** is the study of strategic situations where the outcome of a decision depends not just on a single actor’s choice, but on the **interdependent actions of multiple actors**. In contrast to the models we’ve discussed so far—where the environment was treated as fixed or probabilistic—game theory explicitly models the fact that **other people matter**: their decisions affect our outcomes, and vice versa.
+
+Luckily, much of the groundwork for studying games is already in place. We do **not** need to introduce entirely new concepts. We still rely on familiar elements: actions, outcomes, and preferences. What changes is how we think about uncertainty. In game theory, the uncertainty often comes not from possible states of the nature (as in previous sections), but from the fact that we do **not know what others will do**. However, just like before, we can reason through expected utilities—only now, those expectations depend on the beliefs about other **players**.
+
+## Modelling
+
+### Players
+
+In game theory, we refer to the actors as **players**. Let $N = \{1, 2, 3, \dots, n\}$ be the set of players. Each player $i \in N$ has a set of available **actions** $A_i$, and a **Von Neumann-Morgenstern utility function** $u_i$ that assigns a utility value to every possible outcome. We denote the set of all players except player $i$ as $-i$, that is, $-i=N\{i}$.
+
+The set of **outcomes** in a game can be represented as all possible combinations of players' actions (sometimes called **action profiles**) and the states of the world $\Omega$. That is, we define:
+
+$$
+X = A_1 \times A_2 \times \cdots \times A_n \times \Omega,
+$$
+
+However, to keep things simple, we will mostly focus on situations where $|\Omega| = 1$, meaning there is no external uncertainty. This allows us to **concentrate solely on strategic interaction**, i.e., how players’ choices affect one another. This simplification is also common in many textbooks, so don’t be surprised if you come across the outcome space written as:
+
+$$
+X = A_1 \times A_2 \times \cdots \times A_n.
+$$
+
+An intuitive way to think about outcomes from the perspective of one player is this: the actions of all *other* players form the "state of the world" from their point of view. That is, even though those actions are not random per se, the player cannot control them and must form expectations about them—just like in earlier decision problems.
+
+### A Simple Example
+
+To illustrate the basic structure of a game, let’s consider a classic **2-player game** where each player has two strategies. We represent this situation in a **payoff matrix**. Each cell of the table shows the utility (or payoff) for both players, given their chosen actions.
+
+|                         | Player 2: Cooperate | Player 2: Defect |
+|-------------------------|---------------------|------------------|
+| **Player 1: Cooperate** | (3, 3)              | (0, 5)           |
+| **Player 1: Defect**    | (5, 0)              | (1, 1)           |
+
+: A simple 2-player game with two strategies each (e.g., the Prisoner’s Dilemma). The first number in each cell is Player 1’s utility; the second is Player 2’s. {#tbl-game-pd}
+
+In this example, both players have two actions: **Cooperate** and **Defect**. The outcome depends on the combination of both players' choices. For instance, if both cooperate, they each get 3. If one defects while the other cooperates, the defector gets 5 while the cooperator gets nothing. This structure introduces **strategic uncertainty**: each player must consider not just what they want, but what the other is likely to do.
+
+## Analyzing
+
+Now that we have a basic understanding of what a game looks like, the next step is to analyze it. The central solution concept in game theory is the **Nash equilibrium**.
+
+A **Nash equilibrium** is a set of strategies—one for each player—such that **no player has an incentive to unilaterally deviate**. In other words, given the strategies chosen by the others, each player is doing the best they can. Formally, a **action profiles** $a^*=(a_1^*, a_2^*, \dots, a_n^*)$ is a Nash equilibrium if for every player $i$:
+
+$$
+u_i(a_i^*, a_{-i}^*) \ge u_i(a_i, a_{-i}^*) \quad \text{for all } a_i \in A_i.
+$$
+
+This means: given what everyone else is doing ($a_{-i}^*$), player $i$ cannot improve their utility by choosing a different action $a_i$.
+
+Let’s go back to our example from Table @tbl-game-pd and analyze it.
+
+To find the Nash equilibrium:
+
+1.  **Fix Player 2’s strategy**, and ask what Player 1 would do:
+    -   If Player 2 **cooperates**, Player 1 gets 3 by cooperating and 5 by defecting → **Player 1 prefers to defect**.
+    -   If Player 2 **defects**, Player 1 gets 0 by cooperating and 1 by defecting → **Player 1 still prefers to defect**.
+2.  **Fix Player 1’s strategy**, and ask what Player 2 would do:
+    -   If Player 1 **cooperates**, Player 2 gets 3 by cooperating and 5 by defecting → **Player 2 prefers to defect**.
+    -   If Player 1 **defects**, Player 2 gets 0 by cooperating and 1 by defecting → **Player 2 still prefers to defect**.
+
+So, both players have a **dominant strategy**: defecting. Regardless of what the other does, defecting gives a higher payoff. The strategy profile where **both defect** is therefore a **Nash equilibrium**, formally: $a^*=(a_D,a_D)$ with the first $a_D$ is the action of the first player, and so on.
+
+Even though both players would be better off if they both cooperated (3, 3), cooperation is **not** stable: each has an incentive to unilaterally deviate if the other is cooperating. This tension between individual rationality and collective outcome is what makes game theory so powerful—and often so frustrating.
+
+### Mixed Nash Equilibrium
+
+So far, we have focused on **pure strategies** (specific actions), where each player selects a single action with certainty. However, there are many games—especially competitive ones—where no pure strategy Nash equilibrium exists. In such cases, we extend our analysis to include **mixed strategies**.
+
+#### Mixed Strategies
+
+A **mixed strategy** is a probability distribution over a player’s set of available actions. Instead of choosing a single action, the player **randomizes** across multiple actions, assigning a probability to each.
+
+Let $A_i = \{a_{i1}, a_{i2}, \dots, a_{ik}\}$ be the action set for player $i$. A **mixed strategy** $\sigma_i$ is a vector of probabilities:
+
+$$
+\sigma_i = \left( p_{i1}, p_{i2}, \dots, p_{ik} \right),
+$$
+
+where each $p_{ij} \in [0, 1]$ and $\sum_{j=1}^k p_{ij} = 1$.
+
+The set of all possible mixed strategies for player $i$ is denoted by $\Delta(A_i)$—the **simplex** over $A_i$. This set includes all possible ways a player could randomize over their actions, including the pure strategies (which are just special cases where one action is chosen with probability 1).
+
+Once all players are allowed to mix, the outcome of the game becomes **probabilistic**. The expected utility of a player under a mixed strategy profile is calculated by taking the weighted average of their utility across all possible action profiles, weighted by the probability that each occurs under the players’ strategies.
+
+This framework allows us to meaningfully analyze games that have **no pure strategy Nash equilibrium**, by expanding the space of strategies to include randomization.
+
+#### **Mixed Nash equilibrium**
+
+A **mixed strategy Nash equilibrium** is a profile of mixed strategies—one for each player—such that no player can increase their expected utility by unilaterally changing their own strategy. Each player is playing a best response to the **distribution** of strategies chosen by others.
+
+Formally, let $\Delta(A_i)$ denote the set of probability distributions over player $i$'s action set $A_i$. Then a mixed strategy profile $\sigma^* = (\sigma_1^*, \dots, \sigma_n^*)$ is a Nash equilibrium if, for each player $i$,
+
+$$
+\mathrm{EU}(\sigma^*, \sigma_{-i}^*) \geq \mathrm{EU}(\sigma, \sigma_{-i}^*) \quad \text{for all } \sigma_i \in \Delta(A_i).
+$$
+
+This means that given the other players' mixed strategies, player $i$ has no incentive to change their own.
+
+### Example: Matching Pennies
+
+Let’s consider a simple 2-player game called **Matching Pennies**. Each player chooses Heads (H) or Tails (T). If the pennies match, Player 1 wins; if they don’t, Player 2 wins.
+
+|                 | Player 2: H | Player 2: T |
+|-----------------|-------------|-------------|
+| **Player 1: H** | (1, -1)     | (-1, 1)     |
+| **Player 1: T** | (-1, 1)     | (1, -1)     |
+
+There is **no pure strategy Nash equilibrium** in this game: whatever one player does, the other has an incentive to switch. But there is a **mixed strategy equilibrium**.
+
+Let each player choose H with probability 0.5 and T with probability 0.5. Then:
+
+-   Player 1 cannot improve their expected payoff by deviating, since they always face a 50/50 mix from Player 2.
+-   The same goes for Player 2.
+
+> Mixed strategy equilibrium: Both players randomize uniformly (50/50) over Heads and Tails.
+
+This equilibrium reflects a fundamental idea in game theory: sometimes, **deliberate unpredictability** is the optimal strategy.
+
+### Why Mixed Strategies Matter
+
+Mixed strategy equilibria are not just mathematical curiosities—they're crucial for analyzing a wide range of real-world scenarios, including auctions, sports, warfare, and competitive markets. Moreover, Nash’s famous existence theorem guarantees that **every finite game has at least one Nash equilibrium**, possibly in mixed strategies.
+
+In the next sections, we’ll explore further refinements and solution concepts, but for now, it’s important to remember: when pure strategies fail to stabilize, **randomization can restore equilibrium**.
 
 # 🏋️ **Pre-Class Assignment**
 
