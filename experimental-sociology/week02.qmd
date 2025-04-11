@@ -126,7 +126,7 @@ If we have $|\Omega|=1$, meaning there is only a single possible state, this sit
 
 Once we specify both the set of possible actions $A$ an actor may take and the set of possible states of the world $\Omega$, each combination of an action $a \in A$ and a state $\omega \in \Omega$ yields a distinct **consequence**, $x$. Thus, we can define the set of all possible consequences as:
 
-$$X=A \times \Omega$$This notation emphasizes that outcomes depend both on what the actor does (the chosen action) and on how external factors turn out (the actual state of the world). In Table @tbl-consequences illustrates how three actions and two states can combine to produce six potential **consequences**.
+$$X=A \times \Omega$$This notation emphasizes that outcomes depend both on what the actor does (the chosen action) and on how external factors turn out (the actual state of the world). In @tbl-consequences illustrates how three actions and two states can combine to produce six potential **consequences**.
 
 |                                 |                   |                   |
 |---------------------------------|-------------------|-------------------|
@@ -181,7 +181,7 @@ $$
 x\succsim y \Leftrightarrow u(x) \geq u(y)
 $$
 
-In other words, whenever $x$ is at least as preferred as $y$, $u$ must assign to $x$ a value at least as large as the one it assigns to $y$. In Table @tbl-utility-ordinal we see that the ordinal preferences $x\succ y \succ z$ are represented by the utility function $u$ and $v$, but not by $h$ as $h(y)>h(x)$ contradicts with $x\succ y$.
+In other words, whenever $x$ is at least as preferred as $y$, $u$ must assign to $x$ a value at least as large as the one it assigns to $y$. In @tbl-utility-ordinal we see that the ordinal preferences $x\succ y \succ z$ are represented by the utility function $u$ and $v$, but not by $h$ as $h(y)>h(x)$ contradicts with $x\succ y$.
 
 | Assume $x\succ y \succ z$ | $x$ | $y$ | $z$   |
 |---------------------------|-----|-----|-------|
@@ -203,7 +203,7 @@ When decisions involve **uncertainty**, that is, more than one possible state of
 
 We represent a **lottery** as $[p_1,x_1;p_2,x_2]$. This means that if the lottery is chosen, the actor receives outcome $x_1$ with probability $p_1$, and outcome $x_2$ with probability $p_2$. Since probabilities must always add up to 1, in this case $p_2=1-p_1$. In this way, choosing an action in an uncertain environment can be interpreted as selecting a lottery over possible consequences, each defined by the combination of an action and the state of the world that materializes. This framework enables us to evaluate and compare actions by considering the expected value of their outcomes.
 
-Consider the example in Table @tbl-expected-util, which we will call **payoff-matrix**, where we combine the actions with the states of the world and assign them utility values. As we can see, the action “summer clothes” might result in the consequence $x_{S,S}$ (summer clothes + sunny weather) with probability $p$, or $x_{S,R}$ (summer clothes + rainy weather) with probability $1 - p$. Since the actor cannot know for sure which state of the world will occur, they face a lottery: a **random** outcome yielding utility 10 in sunny weather or 4 in rainy weather.
+Consider the example in @tbl-expected-util, which we will call **payoff-matrix**, where we combine the actions with the states of the world and assign them utility values. As we can see, the action “summer clothes” might result in the consequence $x_{S,S}$ (summer clothes + sunny weather) with probability $p$, or $x_{S,R}$ (summer clothes + rainy weather) with probability $1 - p$. Since the actor cannot know for sure which state of the world will occur, they face a lottery: a **random** outcome yielding utility 10 in sunny weather or 4 in rainy weather.
 
 |  |  |  |
 |--------------------------------|--------------------|--------------------|
@@ -249,7 +249,7 @@ To analyze how an imaginary actor would behave in a given situation, we introduc
 When the situation involves **certainty**—that is, there is only one possible state of the world—the actor knows exactly what consequence each action will lead to. In this case, we assume the actor simply chooses the action that results in the highest utility:\
 $$ C^\succsim(D) \;=\; \arg\max_{a \in D} \mathrm{EU}(a)=\arg\max_{a \in D} \mathrm{u}(x_{a,\omega}). $$
 
-Since there is no uncertainty, the best action is the one yielding the highest known outcome. For example, if we assume in Table @tbl-expected-util that $p=1$, that is, sunny weather is guaranteed, then the consequence of each action is known with certainty. Under these conditions, we can immediately predict that the actor would choose **summer clothes**, as they yield the highest utility (10) in sunny weather.
+Since there is no uncertainty, the best action is the one yielding the highest known outcome. For example, if we assume in @tbl-expected-util that $p=1$, that is, sunny weather is guaranteed, then the consequence of each action is known with certainty. Under these conditions, we can immediately predict that the actor would choose **summer clothes**, as they yield the highest utility (10) in sunny weather.
 
 ::: callout-note
 -   In situations of certainty, we predict that the **actor** will **choose** the **action that maximizes** their **utility**.
@@ -263,7 +263,7 @@ The **Expected Utility Hypothesis** posits that the actor will choose the action
 
 $$ C^\succsim(D) \;=\; \arg\max_{a \in D} \mathrm{EU}(a). $$
 
-Let us assume in Table @tbl-expected-util that $p=0.5$, so both sunny and rainy weather are equally likely. We then calculate the expected utility for each action:
+Let us assume in @tbl-expected-util that $p=0.5$, so both sunny and rainy weather are equally likely. We then calculate the expected utility for each action:
 
 -   $EU(\text{summer clothes}) = 0.5 \cdot 10 + 0.5 \cdot 4 = 7$,
 -   $EU(\text{winter clothes}) = 0.5 \cdot 2 + 0.5 \cdot 3 = 2.5$, and
@@ -288,7 +288,7 @@ Let’s put everything together in an applied example. Imagine someone deciding 
     -   Ticket inspection $\omega_i$, with probability $p$,
     -   No ticket inspection $\omega_{ni}$, with probability $1-p$.
 
-We can now bring all the elements together into a structured **payoff matrix** to illustrate how expected utility applies in a real-world setting. Rather than assigning fixed numerical values, we define variables that represent key components of the situation. In Table @tbl-decision-ticket, we introduce a ticket price $T$, a fine $P$, and a status quo $Q$.
+We can now bring all the elements together into a structured **payoff matrix** to illustrate how expected utility applies in a real-world setting. Rather than assigning fixed numerical values, we define variables that represent key components of the situation. In @tbl-decision-ticket, we introduce a ticket price $T$, a fine $P$, and a status quo $Q$.
 
 To evaluate preferences, we assume a plausible ordinal ranking: $Q>-T>-F$. This suggests the actor prefers not paying and not getting caught ($Q$) over paying for the ticket ($-T$), but still much more than being fined ($-F$) .
 
@@ -312,7 +312,7 @@ To evaluate this, we use **expected utility**, which allows us to translate pref
 
 $$ \mathrm{EU}(a_t) > \mathrm{EU}(a_{nt}). $$
 
-This is often the central question we want to answer as researchers: under which conditions does an actor choose one action over another? So, now we can use the information from Table @tbl-decision-ticket, to replace these terms with:
+This is often the central question we want to answer as researchers: under which conditions does an actor choose one action over another? So, now we can use the information from @tbl-decision-ticket, to replace these terms with:
 
 $$ p \cdot (-T) + (1-p) \cdot (-T) > p \cdot (-F) + (1-p) \cdot Q.$$
 
@@ -352,13 +352,19 @@ Importantly, as researchers, we **do not need to know the exact numerical values
 
 **Game theory** is the study of strategic situations where the outcome of a decision depends not just on a single actor’s choice, but on the **interdependent actions of multiple actors**. In contrast to the models we’ve discussed so far—where the environment was treated as fixed or probabilistic—game theory explicitly models the fact that **other people matter**: their decisions affect our outcomes, and vice versa.
 
-Luckily, much of the groundwork for studying games is already in place. We do **not** need to introduce entirely new concepts. We still rely on familiar elements: actions, outcomes, and preferences. What changes is how we think about uncertainty. In game theory, the uncertainty often comes not from possible states of the nature (as in previous sections), but from the fact that we do **not know what others will do**. However, just like before, we can reason through expected utilities—only now, those expectations depend on the beliefs about other **players**.
+Luckily, much of the groundwork for studying games is already in place. We do not need to introduce entirely new concepts. We still rely on familiar elements: actions, outcomes, and preferences. What changes is how we think about uncertainty. In game theory, the uncertainty often comes not from possible states of the nature (as in previous sections), but from the fact that we do **not know what others will do**. However, just like before, we can reason through expected utilities—only now, those expectations depend on the beliefs about other **players**.
 
 ## Modelling
 
 ### Players
 
-In game theory, we refer to the actors as **players**. Let $N = \{1, 2, 3, \dots, n\}$ be the set of players. Each player $i \in N$ has a set of available **actions** $A_i$, and a **Von Neumann-Morgenstern utility function** $u_i$ that assigns a utility value to every possible outcome. We denote the set of all players except player $i$ as $-i$, that is, $-i=N\{i}$.
+In game theory, we refer to the actors as **players**. This terminology immediately signals that we are analyzing a situation through a game-theoretic lens. We define the set of all players as a **finite set** $N$. While in principle we could label the players with names—such as $N = \{\text{Ann}, \text{Bob}, \text{Charlie}, \dots\}$—it is standard practice to **number** them instead. So we typically write:
+
+$$
+N = \{1, 2, 3, \dots, n\},
+$$
+
+where each number represents a different player. This not only simplifies notation but also generalizes easily to games with any number of participants. Each player $i \in N$ has a set of available **actions** $A_i$, and a **Von Neumann-Morgenstern utility function** $u_i$ that assigns a utility value to every possible outcome. We denote the set of all players except player $i$ as $-i$, that is, $-i=N\{i\}$.
 
 The set of **outcomes** in a game can be represented as all possible combinations of players' actions (sometimes called **action profiles**) and the states of the world $\Omega$. That is, we define:
 
@@ -374,9 +380,15 @@ $$
 
 An intuitive way to think about outcomes from the perspective of one player is this: the actions of all *other* players form the "state of the world" from their point of view. That is, even though those actions are not random per se, the player cannot control them and must form expectations about them—just like in earlier decision problems.
 
+::: callout-note
+-   In a game actors are called **players**, and we use a finite set $N = {1, 2, \dots, n}$ to represent them.
+-   Each player $i$ has its own set of actions $A_i$ and utility function $u_i$.
+-   The full outcome space is based on **combinations of all players’ actions**, possibly including a state of the world $\Omega$.
+:::
+
 ### A Simple Example
 
-To illustrate the basic structure of a game, let’s consider a classic **2-player game** where each player has two strategies. We represent this situation in a **payoff matrix**. Each cell of the table shows the utility (or payoff) for both players, given their chosen actions.
+To illustrate the basic structure of a game, let’s consider a classic **2-player game** where each player has two strategies and the state of the world is certain. We represent this situation in a **payoff matrix**. Each cell of the table shows the utility (or payoff) for both players, given their chosen actions.
 
 |                         | Player 2: Cooperate | Player 2: Defect |
 |-------------------------|---------------------|------------------|
@@ -385,13 +397,17 @@ To illustrate the basic structure of a game, let’s consider a classic **2-play
 
 : A simple 2-player game with two strategies each (e.g., the Prisoner’s Dilemma). The first number in each cell is Player 1’s utility; the second is Player 2’s. {#tbl-game-pd}
 
-In this example, both players have two actions: **Cooperate** and **Defect**. The outcome depends on the combination of both players' choices. For instance, if both cooperate, they each get 3. If one defects while the other cooperates, the defector gets 5 while the cooperator gets nothing. This structure introduces **strategic uncertainty**: each player must consider not just what they want, but what the other is likely to do.
+In this example, both players have the same two actions: **Cooperate** and **Defect**. The outcome depends on the combination of both players' choices. For instance, if both cooperate, they each get 3.[^4] If one defects while the other cooperates, the defector gets 5 while the cooperator gets nothing. This structure introduces **strategic uncertainty**: each player must consider not just what they want, but what the other is likely to do.
+
+[^4]: For the sake of simplicity, we say "a player gets 3" instead of "a player receives a utility of 3 from this outcome". Please note that this doesn’t mean the player literally receives money or any tangible reward—it's just a representation of their preference or satisfaction with the outcome.
 
 ## Analyzing
 
 Now that we have a basic understanding of what a game looks like, the next step is to analyze it. The central solution concept in game theory is the **Nash equilibrium**.
 
-A **Nash equilibrium** is a set of strategies—one for each player—such that **no player has an incentive to unilaterally deviate**. In other words, given the strategies chosen by the others, each player is doing the best they can. Formally, a **action profiles** $a^*=(a_1^*, a_2^*, \dots, a_n^*)$ is a Nash equilibrium if for every player $i$:
+A **Nash equilibrium** is a set of strategies—one for each player—such that **no player has an incentive to unilaterally deviate**. In other words, given the strategies chosen by the others, each player is doing the best they can. Formally, a **action profiles** $a^*=(a_1^*, a_2^*, \dots, a_n^*)$ is a pure Nash equilibrium if for every player $i$, if it holds that:[^5]
+
+[^5]: We will learn about the differences between a pure and a mixed Nash equilibrium in the next section.
 
 $$
 u_i(a_i^*, a_{-i}^*) \ge u_i(a_i, a_{-i}^*) \quad \text{for all } a_i \in A_i.
@@ -399,7 +415,7 @@ $$
 
 This means: given what everyone else is doing ($a_{-i}^*$), player $i$ cannot improve their utility by choosing a different action $a_i$.
 
-Let’s go back to our example from Table @tbl-game-pd and analyze it.
+Let’s go back to our example from @tbl-game-pd and analyze it.
 
 To find the Nash equilibrium:
 
@@ -412,11 +428,20 @@ To find the Nash equilibrium:
 
 So, both players have a **dominant strategy**: defecting. Regardless of what the other does, defecting gives a higher payoff. The strategy profile where **both defect** is therefore a **Nash equilibrium**, formally: $a^*=(a_D,a_D)$ with the first $a_D$ is the action of the first player, and so on.
 
-Even though both players would be better off if they both cooperated (3, 3), cooperation is **not** stable: each has an incentive to unilaterally deviate if the other is cooperating. This tension between individual rationality and collective outcome is what makes game theory so powerful—and often so frustrating.
+Even though both players would be better off if they both cooperated (3, 3), bilateral cooperation is **not** stable: each has an incentive to unilaterally deviate if the other is cooperating. This tension between individual rationality and collective outcome is what makes game theory so powerful—and often so frustrating.
+
+A game can easily have **more than one Nash equilibrium**, as illustrated by the game in @tbl-game-sd. This game models a situation where two countries must independently decide whether to **arm themselves** or **refrain** from doing so. In this example, there are **two pure strategy Nash equilibria**. Each country’s best decision depends on what the other does, and both (Arm, Arm) and (Refrain, Refrain) are stable outcomes where no player has an incentive to deviate unilaterally.
+
+|                       | Player 2: Refrain | Player 2: Arm |
+|-----------------------|-------------------|---------------|
+| **Player 1: Refrain** | (3, 3)            | (0, 2)        |
+| **Player 1: Arm**     | (2, 0)            | (1, 1)        |
+
+: A coordination game with two pure Nash equilibria. {#tbl-game-sd}
 
 ### Mixed Nash Equilibrium
 
-So far, we have focused on **pure strategies** (specific actions), where each player selects a single action with certainty. However, there are many games—especially competitive ones—where no pure strategy Nash equilibrium exists. In such cases, we extend our analysis to include **mixed strategies**.
+So far, we have focused on **pure strategies**, where each player selects a single action with certainty. However, there are many games—especially competitive ones—where no pure Nash equilibrium exists. In such cases, we extend our analysis to include **mixed strategies**.
 
 #### Mixed Strategies
 
@@ -432,60 +457,133 @@ where each $p_{ij} \in [0, 1]$ and $\sum_{j=1}^k p_{ij} = 1$.
 
 The set of all possible mixed strategies for player $i$ is denoted by $\Delta(A_i)$—the **simplex** over $A_i$. This set includes all possible ways a player could randomize over their actions, including the pure strategies (which are just special cases where one action is chosen with probability 1).
 
+Choosing a strategy rather than an action is quite common. Just think about playing **rock-paper-scissors**: if you always choose the same move, your opponent can easily exploit you. But if you randomize—say, by playing each option with equal probability—you become unpredictable and much harder to beat. This is exactly the idea of a mixed strategy: your best response might not be to pick a single action, but rather to **mix** between several.[^6]
+
+[^6]: There is an ongoing philosophical debate about whether humans are truly capable of generating random behavior. Empirical studies suggest that humans often struggle to produce genuinely random sequences, tending instead toward predictable patterns [@wagenaar1972, @nickerson2009]. However, in strategic contexts, perfect randomness may not be necessary. What matters more is that an individual's behavior is sufficiently unpredictable to others, effectively mimicking randomness. This perceived unpredictability can be strategically advantageous, as it prevents opponents from exploiting discernible patterns. While this topic delves into complex philosophical and psychological discussions, for our purposes, we will assume that players can adopt mixed strategies that achieve the necessary level of unpredictability.
+
 Once all players are allowed to mix, the outcome of the game becomes **probabilistic**. The expected utility of a player under a mixed strategy profile is calculated by taking the weighted average of their utility across all possible action profiles, weighted by the probability that each occurs under the players’ strategies.
 
 This framework allows us to meaningfully analyze games that have **no pure strategy Nash equilibrium**, by expanding the space of strategies to include randomization.
 
-#### **Mixed Nash equilibrium**
+::: callout-note
+-   A **strategy** $\sigma$ is a **probability distribution** over the set of actions.
+:::
+
+#### **Mixed Nash Equilibrium**
 
 A **mixed strategy Nash equilibrium** is a profile of mixed strategies—one for each player—such that no player can increase their expected utility by unilaterally changing their own strategy. Each player is playing a best response to the **distribution** of strategies chosen by others.
 
 Formally, let $\Delta(A_i)$ denote the set of probability distributions over player $i$'s action set $A_i$. Then a mixed strategy profile $\sigma^* = (\sigma_1^*, \dots, \sigma_n^*)$ is a Nash equilibrium if, for each player $i$,
 
 $$
-\mathrm{EU}(\sigma^*, \sigma_{-i}^*) \geq \mathrm{EU}(\sigma, \sigma_{-i}^*) \quad \text{for all } \sigma_i \in \Delta(A_i).
+\mathrm{EU_i}(\sigma^*, \sigma_{-i}^*) \geq \mathrm{EU_i}(\sigma_i, \sigma_{-i}^*) \quad \text{for all } \sigma_i \in \Delta(A_i).
 $$
 
-This means that given the other players' mixed strategies, player $i$ has no incentive to change their own.
+This means that given the other players' mixed strategies, player $i$ has no incentive to unilaterally change their own strategy.
 
 ### Example: Matching Pennies
 
 Let’s consider a simple 2-player game called **Matching Pennies**. Each player chooses Heads (H) or Tails (T). If the pennies match, Player 1 wins; if they don’t, Player 2 wins.
 
-|                 | Player 2: H | Player 2: T |
-|-----------------|-------------|-------------|
-| **Player 1: H** | (1, -1)     | (-1, 1)     |
-| **Player 1: T** | (-1, 1)     | (1, -1)     |
+|                           | Player 2: H ($p_2$) | Player 2: T ($1-p_2$) |
+|---------------------------|---------------------|-----------------------|
+| **Player 1: H** ($p_1$)   | (1, -1)             | (-1, 1)               |
+| **Player 1: T** ($1-p_1$) | (-1, 1)             | (1, -1)               |
+
+: Matching Pennies. The first number in each cell is Player 1’s utility; the second is Player 2’s. {#tbl-game-mp}
 
 There is **no pure strategy Nash equilibrium** in this game: whatever one player does, the other has an incentive to switch. But there is a **mixed strategy equilibrium**.
 
-Let each player choose H with probability 0.5 and T with probability 0.5. Then:
+::: callout-important
+One of the most fundamental results in game theory is **Nash’s Theorem**. It tells us something very reassuring: **every finite game has at least one Nash equilibrium** (either in pure or mixed strategies). A **finite game** is simply a game where there is a **finite number of players**, and each player has a **finite number of actions** to choose from.
 
--   Player 1 cannot improve their expected payoff by deviating, since they always face a 50/50 mix from Player 2.
--   The same goes for Player 2.
+Nash’s Theorem guarantees that, even if players must randomize over their actions, there will always be at least one strategy profile where no player has an incentive to deviate. This means that game theory, even in its most basic form, always provides a solution concept that predicts stable behavior.
+:::
 
-> Mixed strategy equilibrium: Both players randomize uniformly (50/50) over Heads and Tails.
+To find the mixed strategy equilibrium, we use the same logic as in decisions under uncertainty. But this time, the **"uncertainty" comes from the other player's strategy**, and we want to find a situation where each player is **indifferent** between their available actions—meaning they have no incentive to shift their probabilities. Hence, we look for values of $p_1$ and $p_2$ where the following equations hold true:
 
-This equilibrium reflects a fundamental idea in game theory: sometimes, **deliberate unpredictability** is the optimal strategy.
+$$
+EU_1(a_{1H})=EU_1(a_{1T}),
+$$
 
-### Why Mixed Strategies Matter
+$$ EU_2(a_{2H})=EU_2(a_{2T}).$$
 
-Mixed strategy equilibria are not just mathematical curiosities—they're crucial for analyzing a wide range of real-world scenarios, including auctions, sports, warfare, and competitive markets. Moreover, Nash’s famous existence theorem guarantees that **every finite game has at least one Nash equilibrium**, possibly in mixed strategies.
+Let’s compute Player 1’s expected utility from playing Heads or Tails, given Player 2 plays Heads with probability $p_2$ and Tails with probability $1 - p_2$:
 
-In the next sections, we’ll explore further refinements and solution concepts, but for now, it’s important to remember: when pure strategies fail to stabilize, **randomization can restore equilibrium**.
+-   Expected utility of **H** for Player 1:\
+    $$
+    EU_1(a_{1H}) = p_2 \cdot 1 + (1 - p_2) \cdot (-1) = 2p_2 - 1
+    $$
+
+-   Expected utility of **T** for Player 1:\
+    $$
+    EU_1(a_{1T}) = p_2 \cdot (-1) + (1 - p_2) \cdot 1 = 1 - 2p_2
+    $$
+
+Player 1 is **indifferent** between $a_{1H}$ and $a_{1T}$ when:
+
+$$
+EU_1(a_{1H}) = EU_1(a_{1T}) \quad \Rightarrow \quad 2p_2 - 1 = 1 - 2p_2
+$$
+
+Solving gives:
+
+$$
+4p_2 = 2 \quad \Rightarrow \quad p_2 = 0.5
+$$
+
+So Player 1 is indifferent **only if** Player 2 randomizes 50/50 between $a_{2H}$ and $a_{2T}$.
+
+::: callout-important
+Note that we determined Player 2’s behavioral predictions **even though we started by calculating the expected utilities for Player 1**. This might seem puzzling at first—after all, why should analyzing one player's incentives tell us what the other player will do?
+
+But this makes sense when you think in terms of **strategic interaction**. The key idea in a mixed strategy Nash equilibrium is that each player is choosing their strategy so that the **other player is indifferent** between their own actions. So by solving for the condition under which Player 1 is indifferent, we’re actually **learning what Player 2 must be doing** to create that indifference—and vice versa.
+
+In this way, even though each player is focused on their own payoffs, their optimal behavior is tightly linked to the incentives of the other. That’s the essence of equilibrium thinking in game theory.
+:::
+
+We repeat the same for Player 2:
+
+-   Expected utility of $a_{2H}$ for Player 2:\
+    $$
+    EU_2(a\_{2H}) = p_1 \cdot (-1) + (1 - p_1) \cdot 1 = 1 - 2p_1
+    $$
+
+-   Expected utility of $a_{2T}$ for Player 2:\
+    $$
+    EU_2(a\_{2T}) = p_1 \cdot 1 + (1 - p_1) \cdot (-1) = 2p_1 - 1
+    $$
+
+Indifference occurs when:
+
+$$
+1 - 2p_1 = 2p_1 - 1 \quad \Rightarrow \quad 4p_1 = 2 \quad \Rightarrow \quad p_1 = 0.5
+$$
+
+So Player 2 is also indifferent only if Player 1 plays H and T with equal probability.
+
+The unique **mixed strategy Nash equilibrium** of Matching Pennies is:
+
+$$
+s^*=((0.5,H;0.5;T), (0.5,H;0.5;T))
+$$
+
+In this equilibrium, each player keeps the other perfectly indifferent and maximally uncertain—neither can benefit by changing their strategy.
 
 # 🏋️ **Pre-Class Assignment**
 
 1.  Read the assigned materials.
 
-2.  \[easy\] Look at Table @tbl-expected-util. Calculate the the expected utilities for each action if $p=0.25$.
+2.  \[easy\] Look at @tbl-expected-util. Calculate the the expected utilities for each action if $p=0.25$.
 
-3.  \[easy\] Model a decision situation
+3.  \[easy\] Model a socially relevant decision situation, including important variables.
 
-4.  Remember the model of relative deprivation [@boudon1977]? There are only: costs $c$ if somebody applies for a promotion, benefits $b$ for they get the promotion, and the relative share of free positions $f$, all of these information are being common knowledge.
+4.  \[intermediate\] Look at the game shown in @tbl-game-sd. This game also has a third equilibrium in mixed strategies; determine it.
+
+5.  Remember the model of relative deprivation [@boudon1977]? There are only: costs $c$ if somebody applies for a promotion, benefits $b$ for they get the promotion, and the relative share of free positions $f$, all of these information are being common knowledge.
 
     1.  \[easy\] Model this situation with $n=2$ and $f=.5$.
 
     2.  \[hard\] Try to derive the general function of p for any $n$ and $f$ .
 
-5.  Bring your results and any questions to the seminar.
+6.  Bring your results and any questions to the seminar.
