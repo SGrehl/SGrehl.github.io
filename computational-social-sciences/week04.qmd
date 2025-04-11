@@ -3,10 +3,19 @@ title: "Week 04"
 subtitle: "Theoretical Insights"
 ---
 
+```{r}
+library(needs)
+needs(igraph,
+      igraphdata,
+      netseg)
+data("UKfaculty")
+```
+
+
 
 # Short recapture
 
-# Network concepts
+Density
 
 Complete networks
 
@@ -14,15 +23,119 @@ Cliques
 
 Path
 
+
+
+# Relational Sociology and the concept of embeddedness
+
+## Reciprocity
+
+Measures of reciprocity are 
+
+vertex centrality
+
+
 Dyads
 
-Transitivity
+
+
+## Transitivity
+
+
+# Network segregation and homophily
+
+## Segregation
+network level property such that edges between predefined groups of vertices are relatively less likely. (netseg package)
+
+Example: Schellings model 
+
+tightly connected to the individual level phenomena homophily
+
+## Homophily
+
+
+Denotes the social phenomenon that people tend to be similar to their social contacts.
+
+Birds of a feather - Billie Eilish has the same title as one of the most cited homophily papers by McPherson, Smith-Lovin and Cook (2001), where various studies of homophily were summarised. Homophily is observed in regard to race and ethnicity, gender and age, religion, education, occupation and social class, behaviour, and attitudes and beliefs 
+
+Bild aus Masterarbeit
+
+:::{#custom-block}
+Definition: from what stage on, can we say a network is homophile?
+:::
+
+1. Einstellungshomophily
+2. Statushomophily
+
+```{r}
+
+
+# Check the attributes available in the dataset
+vertex_attr_names(UKfaculty)
+
+# Assuming 'Group' is an attribute in the dataset
+# Assign different colors to each unique group
+group_colors <- rainbow(length(unique(V(UKfaculty)$Group)))
+
+# Create a vector of colors for each vertex based on its group
+vertex_colors <- group_colors[V(UKfaculty)$Group]
+
+# Plot the graph with vertex colors based on the 'Group' attribute
+plot(UKfaculty, vertex.color = vertex_colors)
+
+
+
+
+
+
+```
+
+![UKfaculty network colored by Attribute group](Graphics/homophily.png)
+Measures: 
+
+Let $e_{AB}$ be the number of edges between two types of actors A and B (e.g. different faculties) and $m$ be the total numbers of edges in the network. Then homophily the probability of a connection between a node of the A group and a node of the B group is significantly smaller than in a random network. We can use the **assortavity coefficient** for measurement.
+
+Assortavity coefficients are basically correlation coefficients that (in the case of categorical variables) can be measured by $e_{i,j}$ being the ratio of edge from actors of type $i$ to type $j$
+
+$$
+r = \frac{\sum}{}
+$$
+
+```{r}
+
+# types are assumed to be integers starting with one
+assortativity_nominal(UKfaculty, types = V(UKfaculty)$Group + 1)
+
+```
+
+or odds-ratios of within-group ties [@bojanowskiMeasuringSegregationSocial2014]
+
+```{r}
+orwg(UKfaculty, "Group")
+```
+
+telling us, that same-group tie odds are 12.866 times greater than tie odds between groups.
+
+or Colemans Index [@colemanRelationalAnalysisStudy1958] that compares the proportion of same-group neighbours to the proportion of that group in the network as a whole.
+
+```{r}
+coleman(UKfaculty, "Group")
+```
+
+which compares the proportion of same-group neighbors to the proportion of that group in the network as a whole. It is a number between -1 and 1. Value of 0 means these proportions are equal. Value of 1 means that all ties outgoing from a particular group are sent to the members of the same group. Value of -1 is the opposite – all ties are sent to members of other group(s).
+
 
 
 # Social capital
+Pierre Bourdieu
 
 
 
+
+
+# Power
+centrality measures
+
+Aufgabe: Why your friends have more friends than you do (Feld 1991)
 
 
 # Theoretical Insights from Network Data
@@ -33,3 +146,5 @@ Transitivity
 # Strength of weak ties
 
 # Structural hole
+
+# Network cohesion

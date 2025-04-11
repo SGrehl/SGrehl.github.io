@@ -26,7 +26,7 @@ library(ggplot2)
 set.seed(123)
 
 # Generate a random graph with 30 nodes and 50 edges
-g <- erdos.renyi.game(n = 60, p.or.m = 70, type = "gnm", directed = FALSE)
+g <- sample_gnm(n = 60, p.or.m = 70, type = "gnm", directed = FALSE)
 
 # Assign random colors to nodes
 V(g)$color <- sample(c("blue", "green"), vcount(g), replace = TRUE)
@@ -150,7 +150,7 @@ library(patchwork)  # For arranging plots
 
 
 # Generate a random graph with 30 nodes and 50 edges
-g2 <- erdos.renyi.game(n = 60, p.or.m = 70, type = "gnm", directed = TRUE)
+g2 <- sample_gnm(n = 60, p.or.m = 70, type = "gnm", directed = TRUE)
 
 # Assign random colors to nodes
 V(g2)$color <- sample(c("blue", "green"), vcount(g2), replace = TRUE)
@@ -284,6 +284,8 @@ In `igraph` [@csardiIgraphInterfaceIgraph2025], a network object is an instance 
 ```{r}
 #| code-fold: false
 
+library(igraph)
+
 M <- matrix(c( 0, 1, 0, 0, 0,
                0, 0, 1, 0, 0,
                1, 1, 0, 0, 1,
@@ -298,7 +300,7 @@ summary(g)
 V(g)  # List nodes
 E(g)  # List edges
 
-get.edgelist(g)  # Convert to edge list
+as_edgelist(g)  # Convert to edge list
 as_adjacency_matrix(g) # Get adjacency matrix
 as_adj_list(g, mode = "out") # Get adjacency list
 
@@ -314,7 +316,7 @@ plot(g)
 ```{r}
 #| code-fold: false
 
-ug <- graph.adjacency(M, mode = "undirected")
+ug <- graph_from_adjacency_matrix(M, mode = "undirected")
 ug
 summary(ug)
 
@@ -410,6 +412,7 @@ plot(G,
 
 ![Example of a simple graph](Graphics/vocabulary.png)
 
+## Complete graphs and density
 
 Consider this simple graph $G$ with:
 
@@ -421,24 +424,14 @@ This graph has two **components** (disconnected parts).
 
 
 
-A **walk** is a way of traveling from one vertex to another, following a sequence of edges. 
-
-- **Path**: A walk in which no vertex appears more than once.
-
-- **Cycle**: A walk that starts and ends at the same vertex.
-
-Example:
-
-- Walk: $ (w \to u \to v \to w \to z) $ (length = 4)
-
-- Path: $ ( v \to w \to z \to R )$ (length = 3)
-
-- Cycle:$ ( w \to u \to v \to w)$
-
-
 A **connected graph** is a graph where there exists a path between any two vertices.
 
 A **disconnected graph** has multiple **components**, meaning some vertices are not reachable from others.
+
+```{r}
+is_connected(karate)
+```
+
 
 
 A **complete graph** $K_n$ is a simple graph where each pair of distinct vertices is connected by an edge. It has:
@@ -450,18 +443,183 @@ $$
 edges.
 
 
-Small worlds, Dichte, Diameter, Verteilung
+```{r}
+g_complete <- make_full_graph(5)
+plot(g_complete)
 
+```
+
+- The **density** of a graph is a measure of how close it is to being completely connected.
+
+```{r}
+graph.density(make_empty_graph(20))
+graph.density(make_full_graph(20))
+```
+$1 =$ completely connected
+$0 =$ completely disconnected
+
+
+
+## Paths and Distance
+
+Given an undirected Network $(V, E)$ a **path** of length $l$ is a non-empty sequence of vertices $(v_1, v_2,..., v_{l+1}), such that $v_i \in V, \forall i = 1,...,l+1$ and $v_i, v_{i+1} \in E \forall i = 1,...,l$ .
+
+- A path is *simple* if $v_1 \neq v_j \forall i<j$
+- A path is *closed* if $v_1 \eq v_{i+1}$
+- A path is a *cyle* if it is closed and $v_1 \neq v_j \forall i<j$, except for the pair $(i,j) \eq (1, l+1)$
+
+
+- A *shortest path* between two nodes is calles **geodesic**.
+
+:::{#custom-block}
+The (following) [Zachary Karate Club](https://en.wikipedia.org/wiki/Zachary%27s_karate_club) data set is a very famous one, as it is publicly available and a good example for small-scale community structure analysis. Check Wikipedia for more information.
+:::
+
+
+```{r}
+#| code-fold: false
+
+
+
+data(karate)
+
+plot(karate)
+
+sp <- shortest_paths(karate, 17)
+sp$vpath[[24]]
+path <- E(karate, path=sp$vpath[[24]])
+
+# Set default colors and sizes
+V(karate)$color <- "lavender"
+E(karate)$color <- "lavender"
+E(karate)$width <- 1
+
+# Highlight path in pink
+E(karate)[path]$color <- "pink"
+E(karate)[path]$width <- 3
+
+# Final plot
+plot(karate)
+```
+
+![Shortest path between vertice 24 and vertice 17 in the karate network ](Graphics/shortest_path.png)
+
+- the *distance* $d(i,j)$ between two nodes $i$ and $j$ is the length of the shortest path between them
+
+```{r}
+dist <- distances(karate)
+dist
+dist[1,]
+
+E(karate)$weight
+
+dist <- distances(karate,
+                  weights = rep(1,
+                                ecount(karate)
+                                )
+                  )
+dist[1,]
+
+distance_table(karate)
+dist_tbl <- distance_table(karate)$res
+
+barplot(dist_tbl,
+        names.arg=1:length(dist_tbl)
+        )
+
+```
+
+- the *average distance*: 
+
+$$
+
+\bar{d} = \frac{1}{n(n-1)} \sum_{\substack{i,j = 1 \\ i \ne j}}^{n} d(i, j)
+
+$$
+
+```{r}
+#| code-fold: false
+
+mean_distance(karate)
+
+```
+
+
+- the maximum distance between any pair of nodes in the graph is called a **diameter**
+
+$$
+\delta = max_{i,j}(d(i,j))
+$$
+
+```{r}
+#| code-fold: false
+
+max(dist)
+diameter(karate,
+         weights = rep(1,
+                       ecount(karate)
+                       )
+         )
+
+```
+
+
+##Subnetworks and Components
+
+A **subnetwork** is a smaller part of a larger network. It includes a selection of nodes (vertices) and all the edges (connections) that exist between those selected nodes in the original network. Think of it like zooming in on a specific group within a bigger social network — for example, looking at just the group of friends connected to one person so a subnetwork is any network $h=(W,F)$ where $W \subseteq V$ and $F \subseteq E$, containing all edges between nodes in $W$.
+
+
+A **component** is a subnetwork where every node is reachable from every other node, and which is not part of a larger connected subnetwork. In simpler terms, a component is a self-contained cluster — a group of nodes that are all connected to each other, but not to nodes outside the group.
+
+![Example of a simple graph](Graphics/vocabulary.png)
+
+So for example this graph has two components.
+
+- Vertexes whose removal leads to more components are called **cutpoints**
+- Edges whose removal leads to more components are calles **bridges**
+
+```{r}
+data(karate)
+
+
+# Cutpoints
+articulation_points(karate)
+
+V(karate)$color <- "lavender"
+
+V(karate)[articulation.points(karate)]$color <- "pink"
+plot(karate)
+
+components(karate)
+karate_split <- delete_vertices(karate, c(1))
+plot(karate_split)
+components(karate_split)
+
+
+E(karate)$color <- "lavender"
+
+##  Set bridge edges to red:
+num_comp <- length(decompose(karate))
+for (i in 1:length(E(karate))) {
+  karate_sub <- delete_edges(karate, i)
+  if ( length(decompose(karate_sub) ) > num_comp ) E(karate)$color[i] <- "pink"
+}
+
+plot(karate)
+
+```
+![Karate network - Cutpoints and Bridges are highlighted in red](Graphics/cut-points.png)
 
 # Data collection
 
-There are many different forms of data collection for socia network data. Options to collect data include Small Group questionnaires, large-scale Surveys, face-to-face observations, scraping of Websites, APIs or digital Archives.
+There are many different forms of data collection for social network data. Options to collect data include Small Group questionnaires, large-scale Surveys, face-to-face observations, scraping of Websites, APIs or digital Archives.
 The choice of collection strategy has to be informed by the focus of research and available data sources. Almost always, when we are collecting network data, we are bounded by place and time where we have to make reasonable decisions in order to restrict our node set [@rawlingsHowAreSocial2023].
 
 Colection strategies can broadly be structured in Local and Global collection strategies.
 
 
 **Local (Egocentric Networks)**
+
 - Focused around a particular node (**ego**).
 - Provides insights into individual behavior and immediate social environment.
 - Reduces challenges of defining network boundaries.
@@ -471,6 +629,7 @@ Colection strategies can broadly be structured in Local and Global collection st
   
 
 **Global (Sociocentric Networks)**
+
 - Captures **all nodes and their relationships** within a specific setting (e.g., a school, company, or online platform).
 - Allows measurement of **network-wide properties** (e.g., degree distribution, network diameter, clustering).
 - **Limitations**:
@@ -480,6 +639,8 @@ Colection strategies can broadly be structured in Local and Global collection st
 Given the collection approach, there are different modes of collecting the data like the **Nominalist Approach**, which is based on observable links between actors
 
 e.g.:
+
+
   
 **Co-authorship networks** derived from Web of Science or Scopus.
 
@@ -487,6 +648,8 @@ e.g.:
   - Over representation of English-language journals.
   - Exclusion of informal collaborations
   - Exclusion of fast and slow science
+
+
 
 
 **Facebook-Connections**
