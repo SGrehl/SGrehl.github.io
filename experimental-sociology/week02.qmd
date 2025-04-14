@@ -27,7 +27,7 @@ In many cases, we’re interested in a core outcome—such as shifting attitudes
 
 Decision theory and game theory emphasize the centrality of behavior but apply differently depending on the social context. **Decision theory** addresses situations where the outcome depends solely on the decisions of an **individual actor**, without direct interference from others. For example, choosing whether to pursue higher education or immediately enter the labor market is primarily a personal decision that can be analyzed using decision theory. These situations are formally termed parametric ***decisions*** because the model predictions primarily depend on situational parameters.
 
-In contrast, **game theory** applies to scenarios where outcomes are influenced by the interactions of **multiple individuals** or groups, whose **decisions are interdependent**. This means no single actor has complete control over the outcome, adding a strategic dimension to their decision-making. Examples include negotiations, competitive markets, or voluncteering for a task. These situations are formally termed ***games*** due to their interactive and strategic nature.[^1]
+In contrast, **game theory** applies to scenarios where outcomes are influenced by the interactions of **multiple individuals** or groups, whose **decisions are interdependent**. This means no single actor has complete control over the outcome, adding a strategic dimension to their decision-making. Examples include negotiations, competitive markets, or volunteering for a task. These situations are formally termed ***games*** due to their interactive and strategic nature.[^1]
 
 [^1]: Decision theory is sometimes referred to as *parametric decision theory*. Game theory, on the other hand, could actually be called *strategic decision theory*, since outcomes depend significantly on strategic considerations and the choices of others. Despite this, game theory retains its playful name from its origins in analyzing parlor games [@neumann1944]. A fitting testament to how tradition (and a dash of path dependence) can leave a lasting imprint on terminology.
 
@@ -299,12 +299,12 @@ In such a setup, we would say that action $a_t$ **dominates** action $a_{nt}$, b
 |  |  |  |
 |--------------------------------|--------------------|--------------------|
 | **actions \\ states of the world** | **Ticket inspection (**$p$) | **No ticket inspection** ($1-p$) |
-| **Buy ticket** | $-T$ | $-T$ |
-| **Don’t buy ticket** | $-F$ | $Q$ |
+| **Buy ticket** ($a_t$) | $-T$ | $-T$ |
+| **Don’t buy ticket** ($a_{nt}$) | $-F$ | $Q$ |
 
 : Payoff matrix for the ticket decision. {#tbl-decision-ticket}
 
-Let us come now back to our original assumptoion $Q>-T>-F$. Please make sure that in this case neither of the two strategies dominates the other, as in one case $a_t$ is better, in the other $a_{nt}$. We now want to determine whether the actor prefers buying a ticket over not buying a ticket, i.e., whether the preference relation\
+Let us come now back to our original assumption $Q>-T>-F$. Please make sure that in this case neither of the two strategies dominates the other, as in one case $a_t$ is better, in the other $a_{nt}$. We now want to determine whether the actor prefers buying a ticket over not buying a ticket, i.e., whether the preference relation\
 $$ a_t \succ a_{nt} $$\
 holds.
 
@@ -580,10 +580,10 @@ In this equilibrium, each player keeps the other perfectly indifferent and maxim
 
 4.  \[intermediate\] Look at the game shown in @tbl-game-sd. This game also has a third equilibrium in mixed strategies; determine it.
 
-5.  Remember the model of relative deprivation [@boudon1977]? There are only: costs $c$ if somebody applies for a promotion, benefits $b$ for they get the promotion, and the relative share of free positions $f$, all of these information are being common knowledge.
+5.  Remember Boudon's [-@boudon1977] model of relative deprivation? It considers only three factors: the costs $c$ of applying for a promotion, the benefits $b$ of receiving the promotion, and the relative share of available positions $f$, all of which are assumed to be common knowledge.
 
     1.  \[easy\] Model this situation with $n=2$ and $f=.5$.
 
-    2.  \[hard\] Try to derive the general function of p for any $n$ and $f$ .
+    2.  \[hard\] Try to derive the general function of p for any $n$ and $f$.
 
 6.  Bring your results and any questions to the seminar.
