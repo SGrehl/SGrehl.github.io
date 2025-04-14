@@ -300,15 +300,13 @@ In `igraph` [@csardiIgraphInterfaceIgraph2025], a network object is an instance 
 ```{r}
 #| code-fold: false
 
-library(igraph)
-
 M <- matrix(c( 0, 1, 0, 0, 0,
                0, 0, 1, 0, 0,
                1, 1, 0, 0, 1,
                0, 1, 0, 0, 0,
                0, 1, 1, 0, 0), nrow = 5, byrow=TRUE)
 
-g <- graph.adjacency(M, mode = "directed")
+g <- graph_from_adjacency_matrix(M, mode = "directed")
 
 # Graph descriptives
 summary(g)
@@ -382,7 +380,7 @@ g <- graph_from_literal(1--2, 2--3, 3--5, 4--2, 1--3, 2--5)
 plot(g)
 
 # for directed networks
-gd <- graph_from_literal(1-+2, 2-+3, 3-+4, 4-+1)
+gd <- graph_from_literal(1-+2, 2-+3, 3-+4, 4++1)
 
 plot(gd)
 ```
@@ -409,12 +407,12 @@ Just the network itself does not hold a lot of information to analyze. In order 
 #| code-fold: false
 
 # Assign names to nodes
-V(g)$name <- c("A", "B", "C", "D", "E")
+V(g)$name <- c("Berta", "B", "C", "D", "E")
 
 plot(g)
 
 
-E(g)$weight <- c(1.2, 2.3, 1.8, 3.0, 2.1, 1.5)
+E(g)$weight <- c(1.2, 2.3, 1.8, 3.0, 2.1, 1.5, 6.3, 8.3)
 
 plot(g, edge.width = E(g)$weight)  # Visualizing edge weights
 ```
@@ -507,7 +505,9 @@ The (following) [Zachary Karate Club](https://en.wikipedia.org/wiki/Zachary%27s_
 
 ```{r}
 #| code-fold: false
+
 data(karate)
+
 
 plot(karate)
 
@@ -664,18 +664,88 @@ M =
 \end{pmatrix}
 $$
 
+```{r}
+M <- matrix(c(
+  0, 1, 0, 1, 0, 1,
+  1, 0, 0, 1, 0, 1,
+  0, 0, 0, 1, 0, 1,
+  0, 0, 0, 0, 0, 1,
+  0, 1, 0, 1, 0, 1,
+  1, 0, 0, 1, 0, 0
+), nrow = 6, byrow = TRUE)
+
+
+g <- graph_from_adjacency_matrix(M, mode = "directed")
+plot(g)
+
+```
+
+
 2. How many edges and how many vertices has the network?
+
+```{r}
+vcount(g)
+ecount(g)
+```
 
 
 3. Calculate the distances of node 3 to all other nodes. Interpret these values.
 
+```{r}
+dist <- distances(g, mode = "out")
+dist
+dist[3,]
+
+
+
+#[1] 2 3 0 1 Inf 1 - the distance from node 3 to node 1 is 2, to node 2 its 3, there is a path of 0 to itself and no way to reach the vertex 5 (through out paths).
+
+```
+
+
 4. Find a command that gets you an edge list of the network.
+
+```{r}
+eg <- as_edgelist(g)
+eg
+```
+
 
 5. Use the adjacency matrix to calculate the sum of outgoing and ingoing edges of node 6.
 
+```{r}
+sum(M[,6]==1) # ingoing edges
+sum(M[6,]==1) # outgoing edges
+
+```
+
+
+
 6. Is there a tie between vertex 2 and vertex 3?
 
+```{r}
+
+are_adjacent(g, 2, 3)
+
+```
+
+
 7. Use the adjacency matrix to add an edge from vertex 5 to vertex 3.
+
+```{r}
+M2 <- matrix(c(
+  0, 1, 0, 1, 0, 1,
+  1, 0, 0, 1, 0, 1,
+  0, 0, 0, 1, 0, 1,
+  0, 0, 0, 0, 0, 1,
+  0, 1, 1, 1, 0, 1,
+  1, 0, 0, 1, 0, 0
+), nrow = 6, byrow = TRUE)
+
+g2 <- graph_from_adjacency_matrix(M2)
+plot(g2)
+```
+
 
 8. Using the following dataframe, construct an adjacency matrix: 
 
@@ -685,13 +755,56 @@ $$
 df <- data.frame(id = c(1:10), 
                  friend1 = c(9, 8, 10,  3,  1,  4,  2,  6,  7,  5), # first friend nomination
                  friend2 = c(5, 7, 2, 2, 3,  7,  3, 10,  1, 8),  # second friend nomination
-                 friend3 = c(NA, NA, 4, 6, 10, 7, 2, NA, NA, 3), # third friend nomination
+                 friend3 = c(NA, NA, 4, 6, 10, 8, 5, NA, NA, 3), # third friend nomination
                  age = c(15, 15, 15, 16, 14, 14, 14, 15, 16, 14), # age in years
                  gender = c(2, 0, 1, 0, 1, 1, 2, 0, 0, 1)) # gender: 0= male, 1= female, 2= divers
 
 ```
 
 7. Create a network from 6) and add the vertex attributes gender and age. 
+
+```{r}
+edges1 <- data.frame(from = df$id,
+                     to = df$friend1)
+
+edges2 <- data.frame(from = df$id,
+                     to = df$friend2)
+
+edges3 <- data.frame(from  = df$id,
+                     to = df$friend3)
+
+# Combine all edges into one data frame
+edges <- rbind(edges1, edges2, edges3)
+
+# Remove rows with NA (where there was no third friend)
+edges <- na.omit(edges)
+
+# Create graph from edge list and vertex attributes
+g <- graph_from_data_frame(d = edges, directed = TRUE, vertices = df)
+
+plot(g)
+
+
+# Set vertex attributes
+V(g)$name <- df$id
+V(g)$age <- df$age
+V(g)$gender <- df$gender
+
+scaled_age <- scales::rescale(V(g)$age, to = c(5, 20))
+
+# Optional: plot the graph with attributes
+plot(g,
+     vertex.label = V(g)$name, # use "name" for labels
+     vertex.size = scaled_age,
+     vertex.color = ifelse(V(g)$gender == 0, "lightblue",
+                    ifelse(V(g)$gender == 1, "pink", "purple")),
+     edge.arrow.size = 0.5,
+     main = "Friendship Network with Age and Gender")
+
+
+
+```
+
 
 :::
 
@@ -701,7 +814,7 @@ df <- data.frame(id = c(1:10),
 There are many different forms of data collection for social network data. Options to collect data include Small Group questionnaires, large-scale Surveys, face-to-face observations, scraping of Websites, APIs or digital Archives.
 The choice of collection strategy has to be informed by the focus of research and available data sources. Almost always, when we are collecting network data, we are bounded by place and time where we have to make reasonable decisions in order to restrict our node set [@rawlingsHowAreSocial2023].
 
-Colection strategies can broadly be structured in Local and Global collection strategies.
+Collection strategies can broadly be structured in Local and Global collection strategies.
 
 
 **Local (Egocentric Networks)**
