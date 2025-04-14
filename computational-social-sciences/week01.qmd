@@ -629,7 +629,7 @@ Sascha 7, Julius 9 and Felix 2 [^3]. Everybody has had two coffees already but a
 :::
 
 
-```{r}
+```{r Solution}
 # Remember: this is just one solution, there are many ways, that lead to the same result
 
 # Define the initial list of employees
