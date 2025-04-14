@@ -1,7 +1,7 @@
 project:
   type: website
 date-format: "MMM D, YYYY"
-title-block-banner: "#F88379"
+title-block-banner: "#D3D3FF"
 format:
   html:
     theme: cerulian

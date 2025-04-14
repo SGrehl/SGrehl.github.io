@@ -384,6 +384,12 @@ gd <- graph_from_literal(1-+2, 2-+3, 3-+4, 4-+1)
 plot(gd)
 ```
 
+::: {#custom-block}
+We can also use `get_edge_list()` or `get_adjacency_matrix()` and so on to return alternative representations of `igraph-objects`.
+
+:::
+
+
 ## Adding node and edge attributes
 
 Just the network itself does not hold a lot of information to analyze. In order to sensefully do so on a micro-level, we can add more data to our nodes and edges.
@@ -415,7 +421,7 @@ plot(g, edge.width = E(g)$weight)  # Visualizing edge weights
 
 ::: {#custom-block}
 
-The language of graph Theory is not Standard - all authors have their own terminology Some use the term 'graph' for what we call a simple graph, or for a graph with directed edges, or for a graph with infinitely many vertices or edges. In this case the notion is taken from [@wilsonIntroductionGraphTheory2009].
+The language of graph theory is not Standard - all authors have their own terminology Some use the term 'graph' for what we call a simple graph, or for a graph with directed edges, or for a graph with infinitely many vertices or edges. In this case the notion is taken from [@wilsonIntroductionGraphTheory2009].
 :::
 
 
