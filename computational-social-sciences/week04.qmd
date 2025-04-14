@@ -24,21 +24,171 @@ Cliques
 Path
 
 
-
 # Relational Sociology and the concept of embeddedness
 
 ## Reciprocity
 
-Measures of reciprocity are 
+Measures of reciprocity are based on the **dyad census**: Any pair of vertices in a network is called  a dyad. There are three possible states of dyads (in a directed network): null dyads (no edge), b) asymmetric dyads (one directed edge) and c) mutual dyads (two directed edges).
 
-vertex centrality
+```{r}
+null <- graph_from_literal(1, 2)
+as <- graph_from_literal(1-+2)
+mutual <- graph_from_literal(1-+2, 2-+1)
+
+g <- graph_from_literal(1-+2, 2-+3, 2+-3, 5-+2, 3--+5, 5-+3, 3-+4)
+
+layout_line <- cbind(1:2, rep(1, 2))
+
+plot(null,
+     vertex.color = "lavender",
+     vertex.size = 30, 
+     layout = layout_line)
+
+plot(as, 
+     vertex.color = "lavender",
+     vertex.size = 30,
+     layout = layout_line)
+
+plot(mutual,
+     vertex.color = "lavender",
+     vertex.size = 30,
+     layout = layout_line)
+
+# Plotte das Netzwerk mit Lavender vertices
+plot(g,
+     vertex.color = "lavender",
+     vertex.size = 30,
+     edge.width = 2,
+     arrow.size = 0.1,
+     layout = layout_with_fr)
+
+```
+::: {#fig-dyads layout-ncol=3}
+
+![Null dyad](Graphics/null.png){width=30%}
+
+![Assymetrical dyad](Graphics/assymetrical.png){width=30%}
+
+![Mutual dyad](Graphics/mutual.png){width=30%}
+:::
+
+![Example dyads](Graphics/dyad.png)
+
+| null         | asymmetric         | mutual           |
+|--------------|--------------------|------------------|
+| 5 | 3  | 2 |
 
 
-Dyads
 
+### Dyad census in a graph
 
+```{r}
+
+UKfaculty <- upgrade_graph(UKfaculty)
+UKfaculty <- simplify(UKfaculty)
+
+dyad_census(UKfaculty)
+```
+
+The **level of reciprocity** shows whether a network mainly consists of mutual or assymetrical edges and can be calculated in R using either 'default'-mode (number of reciprocated edges divided by the total number of edges) or 'ratio'-mode (number of mutual dyads divided by the number of asymmetric dyads).
+
+```{r}
+
+reciprocity(UKfaculty, mode="default")
+
+reciprocity(UKfaculty, mode="ratio")
+```
 
 ## Transitivity
+
+Any set of 3 vertices is called a **triad**. In directed networks, 16 different triads exist [@davisStructurePositiveInterpersonal1967].
+
+MATRIX ÜBERARBEITEN
+
+```{r}
+
+# Define all 16 triad types using adjacency matrices
+triad_matrices <- list(
+  matrix(c(0,0,0, 0,0,0, 0,0,0), nrow=3, byrow=TRUE), # 003
+  matrix(c(0,1,0, 0,0,0, 0,0,0), nrow=3, byrow=TRUE), # 012
+  matrix(c(0,1,0, 1,0,0, 0,0,0), nrow=3, byrow=TRUE), # 102
+  matrix(c(0,1,1, 0,0,0, 0,0,0), nrow=3, byrow=TRUE), # 021D
+  matrix(c(0,0,0, 1,0,0, 1,0,0), nrow=3, byrow=TRUE), # 021U
+  matrix(c(0,1,0, 0,0,1, 0,0,0), nrow=3, byrow=TRUE), # 021C
+  matrix(c(0,1,0, 1,0,0, 1,0,0), nrow=3, byrow=TRUE), # 111D
+  matrix(c(0,1,0, 1,0,1, 0,0,0), nrow=3, byrow=TRUE), # 111U
+  matrix(c(0,1,1, 0,0,0, 0,1,0), nrow=3, byrow=TRUE), # 030T
+  matrix(c(0,1,0, 0,0,1, 1,0,0), nrow=3, byrow=TRUE), # 030C
+  matrix(c(0,1,1, 1,0,0, 1,0,0), nrow=3, byrow=TRUE), # 201
+  matrix(c(0,1,1, 0,0,1, 0,1,0), nrow=3, byrow=TRUE), # 120D
+  matrix(c(0,0,0, 1,0,1, 1,1,0), nrow=3, byrow=TRUE), # 120U
+  matrix(c(0,1,1, 0,0,1, 1,0,0), nrow=3, byrow=TRUE), # 120C
+  matrix(c(0,0,1, 1,0,1, 1,1,0), nrow=3, byrow=TRUE), # 210
+  matrix(c(0,1,1, 1,0,1, 1,1,0), nrow=3, byrow=TRUE) # 300 (mutual all)
+)
+
+triad_names <- c("003", "012", "102", "021D", "021U", "021C", "111D", "111U", "030T", "030C",
+                 "201", "120D", "120U", "120C", "210", "300")
+
+# Plot each triad
+par(mfrow = c(4, 4), mar = c(1, 1, 2, 1))  # 4x4 grid layout
+
+for (i in 1:16) {
+  adj <- triad_matrices[[i]]
+  g <- graph_from_adjacency_matrix(adj, mode = "directed")
+  plot(
+    g,
+    main = triad_names[i],
+    vertex.color = "lavender",
+    vertex.size = 30,
+    vertex.label = NA,
+    vertex.label.cex = 0,
+    edge.arrow.size = 0.3,
+    layout = layout_in_circle
+  )
+}
+
+```
+![Different tryads](Graphics/triads.png)
+
+:::{#custom-block}
+The codes like `102`, `021C`, `120U` may feel cryptic at first, but they follow a logical pattern:
+
+** Basic structure: Three-digit code
+
+- **First digit**: Number of **mutual (reciprocal)** dyads (e.g., A ↔ B)
+- **Second digit**: Number of **asymmetric (one-way)** dyads (e.g., A → B)
+- **Third digit**: Number of **null dyads** (no tie between the pair)
+
+**Example: '102'**
+
+| Digit | Meaning                                        |
+|-------|------------------------------------------------|
+| `1`   | 1 mutual (reciprocal) relationship (e.g., A ↔ B) |
+| `0`   | 0 one-way relationships                        |
+| `2`   | 2 node pairs have no relationship              |
+
+
+---
+
+**Add-On lettering:**
+
+For more complex cases, a letter is added to describe the triad's shape or direction:
+
+| Code     | Description                                                    |
+|----------|----------------------------------------------------------------|
+| `021D`   | Two one-way edges going **down** (A → B → C)                   |
+| `021U`   | Two one-way edges going **up** (C → B → A)                     |
+| `021C`   | A **circle** of one-way edges (A → B → C → A)                  |
+| `030T`   | A **transitive** triangle (A → B → C and A → C)                |
+| `030C`   | A **cycle** with three one-way edges (A → B → C → A)           |
+| `120D`   | One mutual edge, two one-way edges in a **downward** direction |
+| `120U`   | One mutual edge, two one-way edges in an **upward** direction  |
+| `120C`   | A **circle**-like pattern with mutual + one-way ties           |
+| `210`    | Two mutual dyads and one one-way edge                          |
+| `300`    | All three dyads are mutual (fully connected triad)             |      |
+
+:::
 
 
 # Network segregation and homophily
@@ -125,8 +275,12 @@ which compares the proportion of same-group neighbors to the proportion of that 
 
 
 
+
+
 # Social capital
-Pierre Bourdieu
+
+Similarly to homophily, social capital is (though often cited) not as a clear term as it may seem.
+
 
 
 

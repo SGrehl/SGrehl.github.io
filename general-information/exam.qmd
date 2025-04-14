@@ -5,24 +5,26 @@ date: "2025-03-21"
 
 # Pre-examination requirement (Prüfungsvorleistung):
 
-Every two weeks, in one of the courses, we will assign you a problem set (*Übungsblatt*). You will typically have at least one week to complete and submit your solutions. You can hand in your solutions either as a Markdown or a Quarto Skript.
+Every two weeks, in one of the courses, we will assign you a problem set (*Übungsblatt*). You will typically have at least one week to complete and submit your solutions. You can find the problem set as well as supplementary materials on Moodle.
+
+Please [**submit your solutions on Moodle**](https://moodle2.uni-leipzig.de/course/view.php?id=53760) as a rendered PDF or HTML file, generated using either Markdown or Quarto.
 
 
 
 +--------------+--------------+------------------------------+
 | Week         | Course       | Topics                       |
 +==============+==============+==============================+
-| 2            | CSS          | tba                          |
+| 2            | CSS          | Social network analysis      |
 +--------------+--------------+------------------------------+
-| 4            | CSS          | tba                          |
+| 5            | CSS          | Social network analysis      |
 +--------------+--------------+------------------------------+
-| 6            | ES           | tba                          |
+| 7            | ES           | tba                          |
 +--------------+--------------+------------------------------+
-| 8            | CSS          | tba                          |
+| 9            | CSS          | Spatial data                 |
 +--------------+--------------+------------------------------+
-| 10           | ES           | tba                          |
+| 11           | ES           | tba                          |
 +--------------+--------------+------------------------------+
-| 12           | ES           | tba                          |
+| 13           | ES           | tba                          |
 +--------------+--------------+------------------------------+
 
 # Course assessment (Prüfungsleistung)

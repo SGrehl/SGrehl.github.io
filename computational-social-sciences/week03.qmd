@@ -1,10 +1,44 @@
 ---
-title: "Week 03"
-subtitle: "No class"
+title: "🐰 Week 03 🐰 "
+subtitle: "No lecture - Happy Easter, y'all!"
 ---
 
 
 ::: {#custom-block}
-# Easter Eggs in Data Science
+# 🥚💐 Easter Eggs in Computation and Datascience
 
+In the field of computation and data analysis, **Easter eggs** are hidden elements intentionally placed within software or code. These can include hidden features, secret messages, subtle jokes, or surprising behaviors that aren't immediately obvious to users. Often, they are integrated in a way that makes them discoverable only to those who explore beyond the usual interface or behavior.
+
+Mostly developers hide Easter eggs to leave a mark in their work or as a reward for curious users.
+
+**For examples: Try running these code chunks in an R-Script: **
+
+```{r}
+#| code-fold: false
+data(bunny); p3d(bunny,theta=3,phi=104,box=FALSE)
+
+```
+
+
+```{r}
+#| code-fold: false
+
+if (!require("pacman")) install.packages("pacman")
+pacman::p_exists(R)
+
+```
+
+
+**Or some console humor**:
+
+```{r}
+#| code-fold: false
+
+????t.test
+
+
+example(readline)
+```
 :::
+
+

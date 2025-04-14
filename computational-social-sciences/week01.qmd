@@ -629,6 +629,67 @@ Sascha 7, Julius 9 and Felix 2 [^3]. Everybody has had two coffees already but a
 :::
 
 
+```{r}
+# Remember: this is just one solution, there are many ways, that lead to the same result
+
+# Define the initial list of employees
+employees <- list(
+  Stephan = c(2, 4, TRUE),
+  Sascha = c(2, 7, TRUE),
+  Leo = c(2, 4, TRUE),
+  Julius = c(2, 9, TRUE),
+  Felix = c(2, 2, TRUE)
+)
+
+# Define the function to update coffee values and awake status
+update_coffee <- function(employees_list) {
+  updated_list <- lapply(employees_list, function(employee) {
+    cups_drunk <- employee[1]
+    caffeine_tolerance <- employee[2]
+    tired <- employee[3]
+    
+    if (cups_drunk >= caffeine_tolerance) {
+      # If already reached tolerance, do not give more coffee
+      message <- "No coffee. Reached caffeine tolerance."
+      next_attempt <- "No"
+    } else {
+      # Give coffee up to tolerance or until not tired (max 3 cups)
+      cups_to_give <- min(3, caffeine_tolerance - cups_drunk)
+      cups_given <- 0
+      
+      while (cups_given < cups_to_give && tired) {
+        cups_drunk <- cups_drunk + 1
+        cups_given <- cups_given + 1
+        tired <- ifelse(runif(1) <= 0.4, FALSE, TRUE)  # 40% chance of feeling more awake
+      }
+      
+      if (cups_given > 0) {
+        message <- paste("Received coffee. Cups:", cups_given)
+        next_attempt <- ifelse(cups_drunk < caffeine_tolerance, "Yes", "No")
+      } else {
+        message <- "No coffee. Already awake or tolerance reached."
+        next_attempt <- "No"
+      }
+    }
+    
+    # Return updated values
+    c(cups_drunk, caffeine_tolerance, tired, message, next_attempt)
+  })
+  
+  # Return the updated list
+  updated_list
+}
+
+# Call the function to update coffee values and awake status
+updated_employees <- update_coffee(employees)
+
+# Print the updated list
+updated_employees
+
+```
+
+
+
 ## Global environment
 
 The global environment is the workspace of R. It contains all objects that you have created during your session. You can see all objects in the global environment in the upper right corner of RStudio. You can also list all objects in the global environment using the `ls()` function.
