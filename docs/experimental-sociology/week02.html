@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-04-11">
+<meta name="dcterms.date" content="2025-04-14">
 
 <title>Experimental Sociology - Week 02 – ES &amp; CSS</title>
 <style>
@@ -5141,7 +5141,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">2025-04-11</p>
+        <p class="date">2025-04-14</p>
       </div>
     </div>
     
@@ -5191,7 +5191,6 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#mixed-nash-equilibrium" id="toc-mixed-nash-equilibrium" class="nav-link" data-scroll-target="#mixed-nash-equilibrium">Mixed Nash Equilibrium</a></li>
   <li><a href="#example-matching-pennies" id="toc-example-matching-pennies" class="nav-link" data-scroll-target="#example-matching-pennies">Example: Matching Pennies</a></li>
-  <li><a href="#why-mixed-strategies-matter" id="toc-why-mixed-strategies-matter" class="nav-link" data-scroll-target="#why-mixed-strategies-matter">Why Mixed Strategies Matter</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#pre-class-assignment" id="toc-pre-class-assignment" class="nav-link" data-scroll-target="#pre-class-assignment">🏋️ <strong>Pre-Class Assignment</strong></a></li>
@@ -5357,7 +5356,7 @@ Note
 <section id="consequences" class="level3">
 <h3 class="anchored" data-anchor-id="consequences">Consequences</h3>
 <p>Once we specify both the set of possible actions <span class="math inline">\(A\)</span> an actor may take and the set of possible states of the world <span class="math inline">\(\Omega\)</span>, each combination of an action <span class="math inline">\(a \in A\)</span> and a state <span class="math inline">\(\omega \in \Omega\)</span> yields a distinct <strong>consequence</strong>, <span class="math inline">\(x\)</span>. Thus, we can define the set of all possible consequences as:</p>
-<p><span class="math display">\[X=A \times \Omega\]</span>This notation emphasizes that outcomes depend both on what the actor does (the chosen action) and on how external factors turn out (the actual state of the world). In Table <a href="#tbl-consequences" class="quarto-xref">Table 1</a> illustrates how three actions and two states can combine to produce six potential <strong>consequences</strong>.</p>
+<p><span class="math display">\[X=A \times \Omega\]</span>This notation emphasizes that outcomes depend both on what the actor does (the chosen action) and on how external factors turn out (the actual state of the world). In <a href="#tbl-consequences" class="quarto-xref">Table 1</a> illustrates how three actions and two states can combine to produce six potential <strong>consequences</strong>.</p>
 <div id="tbl-consequences" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-consequences-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -5440,7 +5439,7 @@ Note
 <p><span class="math display">\[
 x\succsim y \Leftrightarrow u(x) \geq u(y)
 \]</span></p>
-<p>In other words, whenever <span class="math inline">\(x\)</span> is at least as preferred as <span class="math inline">\(y\)</span>, <span class="math inline">\(u\)</span> must assign to <span class="math inline">\(x\)</span> a value at least as large as the one it assigns to <span class="math inline">\(y\)</span>. In Table <a href="#tbl-utility-ordinal" class="quarto-xref">Table 2</a> we see that the ordinal preferences <span class="math inline">\(x\succ y \succ z\)</span> are represented by the utility function <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span>, but not by <span class="math inline">\(h\)</span> as <span class="math inline">\(h(y)&gt;h(x)\)</span> contradicts with <span class="math inline">\(x\succ y\)</span>.</p>
+<p>In other words, whenever <span class="math inline">\(x\)</span> is at least as preferred as <span class="math inline">\(y\)</span>, <span class="math inline">\(u\)</span> must assign to <span class="math inline">\(x\)</span> a value at least as large as the one it assigns to <span class="math inline">\(y\)</span>. In <a href="#tbl-utility-ordinal" class="quarto-xref">Table 2</a> we see that the ordinal preferences <span class="math inline">\(x\succ y \succ z\)</span> are represented by the utility function <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span>, but not by <span class="math inline">\(h\)</span> as <span class="math inline">\(h(y)&gt;h(x)\)</span> contradicts with <span class="math inline">\(x\succ y\)</span>.</p>
 <div id="tbl-utility-ordinal" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-utility-ordinal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -5501,7 +5500,7 @@ Note
 <h3 class="anchored" data-anchor-id="expected-utility">Expected Utility</h3>
 <p>When decisions involve <strong>uncertainty</strong>, that is, more than one possible state of the world can occur with varying likelihoods, we apply the concept of <strong>expected utility</strong>. This approach extends the idea of a <strong>utility function</strong> from deterministic outcomes (under certainty) to <strong>probabilistic mixtures</strong> of outcomes, commonly referred to as <strong>lotteries</strong>.</p>
 <p>We represent a <strong>lottery</strong> as <span class="math inline">\([p_1,x_1;p_2,x_2]\)</span>. This means that if the lottery is chosen, the actor receives outcome <span class="math inline">\(x_1\)</span> with probability <span class="math inline">\(p_1\)</span>, and outcome <span class="math inline">\(x_2\)</span> with probability <span class="math inline">\(p_2\)</span>. Since probabilities must always add up to 1, in this case <span class="math inline">\(p_2=1-p_1\)</span>. In this way, choosing an action in an uncertain environment can be interpreted as selecting a lottery over possible consequences, each defined by the combination of an action and the state of the world that materializes. This framework enables us to evaluate and compare actions by considering the expected value of their outcomes.</p>
-<p>Consider the example in Table <a href="#tbl-expected-util" class="quarto-xref">Table 3</a>, which we will call <strong>payoff-matrix</strong>, where we combine the actions with the states of the world and assign them utility values. As we can see, the action “summer clothes” might result in the consequence <span class="math inline">\(x_{S,S}\)</span> (summer clothes + sunny weather) with probability <span class="math inline">\(p\)</span>, or <span class="math inline">\(x_{S,R}\)</span> (summer clothes + rainy weather) with probability <span class="math inline">\(1 - p\)</span>. Since the actor cannot know for sure which state of the world will occur, they face a lottery: a <strong>random</strong> outcome yielding utility 10 in sunny weather or 4 in rainy weather.</p>
+<p>Consider the example in <a href="#tbl-expected-util" class="quarto-xref">Table 3</a>, which we will call <strong>payoff-matrix</strong>, where we combine the actions with the states of the world and assign them utility values. As we can see, the action “summer clothes” might result in the consequence <span class="math inline">\(x_{S,S}\)</span> (summer clothes + sunny weather) with probability <span class="math inline">\(p\)</span>, or <span class="math inline">\(x_{S,R}\)</span> (summer clothes + rainy weather) with probability <span class="math inline">\(1 - p\)</span>. Since the actor cannot know for sure which state of the world will occur, they face a lottery: a <strong>random</strong> outcome yielding utility 10 in sunny weather or 4 in rainy weather.</p>
 <div id="tbl-expected-util" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-expected-util-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -5589,7 +5588,7 @@ Note
 <h3 class="anchored" data-anchor-id="decisions-under-certainty">Decisions under certainty</h3>
 <p>When the situation involves <strong>certainty</strong>—that is, there is only one possible state of the world—the actor knows exactly what consequence each action will lead to. In this case, we assume the actor simply chooses the action that results in the highest utility:<br>
 <span class="math display">\[ C^\succsim(D) \;=\; \arg\max_{a \in D} \mathrm{EU}(a)=\arg\max_{a \in D} \mathrm{u}(x_{a,\omega}). \]</span></p>
-<p>Since there is no uncertainty, the best action is the one yielding the highest known outcome. For example, if we assume in Table <a href="#tbl-expected-util" class="quarto-xref">Table 3</a> that <span class="math inline">\(p=1\)</span>, that is, sunny weather is guaranteed, then the consequence of each action is known with certainty. Under these conditions, we can immediately predict that the actor would choose <strong>summer clothes</strong>, as they yield the highest utility (10) in sunny weather.</p>
+<p>Since there is no uncertainty, the best action is the one yielding the highest known outcome. For example, if we assume in <a href="#tbl-expected-util" class="quarto-xref">Table 3</a> that <span class="math inline">\(p=1\)</span>, that is, sunny weather is guaranteed, then the consequence of each action is known with certainty. Under these conditions, we can immediately predict that the actor would choose <strong>summer clothes</strong>, as they yield the highest utility (10) in sunny weather.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -5611,7 +5610,7 @@ Note
 <p>When the actor faces <strong>uncertainty</strong>—meaning that multiple states of the world are possible, each with its own probability —we use the concept of <strong>expected utility</strong>.</p>
 <p>The <strong>Expected Utility Hypothesis</strong> posits that the actor will choose the action that <strong>maximizes expected utility</strong>. Formally:</p>
 <p><span class="math display">\[ C^\succsim(D) \;=\; \arg\max_{a \in D} \mathrm{EU}(a). \]</span></p>
-<p>Let us assume in Table <a href="#tbl-expected-util" class="quarto-xref">Table 3</a> that <span class="math inline">\(p=0.5\)</span>, so both sunny and rainy weather are equally likely. We then calculate the expected utility for each action:</p>
+<p>Let us assume in <a href="#tbl-expected-util" class="quarto-xref">Table 3</a> that <span class="math inline">\(p=0.5\)</span>, so both sunny and rainy weather are equally likely. We then calculate the expected utility for each action:</p>
 <ul>
 <li><span class="math inline">\(EU(\text{summer clothes}) = 0.5 \cdot 10 + 0.5 \cdot 4 = 7\)</span>,</li>
 <li><span class="math inline">\(EU(\text{winter clothes}) = 0.5 \cdot 2 + 0.5 \cdot 3 = 2.5\)</span>, and</li>
@@ -5635,7 +5634,7 @@ Note
 <li>No ticket inspection <span class="math inline">\(\omega_{ni}\)</span>, with probability <span class="math inline">\(1-p\)</span>.</li>
 </ul></li>
 </ul>
-<p>We can now bring all the elements together into a structured <strong>payoff matrix</strong> to illustrate how expected utility applies in a real-world setting. Rather than assigning fixed numerical values, we define variables that represent key components of the situation. In Table <a href="#tbl-decision-ticket" class="quarto-xref">Table 4</a>, we introduce a ticket price <span class="math inline">\(T\)</span>, a fine <span class="math inline">\(P\)</span>, and a status quo <span class="math inline">\(Q\)</span>.</p>
+<p>We can now bring all the elements together into a structured <strong>payoff matrix</strong> to illustrate how expected utility applies in a real-world setting. Rather than assigning fixed numerical values, we define variables that represent key components of the situation. In <a href="#tbl-decision-ticket" class="quarto-xref">Table 4</a>, we introduce a ticket price <span class="math inline">\(T\)</span>, a fine <span class="math inline">\(P\)</span>, and a status quo <span class="math inline">\(Q\)</span>.</p>
 <p>To evaluate preferences, we assume a plausible ordinal ranking: <span class="math inline">\(Q&gt;-T&gt;-F\)</span>. This suggests the actor prefers not paying and not getting caught (<span class="math inline">\(Q\)</span>) over paying for the ticket (<span class="math inline">\(-T\)</span>), but still much more than being fined (<span class="math inline">\(-F\)</span>) .</p>
 <p>That said, this ranking is not set in stone. As a researcher, you may adopt alternative assumptions. For example, if riding without a ticket causes guilt, the outcome might instead be represented as <span class="math inline">\(Q-G\)</span>, where <span class="math inline">\(G\)</span> reflects a emotional cost (guild) that reduces the utility of this outcome so that <span class="math inline">\(-T&gt;Q-G&gt;-P\)</span> holds, in which case buying a ticket is preferred in every scenario.</p>
 <p>In such a setup, we would say that action <span class="math inline">\(a_t\)</span> <strong>dominates</strong> action <span class="math inline">\(a_{nt}\)</span>, because it performs better regardless of the state of the world. A dominated action is <strong>never</strong> chosen by a rational actor. Thus, our prediction becomes simple: the actor will always choose to buy a ticket.</p>
@@ -5677,7 +5676,7 @@ Table 4: Payoff matrix for the ticket decision.
 holds.</p>
 <p>To evaluate this, we use <strong>expected utility</strong>, which allows us to translate preference questions into comparisons of expected utilities. That is, the actor prefers buying a ticket if and only if:</p>
 <p><span class="math display">\[ \mathrm{EU}(a_t) &gt; \mathrm{EU}(a_{nt}). \]</span></p>
-<p>This is often the central question we want to answer as researchers: under which conditions does an actor choose one action over another? So, now we can use the information from Table <a href="#tbl-decision-ticket" class="quarto-xref">Table 4</a>, to replace these terms with:</p>
+<p>This is often the central question we want to answer as researchers: under which conditions does an actor choose one action over another? So, now we can use the information from <a href="#tbl-decision-ticket" class="quarto-xref">Table 4</a>, to replace these terms with:</p>
 <p><span class="math display">\[ p \cdot (-T) + (1-p) \cdot (-T) &gt; p \cdot (-F) + (1-p) \cdot Q.\]</span></p>
 <p>The left side can easy reduced to:</p>
 <p><span class="math display">\[ -T &gt; p \cdot (-F) + (1-p) \cdot Q.\]</span></p>
@@ -5739,7 +5738,7 @@ Note
 <p><span class="math display">\[
 N = \{1, 2, 3, \dots, n\},
 \]</span></p>
-<p>where each number represents a different player. This not only simplifies notation but also generalizes easily to games with any number of participants. Each player <span class="math inline">\(i \in N\)</span> has a set of available <strong>actions</strong> <span class="math inline">\(A_i\)</span>, and a <strong>Von Neumann-Morgenstern utility function</strong> <span class="math inline">\(u_i\)</span> that assigns a utility value to every possible outcome. We denote the set of all players except player <span class="math inline">\(i\)</span> as <span class="math inline">\(-i\)</span>, that is, <span class="math inline">\(-i=N\{i}\)</span>.</p>
+<p>where each number represents a different player. This not only simplifies notation but also generalizes easily to games with any number of participants. Each player <span class="math inline">\(i \in N\)</span> has a set of available <strong>actions</strong> <span class="math inline">\(A_i\)</span>, and a <strong>Von Neumann-Morgenstern utility function</strong> <span class="math inline">\(u_i\)</span> that assigns a utility value to every possible outcome. We denote the set of all players except player <span class="math inline">\(i\)</span> as <span class="math inline">\(-i\)</span>, that is, <span class="math inline">\(-i=N\{i\}\)</span>.</p>
 <p>The set of <strong>outcomes</strong> in a game can be represented as all possible combinations of players’ actions (sometimes called <strong>action profiles</strong>) and the states of the world <span class="math inline">\(\Omega\)</span>. That is, we define:</p>
 <p><span class="math display">\[
 X = A_1 \times A_2 \times \cdots \times A_n \times \Omega,
@@ -5811,7 +5810,7 @@ Table 5: A simple 2-player game with two strategies each (e.g., the Prisoner’
 u_i(a_i^*, a_{-i}^*) \ge u_i(a_i, a_{-i}^*) \quad \text{for all } a_i \in A_i.
 \]</span></p>
 <p>This means: given what everyone else is doing (<span class="math inline">\(a_{-i}^*\)</span>), player <span class="math inline">\(i\)</span> cannot improve their utility by choosing a different action <span class="math inline">\(a_i\)</span>.</p>
-<p>Let’s go back to our example from Table <a href="#tbl-game-pd" class="quarto-xref">Table 5</a> and analyze it.</p>
+<p>Let’s go back to our example from <a href="#tbl-game-pd" class="quarto-xref">Table 5</a> and analyze it.</p>
 <p>To find the Nash equilibrium:</p>
 <ol type="1">
 <li><strong>Fix Player 2’s strategy</strong>, and ask what Player 1 would do:
@@ -5827,7 +5826,7 @@ u_i(a_i^*, a_{-i}^*) \ge u_i(a_i, a_{-i}^*) \quad \text{for all } a_i \in A_i.
 </ol>
 <p>So, both players have a <strong>dominant strategy</strong>: defecting. Regardless of what the other does, defecting gives a higher payoff. The strategy profile where <strong>both defect</strong> is therefore a <strong>Nash equilibrium</strong>, formally: <span class="math inline">\(a^*=(a_D,a_D)\)</span> with the first <span class="math inline">\(a_D\)</span> is the action of the first player, and so on.</p>
 <p>Even though both players would be better off if they both cooperated (3, 3), bilateral cooperation is <strong>not</strong> stable: each has an incentive to unilaterally deviate if the other is cooperating. This tension between individual rationality and collective outcome is what makes game theory so powerful—and often so frustrating.</p>
-<p>A game can easily have <strong>more than one Nash equilibrium</strong>, as illustrated by the game in Table <a href="#tbl-game-sd" class="quarto-xref">Table 6</a>. This game models a situation where two countries must independently decide whether to <strong>arm themselves</strong> or <strong>refrain</strong> from doing so. In this example, there are <strong>two pure strategy Nash equilibria</strong>. Each country’s best decision depends on what the other does, and both (Arm, Arm) and (Refrain, Refrain) are stable outcomes where no player has an incentive to deviate unilaterally.</p>
+<p>A game can easily have <strong>more than one Nash equilibrium</strong>, as illustrated by the game in <a href="#tbl-game-sd" class="quarto-xref">Table 6</a>. This game models a situation where two countries must independently decide whether to <strong>arm themselves</strong> or <strong>refrain</strong> from doing so. In this example, there are <strong>two pure strategy Nash equilibria</strong>. Each country’s best decision depends on what the other does, and both (Arm, Arm) and (Refrain, Refrain) are stable outcomes where no player has an incentive to deviate unilaterally.</p>
 <div id="tbl-game-sd" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-game-sd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -5952,23 +5951,67 @@ Important
 <p>Nash’s Theorem guarantees that, even if players must randomize over their actions, there will always be at least one strategy profile where no player has an incentive to deviate. This means that game theory, even in its most basic form, always provides a solution concept that predicts stable behavior.</p>
 </div>
 </div>
-<p>In order to determine this (or these mixed strategies, since there can be more than one strategy), we proceed in a similar way as in decision under uncertainty. This time however we are interested in the question when a player does not want to change their strategy anymore (i.e., adjusting their probabilities over the actions). Because in our example there are only two actions for each player, we try to answer the following question:</p>
+<p>To find the mixed strategy equilibrium, we use the same logic as in decisions under uncertainty. But this time, the <strong>“uncertainty” comes from the other player’s strategy</strong>, and we want to find a situation where each player is <strong>indifferent</strong> between their available actions—meaning they have no incentive to shift their probabilities. Hence, we look for values of <span class="math inline">\(p_1\)</span> and <span class="math inline">\(p_2\)</span> where the following equations hold true:</p>
 <p><span class="math display">\[
-\mathrm{EU_i}(H)=\mathrm{EU_i}(T)
+EU_1(a_{1H})=EU_1(a_{1T}),
 \]</span></p>
+<p><span class="math display">\[ EU_2(a_{2H})=EU_2(a_{2T}).\]</span></p>
+<p>Let’s compute Player 1’s expected utility from playing Heads or Tails, given Player 2 plays Heads with probability <span class="math inline">\(p_2\)</span> and Tails with probability <span class="math inline">\(1 - p_2\)</span>:</p>
 <ul>
-<li>Player 1 cannot improve their expected payoff by deviating, since they always face a 50/50 mix from Player 2.</li>
-<li>The same goes for Player 2.</li>
+<li><p>Expected utility of <strong>H</strong> for Player 1:<br>
+<span class="math display">\[
+EU_1(a_{1H}) = p_2 \cdot 1 + (1 - p_2) \cdot (-1) = 2p_2 - 1
+\]</span></p></li>
+<li><p>Expected utility of <strong>T</strong> for Player 1:<br>
+<span class="math display">\[
+EU_1(a_{1T}) = p_2 \cdot (-1) + (1 - p_2) \cdot 1 = 1 - 2p_2
+\]</span></p></li>
 </ul>
-<blockquote class="blockquote">
-<p>Mixed strategy equilibrium: Both players randomize uniformly (50/50) over Heads and Tails.</p>
-</blockquote>
-<p>This equilibrium reflects a fundamental idea in game theory: sometimes, <strong>deliberate unpredictability</strong> is the optimal strategy.</p>
-</section>
-<section id="why-mixed-strategies-matter" class="level3">
-<h3 class="anchored" data-anchor-id="why-mixed-strategies-matter">Why Mixed Strategies Matter</h3>
-<p>Mixed strategy equilibria are not just mathematical curiosities—they’re crucial for analyzing a wide range of real-world scenarios, including auctions, sports, warfare, and competitive markets. Moreover, Nash’s famous existence theorem guarantees that <strong>every finite game has at least one Nash equilibrium</strong>, possibly in mixed strategies.</p>
-<p>In the next sections, we’ll explore further refinements and solution concepts, but for now, it’s important to remember: when pure strategies fail to stabilize, <strong>randomization can restore equilibrium</strong>.</p>
+<p>Player 1 is <strong>indifferent</strong> between <span class="math inline">\(a_{1H}\)</span> and <span class="math inline">\(a_{1T}\)</span> when:</p>
+<p><span class="math display">\[
+EU_1(a_{1H}) = EU_1(a_{1T}) \quad \Rightarrow \quad 2p_2 - 1 = 1 - 2p_2
+\]</span></p>
+<p>Solving gives:</p>
+<p><span class="math display">\[
+4p_2 = 2 \quad \Rightarrow \quad p_2 = 0.5
+\]</span></p>
+<p>So Player 1 is indifferent <strong>only if</strong> Player 2 randomizes 50/50 between <span class="math inline">\(a_{2H}\)</span> and <span class="math inline">\(a_{2T}\)</span>.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note that we determined Player 2’s behavioral predictions <strong>even though we started by calculating the expected utilities for Player 1</strong>. This might seem puzzling at first—after all, why should analyzing one player’s incentives tell us what the other player will do?</p>
+<p>But this makes sense when you think in terms of <strong>strategic interaction</strong>. The key idea in a mixed strategy Nash equilibrium is that each player is choosing their strategy so that the <strong>other player is indifferent</strong> between their own actions. So by solving for the condition under which Player 1 is indifferent, we’re actually <strong>learning what Player 2 must be doing</strong> to create that indifference—and vice versa.</p>
+<p>In this way, even though each player is focused on their own payoffs, their optimal behavior is tightly linked to the incentives of the other. That’s the essence of equilibrium thinking in game theory.</p>
+</div>
+</div>
+<p>We repeat the same for Player 2:</p>
+<ul>
+<li><p>Expected utility of <span class="math inline">\(a_{2H}\)</span> for Player 2:<br>
+<span class="math display">\[
+EU_2(a\_{2H}) = p_1 \cdot (-1) + (1 - p_1) \cdot 1 = 1 - 2p_1
+\]</span></p></li>
+<li><p>Expected utility of <span class="math inline">\(a_{2T}\)</span> for Player 2:<br>
+<span class="math display">\[
+EU_2(a\_{2T}) = p_1 \cdot 1 + (1 - p_1) \cdot (-1) = 2p_1 - 1
+\]</span></p></li>
+</ul>
+<p>Indifference occurs when:</p>
+<p><span class="math display">\[
+1 - 2p_1 = 2p_1 - 1 \quad \Rightarrow \quad 4p_1 = 2 \quad \Rightarrow \quad p_1 = 0.5
+\]</span></p>
+<p>So Player 2 is also indifferent only if Player 1 plays H and T with equal probability.</p>
+<p>The unique <strong>mixed strategy Nash equilibrium</strong> of Matching Pennies is:</p>
+<p><span class="math display">\[
+s^*=((0.5,H;0.5;T), (0.5,H;0.5;T))
+\]</span></p>
+<p>In this equilibrium, each player keeps the other perfectly indifferent and maximally uncertain—neither can benefit by changing their strategy.</p>
 </section>
 </section>
 </section>
@@ -5976,9 +6019,9 @@ Important
 <h1>🏋️ <strong>Pre-Class Assignment</strong></h1>
 <ol type="1">
 <li><p>Read the assigned materials.</p></li>
-<li><p>[easy] Look at Table <a href="#tbl-expected-util" class="quarto-xref">Table 3</a>. Calculate the the expected utilities for each action if <span class="math inline">\(p=0.25\)</span>.</p></li>
+<li><p>[easy] Look at <a href="#tbl-expected-util" class="quarto-xref">Table 3</a>. Calculate the the expected utilities for each action if <span class="math inline">\(p=0.25\)</span>.</p></li>
 <li><p>[easy] Model a socially relevant decision situation, including important variables.</p></li>
-<li><p>[intermediate] Look at the game shown in Table <a href="#tbl-game-sd" class="quarto-xref">Table 6</a>. This game also has a third equilibrium in mixed strategies; determine it.</p></li>
+<li><p>[intermediate] Look at the game shown in <a href="#tbl-game-sd" class="quarto-xref">Table 6</a>. This game also has a third equilibrium in mixed strategies; determine it.</p></li>
 <li><p>Remember the model of relative deprivation <span class="citation" data-cites="boudon1977">(<a href="#ref-boudon1977" role="doc-biblioref">Boudon 1977</a>)</span>? There are only: costs <span class="math inline">\(c\)</span> if somebody applies for a promotion, benefits <span class="math inline">\(b\)</span> for they get the promotion, and the relative share of free positions <span class="math inline">\(f\)</span>, all of these information are being common knowledge.</p>
 <ol type="1">
 <li><p>[easy] Model this situation with <span class="math inline">\(n=2\)</span> and <span class="math inline">\(f=.5\)</span>.</p></li>
