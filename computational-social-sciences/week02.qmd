@@ -73,7 +73,7 @@ In this class we will try to have a look at both "faces" of social network analy
 
 ## From ties to graphs
 
-Imagine you where to plot all relationships of all people in the world. Of course, this is just not possible, as the measurement but also the representation would be too complex. Thus we need some kind of (theoretical) bounds, that make the analysis of networks possible.
+Imagine you were to plot all relationships of all people in the world. Of course, this is just not possible, as the measurement but also the representation would be too complex. Thus we need some kind of (theoretical) bounds, that make the analysis of networks possible.
 
 In social network analysis, we use **graphs** to represent social networks. We borrow graphs from the mathematical **graph theory** which also provides us with a definition [@joshiGentleIntroductionGraph2017].
 
@@ -121,11 +121,13 @@ $$
 - **Social media interactions**: On Twitter or Instagram, one user can follow another without being followed back.\
 - **Communication networks**: E-Mails, phone calls or other forms of communication, can be sent out or received, thus defining a direction.
 
-**Note**: In a **directed graph**, the edges are **ordered**, meaning the edge ( (a, b) ) is **not** the same as ( (b, a) ). The direction of the edge matters, and there is a one-way connection from ( a ) to ( b ) (but not necessarily the other way around).
+
 
 ::: {#custom-block}
 
-Edges in directed graphs are representations of ordered pairs (**tuples**), where the order of the vertices does matter. We can write these as $E = \{(a,b), (b, c), (c, d), (d, a)\}$.
+**Note**: In a **directed graph**, the edges are **ordered**, meaning the edge ( (a, b) ) is **not** the same as ( (b, a) ). The direction of the edge matters, and there is a one-way connection from ( a ) to ( b ) (but not necessarily the other way around).
+
+Edges in directed graphs are thus representations of ordered pairs (**tuples**). We can write these as $E = \{(a,b), (b, c), (c, d), (d, a)\}$.
 
 :::
 
@@ -140,7 +142,8 @@ $$
 **Examples:**\
 - **Mutual friendships**: In many studies, friendship networks are assumed to be undirected, meaning if A considers B a friend, B also considers A a friend (although this is not always the case in reality).\
 - **Co-authorship networks**: If two researchers have co-authored a paper together, the connection exists for both equally.\
-- **Collaboration networks**: In corporate or scientific collaborations, individuals or institutions work together on projects, making the relationship inherently bidirectional. - **Classmates**
+- **Collaboration networks**: In corporate or scientific collaborations, individuals or institutions work together on projects, making the relationship inherently bidirectional.
+- **Classmates**
 
 ::: {#custom-block}
 **Note**: In an **undirected graph**, the edges are **unordered**, meaning the edge ( {a, b} ) is the same as ( {b, a} ). The connection between ( a ) and ( b ) has no direction, and this is reflected by the use of **unordered pairs** in the edge set.
@@ -200,7 +203,7 @@ This is why, alongside graphical representations, there are other, mathematicall
 
 #### Adjacency matrices
 
-**Adjacency**: We say that two vertices v and w of a graph G are adjacent if there is an edge joining them, and the vertices v and w are then incident with such an edge. Similarly, two distinct edges e and f are adjacent if they have a vertex in common.[@wilsonIntroductionGraphTheory2009]
+**Adjacency**: We say that two vertices $v$ and $w$ of a graph $G$ are adjacent if there is an edge joining them, and the vertices v and w are then incident with such an edge. Similarly, two distinct edges $e$ and $f$ are adjacent if they have a vertex in common [@wilsonIntroductionGraphTheory2009].
 
 ![Adjacency](Graphics/adjacency.png)
 
@@ -243,7 +246,7 @@ An adjacency list is a collection of lists, where each node has a list of its ne
 
 We can convert from an adjacency matrix to a adjacency list in the way that we iterate over the matrix $A$ and for each entry $A_{ij} = 1$, we add node $j$ to the adjacency list of node $i$.
 
-|     | directed | undirected |
+|     |undirected| directed   |
 |-----|----------|------------|
 | 1   | (4,7)    | (4,6,7)    |
 | 2   | (3,7)    | (3,5,7)    |
@@ -257,10 +260,10 @@ We can convert from an adjacency matrix to a adjacency list in the way that we i
 
 With even bigger networks it might be useful to even store networks in an edge list, where each edge is represented as a pair (or triplet in weighted graphs) indicating a connection between two nodes.
 
-|   | directed | undirected |
+|   | undirected | directed |
 |------------------------|------------------------|------------------------|
 | V | 1, 2, 3, 4, 5, 6, 7 | 1, 2, 3, 4, 5, 6, 7 |
-| E | (1,4), (1,7), (2,3), (2,7), (3,6), (5,7), (4,1), (6,1), (3,2), (5,2), (4,3), (6,3), (5,4), (6,5) | (1,4), (1,6), (1,7), (2,3), (2,5), (2,7), (3,2), (3,4), (3,6), (4,1), (4,3), (4,5), (5,2), (5,4), (5,6), (5,7), (6,1), (6,3), (6,5), (6,7), (7,1), (7,2), (7,5), (7,6) |
+| E | {1,4}, {1,7}, {2,3}, {2,7}, {3,6}, {5,7}, {4,1}, {6,1}, {3,2}, {5,2}, {4,3}, {6,3}, {5,4}, {6,5} | (1,4), (1,6), (1,7), (2,3), (2,5), (2,7), (3,2), (3,4), (3,6), (4,1), (4,3), (4,5), (5,2), (5,4), (5,6), (5,7), (6,1), (6,3), (6,5), (6,7), (7,1), (7,2), (7,5), (7,6) |
 
 ::: {#custom-block}
 
@@ -421,7 +424,7 @@ plot(g, edge.width = E(g)$weight)  # Visualizing edge weights
 
 ::: {#custom-block}
 
-The language of graph theory is not Standard - all authors have their own terminology Some use the term 'graph' for what we call a simple graph, or for a graph with directed edges, or for a graph with infinitely many vertices or edges. In this case the notion is taken from [@wilsonIntroductionGraphTheory2009].
+The language of graph theory is not standard - lots of authors have their own terminology. Some use the term 'graph' for what we call a simple graph, or for a graph with directed edges, or for a graph with infinitely many vertices or edges. In this case the notion is taken from [@wilsonIntroductionGraphTheory2009].
 :::
 
 
