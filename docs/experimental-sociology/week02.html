@@ -5236,7 +5236,7 @@ Tip
 <p>Central to this process is understanding behavior—people’s actions have a direct bearing on how we address societal challenges. For example, consider the question, “How can we reduce discriminatory behavior?” Here, it’s clear that behavior itself is crucial: discrimination is enacted through observable actions. Yet, to combat discrimination effectively, researchers also investigate underlying attitudes (like prejudices or biases) and the cultural products (books, movies, music) that might indirectly influence discrimination.</p>
 <p>In many cases, we’re interested in a core outcome—such as shifting attitudes or assessing whether certain initiatives succeed or fail. However, these outcomes typically hinge on actual behavior: how people speak, what they consume, and how they respond to one another. Even when our primary focus isn’t directly on behavior, the factors shaping or driving that outcome often are forms of behavior themselves. Recognizing this central role of behavior is essential for fully understanding and tackling social problems.</p>
 <p>Decision theory and game theory emphasize the centrality of behavior but apply differently depending on the social context. <strong>Decision theory</strong> addresses situations where the outcome depends solely on the decisions of an <strong>individual actor</strong>, without direct interference from others. For example, choosing whether to pursue higher education or immediately enter the labor market is primarily a personal decision that can be analyzed using decision theory. These situations are formally termed parametric <strong><em>decisions</em></strong> because the model predictions primarily depend on situational parameters.</p>
-<p>In contrast, <strong>game theory</strong> applies to scenarios where outcomes are influenced by the interactions of <strong>multiple individuals</strong> or groups, whose <strong>decisions are interdependent</strong>. This means no single actor has complete control over the outcome, adding a strategic dimension to their decision-making. Examples include negotiations, competitive markets, or voluncteering for a task. These situations are formally termed <strong><em>games</em></strong> due to their interactive and strategic nature.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>In contrast, <strong>game theory</strong> applies to scenarios where outcomes are influenced by the interactions of <strong>multiple individuals</strong> or groups, whose <strong>decisions are interdependent</strong>. This means no single actor has complete control over the outcome, adding a strategic dimension to their decision-making. Examples include negotiations, competitive markets, or volunteering for a task. These situations are formally termed <strong><em>games</em></strong> due to their interactive and strategic nature.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <p>Occasionally, categorizing a situation clearly as either a decision or a game may not be straightforward. Take, for instance, the choice of whether to attend university or join the workforce immediately. Initially, this might appear to be an individual decision. However, parental approval or financial support can significantly influence the outcome, suggesting elements of strategic interaction. As social scientists, we have the flexibility to model such scenarios either as decisions or as games, depending on which perspective best captures the dynamics involved. Making this choice entails analytical responsibility, as it shapes how we understand, analyze, and interpret the social situation. Later, we will examine an example that demonstrates how these contrasting approaches can yield markedly different predictions.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -5657,12 +5657,12 @@ Table 4: Payoff matrix for the ticket decision.
 <td><strong>No ticket inspection</strong> (<span class="math inline">\(1-p\)</span>)</td>
 </tr>
 <tr class="even">
-<td><strong>Buy ticket</strong></td>
+<td><strong>Buy ticket</strong> (<span class="math inline">\(a_t\)</span>)</td>
 <td><span class="math inline">\(-T\)</span></td>
 <td><span class="math inline">\(-T\)</span></td>
 </tr>
 <tr class="odd">
-<td><strong>Don’t buy ticket</strong></td>
+<td><strong>Don’t buy ticket</strong> (<span class="math inline">\(a_{nt}\)</span>)</td>
 <td><span class="math inline">\(-F\)</span></td>
 <td><span class="math inline">\(Q\)</span></td>
 </tr>
@@ -5671,7 +5671,7 @@ Table 4: Payoff matrix for the ticket decision.
 </div>
 </figure>
 </div>
-<p>Let us come now back to our original assumptoion <span class="math inline">\(Q&gt;-T&gt;-F\)</span>. Please make sure that in this case neither of the two strategies dominates the other, as in one case <span class="math inline">\(a_t\)</span> is better, in the other <span class="math inline">\(a_{nt}\)</span>. We now want to determine whether the actor prefers buying a ticket over not buying a ticket, i.e., whether the preference relation<br>
+<p>Let us come now back to our original assumption <span class="math inline">\(Q&gt;-T&gt;-F\)</span>. Please make sure that in this case neither of the two strategies dominates the other, as in one case <span class="math inline">\(a_t\)</span> is better, in the other <span class="math inline">\(a_{nt}\)</span>. We now want to determine whether the actor prefers buying a ticket over not buying a ticket, i.e., whether the preference relation<br>
 <span class="math display">\[ a_t \succ a_{nt} \]</span><br>
 holds.</p>
 <p>To evaluate this, we use <strong>expected utility</strong>, which allows us to translate preference questions into comparisons of expected utilities. That is, the actor prefers buying a ticket if and only if:</p>
@@ -6022,10 +6022,10 @@ s^*=((0.5,H;0.5;T), (0.5,H;0.5;T))
 <li><p>[easy] Look at <a href="#tbl-expected-util" class="quarto-xref">Table 3</a>. Calculate the the expected utilities for each action if <span class="math inline">\(p=0.25\)</span>.</p></li>
 <li><p>[easy] Model a socially relevant decision situation, including important variables.</p></li>
 <li><p>[intermediate] Look at the game shown in <a href="#tbl-game-sd" class="quarto-xref">Table 6</a>. This game also has a third equilibrium in mixed strategies; determine it.</p></li>
-<li><p>Remember the model of relative deprivation <span class="citation" data-cites="boudon1977">(<a href="#ref-boudon1977" role="doc-biblioref">Boudon 1977</a>)</span>? There are only: costs <span class="math inline">\(c\)</span> if somebody applies for a promotion, benefits <span class="math inline">\(b\)</span> for they get the promotion, and the relative share of free positions <span class="math inline">\(f\)</span>, all of these information are being common knowledge.</p>
+<li><p>Remember Boudon’s <span class="citation" data-cites="boudon1977">(<a href="#ref-boudon1977" role="doc-biblioref">1977</a>)</span> model of relative deprivation? It considers only three factors: the costs <span class="math inline">\(c\)</span> of applying for a promotion, the benefits <span class="math inline">\(b\)</span> of receiving the promotion, and the relative share of available positions <span class="math inline">\(f\)</span>, all of which are assumed to be common knowledge.</p>
 <ol type="1">
 <li><p>[easy] Model this situation with <span class="math inline">\(n=2\)</span> and <span class="math inline">\(f=.5\)</span>.</p></li>
-<li><p>[hard] Try to derive the general function of p for any <span class="math inline">\(n\)</span> and <span class="math inline">\(f\)</span> .</p></li>
+<li><p>[hard] Try to derive the general function of p for any <span class="math inline">\(n\)</span> and <span class="math inline">\(f\)</span>.</p></li>
 </ol></li>
 <li><p>Bring your results and any questions to the seminar.</p></li>
 </ol>
@@ -6591,7 +6591,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>Decision theory and game theory emphasize the centrality of behavior but apply differently depending on the social context. **Decision theory** addresses situations where the outcome depends solely on the decisions of an **individual actor**, without direct interference from others. For example, choosing whether to pursue higher education or immediately enter the labor market is primarily a personal decision that can be analyzed using decision theory. These situations are formally termed parametric ***decisions*** because the model predictions primarily depend on situational parameters.</span>
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>In contrast, **game theory** applies to scenarios where outcomes are influenced by the interactions of **multiple individuals** or groups, whose **decisions are interdependent**. This means no single actor has complete control over the outcome, adding a strategic dimension to their decision-making. Examples include negotiations, competitive markets, or voluncteering for a task. These situations are formally termed ***games*** due to their interactive and strategic nature.<span class="ot">[^1]</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>In contrast, **game theory** applies to scenarios where outcomes are influenced by the interactions of **multiple individuals** or groups, whose **decisions are interdependent**. This means no single actor has complete control over the outcome, adding a strategic dimension to their decision-making. Examples include negotiations, competitive markets, or volunteering for a task. These situations are formally termed ***games*** due to their interactive and strategic nature.<span class="ot">[^1]</span></span>
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="ot">[^1]: </span>Decision theory is sometimes referred to as *parametric decision theory*. Game theory, on the other hand, could actually be called *strategic decision theory*, since outcomes depend significantly on strategic considerations and the choices of others. Despite this, game theory retains its playful name from its origins in analyzing parlor games <span class="co">[</span><span class="ot">@neumann1944</span><span class="co">]</span>. A fitting testament to how tradition (and a dash of path dependence) can leave a lasting imprint on terminology.</span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
@@ -6863,12 +6863,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-299"><a href="#cb1-299" aria-hidden="true" tabindex="-1"></a>|  |  |  |</span>
 <span id="cb1-300"><a href="#cb1-300" aria-hidden="true" tabindex="-1"></a>|--------------------------------|--------------------|--------------------|</span>
 <span id="cb1-301"><a href="#cb1-301" aria-hidden="true" tabindex="-1"></a>| **actions \\ states of the world** | **Ticket inspection (**$p$) | **No ticket inspection** ($1-p$) |</span>
-<span id="cb1-302"><a href="#cb1-302" aria-hidden="true" tabindex="-1"></a>| **Buy ticket** | $-T$ | $-T$ |</span>
-<span id="cb1-303"><a href="#cb1-303" aria-hidden="true" tabindex="-1"></a>| **Don’t buy ticket** | $-F$ | $Q$ |</span>
+<span id="cb1-302"><a href="#cb1-302" aria-hidden="true" tabindex="-1"></a>| **Buy ticket** ($a_t$) | $-T$ | $-T$ |</span>
+<span id="cb1-303"><a href="#cb1-303" aria-hidden="true" tabindex="-1"></a>| **Don’t buy ticket** ($a_{nt}$) | $-F$ | $Q$ |</span>
 <span id="cb1-304"><a href="#cb1-304" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-305"><a href="#cb1-305" aria-hidden="true" tabindex="-1"></a>: Payoff matrix for the ticket decision. {#tbl-decision-ticket}</span>
 <span id="cb1-306"><a href="#cb1-306" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-307"><a href="#cb1-307" aria-hidden="true" tabindex="-1"></a>Let us come now back to our original assumptoion $Q&gt;-T&gt;-F$. Please make sure that in this case neither of the two strategies dominates the other, as in one case $a_t$ is better, in the other $a_{nt}$. We now want to determine whether the actor prefers buying a ticket over not buying a ticket, i.e., whether the preference relation\</span>
+<span id="cb1-307"><a href="#cb1-307" aria-hidden="true" tabindex="-1"></a>Let us come now back to our original assumption $Q&gt;-T&gt;-F$. Please make sure that in this case neither of the two strategies dominates the other, as in one case $a_t$ is better, in the other $a_{nt}$. We now want to determine whether the actor prefers buying a ticket over not buying a ticket, i.e., whether the preference relation\</span>
 <span id="cb1-308"><a href="#cb1-308" aria-hidden="true" tabindex="-1"></a>$$ a_t \succ a_{nt} $$\</span>
 <span id="cb1-309"><a href="#cb1-309" aria-hidden="true" tabindex="-1"></a>holds.</span>
 <span id="cb1-310"><a href="#cb1-310" aria-hidden="true" tabindex="-1"></a></span>
@@ -7144,11 +7144,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-580"><a href="#cb1-580" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-581"><a href="#cb1-581" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span><span class="sc">\[</span>intermediate<span class="sc">\]</span> Look at the game shown in @tbl-game-sd. This game also has a third equilibrium in mixed strategies; determine it.</span>
 <span id="cb1-582"><a href="#cb1-582" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-583"><a href="#cb1-583" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>Remember the model of relative deprivation <span class="co">[</span><span class="ot">@boudon1977</span><span class="co">]</span>? There are only: costs $c$ if somebody applies for a promotion, benefits $b$ for they get the promotion, and the relative share of free positions $f$, all of these information are being common knowledge.</span>
+<span id="cb1-583"><a href="#cb1-583" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>Remember Boudon&#39;s <span class="co">[</span><span class="ot">-@boudon1977</span><span class="co">]</span> model of relative deprivation? It considers only three factors: the costs $c$ of applying for a promotion, the benefits $b$ of receiving the promotion, and the relative share of available positions $f$, all of which are assumed to be common knowledge.</span>
 <span id="cb1-584"><a href="#cb1-584" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-585"><a href="#cb1-585" aria-hidden="true" tabindex="-1"></a><span class="ss">    1.  </span><span class="sc">\[</span>easy<span class="sc">\]</span> Model this situation with $n=2$ and $f=.5$.</span>
 <span id="cb1-586"><a href="#cb1-586" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-587"><a href="#cb1-587" aria-hidden="true" tabindex="-1"></a><span class="ss">    2.  </span><span class="sc">\[</span>hard<span class="sc">\]</span> Try to derive the general function of p for any $n$ and $f$ .</span>
+<span id="cb1-587"><a href="#cb1-587" aria-hidden="true" tabindex="-1"></a><span class="ss">    2.  </span><span class="sc">\[</span>hard<span class="sc">\]</span> Try to derive the general function of p for any $n$ and $f$.</span>
 <span id="cb1-588"><a href="#cb1-588" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-589"><a href="#cb1-589" aria-hidden="true" tabindex="-1"></a><span class="ss">6.  </span>Bring your results and any questions to the seminar.</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
