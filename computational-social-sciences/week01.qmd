@@ -301,7 +301,7 @@ ages[names == "Tom"] # Age of the person with the name "Tom"
 3.  Are Berta and Charlie sociologists?
 :::
 
-```{r Solution}
+```{r solution1}
 
 # 1. What are the names of the sociologists? - Albert and Charlie
 names[sociologists]
