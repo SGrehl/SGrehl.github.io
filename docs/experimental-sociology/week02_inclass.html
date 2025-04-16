@@ -6122,6 +6122,9 @@ p_2^* = \frac{T}{F}
 <li><span class="math inline">\(T\)</span> and <span class="math inline">\(F\)</span> have <u>no influence</u> on the probability of a ticket being purchased<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
 <li><span class="math inline">\(C\)</span> and <span class="math inline">\(B\)</span> have <u>no influence</u> on the probability of an inspection</li>
 </ul>
+<p><strong>Wait what???</strong></p>
+<p>In this analysis, we conclude that it’s not the ticket price alone that determines how many people buy tickets, but rather the probability of inspection. At first glance, this may seem counterintuitive. However, this impression arises because the Nash equilibrium reflects the final outcome—not the dynamic path that leads there.</p>
+<p>In reality, if the ticket price increases and the inspection probability <span class="math inline">\(p_2\)</span> remains unchanged, people become less inclined to buy a ticket, and so <span class="math inline">\(p_1\)</span> (the probability of buying) decreases. In response, Player 2 (the inspector) now has a stronger incentive to inspect, causing <span class="math inline">\(p_2\)</span> to increase. As inspections become more frequent, the cost of fare evasion rises, and passengers are once again more likely to buy tickets. This feedback loop continues until the system settles back at the equilibrium point—where each player’s strategy is a best response to the other’s.</p>
 <section id="graphical-representation" class="level3">
 <h3 class="anchored" data-anchor-id="graphical-representation">Graphical Representation</h3>
 <p>Below, you can see the <strong>best response functions</strong> for both players.</p>
@@ -7526,105 +7529,112 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb10-816"><a href="#cb10-816" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-817"><a href="#cb10-817" aria-hidden="true" tabindex="-1"></a><span class="ot">[^1]: </span>As long as F<span class="sc">\&gt;</span>T<span class="sc">\&gt;</span>0 and B<span class="sc">\&gt;</span>C<span class="sc">\&gt;</span>0 holds.</span>
 <span id="cb10-818"><a href="#cb10-818" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-819"><a href="#cb10-819" aria-hidden="true" tabindex="-1"></a><span class="fu">### Graphical Representation</span></span>
+<span id="cb10-819"><a href="#cb10-819" aria-hidden="true" tabindex="-1"></a>**Wait what???**</span>
 <span id="cb10-820"><a href="#cb10-820" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-821"><a href="#cb10-821" aria-hidden="true" tabindex="-1"></a>Below, you can see the **best response functions** for both players.</span>
+<span id="cb10-821"><a href="#cb10-821" aria-hidden="true" tabindex="-1"></a>In this analysis, we conclude that it’s not the ticket price alone that determines how many people buy tickets, but rather the probability of inspection. At first glance, this may seem counterintuitive. However, this impression arises because the Nash equilibrium reflects the final outcome—not the dynamic path that leads there.</span>
 <span id="cb10-822"><a href="#cb10-822" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-823"><a href="#cb10-823" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
-<span id="cb10-824"><a href="#cb10-824" aria-hidden="true" tabindex="-1"></a>A best response function, denoted $BR_i(a_{-i})$, shows the optimal strategy for player $i$ given the strategies chosen by the other player(s), represented by $a_{-i}$. In other words, it tells us how player $i$ should opimally behave in response to the actions of the others. If we know the best response functions for all players, a **Nash equilibrium** occurs at the point where these functions intersect—meaning that each player&#39;s strategy is a best response to the others.</span>
-<span id="cb10-825"><a href="#cb10-825" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb10-826"><a href="#cb10-826" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-829"><a href="#cb10-829" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb10-830"><a href="#cb10-830" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb10-831"><a href="#cb10-831" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: Show R Code (Decision Theory Simulation, shiny)</span></span>
-<span id="cb10-832"><a href="#cb10-832" aria-hidden="true" tabindex="-1"></a><span class="co"># app.R</span></span>
-<span id="cb10-833"><a href="#cb10-833" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
-<span id="cb10-834"><a href="#cb10-834" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb10-835"><a href="#cb10-835" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-836"><a href="#cb10-836" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
-<span id="cb10-837"><a href="#cb10-837" aria-hidden="true" tabindex="-1"></a>  <span class="fu">titlePanel</span>(<span class="st">&quot;Best Response Functions in Ticket Inspection Game&quot;</span>),</span>
-<span id="cb10-838"><a href="#cb10-838" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb10-839"><a href="#cb10-839" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sidebarLayout</span>(</span>
-<span id="cb10-840"><a href="#cb10-840" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sidebarPanel</span>(</span>
-<span id="cb10-841"><a href="#cb10-841" aria-hidden="true" tabindex="-1"></a>      <span class="fu">numericInput</span>(<span class="st">&quot;T&quot;</span>, <span class="st">&quot;Ticket price (T):&quot;</span>, <span class="at">value =</span> <span class="dv">2</span>, <span class="at">min =</span> <span class="dv">0</span>),</span>
-<span id="cb10-842"><a href="#cb10-842" aria-hidden="true" tabindex="-1"></a>      <span class="fu">numericInput</span>(<span class="st">&quot;F&quot;</span>, <span class="st">&quot;Fine for no ticket (F):&quot;</span>, <span class="at">value =</span> <span class="dv">40</span>, <span class="at">min =</span> <span class="dv">0</span>),</span>
-<span id="cb10-843"><a href="#cb10-843" aria-hidden="true" tabindex="-1"></a>      <span class="fu">numericInput</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;Bonus for catching evader (B):&quot;</span>, <span class="at">value =</span> <span class="dv">20</span>, <span class="at">min =</span> <span class="dv">0</span>),</span>
-<span id="cb10-844"><a href="#cb10-844" aria-hidden="true" tabindex="-1"></a>      <span class="fu">numericInput</span>(<span class="st">&quot;C&quot;</span>, <span class="st">&quot;Cost of inspection (C):&quot;</span>, <span class="at">value =</span> <span class="dv">4</span>, <span class="at">min =</span> <span class="dv">0</span>)</span>
-<span id="cb10-845"><a href="#cb10-845" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb10-846"><a href="#cb10-846" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb10-847"><a href="#cb10-847" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mainPanel</span>(</span>
-<span id="cb10-848"><a href="#cb10-848" aria-hidden="true" tabindex="-1"></a>      <span class="fu">plotOutput</span>(<span class="st">&quot;brPlot&quot;</span>),</span>
-<span id="cb10-849"><a href="#cb10-849" aria-hidden="true" tabindex="-1"></a>      <span class="fu">verbatimTextOutput</span>(<span class="st">&quot;equilibrium&quot;</span>)</span>
-<span id="cb10-850"><a href="#cb10-850" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb10-851"><a href="#cb10-851" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb10-852"><a href="#cb10-852" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb10-853"><a href="#cb10-853" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-854"><a href="#cb10-854" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
-<span id="cb10-855"><a href="#cb10-855" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb10-856"><a href="#cb10-856" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>brPlot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
-<span id="cb10-857"><a href="#cb10-857" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-858"><a href="#cb10-858" aria-hidden="true" tabindex="-1"></a>    <span class="co"># define the utility function for player 1</span></span>
-<span id="cb10-859"><a href="#cb10-859" aria-hidden="true" tabindex="-1"></a>    EU_1 <span class="ot">&lt;-</span> <span class="cf">function</span>(T,F,p_2) {</span>
-<span id="cb10-860"><a href="#cb10-860" aria-hidden="true" tabindex="-1"></a>      term1 <span class="ot">=</span> <span class="sc">-</span>T</span>
-<span id="cb10-861"><a href="#cb10-861" aria-hidden="true" tabindex="-1"></a>      term2 <span class="ot">=</span> p_2 <span class="sc">*</span> (<span class="sc">-</span>F)</span>
-<span id="cb10-862"><a href="#cb10-862" aria-hidden="true" tabindex="-1"></a>      term1 <span class="sc">-</span> term2</span>
-<span id="cb10-863"><a href="#cb10-863" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb10-864"><a href="#cb10-864" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb10-865"><a href="#cb10-865" aria-hidden="true" tabindex="-1"></a>    <span class="co"># define the utility function for player 1  </span></span>
-<span id="cb10-866"><a href="#cb10-866" aria-hidden="true" tabindex="-1"></a>    EU_2 <span class="ot">&lt;-</span> <span class="cf">function</span>(B,C,p_1) {</span>
-<span id="cb10-867"><a href="#cb10-867" aria-hidden="true" tabindex="-1"></a>      term1 <span class="ot">=</span> p_1 <span class="sc">*</span> (<span class="sc">-</span>C) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">-</span>p_1) <span class="sc">*</span> (B<span class="sc">-</span>C)</span>
-<span id="cb10-868"><a href="#cb10-868" aria-hidden="true" tabindex="-1"></a>      term2 <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb10-823"><a href="#cb10-823" aria-hidden="true" tabindex="-1"></a>In reality, if the ticket price increases and the inspection probability $p_2$ remains unchanged, people become less inclined to buy a ticket, and so $p_1$ (the probability of buying) decreases. In response, Player 2 (the inspector) now has a stronger incentive to inspect, causing $p_2$ to increase. As inspections become more frequent, the cost of fare evasion rises, and passengers are once again more likely to buy tickets. This feedback loop continues until the system settles back at the equilibrium point—where each player’s strategy is a best response to the other’s.</span>
+<span id="cb10-824"><a href="#cb10-824" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-825"><a href="#cb10-825" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-826"><a href="#cb10-826" aria-hidden="true" tabindex="-1"></a><span class="fu">### Graphical Representation</span></span>
+<span id="cb10-827"><a href="#cb10-827" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-828"><a href="#cb10-828" aria-hidden="true" tabindex="-1"></a>Below, you can see the **best response functions** for both players.</span>
+<span id="cb10-829"><a href="#cb10-829" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-830"><a href="#cb10-830" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
+<span id="cb10-831"><a href="#cb10-831" aria-hidden="true" tabindex="-1"></a>A best response function, denoted $BR_i(a_{-i})$, shows the optimal strategy for player $i$ given the strategies chosen by the other player(s), represented by $a_{-i}$. In other words, it tells us how player $i$ should opimally behave in response to the actions of the others. If we know the best response functions for all players, a **Nash equilibrium** occurs at the point where these functions intersect—meaning that each player&#39;s strategy is a best response to the others.</span>
+<span id="cb10-832"><a href="#cb10-832" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb10-833"><a href="#cb10-833" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-836"><a href="#cb10-836" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb10-837"><a href="#cb10-837" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb10-838"><a href="#cb10-838" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: Show R Code (Decision Theory Simulation, shiny)</span></span>
+<span id="cb10-839"><a href="#cb10-839" aria-hidden="true" tabindex="-1"></a><span class="co"># app.R</span></span>
+<span id="cb10-840"><a href="#cb10-840" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb10-841"><a href="#cb10-841" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb10-842"><a href="#cb10-842" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-843"><a href="#cb10-843" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb10-844"><a href="#cb10-844" aria-hidden="true" tabindex="-1"></a>  <span class="fu">titlePanel</span>(<span class="st">&quot;Best Response Functions in Ticket Inspection Game&quot;</span>),</span>
+<span id="cb10-845"><a href="#cb10-845" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-846"><a href="#cb10-846" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sidebarLayout</span>(</span>
+<span id="cb10-847"><a href="#cb10-847" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sidebarPanel</span>(</span>
+<span id="cb10-848"><a href="#cb10-848" aria-hidden="true" tabindex="-1"></a>      <span class="fu">numericInput</span>(<span class="st">&quot;T&quot;</span>, <span class="st">&quot;Ticket price (T):&quot;</span>, <span class="at">value =</span> <span class="dv">2</span>, <span class="at">min =</span> <span class="dv">0</span>),</span>
+<span id="cb10-849"><a href="#cb10-849" aria-hidden="true" tabindex="-1"></a>      <span class="fu">numericInput</span>(<span class="st">&quot;F&quot;</span>, <span class="st">&quot;Fine for no ticket (F):&quot;</span>, <span class="at">value =</span> <span class="dv">40</span>, <span class="at">min =</span> <span class="dv">0</span>),</span>
+<span id="cb10-850"><a href="#cb10-850" aria-hidden="true" tabindex="-1"></a>      <span class="fu">numericInput</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;Bonus for catching evader (B):&quot;</span>, <span class="at">value =</span> <span class="dv">20</span>, <span class="at">min =</span> <span class="dv">0</span>),</span>
+<span id="cb10-851"><a href="#cb10-851" aria-hidden="true" tabindex="-1"></a>      <span class="fu">numericInput</span>(<span class="st">&quot;C&quot;</span>, <span class="st">&quot;Cost of inspection (C):&quot;</span>, <span class="at">value =</span> <span class="dv">4</span>, <span class="at">min =</span> <span class="dv">0</span>)</span>
+<span id="cb10-852"><a href="#cb10-852" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb10-853"><a href="#cb10-853" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-854"><a href="#cb10-854" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mainPanel</span>(</span>
+<span id="cb10-855"><a href="#cb10-855" aria-hidden="true" tabindex="-1"></a>      <span class="fu">plotOutput</span>(<span class="st">&quot;brPlot&quot;</span>),</span>
+<span id="cb10-856"><a href="#cb10-856" aria-hidden="true" tabindex="-1"></a>      <span class="fu">verbatimTextOutput</span>(<span class="st">&quot;equilibrium&quot;</span>)</span>
+<span id="cb10-857"><a href="#cb10-857" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb10-858"><a href="#cb10-858" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb10-859"><a href="#cb10-859" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-860"><a href="#cb10-860" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-861"><a href="#cb10-861" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb10-862"><a href="#cb10-862" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-863"><a href="#cb10-863" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>brPlot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb10-864"><a href="#cb10-864" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-865"><a href="#cb10-865" aria-hidden="true" tabindex="-1"></a>    <span class="co"># define the utility function for player 1</span></span>
+<span id="cb10-866"><a href="#cb10-866" aria-hidden="true" tabindex="-1"></a>    EU_1 <span class="ot">&lt;-</span> <span class="cf">function</span>(T,F,p_2) {</span>
+<span id="cb10-867"><a href="#cb10-867" aria-hidden="true" tabindex="-1"></a>      term1 <span class="ot">=</span> <span class="sc">-</span>T</span>
+<span id="cb10-868"><a href="#cb10-868" aria-hidden="true" tabindex="-1"></a>      term2 <span class="ot">=</span> p_2 <span class="sc">*</span> (<span class="sc">-</span>F)</span>
 <span id="cb10-869"><a href="#cb10-869" aria-hidden="true" tabindex="-1"></a>      term1 <span class="sc">-</span> term2</span>
 <span id="cb10-870"><a href="#cb10-870" aria-hidden="true" tabindex="-1"></a>    }</span>
 <span id="cb10-871"><a href="#cb10-871" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb10-872"><a href="#cb10-872" aria-hidden="true" tabindex="-1"></a>    <span class="co"># calculate the critical values</span></span>
-<span id="cb10-873"><a href="#cb10-873" aria-hidden="true" tabindex="-1"></a>    p_1_star <span class="ot">&lt;-</span> (input<span class="sc">$</span>B <span class="sc">-</span> input<span class="sc">$</span>C) <span class="sc">/</span> input<span class="sc">$</span>B</span>
-<span id="cb10-874"><a href="#cb10-874" aria-hidden="true" tabindex="-1"></a>    p_2_star <span class="ot">&lt;-</span> input<span class="sc">$</span>T <span class="sc">/</span> input<span class="sc">$</span>F</span>
-<span id="cb10-875"><a href="#cb10-875" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-876"><a href="#cb10-876" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Determines what is the best reponse for player 1 or 2 if the other chooses their p equal 0 or 1. </span></span>
-<span id="cb10-877"><a href="#cb10-877" aria-hidden="true" tabindex="-1"></a>    BR1_0 <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">EU_1</span>(input<span class="sc">$</span>T, input<span class="sc">$</span>F, <span class="dv">0</span>)<span class="sc">&gt;</span><span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb10-878"><a href="#cb10-878" aria-hidden="true" tabindex="-1"></a>    BR1_1 <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">EU_1</span>(input<span class="sc">$</span>T, input<span class="sc">$</span>F, <span class="dv">1</span>)<span class="sc">&gt;</span><span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb10-879"><a href="#cb10-879" aria-hidden="true" tabindex="-1"></a>    BR2_0 <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">EU_2</span>(input<span class="sc">$</span>B, input<span class="sc">$</span>C, <span class="dv">0</span>)<span class="sc">&gt;</span><span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb10-880"><a href="#cb10-880" aria-hidden="true" tabindex="-1"></a>    BR2_1 <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">EU_2</span>(input<span class="sc">$</span>B, input<span class="sc">$</span>C, <span class="dv">1</span>)<span class="sc">&gt;</span><span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb10-881"><a href="#cb10-881" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-882"><a href="#cb10-882" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create data for plotting</span></span>
-<span id="cb10-883"><a href="#cb10-883" aria-hidden="true" tabindex="-1"></a>    x_vals <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>, p_1_star, p_1_star, <span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb10-884"><a href="#cb10-884" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb10-885"><a href="#cb10-885" aria-hidden="true" tabindex="-1"></a>    df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb10-886"><a href="#cb10-886" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> x_vals,</span>
-<span id="cb10-887"><a href="#cb10-887" aria-hidden="true" tabindex="-1"></a>      <span class="at">BR1 =</span> <span class="fu">c</span>(BR2_0, p_2_star, p_2_star, p_2_star, p_2_star, BR2_1),</span>
-<span id="cb10-888"><a href="#cb10-888" aria-hidden="true" tabindex="-1"></a>      <span class="at">BR2 =</span> <span class="fu">c</span>(BR1_0,    BR1_0,    BR1_0,    BR1_1, BR1_1, BR1_1)</span>
-<span id="cb10-889"><a href="#cb10-889" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb10-890"><a href="#cb10-890" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb10-891"><a href="#cb10-891" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
-<span id="cb10-892"><a href="#cb10-892" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> BR1), <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">size =</span> <span class="fl">1.2</span>, <span class="at">linetype =</span> <span class="st">&quot;solid&quot;</span>) <span class="sc">+</span></span>
-<span id="cb10-893"><a href="#cb10-893" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> BR2), <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="fl">1.2</span>, <span class="at">linetype =</span> <span class="st">&quot;solid&quot;</span>) <span class="sc">+</span></span>
-<span id="cb10-894"><a href="#cb10-894" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(</span>
-<span id="cb10-895"><a href="#cb10-895" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">&quot;Best Response Functions&quot;</span>,</span>
-<span id="cb10-896"><a href="#cb10-896" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">&quot;p_1&quot;</span>,</span>
-<span id="cb10-897"><a href="#cb10-897" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">&quot;p_2&quot;</span>,</span>
-<span id="cb10-898"><a href="#cb10-898" aria-hidden="true" tabindex="-1"></a>        <span class="at">caption =</span> <span class="st">&quot;Blue: Player 1 | Red: Player 2&quot;</span></span>
-<span id="cb10-899"><a href="#cb10-899" aria-hidden="true" tabindex="-1"></a>      ) <span class="sc">+</span></span>
-<span id="cb10-900"><a href="#cb10-900" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb10-901"><a href="#cb10-901" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb10-902"><a href="#cb10-902" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb10-903"><a href="#cb10-903" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-904"><a href="#cb10-904" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>equilibrium <span class="ot">&lt;-</span> <span class="fu">renderText</span>({</span>
-<span id="cb10-905"><a href="#cb10-905" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (input<span class="sc">$</span>B <span class="sc">==</span> <span class="dv">0</span> <span class="sc">||</span> input<span class="sc">$</span>F <span class="sc">==</span> <span class="dv">0</span>) {</span>
-<span id="cb10-906"><a href="#cb10-906" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;Error: B and F must be greater than 0 to compute equilibrium.&quot;</span></span>
-<span id="cb10-907"><a href="#cb10-907" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
-<span id="cb10-908"><a href="#cb10-908" aria-hidden="true" tabindex="-1"></a>      p1_star <span class="ot">&lt;-</span> <span class="fu">round</span>((input<span class="sc">$</span>B <span class="sc">-</span> input<span class="sc">$</span>C) <span class="sc">/</span> input<span class="sc">$</span>B, <span class="dv">3</span>)</span>
-<span id="cb10-909"><a href="#cb10-909" aria-hidden="true" tabindex="-1"></a>      p2_star <span class="ot">&lt;-</span> <span class="fu">round</span>(input<span class="sc">$</span>T <span class="sc">/</span> input<span class="sc">$</span>F, <span class="dv">3</span>)</span>
-<span id="cb10-910"><a href="#cb10-910" aria-hidden="true" tabindex="-1"></a>      <span class="fu">paste0</span>(<span class="st">&quot;Equilibrium Strategies:</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb10-911"><a href="#cb10-911" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;Player 1 (buy ticket): p1* = &quot;</span>, p1_star, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb10-912"><a href="#cb10-912" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;Player 2 (inspect):     p2* = &quot;</span>, p2_star)</span>
-<span id="cb10-913"><a href="#cb10-913" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb10-914"><a href="#cb10-914" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb10-915"><a href="#cb10-915" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb10-916"><a href="#cb10-916" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-917"><a href="#cb10-917" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span>
-<span id="cb10-918"><a href="#cb10-918" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-919"><a href="#cb10-919" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-872"><a href="#cb10-872" aria-hidden="true" tabindex="-1"></a>    <span class="co"># define the utility function for player 1  </span></span>
+<span id="cb10-873"><a href="#cb10-873" aria-hidden="true" tabindex="-1"></a>    EU_2 <span class="ot">&lt;-</span> <span class="cf">function</span>(B,C,p_1) {</span>
+<span id="cb10-874"><a href="#cb10-874" aria-hidden="true" tabindex="-1"></a>      term1 <span class="ot">=</span> p_1 <span class="sc">*</span> (<span class="sc">-</span>C) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">-</span>p_1) <span class="sc">*</span> (B<span class="sc">-</span>C)</span>
+<span id="cb10-875"><a href="#cb10-875" aria-hidden="true" tabindex="-1"></a>      term2 <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb10-876"><a href="#cb10-876" aria-hidden="true" tabindex="-1"></a>      term1 <span class="sc">-</span> term2</span>
+<span id="cb10-877"><a href="#cb10-877" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb10-878"><a href="#cb10-878" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-879"><a href="#cb10-879" aria-hidden="true" tabindex="-1"></a>    <span class="co"># calculate the critical values</span></span>
+<span id="cb10-880"><a href="#cb10-880" aria-hidden="true" tabindex="-1"></a>    p_1_star <span class="ot">&lt;-</span> (input<span class="sc">$</span>B <span class="sc">-</span> input<span class="sc">$</span>C) <span class="sc">/</span> input<span class="sc">$</span>B</span>
+<span id="cb10-881"><a href="#cb10-881" aria-hidden="true" tabindex="-1"></a>    p_2_star <span class="ot">&lt;-</span> input<span class="sc">$</span>T <span class="sc">/</span> input<span class="sc">$</span>F</span>
+<span id="cb10-882"><a href="#cb10-882" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-883"><a href="#cb10-883" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Determines what is the best reponse for player 1 or 2 if the other chooses their p equal 0 or 1. </span></span>
+<span id="cb10-884"><a href="#cb10-884" aria-hidden="true" tabindex="-1"></a>    BR1_0 <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">EU_1</span>(input<span class="sc">$</span>T, input<span class="sc">$</span>F, <span class="dv">0</span>)<span class="sc">&gt;</span><span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb10-885"><a href="#cb10-885" aria-hidden="true" tabindex="-1"></a>    BR1_1 <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">EU_1</span>(input<span class="sc">$</span>T, input<span class="sc">$</span>F, <span class="dv">1</span>)<span class="sc">&gt;</span><span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb10-886"><a href="#cb10-886" aria-hidden="true" tabindex="-1"></a>    BR2_0 <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">EU_2</span>(input<span class="sc">$</span>B, input<span class="sc">$</span>C, <span class="dv">0</span>)<span class="sc">&gt;</span><span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb10-887"><a href="#cb10-887" aria-hidden="true" tabindex="-1"></a>    BR2_1 <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">EU_2</span>(input<span class="sc">$</span>B, input<span class="sc">$</span>C, <span class="dv">1</span>)<span class="sc">&gt;</span><span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb10-888"><a href="#cb10-888" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-889"><a href="#cb10-889" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create data for plotting</span></span>
+<span id="cb10-890"><a href="#cb10-890" aria-hidden="true" tabindex="-1"></a>    x_vals <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>, p_1_star, p_1_star, <span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb10-891"><a href="#cb10-891" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-892"><a href="#cb10-892" aria-hidden="true" tabindex="-1"></a>    df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb10-893"><a href="#cb10-893" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> x_vals,</span>
+<span id="cb10-894"><a href="#cb10-894" aria-hidden="true" tabindex="-1"></a>      <span class="at">BR1 =</span> <span class="fu">c</span>(BR2_0, p_2_star, p_2_star, p_2_star, p_2_star, BR2_1),</span>
+<span id="cb10-895"><a href="#cb10-895" aria-hidden="true" tabindex="-1"></a>      <span class="at">BR2 =</span> <span class="fu">c</span>(BR1_0,    BR1_0,    BR1_0,    BR1_1, BR1_1, BR1_1)</span>
+<span id="cb10-896"><a href="#cb10-896" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb10-897"><a href="#cb10-897" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-898"><a href="#cb10-898" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
+<span id="cb10-899"><a href="#cb10-899" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> BR1), <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">size =</span> <span class="fl">1.2</span>, <span class="at">linetype =</span> <span class="st">&quot;solid&quot;</span>) <span class="sc">+</span></span>
+<span id="cb10-900"><a href="#cb10-900" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> BR2), <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="fl">1.2</span>, <span class="at">linetype =</span> <span class="st">&quot;solid&quot;</span>) <span class="sc">+</span></span>
+<span id="cb10-901"><a href="#cb10-901" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(</span>
+<span id="cb10-902"><a href="#cb10-902" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">&quot;Best Response Functions&quot;</span>,</span>
+<span id="cb10-903"><a href="#cb10-903" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">&quot;p_1&quot;</span>,</span>
+<span id="cb10-904"><a href="#cb10-904" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">&quot;p_2&quot;</span>,</span>
+<span id="cb10-905"><a href="#cb10-905" aria-hidden="true" tabindex="-1"></a>        <span class="at">caption =</span> <span class="st">&quot;Blue: Player 1 | Red: Player 2&quot;</span></span>
+<span id="cb10-906"><a href="#cb10-906" aria-hidden="true" tabindex="-1"></a>      ) <span class="sc">+</span></span>
+<span id="cb10-907"><a href="#cb10-907" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb10-908"><a href="#cb10-908" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb10-909"><a href="#cb10-909" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb10-910"><a href="#cb10-910" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-911"><a href="#cb10-911" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>equilibrium <span class="ot">&lt;-</span> <span class="fu">renderText</span>({</span>
+<span id="cb10-912"><a href="#cb10-912" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (input<span class="sc">$</span>B <span class="sc">==</span> <span class="dv">0</span> <span class="sc">||</span> input<span class="sc">$</span>F <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb10-913"><a href="#cb10-913" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;Error: B and F must be greater than 0 to compute equilibrium.&quot;</span></span>
+<span id="cb10-914"><a href="#cb10-914" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb10-915"><a href="#cb10-915" aria-hidden="true" tabindex="-1"></a>      p1_star <span class="ot">&lt;-</span> <span class="fu">round</span>((input<span class="sc">$</span>B <span class="sc">-</span> input<span class="sc">$</span>C) <span class="sc">/</span> input<span class="sc">$</span>B, <span class="dv">3</span>)</span>
+<span id="cb10-916"><a href="#cb10-916" aria-hidden="true" tabindex="-1"></a>      p2_star <span class="ot">&lt;-</span> <span class="fu">round</span>(input<span class="sc">$</span>T <span class="sc">/</span> input<span class="sc">$</span>F, <span class="dv">3</span>)</span>
+<span id="cb10-917"><a href="#cb10-917" aria-hidden="true" tabindex="-1"></a>      <span class="fu">paste0</span>(<span class="st">&quot;Equilibrium Strategies:</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb10-918"><a href="#cb10-918" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;Player 1 (buy ticket): p1* = &quot;</span>, p1_star, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb10-919"><a href="#cb10-919" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;Player 2 (inspect):     p2* = &quot;</span>, p2_star)</span>
+<span id="cb10-920"><a href="#cb10-920" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb10-921"><a href="#cb10-921" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb10-922"><a href="#cb10-922" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-923"><a href="#cb10-923" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-924"><a href="#cb10-924" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span>
+<span id="cb10-925"><a href="#cb10-925" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-926"><a href="#cb10-926" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
