@@ -5762,19 +5762,19 @@ b &amp; \text{ - benefit of receiving a position} \\
 \]</span></p>
 <p>The probability <span class="math inline">\(s\)</span> of successfully securing a position when applying is given by:</p>
 <p><span class="math display">\[
-s =
-\begin{cases}
+s = \Biggl\{
+\begin{array}{ll}
   \frac{k}{a} &amp; \text{if } a &gt; k \\
   1           &amp; \text{if } a \leq k
-\end{cases}
+\end{array}
 \]</span></p>
 <p>Accordingly, the expected utility for a player <span class="math inline">\(i \in N\)</span> who applies is:</p>
 <p><span class="math display">\[
-EU_i(a_{iA}) = E(k,a) =
-\begin{cases}
+EU_i(a_{iA}) = E(k,a) = \Biggl\{
+\begin{array}{ll}
   \frac{k}{a} \cdot b - c &amp; \text{if } a &gt; k \\
-  b-c             &amp; \text{if } a \leq k
-\end{cases}
+  b-c                     &amp; \text{if } a \leq k
+\end{array}
 \]</span></p>
 <p>Assuming, as before, that refraining yields utility <span class="math inline">\(0\)</span>, we can summarize the payoffs for player <span class="math inline">\(i\)</span> depending on how many of the other <span class="math inline">\(n-1\)</span> players choose to apply:</p>
 <div id="tbl-util-boudon" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -5959,8 +5959,12 @@ eu(p,n,k,b,c)
 EU_i(a_{iA})=EU_i(a_{iR})
 \]</span></p>
 <p>Suppose that when a player applies her probability of success is <span class="math inline">\(p_s\)</span>. If success yields a net benefit <span class="math inline">\((b-c)\)</span> and failure yields a payoff of <span class="math inline">\(-c\)</span>, then her expected payoff from applying is</p>
-<p>$$ p_s (b-c) + (1-p_s) (0 - c) = 0 \</p>
-<p>p_s b - c = 0 $$</p>
+<p><span class="math display">\[
+\begin{align*}
+p_s \cdot (b-c) + (1-p_s) \cdot (0 - c) = 0 \\
+p_s \cdot b - c = 0
+\end{align*}
+\]</span></p>
 <p>On the other hand, consider the following approximation. If there are <span class="math inline">\(k\)</span> free positions among <span class="math inline">\(n\)</span> players and each player applies with probability <span class="math inline">\(p\)</span>, then the expected number of applicants is <span class="math inline">\(n \cdot p\)</span>. Assuming that applicants share the <span class="math inline">\(k\)</span> positions equally, a given applicant’s chance of success can be approximated by the ratio of free positions to the expected number of applicants:</p>
 <p><span class="math display">\[
 p_s \approx \frac{k}{n} \cdot \frac{n}{a} = \frac{k}{a} = \frac{k}{n \cdot p}
@@ -6048,12 +6052,12 @@ Table 6: Payoff matrix for the ticket inspection game (Player 1 and Player 2).
 </tr>
 <tr class="even">
 <td><strong>Buy ticket</strong> (<span class="math inline">\(a_{1T}\)</span>)</td>
-<td><span class="math inline">\(-T, B-C\)</span></td>
+<td><span class="math inline">\(-T, -C\)</span></td>
 <td><span class="math inline">\(-T, 0\)</span></td>
 </tr>
 <tr class="odd">
 <td><strong>Don’t buy ticket</strong> (<span class="math inline">\(a_{1NT}\)</span>)</td>
-<td><span class="math inline">\(-F, -C\)</span></td>
+<td><span class="math inline">\(-F, B-C\)</span></td>
 <td><span class="math inline">\(0, 0\)</span></td>
 </tr>
 </tbody>
@@ -6092,8 +6096,12 @@ This is <strong>not</strong> a Nash equilibrium, since Player 2 would prefer not
 <section id="player-1-strategy" class="level4">
 <h4 class="anchored" data-anchor-id="player-1-strategy">Player 1 strategy</h4>
 <p>By this time you should know that in order to calculate <span class="math inline">\(p_1\)</span> we need the <span class="math inline">\(EU\)</span> of Player 2:</p>
-<p>$$ EU_2(a_{2I})=EU_2(a_{2NI}) \ p_1 (- C) + (1 - p_1) (B-C) = 0</p>
-<p>$$</p>
+<p><span class="math display">\[
+\begin{align*}
+EU_2(a_{2I})=EU_2(a_{2NI}) \\
+p_1 \cdot (- C) + (1 - p_1) \cdot (B-C) = 0
+\end{align*}
+\]</span></p>
 <p>Solving for <span class="math inline">\(p_1\)</span> we get:</p>
 <p><span class="math display">\[
 p_1^* = \frac{B-C}{B}
@@ -6102,8 +6110,12 @@ p_1^* = \frac{B-C}{B}
 <section id="player-2-strategy" class="level4">
 <h4 class="anchored" data-anchor-id="player-2-strategy">Player 2 strategy</h4>
 <p>Similarly, we equate Player 1’s expected utilities to solve for <span class="math inline">\(p_2\)</span>:</p>
-<p>$$ EU_1(a_{1T})=EU_1(a_{1NT}) \ -T = p_2 (-F) + (1-p_2) </p>
-<p>$$</p>
+<p><span class="math display">\[
+\begin{align*}
+EU_1(a_{1T})=EU_1(a_{1NT}) \\
+-T = p_2 \cdot (-F) + (1-p_2) \cdot 0
+\end{align*}
+\]</span></p>
 <p>Solving for <span class="math inline">\(p_2\)</span> we get:</p>
 <p><span class="math display">\[
 p_2^* = \frac{T}{F}
@@ -6127,7 +6139,7 @@ p_2^* = \frac{T}{F}
 <p>In reality, if the ticket price increases and the inspection probability <span class="math inline">\(p_2\)</span> remains unchanged, people become less inclined to buy a ticket, and so <span class="math inline">\(p_1\)</span> (the probability of buying) decreases. In response, Player 2 (the inspector) now has a stronger incentive to inspect, causing <span class="math inline">\(p_2\)</span> to increase. As inspections become more frequent, the cost of fare evasion rises, and passengers are once again more likely to buy tickets. This feedback loop continues until the system settles back at the equilibrium point—where each player’s strategy is a best response to the other’s.</p>
 <section id="graphical-representation" class="level3">
 <h3 class="anchored" data-anchor-id="graphical-representation">Graphical Representation</h3>
-<p>Below, you can see the <strong>best response functions</strong> for both players.</p>
+<p>Below, you can see the <strong>best response functions</strong> for both players. These graphical representations might help us to determine equilibria in a game.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -6252,7 +6264,7 @@ Boudon, Raymond. 1977. <em>The Unintended Consequences of Social Action</em>. Lo
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>As long as F&gt;T&gt;0 and B&gt;C&gt;0 holds.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>As long as <span class="math inline">\(F&gt;T&gt;0\)</span> and <span class="math inline">\(B&gt;C&gt;0\)</span> holds.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section><section class="quarto-appendix-contents" id="quarto-copyright"><h2 class="anchored quarto-appendix-heading">Copyright</h2><div class="quarto-appendix-contents"><div>Copyright Sascha Grehl, 2025. All Rights Reserved</div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -7205,21 +7217,21 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb10-490"><a href="#cb10-490" aria-hidden="true" tabindex="-1"></a>The probability $s$ of successfully securing a position when applying is given by:</span>
 <span id="cb10-491"><a href="#cb10-491" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-492"><a href="#cb10-492" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb10-493"><a href="#cb10-493" aria-hidden="true" tabindex="-1"></a>s = </span>
-<span id="cb10-494"><a href="#cb10-494" aria-hidden="true" tabindex="-1"></a>\begin{cases}</span>
+<span id="cb10-493"><a href="#cb10-493" aria-hidden="true" tabindex="-1"></a>s = \Biggl<span class="sc">\{</span></span>
+<span id="cb10-494"><a href="#cb10-494" aria-hidden="true" tabindex="-1"></a>\begin{array}{ll}</span>
 <span id="cb10-495"><a href="#cb10-495" aria-hidden="true" tabindex="-1"></a>  \frac{k}{a} &amp; \text{if } a &gt; k <span class="sc">\\</span></span>
 <span id="cb10-496"><a href="#cb10-496" aria-hidden="true" tabindex="-1"></a>  1           &amp; \text{if } a \leq k</span>
-<span id="cb10-497"><a href="#cb10-497" aria-hidden="true" tabindex="-1"></a>\end{cases}</span>
+<span id="cb10-497"><a href="#cb10-497" aria-hidden="true" tabindex="-1"></a>\end{array}</span>
 <span id="cb10-498"><a href="#cb10-498" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb10-499"><a href="#cb10-499" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-500"><a href="#cb10-500" aria-hidden="true" tabindex="-1"></a>Accordingly, the expected utility for a player $i \in N$ who applies is:</span>
 <span id="cb10-501"><a href="#cb10-501" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-502"><a href="#cb10-502" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb10-503"><a href="#cb10-503" aria-hidden="true" tabindex="-1"></a>EU_i(a_{iA}) = E(k,a) =</span>
-<span id="cb10-504"><a href="#cb10-504" aria-hidden="true" tabindex="-1"></a>\begin{cases}</span>
+<span id="cb10-503"><a href="#cb10-503" aria-hidden="true" tabindex="-1"></a>EU_i(a_{iA}) = E(k,a) = \Biggl<span class="sc">\{</span></span>
+<span id="cb10-504"><a href="#cb10-504" aria-hidden="true" tabindex="-1"></a>\begin{array}{ll}</span>
 <span id="cb10-505"><a href="#cb10-505" aria-hidden="true" tabindex="-1"></a>  \frac{k}{a} \cdot b - c &amp; \text{if } a &gt; k <span class="sc">\\</span></span>
-<span id="cb10-506"><a href="#cb10-506" aria-hidden="true" tabindex="-1"></a>  b-c             &amp; \text{if } a \leq k</span>
-<span id="cb10-507"><a href="#cb10-507" aria-hidden="true" tabindex="-1"></a>\end{cases}</span>
+<span id="cb10-506"><a href="#cb10-506" aria-hidden="true" tabindex="-1"></a>  b-c                     &amp; \text{if } a \leq k</span>
+<span id="cb10-507"><a href="#cb10-507" aria-hidden="true" tabindex="-1"></a>\end{array}</span>
 <span id="cb10-508"><a href="#cb10-508" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb10-509"><a href="#cb10-509" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-510"><a href="#cb10-510" aria-hidden="true" tabindex="-1"></a>Assuming, as before, that refraining yields utility $0$, we can summarize the payoffs for player $i$ depending on how many of the other $n-1$ players choose to apply:</span>
@@ -7392,249 +7404,258 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb10-679"><a href="#cb10-679" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-680"><a href="#cb10-680" aria-hidden="true" tabindex="-1"></a>Suppose that when a player applies her probability of success is $p_s$. If success yields a net benefit $(b-c)$ and failure yields a payoff of $-c$, then her expected payoff from applying is</span>
 <span id="cb10-681"><a href="#cb10-681" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-682"><a href="#cb10-682" aria-hidden="true" tabindex="-1"></a>\$\$ p_s \cdot (b-c) + (1-p_s) \cdot (0 - c) = 0 <span class="sc">\\</span></span>
-<span id="cb10-683"><a href="#cb10-683" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-684"><a href="#cb10-684" aria-hidden="true" tabindex="-1"></a>p_s \cdot b - c = 0 \$\$</span>
-<span id="cb10-685"><a href="#cb10-685" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-686"><a href="#cb10-686" aria-hidden="true" tabindex="-1"></a>On the other hand, consider the following approximation. If there are $k$ free positions among $n$ players and each player applies with probability $p$, then the expected number of applicants is $n \cdot p$. Assuming that applicants share the $k$ positions equally, a given applicant&#39;s chance of success can be approximated by the ratio of free positions to the expected number of applicants:</span>
-<span id="cb10-687"><a href="#cb10-687" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-688"><a href="#cb10-688" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb10-689"><a href="#cb10-689" aria-hidden="true" tabindex="-1"></a>p_s \approx \frac{k}{n} \cdot \frac{n}{a} = \frac{k}{a} = \frac{k}{n \cdot p}</span>
-<span id="cb10-690"><a href="#cb10-690" aria-hidden="true" tabindex="-1"></a>$$ </span>
-<span id="cb10-691"><a href="#cb10-691" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-692"><a href="#cb10-692" aria-hidden="true" tabindex="-1"></a>Equate the two expressions for $p_s$:</span>
-<span id="cb10-693"><a href="#cb10-693" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-694"><a href="#cb10-694" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb10-695"><a href="#cb10-695" aria-hidden="true" tabindex="-1"></a>\frac{k}{n\cdot p} \cdot b - c = 0</span>
-<span id="cb10-696"><a href="#cb10-696" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb10-697"><a href="#cb10-697" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-698"><a href="#cb10-698" aria-hidden="true" tabindex="-1"></a>Solving for $p$, we obtain</span>
-<span id="cb10-699"><a href="#cb10-699" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-700"><a href="#cb10-700" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb10-701"><a href="#cb10-701" aria-hidden="true" tabindex="-1"></a>p^* =\frac{k}{n}\cdot \frac{b}{c}=f\cdot \frac{b}{c}</span>
-<span id="cb10-702"><a href="#cb10-702" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb10-703"><a href="#cb10-703" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-704"><a href="#cb10-704" aria-hidden="true" tabindex="-1"></a>with $f = \frac{k}{n}$ as the relative share of free positions.</span>
-<span id="cb10-705"><a href="#cb10-705" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-706"><a href="#cb10-706" aria-hidden="true" tabindex="-1"></a>This linear approximation for $p^*$ relies on replacing the random number of applicants with its expectation, and it ignores the variability inherent in the binomial structure. Hence, while the approximation becomes increasingly accurate for large $n$, for small $n$ there may be significant differences from the exact solution.</span>
-<span id="cb10-707"><a href="#cb10-707" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-708"><a href="#cb10-708" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Asymmetrical Mixed Nash Equilibria</span></span>
-<span id="cb10-709"><a href="#cb10-709" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-710"><a href="#cb10-710" aria-hidden="true" tabindex="-1"></a>If you thought we were done, you were wrong! There&#39;s actually a plethora of other equilibria. For example, one player might always apply while the others play a mixed Nash strategy. (Don’t believe me? Try a game with $n=3$, $k=2$, $b=5$, $c=4$, and $\sigma^*=(1,3/5,3/5)$). Still, these equilibria aren&#39;t particularly compelling—unless you have strong reasons to believe that players will coordinate or gravitate toward that specific outcome. In fact, they’re often considered so unlikely that many academic papers completely ignore them <span class="co">[</span><span class="ot">@berger2015</span><span class="co">]</span>!</span>
-<span id="cb10-711"><a href="#cb10-711" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-712"><a href="#cb10-712" aria-hidden="true" tabindex="-1"></a><span class="fu"># Extra Tasks</span></span>
-<span id="cb10-713"><a href="#cb10-713" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-714"><a href="#cb10-714" aria-hidden="true" tabindex="-1"></a>Remember this example from @tbl-decision-ticket? While it&#39;s tempting to think of ticket inspections as a kind of natural force—random and unpredictable—that view overlooks a key detail: someone actually has to choose to inspect. So why not bring them into the picture and turn this into a proper game?</span>
-<span id="cb10-715"><a href="#cb10-715" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-716"><a href="#cb10-716" aria-hidden="true" tabindex="-1"></a>|  |  |  |</span>
-<span id="cb10-717"><a href="#cb10-717" aria-hidden="true" tabindex="-1"></a>|--------------------------------|--------------------|--------------------|</span>
-<span id="cb10-718"><a href="#cb10-718" aria-hidden="true" tabindex="-1"></a>| **actions \\ states of the world** | **Ticket inspection (**$p$) | **No ticket inspection** ($1-p$) |</span>
-<span id="cb10-719"><a href="#cb10-719" aria-hidden="true" tabindex="-1"></a>| **Buy ticket** ($a_T$) | $-T$ | $-T$ |</span>
-<span id="cb10-720"><a href="#cb10-720" aria-hidden="true" tabindex="-1"></a>| **Don’t buy ticket** ($a_{NT}$) | $-F$ | $Q$ |</span>
-<span id="cb10-721"><a href="#cb10-721" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-722"><a href="#cb10-722" aria-hidden="true" tabindex="-1"></a>: Payoff matrix for the ticket decision. {#tbl-decision-ticket}</span>
-<span id="cb10-723"><a href="#cb10-723" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-724"><a href="#cb10-724" aria-hidden="true" tabindex="-1"></a><span class="fu">## Modelling</span></span>
-<span id="cb10-725"><a href="#cb10-725" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-726"><a href="#cb10-726" aria-hidden="true" tabindex="-1"></a>To transform this decision problem into a game, we need to introduce a second player—the inspector.</span>
-<span id="cb10-727"><a href="#cb10-727" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-728"><a href="#cb10-728" aria-hidden="true" tabindex="-1"></a>**Step 1: Define their actions**. This is straightforward: the inspector can either inspect ($a_{2I}$) or not inspect ($a_{2NI}$) tickets.</span>
-<span id="cb10-729"><a href="#cb10-729" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-730"><a href="#cb10-730" aria-hidden="true" tabindex="-1"></a>**Step 2: Assign payoffs**. For Player 1, the payoffs stay the same (with $Q$ normalized to 0, as before). For Player 2, we assume:</span>
-<span id="cb10-731"><a href="#cb10-731" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-732"><a href="#cb10-732" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>No inspection yields a payoff of 0.</span>
-<span id="cb10-733"><a href="#cb10-733" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Inspection costs $C$, but if Player 1 is caught without a ticket, the inspector receives a bonus $B$ (with $B&gt;C&gt;0$)</span>
+<span id="cb10-682"><a href="#cb10-682" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb10-683"><a href="#cb10-683" aria-hidden="true" tabindex="-1"></a>\begin{align*}</span>
+<span id="cb10-684"><a href="#cb10-684" aria-hidden="true" tabindex="-1"></a>p_s \cdot (b-c) + (1-p_s) \cdot (0 - c) = 0 <span class="sc">\\</span></span>
+<span id="cb10-685"><a href="#cb10-685" aria-hidden="true" tabindex="-1"></a>p_s \cdot b - c = 0</span>
+<span id="cb10-686"><a href="#cb10-686" aria-hidden="true" tabindex="-1"></a>\end{align*}</span>
+<span id="cb10-687"><a href="#cb10-687" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb10-688"><a href="#cb10-688" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-689"><a href="#cb10-689" aria-hidden="true" tabindex="-1"></a>On the other hand, consider the following approximation. If there are $k$ free positions among $n$ players and each player applies with probability $p$, then the expected number of applicants is $n \cdot p$. Assuming that applicants share the $k$ positions equally, a given applicant&#39;s chance of success can be approximated by the ratio of free positions to the expected number of applicants:</span>
+<span id="cb10-690"><a href="#cb10-690" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-691"><a href="#cb10-691" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb10-692"><a href="#cb10-692" aria-hidden="true" tabindex="-1"></a>p_s \approx \frac{k}{n} \cdot \frac{n}{a} = \frac{k}{a} = \frac{k}{n \cdot p}</span>
+<span id="cb10-693"><a href="#cb10-693" aria-hidden="true" tabindex="-1"></a>$$ </span>
+<span id="cb10-694"><a href="#cb10-694" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-695"><a href="#cb10-695" aria-hidden="true" tabindex="-1"></a>Equate the two expressions for $p_s$:</span>
+<span id="cb10-696"><a href="#cb10-696" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-697"><a href="#cb10-697" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb10-698"><a href="#cb10-698" aria-hidden="true" tabindex="-1"></a>\frac{k}{n\cdot p} \cdot b - c = 0</span>
+<span id="cb10-699"><a href="#cb10-699" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb10-700"><a href="#cb10-700" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-701"><a href="#cb10-701" aria-hidden="true" tabindex="-1"></a>Solving for $p$, we obtain</span>
+<span id="cb10-702"><a href="#cb10-702" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-703"><a href="#cb10-703" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb10-704"><a href="#cb10-704" aria-hidden="true" tabindex="-1"></a>p^* =\frac{k}{n}\cdot \frac{b}{c}=f\cdot \frac{b}{c}</span>
+<span id="cb10-705"><a href="#cb10-705" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb10-706"><a href="#cb10-706" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-707"><a href="#cb10-707" aria-hidden="true" tabindex="-1"></a>with $f = \frac{k}{n}$ as the relative share of free positions.</span>
+<span id="cb10-708"><a href="#cb10-708" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-709"><a href="#cb10-709" aria-hidden="true" tabindex="-1"></a>This linear approximation for $p^*$ relies on replacing the random number of applicants with its expectation, and it ignores the variability inherent in the binomial structure. Hence, while the approximation becomes increasingly accurate for large $n$, for small $n$ there may be significant differences from the exact solution.</span>
+<span id="cb10-710"><a href="#cb10-710" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-711"><a href="#cb10-711" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Asymmetrical Mixed Nash Equilibria</span></span>
+<span id="cb10-712"><a href="#cb10-712" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-713"><a href="#cb10-713" aria-hidden="true" tabindex="-1"></a>If you thought we were done, you were wrong! There&#39;s actually a plethora of other equilibria. For example, one player might always apply while the others play a mixed Nash strategy. (Don’t believe me? Try a game with $n=3$, $k=2$, $b=5$, $c=4$, and $\sigma^*=(1,3/5,3/5)$). Still, these equilibria aren&#39;t particularly compelling—unless you have strong reasons to believe that players will coordinate or gravitate toward that specific outcome. In fact, they’re often considered so unlikely that many academic papers completely ignore them <span class="co">[</span><span class="ot">@berger2015</span><span class="co">]</span>!</span>
+<span id="cb10-714"><a href="#cb10-714" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-715"><a href="#cb10-715" aria-hidden="true" tabindex="-1"></a><span class="fu"># Extra Tasks</span></span>
+<span id="cb10-716"><a href="#cb10-716" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-717"><a href="#cb10-717" aria-hidden="true" tabindex="-1"></a>Remember this example from @tbl-decision-ticket? While it&#39;s tempting to think of ticket inspections as a kind of natural force—random and unpredictable—that view overlooks a key detail: someone actually has to choose to inspect. So why not bring them into the picture and turn this into a proper game?</span>
+<span id="cb10-718"><a href="#cb10-718" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-719"><a href="#cb10-719" aria-hidden="true" tabindex="-1"></a>|  |  |  |</span>
+<span id="cb10-720"><a href="#cb10-720" aria-hidden="true" tabindex="-1"></a>|--------------------------------|--------------------|--------------------|</span>
+<span id="cb10-721"><a href="#cb10-721" aria-hidden="true" tabindex="-1"></a>| **actions \\ states of the world** | **Ticket inspection (**$p$) | **No ticket inspection** ($1-p$) |</span>
+<span id="cb10-722"><a href="#cb10-722" aria-hidden="true" tabindex="-1"></a>| **Buy ticket** ($a_T$) | $-T$ | $-T$ |</span>
+<span id="cb10-723"><a href="#cb10-723" aria-hidden="true" tabindex="-1"></a>| **Don’t buy ticket** ($a_{NT}$) | $-F$ | $Q$ |</span>
+<span id="cb10-724"><a href="#cb10-724" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-725"><a href="#cb10-725" aria-hidden="true" tabindex="-1"></a>: Payoff matrix for the ticket decision. {#tbl-decision-ticket}</span>
+<span id="cb10-726"><a href="#cb10-726" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-727"><a href="#cb10-727" aria-hidden="true" tabindex="-1"></a><span class="fu">## Modelling</span></span>
+<span id="cb10-728"><a href="#cb10-728" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-729"><a href="#cb10-729" aria-hidden="true" tabindex="-1"></a>To transform this decision problem into a game, we need to introduce a second player—the inspector.</span>
+<span id="cb10-730"><a href="#cb10-730" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-731"><a href="#cb10-731" aria-hidden="true" tabindex="-1"></a>**Step 1: Define their actions**. This is straightforward: the inspector can either inspect ($a_{2I}$) or not inspect ($a_{2NI}$) tickets.</span>
+<span id="cb10-732"><a href="#cb10-732" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-733"><a href="#cb10-733" aria-hidden="true" tabindex="-1"></a>**Step 2: Assign payoffs**. For Player 1, the payoffs stay the same (with $Q$ normalized to 0, as before). For Player 2, we assume:</span>
 <span id="cb10-734"><a href="#cb10-734" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-735"><a href="#cb10-735" aria-hidden="true" tabindex="-1"></a>This leads us to the following payoff matrix:</span>
-<span id="cb10-736"><a href="#cb10-736" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-737"><a href="#cb10-737" aria-hidden="true" tabindex="-1"></a>|  |  |  |</span>
-<span id="cb10-738"><a href="#cb10-738" aria-hidden="true" tabindex="-1"></a>|--------------------------------|--------------------|--------------------|</span>
-<span id="cb10-739"><a href="#cb10-739" aria-hidden="true" tabindex="-1"></a>| **actions \\ states of the world** | **Ticket inspection** $(a_{2I})$ | **No ticket inspection** $(a_{2NI})$ |</span>
-<span id="cb10-740"><a href="#cb10-740" aria-hidden="true" tabindex="-1"></a>| **Buy ticket** ($a_{1T}$) | $-T, B-C$ | $-T, 0$ |</span>
-<span id="cb10-741"><a href="#cb10-741" aria-hidden="true" tabindex="-1"></a>| **Don’t buy ticket** ($a_{1NT}$) | $-F, -C$ | $0, 0$ |</span>
-<span id="cb10-742"><a href="#cb10-742" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-743"><a href="#cb10-743" aria-hidden="true" tabindex="-1"></a>: Payoff matrix for the ticket inspection game (Player 1 and Player 2). {#tbl-game-ticket}</span>
-<span id="cb10-744"><a href="#cb10-744" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-745"><a href="#cb10-745" aria-hidden="true" tabindex="-1"></a><span class="fu">## Analyzing</span></span>
-<span id="cb10-746"><a href="#cb10-746" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-747"><a href="#cb10-747" aria-hidden="true" tabindex="-1"></a>Now that we have everything in place, we can analyze this game.</span>
-<span id="cb10-748"><a href="#cb10-748" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-749"><a href="#cb10-749" aria-hidden="true" tabindex="-1"></a>Let’s denote the players’ strategies as:</span>
-<span id="cb10-750"><a href="#cb10-750" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-751"><a href="#cb10-751" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Player 1 buys a ticket with probability $p_1$, and doesn&#39;t buy with probability $1 - p_1$.</span>
-<span id="cb10-752"><a href="#cb10-752" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Player 2 inspects with probability $p_2$, and doesn&#39;t inspect with probability $1 - p_2$.</span>
+<span id="cb10-735"><a href="#cb10-735" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>No inspection yields a payoff of 0.</span>
+<span id="cb10-736"><a href="#cb10-736" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Inspection costs $C$, but if Player 1 is caught without a ticket, the inspector receives a bonus $B$ (with $B&gt;C&gt;0$)</span>
+<span id="cb10-737"><a href="#cb10-737" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-738"><a href="#cb10-738" aria-hidden="true" tabindex="-1"></a>This leads us to the following payoff matrix:</span>
+<span id="cb10-739"><a href="#cb10-739" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-740"><a href="#cb10-740" aria-hidden="true" tabindex="-1"></a>|  |  |  |</span>
+<span id="cb10-741"><a href="#cb10-741" aria-hidden="true" tabindex="-1"></a>|--------------------------------|--------------------|--------------------|</span>
+<span id="cb10-742"><a href="#cb10-742" aria-hidden="true" tabindex="-1"></a>| **actions \\ states of the world** | **Ticket inspection** $(a_{2I})$ | **No ticket inspection** $(a_{2NI})$ |</span>
+<span id="cb10-743"><a href="#cb10-743" aria-hidden="true" tabindex="-1"></a>| **Buy ticket** ($a_{1T}$) | $-T, -C$ | $-T, 0$ |</span>
+<span id="cb10-744"><a href="#cb10-744" aria-hidden="true" tabindex="-1"></a>| **Don’t buy ticket** ($a_{1NT}$) | $-F, B-C$ | $0, 0$ |</span>
+<span id="cb10-745"><a href="#cb10-745" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-746"><a href="#cb10-746" aria-hidden="true" tabindex="-1"></a>: Payoff matrix for the ticket inspection game (Player 1 and Player 2). {#tbl-game-ticket}</span>
+<span id="cb10-747"><a href="#cb10-747" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-748"><a href="#cb10-748" aria-hidden="true" tabindex="-1"></a><span class="fu">## Analyzing</span></span>
+<span id="cb10-749"><a href="#cb10-749" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-750"><a href="#cb10-750" aria-hidden="true" tabindex="-1"></a>Now that we have everything in place, we can analyze this game.</span>
+<span id="cb10-751"><a href="#cb10-751" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-752"><a href="#cb10-752" aria-hidden="true" tabindex="-1"></a>Let’s denote the players’ strategies as:</span>
 <span id="cb10-753"><a href="#cb10-753" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-754"><a href="#cb10-754" aria-hidden="true" tabindex="-1"></a><span class="fu">### Pure Nash Equilibria</span></span>
-<span id="cb10-755"><a href="#cb10-755" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-756"><a href="#cb10-756" aria-hidden="true" tabindex="-1"></a>Let us first check whether this game has any pure Nash equilibria.</span>
-<span id="cb10-757"><a href="#cb10-757" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-758"><a href="#cb10-758" aria-hidden="true" tabindex="-1"></a>To do this, we evaluate all possible pure strategy profiles and check if any of them are mutual best responses:</span>
-<span id="cb10-759"><a href="#cb10-759" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-760"><a href="#cb10-760" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>**Player 1 does not buy a ticket, Player 2 inspects**\</span>
-<span id="cb10-761"><a href="#cb10-761" aria-hidden="true" tabindex="-1"></a>    This is **not** a Nash equilibrium, since Player 1 would prefer not to buy the ticket ($-F &lt; -T$).</span>
+<span id="cb10-754"><a href="#cb10-754" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Player 1 buys a ticket with probability $p_1$, and doesn&#39;t buy with probability $1 - p_1$.</span>
+<span id="cb10-755"><a href="#cb10-755" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Player 2 inspects with probability $p_2$, and doesn&#39;t inspect with probability $1 - p_2$.</span>
+<span id="cb10-756"><a href="#cb10-756" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-757"><a href="#cb10-757" aria-hidden="true" tabindex="-1"></a><span class="fu">### Pure Nash Equilibria</span></span>
+<span id="cb10-758"><a href="#cb10-758" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-759"><a href="#cb10-759" aria-hidden="true" tabindex="-1"></a>Let us first check whether this game has any pure Nash equilibria.</span>
+<span id="cb10-760"><a href="#cb10-760" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-761"><a href="#cb10-761" aria-hidden="true" tabindex="-1"></a>To do this, we evaluate all possible pure strategy profiles and check if any of them are mutual best responses:</span>
 <span id="cb10-762"><a href="#cb10-762" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-763"><a href="#cb10-763" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>**Player 1 buys a ticket, Player 2 inspect**\</span>
-<span id="cb10-764"><a href="#cb10-764" aria-hidden="true" tabindex="-1"></a>    This is **not** a Nash equilibrium, since Player 2 would prefer not to inspect ($-C &lt; 0$).</span>
+<span id="cb10-763"><a href="#cb10-763" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>**Player 1 does not buy a ticket, Player 2 inspects**\</span>
+<span id="cb10-764"><a href="#cb10-764" aria-hidden="true" tabindex="-1"></a>    This is **not** a Nash equilibrium, since Player 1 would prefer not to buy the ticket ($-F &lt; -T$).</span>
 <span id="cb10-765"><a href="#cb10-765" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-766"><a href="#cb10-766" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>**Player 1 buys a ticket, Player 2 does not inspect**\</span>
-<span id="cb10-767"><a href="#cb10-767" aria-hidden="true" tabindex="-1"></a>    This is **not** a Nash equilibrium, since Player 1 would prefer not to buy the ticket ($-T &lt; 0$).</span>
+<span id="cb10-766"><a href="#cb10-766" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>**Player 1 buys a ticket, Player 2 inspect**\</span>
+<span id="cb10-767"><a href="#cb10-767" aria-hidden="true" tabindex="-1"></a>    This is **not** a Nash equilibrium, since Player 2 would prefer not to inspect ($-C &lt; 0$).</span>
 <span id="cb10-768"><a href="#cb10-768" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-769"><a href="#cb10-769" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>**Player 1 does not buy a ticket, Player 2 does not inspect**\</span>
-<span id="cb10-770"><a href="#cb10-770" aria-hidden="true" tabindex="-1"></a>    This is **not** a Nash equilibrium, since Player 2 would prefer not to inspect ($0 &lt; B-C$).</span>
+<span id="cb10-769"><a href="#cb10-769" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>**Player 1 buys a ticket, Player 2 does not inspect**\</span>
+<span id="cb10-770"><a href="#cb10-770" aria-hidden="true" tabindex="-1"></a>    This is **not** a Nash equilibrium, since Player 1 would prefer not to buy the ticket ($-T &lt; 0$).</span>
 <span id="cb10-771"><a href="#cb10-771" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-772"><a href="#cb10-772" aria-hidden="true" tabindex="-1"></a>Hence, **no pure strategy profile forms a Nash equilibrium**. And because it is a finite game (= finite number of players with a finite number of actions), we now that at least one Nash equilibrium must exist.</span>
-<span id="cb10-773"><a href="#cb10-773" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-774"><a href="#cb10-774" aria-hidden="true" tabindex="-1"></a><span class="fu">### Mixed Nash Equilibrium</span></span>
-<span id="cb10-775"><a href="#cb10-775" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-776"><a href="#cb10-776" aria-hidden="true" tabindex="-1"></a>To find the **mixed-strategy Nash equilibrium**, we look for values of $p_1^*$ and $p_2^*$ such that both players are indifferent between their actions. Since this game is not a symmetric game we have to calculate it for both seperatly.</span>
-<span id="cb10-777"><a href="#cb10-777" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-778"><a href="#cb10-778" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Player 1 strategy</span></span>
-<span id="cb10-779"><a href="#cb10-779" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-780"><a href="#cb10-780" aria-hidden="true" tabindex="-1"></a>By this time you should know that in order to calculate $p_1$ we need the $EU$ of Player 2:</span>
-<span id="cb10-781"><a href="#cb10-781" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-782"><a href="#cb10-782" aria-hidden="true" tabindex="-1"></a>\$\$ EU_2(a<span class="sc">\_</span>{2I})=EU_2(a<span class="sc">\_</span>{2NI}) <span class="sc">\\</span> p_1 \cdot (- C) + (1 - p_1) \cdot (B-C) = 0</span>
-<span id="cb10-783"><a href="#cb10-783" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-784"><a href="#cb10-784" aria-hidden="true" tabindex="-1"></a>\$\$</span>
-<span id="cb10-785"><a href="#cb10-785" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-786"><a href="#cb10-786" aria-hidden="true" tabindex="-1"></a>Solving for $p_1$ we get:</span>
-<span id="cb10-787"><a href="#cb10-787" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-788"><a href="#cb10-788" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb10-789"><a href="#cb10-789" aria-hidden="true" tabindex="-1"></a>p_1^* = \frac{B-C}{B}</span>
+<span id="cb10-772"><a href="#cb10-772" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>**Player 1 does not buy a ticket, Player 2 does not inspect**\</span>
+<span id="cb10-773"><a href="#cb10-773" aria-hidden="true" tabindex="-1"></a>    This is **not** a Nash equilibrium, since Player 2 would prefer not to inspect ($0 &lt; B-C$).</span>
+<span id="cb10-774"><a href="#cb10-774" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-775"><a href="#cb10-775" aria-hidden="true" tabindex="-1"></a>Hence, **no pure strategy profile forms a Nash equilibrium**. And because it is a finite game (= finite number of players with a finite number of actions), we now that at least one Nash equilibrium must exist.</span>
+<span id="cb10-776"><a href="#cb10-776" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-777"><a href="#cb10-777" aria-hidden="true" tabindex="-1"></a><span class="fu">### Mixed Nash Equilibrium</span></span>
+<span id="cb10-778"><a href="#cb10-778" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-779"><a href="#cb10-779" aria-hidden="true" tabindex="-1"></a>To find the **mixed-strategy Nash equilibrium**, we look for values of $p_1^*$ and $p_2^*$ such that both players are indifferent between their actions. Since this game is not a symmetric game we have to calculate it for both seperatly.</span>
+<span id="cb10-780"><a href="#cb10-780" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-781"><a href="#cb10-781" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Player 1 strategy</span></span>
+<span id="cb10-782"><a href="#cb10-782" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-783"><a href="#cb10-783" aria-hidden="true" tabindex="-1"></a>By this time you should know that in order to calculate $p_1$ we need the $EU$ of Player 2:</span>
+<span id="cb10-784"><a href="#cb10-784" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-785"><a href="#cb10-785" aria-hidden="true" tabindex="-1"></a>$$ </span>
+<span id="cb10-786"><a href="#cb10-786" aria-hidden="true" tabindex="-1"></a>\begin{align*}</span>
+<span id="cb10-787"><a href="#cb10-787" aria-hidden="true" tabindex="-1"></a>EU_2(a_{2I})=EU_2(a_{2NI}) <span class="sc">\\</span> </span>
+<span id="cb10-788"><a href="#cb10-788" aria-hidden="true" tabindex="-1"></a>p_1 \cdot (- C) + (1 - p_1) \cdot (B-C) = 0</span>
+<span id="cb10-789"><a href="#cb10-789" aria-hidden="true" tabindex="-1"></a>\end{align*}</span>
 <span id="cb10-790"><a href="#cb10-790" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb10-791"><a href="#cb10-791" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-792"><a href="#cb10-792" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Player 2 strategy</span></span>
+<span id="cb10-792"><a href="#cb10-792" aria-hidden="true" tabindex="-1"></a>Solving for $p_1$ we get:</span>
 <span id="cb10-793"><a href="#cb10-793" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-794"><a href="#cb10-794" aria-hidden="true" tabindex="-1"></a>Similarly, we equate Player 1’s expected utilities to solve for $p_2$:</span>
-<span id="cb10-795"><a href="#cb10-795" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-796"><a href="#cb10-796" aria-hidden="true" tabindex="-1"></a>\$\$ EU_1(a<span class="sc">\_</span>{1T})=EU_1(a<span class="sc">\_</span>{1NT}) <span class="sc">\\</span> -T = p_2 \cdot (-F) + (1-p_2) \cdot 0</span>
+<span id="cb10-794"><a href="#cb10-794" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb10-795"><a href="#cb10-795" aria-hidden="true" tabindex="-1"></a>p_1^* = \frac{B-C}{B}</span>
+<span id="cb10-796"><a href="#cb10-796" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb10-797"><a href="#cb10-797" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-798"><a href="#cb10-798" aria-hidden="true" tabindex="-1"></a>\$\$</span>
+<span id="cb10-798"><a href="#cb10-798" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Player 2 strategy</span></span>
 <span id="cb10-799"><a href="#cb10-799" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-800"><a href="#cb10-800" aria-hidden="true" tabindex="-1"></a>Solving for $p_2$ we get:</span>
+<span id="cb10-800"><a href="#cb10-800" aria-hidden="true" tabindex="-1"></a>Similarly, we equate Player 1’s expected utilities to solve for $p_2$:</span>
 <span id="cb10-801"><a href="#cb10-801" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-802"><a href="#cb10-802" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb10-803"><a href="#cb10-803" aria-hidden="true" tabindex="-1"></a>p_2^* = \frac{T}{F}</span>
-<span id="cb10-804"><a href="#cb10-804" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb10-805"><a href="#cb10-805" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-806"><a href="#cb10-806" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conclusions</span></span>
-<span id="cb10-807"><a href="#cb10-807" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-808"><a href="#cb10-808" aria-hidden="true" tabindex="-1"></a>Now with this we can derive a number of hypotheses:</span>
-<span id="cb10-809"><a href="#cb10-809" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-810"><a href="#cb10-810" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>The higher the ticket price $T$, the more likely to be inspected</span>
-<span id="cb10-811"><a href="#cb10-811" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>The higher the fine $F$, the less likely to be inspected</span>
-<span id="cb10-812"><a href="#cb10-812" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>The higher the bonus $B$, the more likely a ticket is bought</span>
-<span id="cb10-813"><a href="#cb10-813" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>The higher the inspection cost $C$, the less likely a ticket is bought</span>
-<span id="cb10-814"><a href="#cb10-814" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$T$ and $F$ have <span class="co">[</span><span class="ot">no influence</span><span class="co">]</span>{.underline} on the probability of a ticket being purchased<span class="ot">[^1]</span></span>
-<span id="cb10-815"><a href="#cb10-815" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$C$ and $B$ have <span class="co">[</span><span class="ot">no influence</span><span class="co">]</span>{.underline} on the probability of an inspection</span>
+<span id="cb10-802"><a href="#cb10-802" aria-hidden="true" tabindex="-1"></a>$$ </span>
+<span id="cb10-803"><a href="#cb10-803" aria-hidden="true" tabindex="-1"></a>\begin{align*}</span>
+<span id="cb10-804"><a href="#cb10-804" aria-hidden="true" tabindex="-1"></a>EU_1(a_{1T})=EU_1(a_{1NT}) <span class="sc">\\</span></span>
+<span id="cb10-805"><a href="#cb10-805" aria-hidden="true" tabindex="-1"></a>-T = p_2 \cdot (-F) + (1-p_2) \cdot 0</span>
+<span id="cb10-806"><a href="#cb10-806" aria-hidden="true" tabindex="-1"></a>\end{align*}</span>
+<span id="cb10-807"><a href="#cb10-807" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb10-808"><a href="#cb10-808" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-809"><a href="#cb10-809" aria-hidden="true" tabindex="-1"></a>Solving for $p_2$ we get:</span>
+<span id="cb10-810"><a href="#cb10-810" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-811"><a href="#cb10-811" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb10-812"><a href="#cb10-812" aria-hidden="true" tabindex="-1"></a>p_2^* = \frac{T}{F}</span>
+<span id="cb10-813"><a href="#cb10-813" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb10-814"><a href="#cb10-814" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-815"><a href="#cb10-815" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conclusions</span></span>
 <span id="cb10-816"><a href="#cb10-816" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-817"><a href="#cb10-817" aria-hidden="true" tabindex="-1"></a><span class="ot">[^1]: </span>As long as F<span class="sc">\&gt;</span>T<span class="sc">\&gt;</span>0 and B<span class="sc">\&gt;</span>C<span class="sc">\&gt;</span>0 holds.</span>
+<span id="cb10-817"><a href="#cb10-817" aria-hidden="true" tabindex="-1"></a>Now with this we can derive a number of hypotheses:</span>
 <span id="cb10-818"><a href="#cb10-818" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-819"><a href="#cb10-819" aria-hidden="true" tabindex="-1"></a>**Wait what???**</span>
-<span id="cb10-820"><a href="#cb10-820" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-821"><a href="#cb10-821" aria-hidden="true" tabindex="-1"></a>In this analysis, we conclude that it’s not the ticket price alone that determines how many people buy tickets, but rather the probability of inspection. At first glance, this may seem counterintuitive. However, this impression arises because the Nash equilibrium reflects the final outcome—not the dynamic path that leads there.</span>
-<span id="cb10-822"><a href="#cb10-822" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-823"><a href="#cb10-823" aria-hidden="true" tabindex="-1"></a>In reality, if the ticket price increases and the inspection probability $p_2$ remains unchanged, people become less inclined to buy a ticket, and so $p_1$ (the probability of buying) decreases. In response, Player 2 (the inspector) now has a stronger incentive to inspect, causing $p_2$ to increase. As inspections become more frequent, the cost of fare evasion rises, and passengers are once again more likely to buy tickets. This feedback loop continues until the system settles back at the equilibrium point—where each player’s strategy is a best response to the other’s.</span>
-<span id="cb10-824"><a href="#cb10-824" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-819"><a href="#cb10-819" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>The higher the ticket price $T$, the more likely to be inspected</span>
+<span id="cb10-820"><a href="#cb10-820" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>The higher the fine $F$, the less likely to be inspected</span>
+<span id="cb10-821"><a href="#cb10-821" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>The higher the bonus $B$, the more likely a ticket is bought</span>
+<span id="cb10-822"><a href="#cb10-822" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>The higher the inspection cost $C$, the less likely a ticket is bought</span>
+<span id="cb10-823"><a href="#cb10-823" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$T$ and $F$ have <span class="co">[</span><span class="ot">no influence</span><span class="co">]</span>{.underline} on the probability of a ticket being purchased<span class="ot">[^1]</span></span>
+<span id="cb10-824"><a href="#cb10-824" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$C$ and $B$ have <span class="co">[</span><span class="ot">no influence</span><span class="co">]</span>{.underline} on the probability of an inspection</span>
 <span id="cb10-825"><a href="#cb10-825" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-826"><a href="#cb10-826" aria-hidden="true" tabindex="-1"></a><span class="fu">### Graphical Representation</span></span>
+<span id="cb10-826"><a href="#cb10-826" aria-hidden="true" tabindex="-1"></a><span class="ot">[^1]: </span>As long as $F&gt;T&gt;0$ and $B&gt;C&gt;0$ holds.</span>
 <span id="cb10-827"><a href="#cb10-827" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-828"><a href="#cb10-828" aria-hidden="true" tabindex="-1"></a>Below, you can see the **best response functions** for both players.</span>
+<span id="cb10-828"><a href="#cb10-828" aria-hidden="true" tabindex="-1"></a>**Wait what???**</span>
 <span id="cb10-829"><a href="#cb10-829" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-830"><a href="#cb10-830" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
-<span id="cb10-831"><a href="#cb10-831" aria-hidden="true" tabindex="-1"></a>A best response function, denoted $BR_i(a_{-i})$, shows the optimal strategy for player $i$ given the strategies chosen by the other player(s), represented by $a_{-i}$. In other words, it tells us how player $i$ should opimally behave in response to the actions of the others. If we know the best response functions for all players, a **Nash equilibrium** occurs at the point where these functions intersect—meaning that each player&#39;s strategy is a best response to the others.</span>
-<span id="cb10-832"><a href="#cb10-832" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb10-830"><a href="#cb10-830" aria-hidden="true" tabindex="-1"></a>In this analysis, we conclude that it’s not the ticket price alone that determines how many people buy tickets, but rather the probability of inspection. At first glance, this may seem counterintuitive. However, this impression arises because the Nash equilibrium reflects the final outcome—not the dynamic path that leads there.</span>
+<span id="cb10-831"><a href="#cb10-831" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-832"><a href="#cb10-832" aria-hidden="true" tabindex="-1"></a>In reality, if the ticket price increases and the inspection probability $p_2$ remains unchanged, people become less inclined to buy a ticket, and so $p_1$ (the probability of buying) decreases. In response, Player 2 (the inspector) now has a stronger incentive to inspect, causing $p_2$ to increase. As inspections become more frequent, the cost of fare evasion rises, and passengers are once again more likely to buy tickets. This feedback loop continues until the system settles back at the equilibrium point—where each player’s strategy is a best response to the other’s.</span>
 <span id="cb10-833"><a href="#cb10-833" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-836"><a href="#cb10-836" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb10-837"><a href="#cb10-837" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb10-838"><a href="#cb10-838" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: Show R Code (Decision Theory Simulation, shiny)</span></span>
-<span id="cb10-839"><a href="#cb10-839" aria-hidden="true" tabindex="-1"></a><span class="co"># app.R</span></span>
-<span id="cb10-840"><a href="#cb10-840" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
-<span id="cb10-841"><a href="#cb10-841" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb10-834"><a href="#cb10-834" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-835"><a href="#cb10-835" aria-hidden="true" tabindex="-1"></a><span class="fu">### Graphical Representation</span></span>
+<span id="cb10-836"><a href="#cb10-836" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-837"><a href="#cb10-837" aria-hidden="true" tabindex="-1"></a>Below, you can see the **best response functions** for both players. These graphical representations might help us to determine equilibria in a game. </span>
+<span id="cb10-838"><a href="#cb10-838" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-839"><a href="#cb10-839" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
+<span id="cb10-840"><a href="#cb10-840" aria-hidden="true" tabindex="-1"></a>A best response function, denoted $BR_i(a_{-i})$, shows the optimal strategy for player $i$ given the strategies chosen by the other player(s), represented by $a_{-i}$. In other words, it tells us how player $i$ should opimally behave in response to the actions of the others. If we know the best response functions for all players, a **Nash equilibrium** occurs at the point where these functions intersect—meaning that each player&#39;s strategy is a best response to the others.</span>
+<span id="cb10-841"><a href="#cb10-841" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb10-842"><a href="#cb10-842" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-843"><a href="#cb10-843" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
-<span id="cb10-844"><a href="#cb10-844" aria-hidden="true" tabindex="-1"></a>  <span class="fu">titlePanel</span>(<span class="st">&quot;Best Response Functions in Ticket Inspection Game&quot;</span>),</span>
-<span id="cb10-845"><a href="#cb10-845" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb10-846"><a href="#cb10-846" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sidebarLayout</span>(</span>
-<span id="cb10-847"><a href="#cb10-847" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sidebarPanel</span>(</span>
-<span id="cb10-848"><a href="#cb10-848" aria-hidden="true" tabindex="-1"></a>      <span class="fu">numericInput</span>(<span class="st">&quot;T&quot;</span>, <span class="st">&quot;Ticket price (T):&quot;</span>, <span class="at">value =</span> <span class="dv">2</span>, <span class="at">min =</span> <span class="dv">0</span>),</span>
-<span id="cb10-849"><a href="#cb10-849" aria-hidden="true" tabindex="-1"></a>      <span class="fu">numericInput</span>(<span class="st">&quot;F&quot;</span>, <span class="st">&quot;Fine for no ticket (F):&quot;</span>, <span class="at">value =</span> <span class="dv">40</span>, <span class="at">min =</span> <span class="dv">0</span>),</span>
-<span id="cb10-850"><a href="#cb10-850" aria-hidden="true" tabindex="-1"></a>      <span class="fu">numericInput</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;Bonus for catching evader (B):&quot;</span>, <span class="at">value =</span> <span class="dv">20</span>, <span class="at">min =</span> <span class="dv">0</span>),</span>
-<span id="cb10-851"><a href="#cb10-851" aria-hidden="true" tabindex="-1"></a>      <span class="fu">numericInput</span>(<span class="st">&quot;C&quot;</span>, <span class="st">&quot;Cost of inspection (C):&quot;</span>, <span class="at">value =</span> <span class="dv">4</span>, <span class="at">min =</span> <span class="dv">0</span>)</span>
-<span id="cb10-852"><a href="#cb10-852" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb10-853"><a href="#cb10-853" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb10-854"><a href="#cb10-854" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mainPanel</span>(</span>
-<span id="cb10-855"><a href="#cb10-855" aria-hidden="true" tabindex="-1"></a>      <span class="fu">plotOutput</span>(<span class="st">&quot;brPlot&quot;</span>),</span>
-<span id="cb10-856"><a href="#cb10-856" aria-hidden="true" tabindex="-1"></a>      <span class="fu">verbatimTextOutput</span>(<span class="st">&quot;equilibrium&quot;</span>)</span>
-<span id="cb10-857"><a href="#cb10-857" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb10-858"><a href="#cb10-858" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb10-859"><a href="#cb10-859" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb10-860"><a href="#cb10-860" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-861"><a href="#cb10-861" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
-<span id="cb10-862"><a href="#cb10-862" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb10-863"><a href="#cb10-863" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>brPlot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
-<span id="cb10-864"><a href="#cb10-864" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-865"><a href="#cb10-865" aria-hidden="true" tabindex="-1"></a>    <span class="co"># define the utility function for player 1</span></span>
-<span id="cb10-866"><a href="#cb10-866" aria-hidden="true" tabindex="-1"></a>    EU_1 <span class="ot">&lt;-</span> <span class="cf">function</span>(T,F,p_2) {</span>
-<span id="cb10-867"><a href="#cb10-867" aria-hidden="true" tabindex="-1"></a>      term1 <span class="ot">=</span> <span class="sc">-</span>T</span>
-<span id="cb10-868"><a href="#cb10-868" aria-hidden="true" tabindex="-1"></a>      term2 <span class="ot">=</span> p_2 <span class="sc">*</span> (<span class="sc">-</span>F)</span>
-<span id="cb10-869"><a href="#cb10-869" aria-hidden="true" tabindex="-1"></a>      term1 <span class="sc">-</span> term2</span>
-<span id="cb10-870"><a href="#cb10-870" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb10-871"><a href="#cb10-871" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb10-872"><a href="#cb10-872" aria-hidden="true" tabindex="-1"></a>    <span class="co"># define the utility function for player 1  </span></span>
-<span id="cb10-873"><a href="#cb10-873" aria-hidden="true" tabindex="-1"></a>    EU_2 <span class="ot">&lt;-</span> <span class="cf">function</span>(B,C,p_1) {</span>
-<span id="cb10-874"><a href="#cb10-874" aria-hidden="true" tabindex="-1"></a>      term1 <span class="ot">=</span> p_1 <span class="sc">*</span> (<span class="sc">-</span>C) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">-</span>p_1) <span class="sc">*</span> (B<span class="sc">-</span>C)</span>
-<span id="cb10-875"><a href="#cb10-875" aria-hidden="true" tabindex="-1"></a>      term2 <span class="ot">=</span> <span class="dv">0</span></span>
-<span id="cb10-876"><a href="#cb10-876" aria-hidden="true" tabindex="-1"></a>      term1 <span class="sc">-</span> term2</span>
-<span id="cb10-877"><a href="#cb10-877" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb10-878"><a href="#cb10-878" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb10-879"><a href="#cb10-879" aria-hidden="true" tabindex="-1"></a>    <span class="co"># calculate the critical values</span></span>
-<span id="cb10-880"><a href="#cb10-880" aria-hidden="true" tabindex="-1"></a>    p_1_star <span class="ot">&lt;-</span> (input<span class="sc">$</span>B <span class="sc">-</span> input<span class="sc">$</span>C) <span class="sc">/</span> input<span class="sc">$</span>B</span>
-<span id="cb10-881"><a href="#cb10-881" aria-hidden="true" tabindex="-1"></a>    p_2_star <span class="ot">&lt;-</span> input<span class="sc">$</span>T <span class="sc">/</span> input<span class="sc">$</span>F</span>
-<span id="cb10-882"><a href="#cb10-882" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-883"><a href="#cb10-883" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Determines what is the best reponse for player 1 or 2 if the other chooses their p equal 0 or 1. </span></span>
-<span id="cb10-884"><a href="#cb10-884" aria-hidden="true" tabindex="-1"></a>    BR1_0 <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">EU_1</span>(input<span class="sc">$</span>T, input<span class="sc">$</span>F, <span class="dv">0</span>)<span class="sc">&gt;</span><span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb10-885"><a href="#cb10-885" aria-hidden="true" tabindex="-1"></a>    BR1_1 <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">EU_1</span>(input<span class="sc">$</span>T, input<span class="sc">$</span>F, <span class="dv">1</span>)<span class="sc">&gt;</span><span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb10-886"><a href="#cb10-886" aria-hidden="true" tabindex="-1"></a>    BR2_0 <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">EU_2</span>(input<span class="sc">$</span>B, input<span class="sc">$</span>C, <span class="dv">0</span>)<span class="sc">&gt;</span><span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb10-887"><a href="#cb10-887" aria-hidden="true" tabindex="-1"></a>    BR2_1 <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">EU_2</span>(input<span class="sc">$</span>B, input<span class="sc">$</span>C, <span class="dv">1</span>)<span class="sc">&gt;</span><span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb10-888"><a href="#cb10-888" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-889"><a href="#cb10-889" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create data for plotting</span></span>
-<span id="cb10-890"><a href="#cb10-890" aria-hidden="true" tabindex="-1"></a>    x_vals <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>, p_1_star, p_1_star, <span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb10-891"><a href="#cb10-891" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb10-892"><a href="#cb10-892" aria-hidden="true" tabindex="-1"></a>    df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb10-893"><a href="#cb10-893" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> x_vals,</span>
-<span id="cb10-894"><a href="#cb10-894" aria-hidden="true" tabindex="-1"></a>      <span class="at">BR1 =</span> <span class="fu">c</span>(BR2_0, p_2_star, p_2_star, p_2_star, p_2_star, BR2_1),</span>
-<span id="cb10-895"><a href="#cb10-895" aria-hidden="true" tabindex="-1"></a>      <span class="at">BR2 =</span> <span class="fu">c</span>(BR1_0,    BR1_0,    BR1_0,    BR1_1, BR1_1, BR1_1)</span>
-<span id="cb10-896"><a href="#cb10-896" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb10-897"><a href="#cb10-897" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb10-898"><a href="#cb10-898" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
-<span id="cb10-899"><a href="#cb10-899" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> BR1), <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">size =</span> <span class="fl">1.2</span>, <span class="at">linetype =</span> <span class="st">&quot;solid&quot;</span>) <span class="sc">+</span></span>
-<span id="cb10-900"><a href="#cb10-900" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> BR2), <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="fl">1.2</span>, <span class="at">linetype =</span> <span class="st">&quot;solid&quot;</span>) <span class="sc">+</span></span>
-<span id="cb10-901"><a href="#cb10-901" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(</span>
-<span id="cb10-902"><a href="#cb10-902" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">&quot;Best Response Functions&quot;</span>,</span>
-<span id="cb10-903"><a href="#cb10-903" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">&quot;p_1&quot;</span>,</span>
-<span id="cb10-904"><a href="#cb10-904" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">&quot;p_2&quot;</span>,</span>
-<span id="cb10-905"><a href="#cb10-905" aria-hidden="true" tabindex="-1"></a>        <span class="at">caption =</span> <span class="st">&quot;Blue: Player 1 | Red: Player 2&quot;</span></span>
-<span id="cb10-906"><a href="#cb10-906" aria-hidden="true" tabindex="-1"></a>      ) <span class="sc">+</span></span>
-<span id="cb10-907"><a href="#cb10-907" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb10-908"><a href="#cb10-908" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb10-909"><a href="#cb10-909" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb10-910"><a href="#cb10-910" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-911"><a href="#cb10-911" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>equilibrium <span class="ot">&lt;-</span> <span class="fu">renderText</span>({</span>
-<span id="cb10-912"><a href="#cb10-912" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (input<span class="sc">$</span>B <span class="sc">==</span> <span class="dv">0</span> <span class="sc">||</span> input<span class="sc">$</span>F <span class="sc">==</span> <span class="dv">0</span>) {</span>
-<span id="cb10-913"><a href="#cb10-913" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;Error: B and F must be greater than 0 to compute equilibrium.&quot;</span></span>
-<span id="cb10-914"><a href="#cb10-914" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
-<span id="cb10-915"><a href="#cb10-915" aria-hidden="true" tabindex="-1"></a>      p1_star <span class="ot">&lt;-</span> <span class="fu">round</span>((input<span class="sc">$</span>B <span class="sc">-</span> input<span class="sc">$</span>C) <span class="sc">/</span> input<span class="sc">$</span>B, <span class="dv">3</span>)</span>
-<span id="cb10-916"><a href="#cb10-916" aria-hidden="true" tabindex="-1"></a>      p2_star <span class="ot">&lt;-</span> <span class="fu">round</span>(input<span class="sc">$</span>T <span class="sc">/</span> input<span class="sc">$</span>F, <span class="dv">3</span>)</span>
-<span id="cb10-917"><a href="#cb10-917" aria-hidden="true" tabindex="-1"></a>      <span class="fu">paste0</span>(<span class="st">&quot;Equilibrium Strategies:</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb10-918"><a href="#cb10-918" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;Player 1 (buy ticket): p1* = &quot;</span>, p1_star, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb10-919"><a href="#cb10-919" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;Player 2 (inspect):     p2* = &quot;</span>, p2_star)</span>
-<span id="cb10-920"><a href="#cb10-920" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb10-921"><a href="#cb10-921" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb10-922"><a href="#cb10-922" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb10-923"><a href="#cb10-923" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-924"><a href="#cb10-924" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span>
-<span id="cb10-925"><a href="#cb10-925" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-926"><a href="#cb10-926" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-845"><a href="#cb10-845" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb10-846"><a href="#cb10-846" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb10-847"><a href="#cb10-847" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: Show R Code (Decision Theory Simulation, shiny)</span></span>
+<span id="cb10-848"><a href="#cb10-848" aria-hidden="true" tabindex="-1"></a><span class="co"># app.R</span></span>
+<span id="cb10-849"><a href="#cb10-849" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb10-850"><a href="#cb10-850" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb10-851"><a href="#cb10-851" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-852"><a href="#cb10-852" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb10-853"><a href="#cb10-853" aria-hidden="true" tabindex="-1"></a>  <span class="fu">titlePanel</span>(<span class="st">&quot;Best Response Functions in Ticket Inspection Game&quot;</span>),</span>
+<span id="cb10-854"><a href="#cb10-854" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-855"><a href="#cb10-855" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sidebarLayout</span>(</span>
+<span id="cb10-856"><a href="#cb10-856" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sidebarPanel</span>(</span>
+<span id="cb10-857"><a href="#cb10-857" aria-hidden="true" tabindex="-1"></a>      <span class="fu">numericInput</span>(<span class="st">&quot;T&quot;</span>, <span class="st">&quot;Ticket price (T):&quot;</span>, <span class="at">value =</span> <span class="dv">2</span>, <span class="at">min =</span> <span class="dv">0</span>),</span>
+<span id="cb10-858"><a href="#cb10-858" aria-hidden="true" tabindex="-1"></a>      <span class="fu">numericInput</span>(<span class="st">&quot;F&quot;</span>, <span class="st">&quot;Fine for no ticket (F):&quot;</span>, <span class="at">value =</span> <span class="dv">40</span>, <span class="at">min =</span> <span class="dv">0</span>),</span>
+<span id="cb10-859"><a href="#cb10-859" aria-hidden="true" tabindex="-1"></a>      <span class="fu">numericInput</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;Bonus for catching evader (B):&quot;</span>, <span class="at">value =</span> <span class="dv">20</span>, <span class="at">min =</span> <span class="dv">0</span>),</span>
+<span id="cb10-860"><a href="#cb10-860" aria-hidden="true" tabindex="-1"></a>      <span class="fu">numericInput</span>(<span class="st">&quot;C&quot;</span>, <span class="st">&quot;Cost of inspection (C):&quot;</span>, <span class="at">value =</span> <span class="dv">4</span>, <span class="at">min =</span> <span class="dv">0</span>)</span>
+<span id="cb10-861"><a href="#cb10-861" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb10-862"><a href="#cb10-862" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-863"><a href="#cb10-863" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mainPanel</span>(</span>
+<span id="cb10-864"><a href="#cb10-864" aria-hidden="true" tabindex="-1"></a>      <span class="fu">plotOutput</span>(<span class="st">&quot;brPlot&quot;</span>),</span>
+<span id="cb10-865"><a href="#cb10-865" aria-hidden="true" tabindex="-1"></a>      <span class="fu">verbatimTextOutput</span>(<span class="st">&quot;equilibrium&quot;</span>)</span>
+<span id="cb10-866"><a href="#cb10-866" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb10-867"><a href="#cb10-867" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb10-868"><a href="#cb10-868" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-869"><a href="#cb10-869" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-870"><a href="#cb10-870" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb10-871"><a href="#cb10-871" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-872"><a href="#cb10-872" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>brPlot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb10-873"><a href="#cb10-873" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-874"><a href="#cb10-874" aria-hidden="true" tabindex="-1"></a>    <span class="co"># define the utility function for player 1</span></span>
+<span id="cb10-875"><a href="#cb10-875" aria-hidden="true" tabindex="-1"></a>    EU_1 <span class="ot">&lt;-</span> <span class="cf">function</span>(T,F,p_2) {</span>
+<span id="cb10-876"><a href="#cb10-876" aria-hidden="true" tabindex="-1"></a>      term1 <span class="ot">=</span> <span class="sc">-</span>T</span>
+<span id="cb10-877"><a href="#cb10-877" aria-hidden="true" tabindex="-1"></a>      term2 <span class="ot">=</span> p_2 <span class="sc">*</span> (<span class="sc">-</span>F)</span>
+<span id="cb10-878"><a href="#cb10-878" aria-hidden="true" tabindex="-1"></a>      term1 <span class="sc">-</span> term2</span>
+<span id="cb10-879"><a href="#cb10-879" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb10-880"><a href="#cb10-880" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-881"><a href="#cb10-881" aria-hidden="true" tabindex="-1"></a>    <span class="co"># define the utility function for player 1  </span></span>
+<span id="cb10-882"><a href="#cb10-882" aria-hidden="true" tabindex="-1"></a>    EU_2 <span class="ot">&lt;-</span> <span class="cf">function</span>(B,C,p_1) {</span>
+<span id="cb10-883"><a href="#cb10-883" aria-hidden="true" tabindex="-1"></a>      term1 <span class="ot">=</span> p_1 <span class="sc">*</span> (<span class="sc">-</span>C) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">-</span>p_1) <span class="sc">*</span> (B<span class="sc">-</span>C)</span>
+<span id="cb10-884"><a href="#cb10-884" aria-hidden="true" tabindex="-1"></a>      term2 <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb10-885"><a href="#cb10-885" aria-hidden="true" tabindex="-1"></a>      term1 <span class="sc">-</span> term2</span>
+<span id="cb10-886"><a href="#cb10-886" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb10-887"><a href="#cb10-887" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-888"><a href="#cb10-888" aria-hidden="true" tabindex="-1"></a>    <span class="co"># calculate the critical values</span></span>
+<span id="cb10-889"><a href="#cb10-889" aria-hidden="true" tabindex="-1"></a>    p_1_star <span class="ot">&lt;-</span> (input<span class="sc">$</span>B <span class="sc">-</span> input<span class="sc">$</span>C) <span class="sc">/</span> input<span class="sc">$</span>B</span>
+<span id="cb10-890"><a href="#cb10-890" aria-hidden="true" tabindex="-1"></a>    p_2_star <span class="ot">&lt;-</span> input<span class="sc">$</span>T <span class="sc">/</span> input<span class="sc">$</span>F</span>
+<span id="cb10-891"><a href="#cb10-891" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-892"><a href="#cb10-892" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Determines what is the best reponse for player 1 or 2 if the other chooses their p equal 0 or 1. </span></span>
+<span id="cb10-893"><a href="#cb10-893" aria-hidden="true" tabindex="-1"></a>    BR1_0 <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">EU_1</span>(input<span class="sc">$</span>T, input<span class="sc">$</span>F, <span class="dv">0</span>)<span class="sc">&gt;</span><span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb10-894"><a href="#cb10-894" aria-hidden="true" tabindex="-1"></a>    BR1_1 <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">EU_1</span>(input<span class="sc">$</span>T, input<span class="sc">$</span>F, <span class="dv">1</span>)<span class="sc">&gt;</span><span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb10-895"><a href="#cb10-895" aria-hidden="true" tabindex="-1"></a>    BR2_0 <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">EU_2</span>(input<span class="sc">$</span>B, input<span class="sc">$</span>C, <span class="dv">0</span>)<span class="sc">&gt;</span><span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb10-896"><a href="#cb10-896" aria-hidden="true" tabindex="-1"></a>    BR2_1 <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">EU_2</span>(input<span class="sc">$</span>B, input<span class="sc">$</span>C, <span class="dv">1</span>)<span class="sc">&gt;</span><span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb10-897"><a href="#cb10-897" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-898"><a href="#cb10-898" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create data for plotting</span></span>
+<span id="cb10-899"><a href="#cb10-899" aria-hidden="true" tabindex="-1"></a>    x_vals <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>, p_1_star, p_1_star, <span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb10-900"><a href="#cb10-900" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-901"><a href="#cb10-901" aria-hidden="true" tabindex="-1"></a>    df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb10-902"><a href="#cb10-902" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> x_vals,</span>
+<span id="cb10-903"><a href="#cb10-903" aria-hidden="true" tabindex="-1"></a>      <span class="at">BR1 =</span> <span class="fu">c</span>(BR2_0, p_2_star, p_2_star, p_2_star, p_2_star, BR2_1),</span>
+<span id="cb10-904"><a href="#cb10-904" aria-hidden="true" tabindex="-1"></a>      <span class="at">BR2 =</span> <span class="fu">c</span>(BR1_0,    BR1_0,    BR1_0,    BR1_1, BR1_1, BR1_1)</span>
+<span id="cb10-905"><a href="#cb10-905" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb10-906"><a href="#cb10-906" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-907"><a href="#cb10-907" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
+<span id="cb10-908"><a href="#cb10-908" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> BR1), <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">size =</span> <span class="fl">1.2</span>, <span class="at">linetype =</span> <span class="st">&quot;solid&quot;</span>) <span class="sc">+</span></span>
+<span id="cb10-909"><a href="#cb10-909" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> BR2), <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="fl">1.2</span>, <span class="at">linetype =</span> <span class="st">&quot;solid&quot;</span>) <span class="sc">+</span></span>
+<span id="cb10-910"><a href="#cb10-910" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(</span>
+<span id="cb10-911"><a href="#cb10-911" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">&quot;Best Response Functions&quot;</span>,</span>
+<span id="cb10-912"><a href="#cb10-912" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">&quot;p_1&quot;</span>,</span>
+<span id="cb10-913"><a href="#cb10-913" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">&quot;p_2&quot;</span>,</span>
+<span id="cb10-914"><a href="#cb10-914" aria-hidden="true" tabindex="-1"></a>        <span class="at">caption =</span> <span class="st">&quot;Blue: Player 1 | Red: Player 2&quot;</span></span>
+<span id="cb10-915"><a href="#cb10-915" aria-hidden="true" tabindex="-1"></a>      ) <span class="sc">+</span></span>
+<span id="cb10-916"><a href="#cb10-916" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb10-917"><a href="#cb10-917" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb10-918"><a href="#cb10-918" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb10-919"><a href="#cb10-919" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-920"><a href="#cb10-920" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>equilibrium <span class="ot">&lt;-</span> <span class="fu">renderText</span>({</span>
+<span id="cb10-921"><a href="#cb10-921" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (input<span class="sc">$</span>B <span class="sc">==</span> <span class="dv">0</span> <span class="sc">||</span> input<span class="sc">$</span>F <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb10-922"><a href="#cb10-922" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;Error: B and F must be greater than 0 to compute equilibrium.&quot;</span></span>
+<span id="cb10-923"><a href="#cb10-923" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb10-924"><a href="#cb10-924" aria-hidden="true" tabindex="-1"></a>      p1_star <span class="ot">&lt;-</span> <span class="fu">round</span>((input<span class="sc">$</span>B <span class="sc">-</span> input<span class="sc">$</span>C) <span class="sc">/</span> input<span class="sc">$</span>B, <span class="dv">3</span>)</span>
+<span id="cb10-925"><a href="#cb10-925" aria-hidden="true" tabindex="-1"></a>      p2_star <span class="ot">&lt;-</span> <span class="fu">round</span>(input<span class="sc">$</span>T <span class="sc">/</span> input<span class="sc">$</span>F, <span class="dv">3</span>)</span>
+<span id="cb10-926"><a href="#cb10-926" aria-hidden="true" tabindex="-1"></a>      <span class="fu">paste0</span>(<span class="st">&quot;Equilibrium Strategies:</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb10-927"><a href="#cb10-927" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;Player 1 (buy ticket): p1* = &quot;</span>, p1_star, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb10-928"><a href="#cb10-928" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;Player 2 (inspect):     p2* = &quot;</span>, p2_star)</span>
+<span id="cb10-929"><a href="#cb10-929" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb10-930"><a href="#cb10-930" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb10-931"><a href="#cb10-931" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-932"><a href="#cb10-932" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-933"><a href="#cb10-933" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span>
+<span id="cb10-934"><a href="#cb10-934" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-935"><a href="#cb10-935" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
