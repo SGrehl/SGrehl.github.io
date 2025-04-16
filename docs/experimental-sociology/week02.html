@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-04-15">
+<meta name="dcterms.date" content="2025-04-16">
 
 <title>Experimental Sociology - Week 02 – ES &amp; CSS</title>
 <style>
@@ -5141,7 +5141,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">2025-04-15</p>
+        <p class="date">2025-04-16</p>
       </div>
     </div>
     
@@ -5176,8 +5176,8 @@ window.Quarto = {
   </ul></li>
   <li><a href="#analyzing" id="toc-analyzing" class="nav-link" data-scroll-target="#analyzing">Analyzing</a>
   <ul class="collapse">
-  <li><a href="#decisions-under-certainty" id="toc-decisions-under-certainty" class="nav-link" data-scroll-target="#decisions-under-certainty">Decisions under certainty</a></li>
-  <li><a href="#decisions-under-uncertainty" id="toc-decisions-under-uncertainty" class="nav-link" data-scroll-target="#decisions-under-uncertainty">Decisions under uncertainty</a></li>
+  <li><a href="#decisions-under-certainty" id="toc-decisions-under-certainty" class="nav-link" data-scroll-target="#decisions-under-certainty">Decisions Under Certainty</a></li>
+  <li><a href="#decisions-under-uncertainty" id="toc-decisions-under-uncertainty" class="nav-link" data-scroll-target="#decisions-under-uncertainty">Decisions Under Uncertainty</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#game-theory" id="toc-game-theory" class="nav-link" data-scroll-target="#game-theory">Game Theory</a>
@@ -5557,7 +5557,7 @@ Caution
 <p>This framework provides a <strong>straightforward method</strong> to compare actions under uncertainty. Because each action can be viewed as a <strong>lottery</strong> (a probabilistic combination of outcomes), we say an actor <strong>prefers</strong> action <span class="math inline">\(a\)</span> over action <span class="math inline">\(b\)</span> if and only if:</p>
 <p><span class="math display">\[
 a\succsim b \Leftrightarrow EU(a)\geq EU(b).
-\]</span>.</p>
+\]</span></p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -5585,7 +5585,7 @@ Note
 <h2 class="anchored" data-anchor-id="analyzing">Analyzing</h2>
 <p>To analyze how an imaginary actor would behave in a given situation, we introduce a <strong>choice function</strong>, denoted by <span class="math inline">\(C(\cdot )\)</span>. This function expresses our prediction of which action(s) an actor will choose from a given decision problem <span class="math inline">\(D\)</span>, where <span class="math inline">\(D\subset A\)</span> represents the set of feasible actions available in that situation.</p>
 <section id="decisions-under-certainty" class="level3">
-<h3 class="anchored" data-anchor-id="decisions-under-certainty">Decisions under certainty</h3>
+<h3 class="anchored" data-anchor-id="decisions-under-certainty">Decisions Under Certainty</h3>
 <p>When the situation involves <strong>certainty</strong>—that is, there is only one possible state of the world—the actor knows exactly what consequence each action will lead to. In this case, we assume the actor simply chooses the action that results in the highest utility:<br>
 <span class="math display">\[ C^\succsim(D) \;=\; \arg\max_{a \in D} \mathrm{EU}(a)=\arg\max_{a \in D} \mathrm{u}(x_{a,\omega}). \]</span></p>
 <p>Since there is no uncertainty, the best action is the one yielding the highest known outcome. For example, if we assume in <a href="#tbl-expected-util" class="quarto-xref">Table 3</a> that <span class="math inline">\(p=1\)</span>, that is, sunny weather is guaranteed, then the consequence of each action is known with certainty. Under these conditions, we can immediately predict that the actor would choose <strong>summer clothes</strong>, as they yield the highest utility (10) in sunny weather.</p>
@@ -5606,7 +5606,7 @@ Note
 </div>
 </section>
 <section id="decisions-under-uncertainty" class="level3">
-<h3 class="anchored" data-anchor-id="decisions-under-uncertainty">Decisions under uncertainty</h3>
+<h3 class="anchored" data-anchor-id="decisions-under-uncertainty">Decisions Under Uncertainty</h3>
 <p>When the actor faces <strong>uncertainty</strong>—meaning that multiple states of the world are possible, each with its own probability —we use the concept of <strong>expected utility</strong>.</p>
 <p>The <strong>Expected Utility Hypothesis</strong> posits that the actor will choose the action that <strong>maximizes expected utility</strong>. Formally:</p>
 <p><span class="math display">\[ C^\succsim(D) \;=\; \arg\max_{a \in D} \mathrm{EU}(a). \]</span></p>
@@ -6791,7 +6791,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-226"><a href="#cb1-226" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-227"><a href="#cb1-227" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb1-228"><a href="#cb1-228" aria-hidden="true" tabindex="-1"></a>a\succsim b \Leftrightarrow EU(a)\geq EU(b).</span>
-<span id="cb1-229"><a href="#cb1-229" aria-hidden="true" tabindex="-1"></a>$$.</span>
+<span id="cb1-229"><a href="#cb1-229" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb1-230"><a href="#cb1-230" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-231"><a href="#cb1-231" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
 <span id="cb1-232"><a href="#cb1-232" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>While **utility** describes an actor’s valuation of a single **specific consequence**, **expected utility** extends that concept to an entire **lottery** (i.e., a scenario with multiple possible outcomes and corresponding probabilities). By weighting each potential consequence according to its probability, expected utility provides a way to compare and rank **actions**—not just individual outcomes—under uncertainty.</span>
@@ -6809,7 +6809,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-244"><a href="#cb1-244" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-245"><a href="#cb1-245" aria-hidden="true" tabindex="-1"></a>To analyze how an imaginary actor would behave in a given situation, we introduce a **choice function**, denoted by $C(\cdot )$. This function expresses our prediction of which action(s) an actor will choose from a given decision problem $D$, where $D\subset A$ represents the set of feasible actions available in that situation.</span>
 <span id="cb1-246"><a href="#cb1-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-247"><a href="#cb1-247" aria-hidden="true" tabindex="-1"></a><span class="fu">### Decisions under certainty</span></span>
+<span id="cb1-247"><a href="#cb1-247" aria-hidden="true" tabindex="-1"></a><span class="fu">### Decisions Under Certainty</span></span>
 <span id="cb1-248"><a href="#cb1-248" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-249"><a href="#cb1-249" aria-hidden="true" tabindex="-1"></a>When the situation involves **certainty**—that is, there is only one possible state of the world—the actor knows exactly what consequence each action will lead to. In this case, we assume the actor simply chooses the action that results in the highest utility:\</span>
 <span id="cb1-250"><a href="#cb1-250" aria-hidden="true" tabindex="-1"></a>$$ C^\succsim(D) \;=\; \arg\max_{a \in D} \mathrm{EU}(a)=\arg\max_{a \in D} \mathrm{u}(x_{a,\omega}). $$</span>
@@ -6820,7 +6820,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-255"><a href="#cb1-255" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>In situations of certainty, we predict that the **actor** will **choose** the **action that maximizes** their **utility**.</span>
 <span id="cb1-256"><a href="#cb1-256" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb1-257"><a href="#cb1-257" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-258"><a href="#cb1-258" aria-hidden="true" tabindex="-1"></a><span class="fu">### Decisions under uncertainty</span></span>
+<span id="cb1-258"><a href="#cb1-258" aria-hidden="true" tabindex="-1"></a><span class="fu">### Decisions Under Uncertainty</span></span>
 <span id="cb1-259"><a href="#cb1-259" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-260"><a href="#cb1-260" aria-hidden="true" tabindex="-1"></a>When the actor faces **uncertainty**—meaning that multiple states of the world are possible, each with its own probability —we use the concept of **expected utility**.</span>
 <span id="cb1-261"><a href="#cb1-261" aria-hidden="true" tabindex="-1"></a></span>
@@ -7149,11 +7149,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-584"><a href="#cb1-584" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-585"><a href="#cb1-585" aria-hidden="true" tabindex="-1"></a><span class="ss">    1.  </span><span class="sc">\[</span>easy<span class="sc">\]</span> Model this situation with $n=2$ and $f=.5$.</span>
 <span id="cb1-586"><a href="#cb1-586" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-587"><a href="#cb1-587" aria-hidden="true" tabindex="-1"></a><span class="ss">    2.  </span><span class="sc">\[</span>hard<span class="sc">\]</span> ~~Try to derive the general function of p for any~~ $n$ ~~and~~ $f$~~.~~ <span class="co">[</span><span class="ot"> Just realized that the original model I presented is not correct, and that this is nearly impossible to do for you! Sorry. </span><span class="co">]</span>{style=&quot;background-color: yellow;&quot;}</span>
+<span id="cb1-587"><a href="#cb1-587" aria-hidden="true" tabindex="-1"></a><span class="ss">    2.  </span><span class="sc">\[</span>hard<span class="sc">\]</span> ~~Try to derive the general function of p for any~~ $n$ ~~and~~ $f$~~.~~ <span class="co">[</span><span class="ot">Just realized that the original model I presented is not correct, and that this is nearly impossible to do for you! Sorry.</span><span class="co">]</span>{style=&quot;background-color: yellow;&quot;}</span>
 <span id="cb1-588"><a href="#cb1-588" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-589"><a href="#cb1-589" aria-hidden="true" tabindex="-1"></a><span class="ss">    3.  </span><span class="sc">\[</span>still hard enough<span class="sc">\]</span> Try to get all possible Nash equilibria for the Model 5.1. (Tip: There are two cases with different numbers of equilibria).</span>
 <span id="cb1-590"><a href="#cb1-590" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-591"><a href="#cb1-591" aria-hidden="true" tabindex="-1"></a><span class="ss">6.  </span>Bring your results and any questions to the seminar.</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></pre></div>
+<span id="cb1-591"><a href="#cb1-591" aria-hidden="true" tabindex="-1"></a><span class="ss">6.  </span>Bring your results and any questions to the seminar.</span>
+<span id="cb1-592"><a href="#cb1-592" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-593"><a href="#cb1-593" aria-hidden="true" tabindex="-1"></a>::: callout-warning</span>
+<span id="cb1-594"><a href="#cb1-594" aria-hidden="true" tabindex="-1"></a>Here is the <span class="co">[</span><span class="ot">link for today&#39;s session.</span><span class="co">](week02_inclass.html)</span></span>
+<span id="cb1-595"><a href="#cb1-595" aria-hidden="true" tabindex="-1"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
