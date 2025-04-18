@@ -1,4 +1,4 @@
-const es_week = 2;
+const es_week = 3;
 const css_week = 3;
 
 document.addEventListener("DOMContentLoaded", () => {
