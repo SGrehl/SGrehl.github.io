@@ -5439,9 +5439,9 @@ Table 4: A twice repeated PD with two players and two strategies.
 <div aria-describedby="tbl-game-rep-pd-tft-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 6%">
-<col style="width: 44%">
-<col style="width: 48%">
+<col style="width: 7%">
+<col style="width: 46%">
+<col style="width: 46%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -6114,7 +6114,42 @@ Note
 <ol type="1">
 <li>[easy] Modify <a href="#tbl-game-rep-pd-tft3" class="quarto-xref">Table 5</a>, use <span class="math inline">\(d=3\)</span> instead of <span class="math inline">\(d=2\)</span>.</li>
 <li>[easy] Normalize the fitness matrix given in <a href="#tbl-eco-fitness" class="quarto-xref">Table 7</a>.</li>
-<li>[medium] Translate the game <a href="#tbl-game-mp" class="quarto-xref">Table 6</a> into fitness function and show, that is has three evolutionary equilibria. What do you notice in comparison to the equilibrium predictions of classical game theory?</li>
+<li>[medium] <del>Translate the game <a href="#tbl-game-mp" class="quarto-xref">Table 6</a> into fitness function and show, that is has three evolutionary equilibria. What do you notice in comparison to the equilibrium predictions of classical game theory?</del>
+<ol type="1">
+<li><p><span style="background-color: yellow;">What is the problem if we want to translate the game <a href="#tbl-game-mp" class="quarto-xref">Table 6</a> into fitness function?</span></p></li>
+<li><p><span style="background-color: yellow;">Translate the game <a href="#tbl-game-hd" class="quarto-xref">Table 8</a> into fitness function and show, that is has three evolutionary equilibria.</span><br>
+</p>
+<div id="tbl-game-hd" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-game-hd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table 8: Hawk-Dove-Game
+</figcaption>
+<div aria-describedby="tbl-game-hd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Player 2: Hawk</th>
+<th>Player 2: Dove</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Player 1: Hawk</td>
+<td><span class="math inline">\(1, 1\)</span></td>
+<td><span class="math inline">\(4, 2\)</span></td>
+</tr>
+<tr class="even">
+<td>Player 1: Dove</td>
+<td><span class="math inline">\(2, 4\)</span></td>
+<td><span class="math inline">\(3, 3\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div></li>
+</ol></li>
 <li>[hard] If you looked at https://ncase.me/trust/ under 5. “The evolution of distrust” Case shows that the number of rounds (in their case fixed numbers of rounds, but we will think of them as expected number of rounds) are crucial whether given the initial distribution of TFT or aD prevails in the end. This is because the number of rounds <span class="math inline">\(d\)</span> directly affect the fitness of both strategies. Model and analyze the replicator dynamics for <span class="math inline">\(q=Q_{TFT}\)</span> for the general case of <span class="math inline">\(d\)</span> rounds.</li>
 <li>[medium] Show that aD and TFT are ESS, show that aC is not (only use this three strategies).</li>
 </ol>
@@ -6656,10 +6691,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>Most students of the social sciences are familiar with the **Prisoner&#39;s Dilemma**, as illustrated in @tbl-game-pd.</span>
 <span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>|   | Player 2: Cooperate | Player 2: Defect |</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>|                         | Player 2: Cooperate | Player 2: Defect               |</span>
 <span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>|---------------------------|------------------------|---------------------|</span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>| **Player 1: Cooperate** | $2, 2$ | $-1, \underline{3}$ |</span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>| **Player 1: Defect** |   $\underline{3},-1$ | $\underline{0}, \underline{0}$ |</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>| **Player 1: Cooperate** | $2, 2$              | $-1, \underline{3}$            |</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>| **Player 1: Defect**    | $\underline{3},-1$  | $\underline{0}, \underline{0}$ |</span>
 <span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>: A two-player Prisoner&#39;s Dilemma. Each player&#39;s best response is underlined. If they coincide, this constitutes a Nash equilibrium. {#tbl-game-pd}</span>
 <span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
@@ -6677,7 +6712,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>|                         | Player 2: Cooperate | Player 2: Defect |</span>
 <span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>|-------------------------|---------------------|------------------|</span>
-<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>| **Player 1: Cooperate** | $2, 2$              | $-1, 3-P$       |</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>| **Player 1: Cooperate** | $2, 2$              | $-1, 3-P$        |</span>
 <span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>| **Player 1: Defect**    | $3-P,-1$            | $0-P, 0-P$       |</span>
 <span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>: A two-player Prisoner&#39;s Dilemma with Punishment. {#tbl-game-pd-punish}</span>
@@ -6728,9 +6763,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>Now consider @tbl-game-rep-pd-tft, where we simplify the strategy space to just two strategies: TFT and complete defection (we will call it now **always defection aD**). This simplified game reveals something interesting: there are two Nash equilibria. If TFT meets TFT, both players will cooperate in the first round and continue cooperating in the second. If FTF meets $(D,D)$ on the other hand, TFT is in the first round exploited but then defects in the second round (it &quot;retaliates&quot;).</span>
 <span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a>|     | TFT                            | aD                                |</span>
-<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>|-----|--------------------------------|-----------------------------------|</span>
-<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a>| TFT | $\underline{4}, \underline{4}$ | $-1, 3$                           |</span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a>|     | TFT                            | aD                             |</span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>|-----|--------------------------------|--------------------------------|</span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a>| TFT | $\underline{4}, \underline{4}$ | $-1, 3$                        |</span>
 <span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a>| aD  | $3,-1$                         | $\underline{0}, \underline{0}$ |</span>
 <span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a>: A twice repeated PD with two players and two strategies. {#tbl-game-rep-pd-tft}</span>
@@ -6743,11 +6778,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a>In @tbl-game-rep-pd-tft3, we add this TFT-1 strategy to the game alongside TFT and aD. The result is sobering: the introduction of this seemingly smart strategy leads to a chain of unilateral deviations, ultimately **eroding cooperation** and resulting in mutual defection as the only Nash equilibrium.</span>
 <span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a>|   | TFT | TFT-1 | aD |</span>
+<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a>|       | TFT                | TFT-1              | aD                             |</span>
 <span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a>|------------------|------------------|------------------|------------------|</span>
-<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a>| TFT | $4, 4$ | $1, \underline{5}$ | $-1, 3$ |</span>
-<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a>| TFT-1 | $\underline{5}, 1$ | $2, 2$ | $-1, \underline{3}$ |</span>
-<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a>| aD | $3,-1$ | $\underline{3},-1$ | $\underline{0}, \underline{0}$ |</span>
+<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a>| TFT   | $4, 4$             | $1, \underline{5}$ | $-1, 3$                        |</span>
+<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a>| TFT-1 | $\underline{5}, 1$ | $2, 2$             | $-1, \underline{3}$            |</span>
+<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a>| aD    | $3,-1$             | $\underline{3},-1$ | $\underline{0}, \underline{0}$ |</span>
 <span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a>: A twice repeated PD with two players and three strategies. {#tbl-game-rep-pd-tft3}</span>
 <span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a></span>
@@ -6815,10 +6850,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb2-198"><a href="#cb2-198" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-199"><a href="#cb2-199" aria-hidden="true" tabindex="-1"></a>Instead of seeing $\delta$ as the probability that another round will happen, we can view it as a measure of how much players **devalue future payoffs**. That is, players care **less** about what happens tomorrow than what happens today.</span>
 <span id="cb2-200"><a href="#cb2-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-201"><a href="#cb2-201" aria-hidden="true" tabindex="-1"></a>This makes intuitive sense. Imagine you&#39;re offered two options: </span>
+<span id="cb2-201"><a href="#cb2-201" aria-hidden="true" tabindex="-1"></a>This makes intuitive sense. Imagine you&#39;re offered two options:</span>
 <span id="cb2-202"><a href="#cb2-202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-203"><a href="#cb2-203" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>€1,000,000, twenty years from now.</span>
-<span id="cb2-204"><a href="#cb2-204" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A smaller amount—say €500,000 or even €200,000, right now.</span>
+<span id="cb2-203"><a href="#cb2-203" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>€1,000,000, twenty years from now.</span>
+<span id="cb2-204"><a href="#cb2-204" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>A smaller amount—say €500,000 or even €200,000, right now.</span>
 <span id="cb2-205"><a href="#cb2-205" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-206"><a href="#cb2-206" aria-hidden="true" tabindex="-1"></a>How much would you be willing to accept today to forgo the future amount of €1,000,000? Depending on your personal **threshold** (or *indifference point*), we could compute your **discount factor**—that is, how much you value future utility compared to present utility.</span>
 <span id="cb2-207"><a href="#cb2-207" aria-hidden="true" tabindex="-1"></a></span>
@@ -6856,8 +6891,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb2-239"><a href="#cb2-239" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-240"><a href="#cb2-240" aria-hidden="true" tabindex="-1"></a>However, in infinitely repeated games with a discount factor, this kind of timing isn’t possible. **No one knows when the last round will occur**. As a result:</span>
 <span id="cb2-241"><a href="#cb2-241" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-242"><a href="#cb2-242" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Some strategies feasible in finitely repeated games—like TFT-1—**can’t be implemented**. </span>
-<span id="cb2-243"><a href="#cb2-243" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>At the same time, infinitely repeated games offer a **vastly richer space of strategies**—in fact, infinitely many.<span class="ot">[^1]</span></span>
+<span id="cb2-242"><a href="#cb2-242" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Some strategies feasible in finitely repeated games—like TFT-1—**can’t be implemented**.</span>
+<span id="cb2-243"><a href="#cb2-243" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>At the same time, infinitely repeated games offer a **vastly richer space of strategies**—in fact, infinitely many.<span class="ot">[^1]</span></span>
 <span id="cb2-244"><a href="#cb2-244" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-245"><a href="#cb2-245" aria-hidden="true" tabindex="-1"></a><span class="ot">[^1]: </span>A simple example is the family of strategies called **Sneaky-TFT-**$n$, where the player plays Tit-for-Tat but defects every $n$-th round. Since the game might continue forever, we could define Sneaky-TFT-1, Sneaky-TFT-2, Sneaky-TFT-3, and so on—an infinite family of strategic variations.</span>
 <span id="cb2-246"><a href="#cb2-246" aria-hidden="true" tabindex="-1"></a></span>
@@ -6893,9 +6928,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb2-276"><a href="#cb2-276" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
 <span id="cb2-277"><a href="#cb2-277" aria-hidden="true" tabindex="-1"></a>Based on his findings, Axelrod identified three traits that successful strategies typically share:</span>
 <span id="cb2-278"><a href="#cb2-278" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-279"><a href="#cb2-279" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Be nice** – Don’t be the first to defect. </span>
-<span id="cb2-280"><a href="#cb2-280" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Be provokable** – Retaliate quickly when wronged. </span>
-<span id="cb2-281"><a href="#cb2-281" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Be forgiving** – Once retaliation has occurred, return to cooperation when possible.</span>
+<span id="cb2-279"><a href="#cb2-279" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Be nice** – Don’t be the first to defect.</span>
+<span id="cb2-280"><a href="#cb2-280" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Be provokable** – Retaliate quickly when wronged.</span>
+<span id="cb2-281"><a href="#cb2-281" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Be forgiving** – Once retaliation has occurred, return to cooperation when possible.</span>
 <span id="cb2-282"><a href="#cb2-282" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb2-283"><a href="#cb2-283" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-284"><a href="#cb2-284" aria-hidden="true" tabindex="-1"></a>However, there’s a key limitation to Axelrod’s tournament setup: The strategy pool—**the population**—was static. There was **no learning**, **no innovation**, and **no evolution** over time. Strategies competed, but they didn’t adapt, mutate, or spread based on success.</span>
@@ -6912,7 +6947,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb2-295"><a href="#cb2-295" aria-hidden="true" tabindex="-1"></a>This spread can happen in many ways:</span>
 <span id="cb2-296"><a href="#cb2-296" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-297"><a href="#cb2-297" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>In **biological evolution**, fitter strategies might correspond to organisms that reproduce more successfully.</span>
-<span id="cb2-298"><a href="#cb2-298" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>In **cultural evolution**, less successful individuals may **imitate** more successful ones. </span>
+<span id="cb2-298"><a href="#cb2-298" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>In **cultural evolution**, less successful individuals may **imitate** more successful ones.</span>
 <span id="cb2-299"><a href="#cb2-299" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>In **learning models**, individuals may adopt strategies based on **reinforcement**, **payoffs**, or **trial and error**.</span>
 <span id="cb2-300"><a href="#cb2-300" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-301"><a href="#cb2-301" aria-hidden="true" tabindex="-1"></a>No matter the interpretation, the effect is the same: **More successful strategies grow in frequency**. Less successful ones decline—and may eventually vanish. Over time, this process **reshapes** the **population**, often settling into a stable distribution of strategies—a so-called **evolutionary equilibrium**.</span>
@@ -6920,7 +6955,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb2-303"><a href="#cb2-303" aria-hidden="true" tabindex="-1"></a>This abstraction is one of the strengths of evolutionary modeling: it allows us to model many real-world processes—biological, social, or economic—using a single unified framework.</span>
 <span id="cb2-304"><a href="#cb2-304" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-305"><a href="#cb2-305" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
-<span id="cb2-306"><a href="#cb2-306" aria-hidden="true" tabindex="-1"></a>  **Ecological models** are repeated games with learning. </span>
+<span id="cb2-306"><a href="#cb2-306" aria-hidden="true" tabindex="-1"></a>**Ecological models** are repeated games with learning.</span>
 <span id="cb2-307"><a href="#cb2-307" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb2-308"><a href="#cb2-308" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-309"><a href="#cb2-309" aria-hidden="true" tabindex="-1"></a><span class="fu">## From Mixed Strategies to Mixed Populations</span></span>
@@ -6952,17 +6987,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb2-335"><a href="#cb2-335" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-336"><a href="#cb2-336" aria-hidden="true" tabindex="-1"></a>In @fig-simplex, we see three examples:</span>
 <span id="cb2-337"><a href="#cb2-337" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-338"><a href="#cb2-338" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$S_2$ simplex: a line segment representing a population with **two** strategies. </span>
-<span id="cb2-339"><a href="#cb2-339" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$S_3$ simplex: a triangle representing a population with **three** strategies. </span>
-<span id="cb2-340"><a href="#cb2-340" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$S_4$ simplex: a 3D shape (projected here in 2D) representing **four** strategies.</span>
+<span id="cb2-338"><a href="#cb2-338" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$S_2$ simplex: a line segment representing a population with **two** strategies.</span>
+<span id="cb2-339"><a href="#cb2-339" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$S_3$ simplex: a triangle representing a population with **three** strategies.</span>
+<span id="cb2-340"><a href="#cb2-340" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$S_4$ simplex: a 3D shape (projected here in 2D) representing **four** strategies.</span>
 <span id="cb2-341"><a href="#cb2-341" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-342"><a href="#cb2-342" aria-hidden="true" tabindex="-1"></a>Each point within a simplex corresponds to a specific **distribution of strategies** within the population.</span>
 <span id="cb2-343"><a href="#cb2-343" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-344"><a href="#cb2-344" aria-hidden="true" tabindex="-1"></a>Let’s look more closely at the $S_2$ simplex: </span>
+<span id="cb2-344"><a href="#cb2-344" aria-hidden="true" tabindex="-1"></a>Let’s look more closely at the $S_2$ simplex:</span>
 <span id="cb2-345"><a href="#cb2-345" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-346"><a href="#cb2-346" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A point on the **left end** means the population consists entirely of **Strategy A**. </span>
-<span id="cb2-347"><a href="#cb2-347" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A point on the **right end** means the population consists entirely of **Strategy B**. </span>
-<span id="cb2-348"><a href="#cb2-348" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A point exactly **in the middle** (as shown) means the population is **evenly split: 50% A and 50% B**.</span>
+<span id="cb2-346"><a href="#cb2-346" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>A point on the **left end** means the population consists entirely of **Strategy A**.</span>
+<span id="cb2-347"><a href="#cb2-347" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>A point on the **right end** means the population consists entirely of **Strategy B**.</span>
+<span id="cb2-348"><a href="#cb2-348" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>A point exactly **in the middle** (as shown) means the population is **evenly split: 50% A and 50% B**.</span>
 <span id="cb2-349"><a href="#cb2-349" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-350"><a href="#cb2-350" aria-hidden="true" tabindex="-1"></a>This geometric view allows us to model and visualize **how populations evolve over time** under various evolutionary dynamics.</span>
 <span id="cb2-351"><a href="#cb2-351" aria-hidden="true" tabindex="-1"></a></span>
@@ -6998,7 +7033,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb2-381"><a href="#cb2-381" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb2-382"><a href="#cb2-382" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-383"><a href="#cb2-383" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
-<span id="cb2-384"><a href="#cb2-384" aria-hidden="true" tabindex="-1"></a>Summary of the changes from classical game theory to evolutionary game theory: </span>
+<span id="cb2-384"><a href="#cb2-384" aria-hidden="true" tabindex="-1"></a>Summary of the changes from classical game theory to evolutionary game theory:</span>
 <span id="cb2-385"><a href="#cb2-385" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-386"><a href="#cb2-386" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Instead of games **systems** are analyzed.</span>
 <span id="cb2-387"><a href="#cb2-387" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Instead of **utilities** each strategy has a **fitness** value to describe success.</span>
@@ -7021,12 +7056,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb2-404"><a href="#cb2-404" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-405"><a href="#cb2-405" aria-hidden="true" tabindex="-1"></a>This equation tells us how successful strategy $i$ is in the current population, based on:</span>
 <span id="cb2-406"><a href="#cb2-406" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-407"><a href="#cb2-407" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>How common each strategy $j$ is, and </span>
-<span id="cb2-408"><a href="#cb2-408" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>How well $i$ performs when matched against $j$</span>
+<span id="cb2-407"><a href="#cb2-407" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>How common each strategy $j$ is, and</span>
+<span id="cb2-408"><a href="#cb2-408" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>How well $i$ performs when matched against $j$</span>
 <span id="cb2-409"><a href="#cb2-409" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-410"><a href="#cb2-410" aria-hidden="true" tabindex="-1"></a>In short, **fitness is frequency-dependent**: a strategy’s success depends not just on its own design, but also on the **strategic environment** it is embedded in.</span>
 <span id="cb2-411"><a href="#cb2-411" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-412"><a href="#cb2-412" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb2-412"><a href="#cb2-412" aria-hidden="true" tabindex="-1"></a>::: callout-tip</span>
 <span id="cb2-413"><a href="#cb2-413" aria-hidden="true" tabindex="-1"></a>**Normalizing Fitness Matrices in Replicator Dynamics**</span>
 <span id="cb2-414"><a href="#cb2-414" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-415"><a href="#cb2-415" aria-hidden="true" tabindex="-1"></a>Replicator dynamics **do not change** if you **add or subtract a constant value from any column** of the fitness matrix.</span>
@@ -7111,8 +7146,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb2-494"><a href="#cb2-494" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-495"><a href="#cb2-495" aria-hidden="true" tabindex="-1"></a>In order to simplify the notation let&#39;s define:</span>
 <span id="cb2-496"><a href="#cb2-496" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-497"><a href="#cb2-497" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$q = q_{\text{TFT}}$ </span>
-<span id="cb2-498"><a href="#cb2-498" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$1 - q = q_{\text{aD}}$</span>
+<span id="cb2-497"><a href="#cb2-497" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$q = q_{\text{TFT}}$</span>
+<span id="cb2-498"><a href="#cb2-498" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$1 - q = q_{\text{aD}}$</span>
 <span id="cb2-499"><a href="#cb2-499" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-500"><a href="#cb2-500" aria-hidden="true" tabindex="-1"></a>Then the **average fitness** $\phi$ is:</span>
 <span id="cb2-501"><a href="#cb2-501" aria-hidden="true" tabindex="-1"></a></span>
@@ -7188,10 +7223,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb2-573"><a href="#cb2-573" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-574"><a href="#cb2-574" aria-hidden="true" tabindex="-1"></a>This graph reveals **three equilibria**, where $\frac{dq}{dt} = 0$: - $q = 0$ - $q = 0.5$ - $q = 1$</span>
 <span id="cb2-575"><a href="#cb2-575" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-576"><a href="#cb2-576" aria-hidden="true" tabindex="-1"></a>These are indicated as **dots in the plot**: </span>
+<span id="cb2-576"><a href="#cb2-576" aria-hidden="true" tabindex="-1"></a>These are indicated as **dots in the plot**:</span>
 <span id="cb2-577"><a href="#cb2-577" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-578"><a href="#cb2-578" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The equilibria at $q = 0$ and $q = 1$ are marked green– these are **stable**.</span>
-<span id="cb2-579"><a href="#cb2-579" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The equilibrium at $q = 0.5$ is marked red – this one is **unstable**.</span>
+<span id="cb2-578"><a href="#cb2-578" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>The equilibria at $q = 0$ and $q = 1$ are marked green– these are **stable**.</span>
+<span id="cb2-579"><a href="#cb2-579" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>The equilibrium at $q = 0.5$ is marked red – this one is **unstable**.</span>
 <span id="cb2-580"><a href="#cb2-580" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-581"><a href="#cb2-581" aria-hidden="true" tabindex="-1"></a>Let’s walk through what happens in each interval:</span>
 <span id="cb2-582"><a href="#cb2-582" aria-hidden="true" tabindex="-1"></a></span>
@@ -7204,9 +7239,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb2-589"><a href="#cb2-589" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-590"><a href="#cb2-590" aria-hidden="true" tabindex="-1"></a>We can summarize the evolutionary outcomes of this system in three clear hypotheses:</span>
 <span id="cb2-591"><a href="#cb2-591" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-592"><a href="#cb2-592" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**H1**: If $q_0 &lt; 0.5$, then the population will evolve toward full defection. (formally: $\lim_{t \to \infty} q(t) = 0$)</span>
-<span id="cb2-593"><a href="#cb2-593" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**H2**: If $q_0 &gt; 0.5$, then the population will evolve toward full cooperation. (formally: $\lim_{t \to \infty} q(t) = 1$)</span>
-<span id="cb2-594"><a href="#cb2-594" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**H3**: If $q_0 = 0.5$, the system will stay balanced, but any small fluctuation will push it toward one of the extremes.</span>
+<span id="cb2-592"><a href="#cb2-592" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**H1**: If $q_0 &lt; 0.5$, then the population will evolve toward full defection. (formally: $\lim_{t \to \infty} q(t) = 0$)</span>
+<span id="cb2-593"><a href="#cb2-593" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**H2**: If $q_0 &gt; 0.5$, then the population will evolve toward full cooperation. (formally: $\lim_{t \to \infty} q(t) = 1$)</span>
+<span id="cb2-594"><a href="#cb2-594" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**H3**: If $q_0 = 0.5$, the system will stay balanced, but any small fluctuation will push it toward one of the extremes.</span>
 <span id="cb2-595"><a href="#cb2-595" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-596"><a href="#cb2-596" aria-hidden="true" tabindex="-1"></a><span class="fu">### Evolutionarily Equilibria</span></span>
 <span id="cb2-597"><a href="#cb2-597" aria-hidden="true" tabindex="-1"></a></span>
@@ -7258,7 +7293,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb2-643"><a href="#cb2-643" aria-hidden="true" tabindex="-1"></a>In short: **evolution doesn&#39;t just reward success—it punishes vulnerability**.</span>
 <span id="cb2-644"><a href="#cb2-644" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-645"><a href="#cb2-645" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
-<span id="cb2-646"><a href="#cb2-646" aria-hidden="true" tabindex="-1"></a>  **Evolutionary models** are ecological models with mutation. </span>
+<span id="cb2-646"><a href="#cb2-646" aria-hidden="true" tabindex="-1"></a>**Evolutionary models** are ecological models with mutation.</span>
 <span id="cb2-647"><a href="#cb2-647" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb2-648"><a href="#cb2-648" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-649"><a href="#cb2-649" aria-hidden="true" tabindex="-1"></a><span class="fu">### Evolutionarily Stable Strategies (ESS)</span></span>
@@ -7276,13 +7311,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb2-661"><a href="#cb2-661" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-662"><a href="#cb2-662" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span><span class="sc">\[</span>easy<span class="sc">\]</span> Modify @tbl-game-rep-pd-tft3, use $d=3$ instead of $d=2$.</span>
 <span id="cb2-663"><a href="#cb2-663" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span><span class="sc">\[</span>easy<span class="sc">\]</span> Normalize the fitness matrix given in @tbl-eco-fitness.</span>
-<span id="cb2-664"><a href="#cb2-664" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span><span class="sc">\[</span>medium<span class="sc">\]</span> Translate the game @tbl-game-mp into fitness function and show, that is has three evolutionary equilibria. What do you notice in comparison to the equilibrium predictions of classical game theory?</span>
-<span id="cb2-665"><a href="#cb2-665" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span><span class="sc">\[</span>hard<span class="sc">\]</span> If you looked at https://ncase.me/trust/ under 5. &quot;The evolution of distrust&quot; Case shows that the number of rounds (in their case fixed numbers of rounds, but we will think of them as expected number of rounds) are crucial whether given the initial distribution of TFT or aD prevails in the end. This is because the number of rounds $d$ directly affect the fitness of both strategies. Model and analyze the replicator dynamics for $q=Q_{TFT}$ for the general case of $d$ rounds.</span>
-<span id="cb2-666"><a href="#cb2-666" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span><span class="sc">\[</span>medium<span class="sc">\]</span> Show that aD and TFT are ESS, show that aC is not (only use this three strategies). </span>
-<span id="cb2-667"><a href="#cb2-667" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-668"><a href="#cb2-668" aria-hidden="true" tabindex="-1"></a><span class="fu"># 🚀 Link to In-Class Material</span></span>
-<span id="cb2-669"><a href="#cb2-669" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-670"><a href="#cb2-670" aria-hidden="true" tabindex="-1"></a>Here is the link for the in-class material.</span>
+<span id="cb2-664"><a href="#cb2-664" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span><span class="sc">\[</span>medium<span class="sc">\]</span> ~~Translate the game @tbl-game-mp into fitness function and show, that is has three evolutionary equilibria. What do you notice in comparison to the equilibrium predictions of classical game theory?~~</span>
+<span id="cb2-665"><a href="#cb2-665" aria-hidden="true" tabindex="-1"></a><span class="ss">    1.  </span><span class="co">[</span><span class="ot">What is the problem if we want to translate the game @tbl-game-mp into fitness function?</span><span class="co">]</span>{style=&quot;background-color: yellow;&quot;}</span>
+<span id="cb2-666"><a href="#cb2-666" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-667"><a href="#cb2-667" aria-hidden="true" tabindex="-1"></a><span class="ss">    2.  </span><span class="co">[</span><span class="ot">Translate the game @tbl-game-hd into fitness function and show, that is has three evolutionary equilibria.</span><span class="co">]</span>{style=&quot;background-color: yellow;&quot;}\</span>
+<span id="cb2-668"><a href="#cb2-668" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-669"><a href="#cb2-669" aria-hidden="true" tabindex="-1"></a>        |                | Player 2: Hawk | Player 2: Dove |</span>
+<span id="cb2-670"><a href="#cb2-670" aria-hidden="true" tabindex="-1"></a>        |----------------|----------------|----------------|</span>
+<span id="cb2-671"><a href="#cb2-671" aria-hidden="true" tabindex="-1"></a>        | Player 1: Hawk | $1, 1$         | $4, 2$         |</span>
+<span id="cb2-672"><a href="#cb2-672" aria-hidden="true" tabindex="-1"></a>        | Player 1: Dove | $2, 4$         | $3, 3$         |</span>
+<span id="cb2-673"><a href="#cb2-673" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-674"><a href="#cb2-674" aria-hidden="true" tabindex="-1"></a>        : Hawk-Dove-Game {#tbl-game-hd}</span>
+<span id="cb2-675"><a href="#cb2-675" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-676"><a href="#cb2-676" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span><span class="sc">\[</span>hard<span class="sc">\]</span> If you looked at https://ncase.me/trust/ under 5. &quot;The evolution of distrust&quot; Case shows that the number of rounds (in their case fixed numbers of rounds, but we will think of them as expected number of rounds) are crucial whether given the initial distribution of TFT or aD prevails in the end. This is because the number of rounds $d$ directly affect the fitness of both strategies. Model and analyze the replicator dynamics for $q=Q_{TFT}$ for the general case of $d$ rounds.</span>
+<span id="cb2-677"><a href="#cb2-677" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span><span class="sc">\[</span>medium<span class="sc">\]</span> Show that aD and TFT are ESS, show that aC is not (only use this three strategies).</span>
+<span id="cb2-678"><a href="#cb2-678" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-679"><a href="#cb2-679" aria-hidden="true" tabindex="-1"></a><span class="fu"># 🚀 Link to In-Class Material</span></span>
+<span id="cb2-680"><a href="#cb2-680" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-681"><a href="#cb2-681" aria-hidden="true" tabindex="-1"></a>Here is the link for the in-class material.</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
