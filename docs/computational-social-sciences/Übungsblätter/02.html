@@ -3834,7 +3834,7 @@ vertical-align: -.125em;
 }</script>
 <style>
 .quarto-title-block .quarto-title-banner {
-background: #F88379;
+background: #D3D3FF;
 }
 </style>
 <script type="text/javascript" src="../../js/week-control.js"></script>
@@ -4063,6 +4063,9 @@ background: #F88379;
   <li><a href="#task-impute-missing-data" id="toc-task-impute-missing-data" class="nav-link" data-scroll-target="#task-impute-missing-data">Task: Impute Missing Data</a></li>
   <li><a href="#reflection-questions" id="toc-reflection-questions" class="nav-link" data-scroll-target="#reflection-questions">Reflection Questions</a></li>
   </ul></li>
+  <li><a href="#homework" id="toc-homework" class="nav-link" data-scroll-target="#homework">Homework</a></li>
+  <li><a href="#homework-1" id="toc-homework-1" class="nav-link" data-scroll-target="#homework-1">Homework</a></li>
+  <li><a href="#homework-2" id="toc-homework-2" class="nav-link" data-scroll-target="#homework-2">Homework</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="02.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
 </nav>
@@ -4194,9 +4197,146 @@ background: #F88379;
 <li><strong>What are the potential biases introduced by simple imputation?</strong></li>
 <li><strong>How could model-based imputation improve accuracy?</strong></li>
 </ol>
-
-
+<p>Which attribute is most sgregated??</p>
 </section>
+</section>
+<section id="homework" class="level1">
+<h1>Homework</h1>
+<p>Download the file <code>vDuijn_prepared.zip</code> from this weeks’ section of the moodle course. It contains data on friendship networks among 37 sociology students in Groningen (Netherlands) in 1996 to 1997. A full description of the data can be found <a href="https://www.stats.ox.ac.uk/~snijders/siena/vDuijn_data.htm">here</a>.</p>
+<p>The <code>data</code> set contains data on</p>
+<pre><code>- id = Id number
+
+- gender = Gender: 1= male; 2=female
+
+- program = Program: 1= regular 4-year program; 2=2-year program
+
+- smoking = Smoking: 0=no; 2=yes, at parties (social); 3=1-3 cigarettes per day, 4=4-10 p.d.; 5= more than 10 p.d.
+
+- soft_drugs = Using soft-drugs: 1=no, 2= yes, less than once a month; 3=yes, 1-3 times p.m.; 4=yes, 1-3 times per week; 5=yes, more than 3 times p.w.</code></pre>
+<p>The next 13 columns consist of scores on an importance of social activities. The respondents indicated the amount of attention given to the activity on a scale from 0-42.</p>
+<pre><code>- going_out = Going out
+
+- concert_movie = Going to a concert or movie
+
+- dinner = Having dinner at home
+
+- do_sports = Exercising/doing sports
+
+- watch_sports = Watching sports
+
+- having_coffee = Having coffee in the university cafeteria
+
+- religious_activities = Religious involvement/Church activities
+
+- music = Listening to music
+
+- politics = Discussing politics
+
+- feelings = Discussing personal feelings
+
+- jokes = Making jokes/having fun
+
+- student_organizations = Student association involvement/organizing activities
+
+- discussing_sociology = Discussing the classes or study program (sociology)</code></pre>
+<p>Then, the data contains information on friendship satisfaction:</p>
+<pre><code>- friend_satisfaction = Satisfaction with number of &quot;real&quot; friends or friends (categories 1 or 2 in network question): 1=very dissatisfied, 2=rather dissatisfied, 3=not satisfied/not dissatisfied; rather satisfied; 5= very satisfied.
+
+- enough_friends = Too few/many friends: 1=far too few; 2=too few; 3=exactly right number; 4=too many; 5=far too many.
+
+- friends_in_groningen Which part of current friends live in the city of Groningen? 1=none; 2=approx. 25%; 3=approx 50%; 4=approx. 75%; 5=100%. </code></pre>
+<p>1.) Prepare the data for your analysis. You will need the id, the students’ gender, whether they consume soft drugs and two of the metric variables of your choice (importance of social activities).</p>
+<pre><code>a.) Shortly describe how you prepared the data: which categories did you categorize the soft drugs variable into? Did you leave it as 5 categories? Did you collapse categories into broader categories? Why? Why not?
+
+b.) Shortly argue why you picked your metric variables. What makes them interesting in your perspective?</code></pre>
+<p>2.) Calculate the segregation in the network for gender, soft drugs and the social activities variables of your choice.</p>
+<pre><code>a.) For the categorical variables, calculate the assortativity coefficient and the share of same-gender/same-drugs friends. 
+
+b.) For the metric variables, calculate the correlation of sociometric distance and attribute distance. </code></pre>
+<p>3.) Interpret your findings. Which attribute is the most segregated? Why do you think this is the case?</p>
+</section>
+<section id="homework-1" class="level1">
+<h1>Homework</h1>
+<p>Today, we will be using the <code>middleschool</code> data from the <code>UserNetR</code>-package. It describes the friendships of 37 6th grade students in California.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(<span class="sc">!</span><span class="fu">require</span>(UserNetR), (<span class="fu">install.packages</span>(<span class="st">&quot;devtools&quot;</span>, <span class="at">dep =</span> T) <span class="sc">&amp;</span> devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;DougLuke/UserNetR&quot;</span>, <span class="at">force =</span> <span class="cn">TRUE</span>) <span class="sc">&amp;</span> <span class="fu">require</span>(UserNetR)), <span class="fu">require</span>(UserNetR))</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(<span class="sc">!</span><span class="fu">require</span>(intergraph), (<span class="fu">install.packages</span>(<span class="st">&quot;intergraph&quot;</span>, <span class="at">dep =</span> T) <span class="sc">&amp;</span> <span class="fu">require</span>(intergraph)), <span class="fu">require</span>(intergraph))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(middleschool)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>middleschool <span class="ot">&lt;-</span> <span class="fu">asIgraph</span>(middleschool) <span class="co"># use the intergraph function asIgraph to convert the network to an igraph object</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(middleschool, </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label =</span> <span class="cn">NA</span>, </span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">20</span>, </span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> mycolors[<span class="dv">3</span>], </span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> <span class="fu">layout.fruchterman.reingold</span>(middleschool))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>1.) Calculate the cohesion of the middleschool network<br>
+a) Calculate the dyad census b) Calculate the reciprocity c) Calculate the triad census d) calculate the Transitivity (Global clustering Coefficient) 2.) To interpret the structural features of a network, we can compare it to a random network of the same size. To create one for the middleschool network, run:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">124</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>rand <span class="ot">&lt;-</span> <span class="fu">erdos.renyi.game</span>(<span class="fu">vcount</span>(middleschool),</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">ecount</span>(middleschool),</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">type =</span> <span class="st">&quot;gnm&quot;</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                         <span class="at">directed =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<ol type="a">
+<li>Calculate the statistics from 1.) for the random network you just created.</li>
+<li>Compare your results from 1.) to the random network. Is the middleschool network more cohesive than expected at random?</li>
+<li>Does this constitute a good way of hypothesis testing? Why? Why not?</li>
+</ol>
+<p>3.) Compute the local clustering coefficient for the nodes in the middleschool network. 4.) Calculate the cut points for the middleschool network. 5.) Split the middleschool network into two networks, one for the boys and one for the girls. a) Calculate the cohesion measures from 1.) for each subnetwork. b) Which of the subnetworks is more cohesive?</p>
+<p>6.) Delete the cut points from the middleschool network.</p>
+<p>7.) Plot the middleschool network in the following way: a) The size of a node is proportional to its degree, but not smaller than 5. b) The node shape should describe the component a node belongs to. c) The node color should describe the students’ gender. d) The cut points are visually distinct from the rest of the network.</p>
+</section>
+<section id="homework-2" class="level1">
+<h1>Homework</h1>
+<p>Today, we will be using the <code>middleschool</code> data from the <code>UserNetR</code>-package. It describes the friendships of 37 6th grade students in California.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(<span class="sc">!</span><span class="fu">require</span>(UserNetR), (<span class="fu">install.packages</span>(<span class="st">&quot;devtools&quot;</span>, <span class="at">dep =</span> T) <span class="sc">&amp;</span> devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;DougLuke/UserNetR&quot;</span>, <span class="at">force =</span> <span class="cn">TRUE</span>) <span class="sc">&amp;</span> <span class="fu">require</span>(UserNetR)), <span class="fu">require</span>(UserNetR))</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(<span class="sc">!</span><span class="fu">require</span>(intergraph), (<span class="fu">install.packages</span>(<span class="st">&quot;intergraph&quot;</span>, <span class="at">dep =</span> T) <span class="sc">&amp;</span> <span class="fu">require</span>(intergraph)), <span class="fu">require</span>(intergraph))</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(middleschool)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>middleschool <span class="ot">&lt;-</span> <span class="fu">asIgraph</span>(middleschool) <span class="co"># use the intergraph function asIgraph to convert the network to an igraph object</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(middleschool, </span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label =</span> <span class="cn">NA</span>, </span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">20</span>, </span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> mycolors[<span class="dv">3</span>], </span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> <span class="fu">layout.fruchterman.reingold</span>(middleschool))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>1.) Calculate the cohesion of the middleschool network<br>
+a) Calculate the dyad census b) Calculate the reciprocity c) Calculate the triad census d) calculate the Transitivity (Global clustering Coefficient) 2.) To interpret the structural features of a network, we can compare it to a random network of the same size. To create one for the middleschool network, run:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">124</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>rand <span class="ot">&lt;-</span> <span class="fu">erdos.renyi.game</span>(<span class="fu">vcount</span>(middleschool),</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">ecount</span>(middleschool),</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">type =</span> <span class="st">&quot;gnm&quot;</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>                         <span class="at">directed =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<ol type="a">
+<li>Calculate the statistics from 1.) for the random network you just created.</li>
+<li>Compare your results from 1.) to the random network. Is the middleschool network more cohesive than expected at random?</li>
+<li>Does this constitute a good way of hypothesis testing? Why? Why not?</li>
+</ol>
+<p>3.) Compute the local clustering coefficient for the nodes in the middleschool network. 4.) Calculate the cut points for the middleschool network. 5.) Split the middleschool network into two networks, one for the boys and one for the girls. a) Calculate the cohesion measures from 1.) for each subnetwork. b) Which of the subnetworks is more cohesive?</p>
+<p>6.) Delete the cut points from the middleschool network.</p>
+<p>7.) Plot the middleschool network in the following way: a) The size of a node is proportional to its degree, but not smaller than 5. b) The node shape should describe the component a node belongs to. c) The node color should describe the students’ gender. d) The cut points are visually distinct from the rest of the network.</p>
+<p>Warum schlägt Burt anstelle des clustering coefficient das constraint Maß vor?</p>
+
+
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-copyright"><h2 class="anchored quarto-appendix-heading">Copyright</h2><div class="quarto-appendix-contents"><div>Copyright Leonie Steinbrinker, 2025. All Rights Reserved</div></div></section></div></main> <!-- /main -->

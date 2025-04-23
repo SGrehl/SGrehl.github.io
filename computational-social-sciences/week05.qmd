@@ -6,6 +6,286 @@ subtitle: "Network visualisation"
 
 # Basic visuaisation
 
+Edge and vertex attributes
+
+
+Example degree centrality
+
+## Layouts
+
+# Network visualisation with ggraph
+
+
+# Network visualisation with tidygraph
+
+## Creating a Tidygraph Network
+
+`tidygraph` offers a different type of graph objects. Objects created with `igraph` need to be converted to `tidygraph` objects first: 
+
+```{r}
+
+# creating our igraph object
+graph1 <- graph_from_adjacency_matrix(adjmatrix = friends$wave_1)
+
+# converting it to tidygraph
+tgraph <- as_tbl_graph(graph1)
+
+tgraph
+
+```
+
+What tidygraph does, is that it stores all the relevant information in two tibbles which are tidyverse's version of data frames. The vertex attributes (in the tibble, where currently only "name" is given), as well as the edges as an adjacency list (and if existant, all edge attributes in the adjacency list).
+
+To run tidyverse or dplyr actions on the tibbles, we first need to tell tidygraph which dataframe (nodes or edges) it should work on. We do this with activate(nodes) and activate(edges) respectively. 
+
+Let's add information on the actors to the object: 
+
+- Alcohol consumption: We want to create a factor of the following levels: 
+    
+    - 1: none, 
+    - 2: seldomly, 
+    - 3: once a month, 
+    - 4 once a weak, 
+    - 5: more than once a weak
+    
+- Smoking (tobacco): 
+
+    - 1: never, 
+    - 2: occasionally, 
+    - 3: regularly
+    
+- Smoking (cannabis): 
+    
+    - 1: never, 
+    - 2: tried it once, 
+    - 3: occasionally, 
+    - 4: regularly
+
+
+```{r}
+
+tgraph <- tgraph %>%
+  activate(nodes) %>%
+  mutate(age = dat$age, # age of the actors
+         gender = factor(dat$male, # gender (male / female)
+                         levels = c(0, 1), 
+                         labels = c("female", 
+                                    "male")), 
+         alcohol = factor(dat$alc_1, # alcohol consumption
+                          levels = c(1:5), 
+                          labels = c("never", 
+                                     "seldomly", 
+                                     "once a month", 
+                                     "once a weak", 
+                                     "multiple times a week")), 
+         tobacco = factor(dat$tob_1, # tobacco consumption
+                          levels = c(1:3), 
+                          labels = c("never", 
+                                     "occasionally", 
+                                     "regularly")), 
+         weed = factor(dat$weed_1, # cannabis consumption
+                       levels = c(1:4), 
+                       labels = c("never", 
+                                  "tried once", 
+                                  "occasionally", 
+                                  "regularly")), 
+         pocketmon = dat$money_1, # pocket money in pounds per week
+         single = factor(dat$relationship_1, # is the person in a relationship?
+                         levels = c(1, 0), 
+                         labels = c("in relationship", 
+                                    "single")), 
+         family_smoking = dat$smoking_at_home) # are the parents or siblings smoking at home?
+
+tgraph
+
+```
+
+We can now also use the objects in our node - dataframe to plot them: 
+
+```{r}
+( # the brackets around the object call the saved object "smoking_plot"
+smoking_plot <- # saves the plot in the object "smoking_plot"
+  tgraph %>%   # calls the tidygraph object "tgraph"
+  activate(nodes) %>%  # activate the nodes
+  as_tibble() %>% # as a tibble
+  ggplot() +  # forward it all to ggplot()
+  geom_bar(aes(x = tobacco,  # create a colored bar plot of the smoking behaviour
+               fill = tobacco)) + 
+  theme_minimal() + # using the minimal theme of ggplot
+  labs(x = "Tobacco consumption", # add labels
+       y = "Number of actors", 
+       fill = "Tobacco consumption")
+
+)
+```
+
+
+# Network plotting
+
+Many geoms for network plotting exist. The manual of `ggraph` has a comprehensive list of them: [ggraph Manual](https://ggraph.data-imaginist.com/reference/index.html). 
+
+
+```{r, warning=FALSE}
+
+(networkplot <- 
+   tgraph %>%
+   ggraph(layout = "stress") + # use the stress layout
+   geom_edge_fan(width = .2,  # color the edges gray and use the "fan geom"
+                 color = "gray") + 
+   geom_node_point(aes(color = tobacco), 
+                   size = 2 ) + # color the nodes by the tobacco consumption
+   coord_fixed() + 
+   theme_graph() + 
+   labs(color = "Tobacco Consumption")
+ )
+
+```
+
+As we see, if we use the `fan`-geom for the edges, by default, they are not directed and rather, two edges appear if a relationship is reciprocal. Let's change that. For that, we need to use another geom: `geom_edge_link`
+
+```{r, warning=FALSE}
+
+(networkplot <- 
+   tgraph %>%
+   ggraph(layout = "stress") + # use the stress layout
+   geom_edge_link(width = .2,  # color the edges gray
+                 color = "gray", 
+                 arrow = arrow(length = unit(1.5, 'mm')), # determine the size of the arrow head
+                 end_cap = circle(0.5, 'mm')) + # determine the distance between the arrow head and the node it is pointing to
+   geom_node_point(aes(color = tobacco), 
+                   size = 2 )+ # color the nodes by the tobacco consumption
+   coord_fixed() + 
+   theme_graph() + 
+   labs(color = "Tobacco Consumption")
+ )
+
+
+```
+
+Let's assume, we want to color the edges indicating whether they are between actors with the same smoking behavior or between dissimilar actors: 
+
+```{r, warning=FALSE}
+
+(networkplot <- 
+   tgraph %>%
+   activate(edges) %>%
+   mutate(smoking_diff = abs(as.numeric(.N()$tobacco[from]) - as.numeric(.N()$tobacco[to]))) %>%
+   ggraph(layout = "stress") + # use the stress layout
+   geom_edge_link(width = .2,  # color the edges gray
+                 aes(color = smoking_diff), 
+                 arrow = arrow(length = unit(1.5, 'mm')), 
+                 end_cap = circle(0.5, 'mm')) + 
+   geom_node_point(aes(color = tobacco), 
+                   size = 2 )+ # color the nodes by the tobacco consumption
+   coord_fixed() + 
+   theme_graph() + 
+   labs(color = "Tobacco Consumption", 
+        edge_color = "Difference in Smoking")
+ )
+
+
+```
+
+What happened here is the following: we activated the edges, thus we went into the edges data.frame. Then, by calling `.N()$tobacco`, we called the node data.frame. The [from] and [to] options refer to the tie sender and receiver, respectively. `as.numeric` is used to convert the factor tobacco to numeric. `.N()$tobacco[from]` thus searches for the smoking behavior of the sender, for instance. `abs(as.numeric(.N()$tobacco[from]) - as.numeric(.N()$tobacco[to]))` lets ggraph calculate the absolute difference in the numerical values of the smoking behavior of the sender and receiver. This attribute is then used to color the nodes.
+
+
+
+# Layouts
+
+`ggraph` has a large number of layout algorithms. By default, it automatically picks a layout most suitable (in the algorithms perspective) for the network. Some of them can be seen below: 
+
+**Note**: Most of the time, we will be using the layouts `kk`, `stress`, `fr`, or the automatic layout. 
+
+```{r, warning=FALSE}
+
+
+plot_kk <- 
+   tgraph %>%
+   ggraph(layout = "kk") + # use the kk layout
+   geom_edge_fan(width = .2,  # color the edges gray
+                 color = "gray") + 
+   geom_node_point(aes(color = tobacco), 
+                   size = 2 )+ # color the nodes by the tobacco consumption
+   coord_fixed() + 
+   theme_graph() + 
+
+plot_circle <- 
+   tgraph %>%
+   ggraph(layout = "circle") + # use the cirle layout
+   geom_edge_fan(width = .2,  # color the edges gray
+                 color = "gray") + 
+   geom_node_point(aes(color = tobacco), 
+                   size = 2 )+ # color the nodes by the tobacco consumption
+   coord_fixed() + 
+   theme_graph() + 
+   labs(subtitle = "Circle Layout")+ 
+  theme(legend.position = "none")
+
+plot_linear <- 
+   tgraph %>%
+   ggraph(layout = "linear") + # use the linear layout
+   geom_edge_fan(width = .2,  # color the edges gray
+                 color = "gray") + 
+   geom_node_point(aes(color = tobacco), 
+                   size = 2 )+ # color the nodes by the tobacco consumption
+   coord_fixed() + 
+   theme_graph() + 
+   labs(subtitle = "Linear Layout")+ 
+  theme(legend.position = "none")
+
+plot_fr <- 
+   tgraph %>%
+   ggraph(layout = "fr") + # use the fr layout
+   geom_edge_fan(width = .2,  # color the edges gray
+                 color = "gray") + 
+   geom_node_point(aes(color = tobacco), 
+                   size = 2 )+ # color the nodes by the tobacco consumption
+   coord_fixed() + 
+   theme_graph() + 
+   labs(subtitle = "Fruchterman-Reingold\nLayout")+ 
+  theme(legend.position = "none")
+
+# plot those four plots side by side: 
+
+grid.arrange(plot_kk, 
+             plot_circle, 
+             plot_linear, 
+             plot_fr, 
+             ncol = 2, 
+             nrow = 2)
+
+
+
+```
+
+# Exercises 
+
+These exercises are not homework, so they will not be presented in class. I will upload solutions to them to Moodle so you can check your solutions / get the correct answers. If you run into problems, feel free to ask me in the normal sessions, we can then discuss the problems in or after class. 
+
+Install the package "igraphdata" and load it. Then execute the command `data("karate")`. This loads data on the interactions among the club members of a university karate club in the early 1970s. The data have been studied by Wayne W. Zachary and are known as Zachary's karate club. 
+
+1. Convert the graph `karate` into a tidygraph object. 
+2. Plot the network using ggraph. 
+3. Display the node attribute  faction. 
+4. "Mr Hi" and "John A" were the two instructors of the club. Change their shapes to be different from the participants. 
+5. Display the edge attribute weight. 
+6. Add a legend and a title to the plot. 
+7. Save the plot. 
+8. Try to interpret the plot: 
+    - Why are there different factions?
+    - What may have happened?
+    - How does the network structure help explain the factions?
+9. Look up the wikipedia article [Zachary's karate club](https://en.wikipedia.org/wiki/Zachary%27s_karate_club) on the study. Does it confirm your interpretation from 8.?
+
+
+
+
+
+## Visualisation of large networks
+
+
+
+
 # Interactive visualisation
 
 [@rawlingsHowAreSocial2023a]

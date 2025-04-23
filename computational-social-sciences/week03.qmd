@@ -15,15 +15,9 @@ Mostly developers hide Easter eggs to leave a mark in their work or as a reward 
 
 ```{r}
 #| code-fold: false
-data(bunny); p3d(bunny,theta=3,phi=104,box=FALSE)
-
-```
-
-
-```{r}
-#| code-fold: false
 
 if (!require("pacman")) install.packages("pacman")
+
 pacman::p_exists(R)
 
 ```

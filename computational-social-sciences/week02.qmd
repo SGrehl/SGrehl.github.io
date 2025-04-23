@@ -645,6 +645,27 @@ plot(karate)
 
 ```
 ![Karate network - Cutpoints and Bridges are highlighted in red](Graphics/cut-points.png)
+### k-connectivity
+
+A network of size $n$ is called **k-connected** if $k < n$ and if it is connected even after removing any $k − 1$ nodes. So you need to remove $k$ nodes in order to disconnect the network. 
+
+- Every connected network is at least 1-connected: You need to remove at least one node to disconnect the network.
+
+- If a network is $k$-connected, then the graph is also $(k - 1)$ connected: After removing $k -1$ nodes, it is still connected.
+
+- *k-components* are the components a network is split into if you remove $k$ nodes and split it into more than one component. 
+    
+    - *k-components* represent clique-like subgroups within a social network. 
+
+- The greatest integer $k$ such that the network is *k-connected* is known as the ***vertex-connectivity κ***. If $K = 0$, the network is disconected.
+
+A **cut set** of a network is the set of nodes whose removal disconnects the graph. A **minimum cut set** is a smallest cut set. 
+
+- Each minimum cut set contains $K$ elements
+
+- A cutpoint exists if there is a minimum cut set of size $1$.
+
+
 
 ::: {.student-exercise}
 
