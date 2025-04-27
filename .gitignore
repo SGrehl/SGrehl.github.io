@@ -5,6 +5,6 @@
 
 /.quarto/
 
-
-computational-social-sciences/Solutions-in-class/
-computational-social-sciences/Übungsblätter/
+experimental-sociology/*
+computational-social-sciences/*
+kk/*

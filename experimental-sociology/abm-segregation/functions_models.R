@@ -1,6 +1,6 @@
 load_model <- function(model_name) {
   
-  # define a baseline model
+  # define a baseline model 
   baseline <- list(
     # --- world generation ---
     world_size   = 10,          # creates a world of 10x10 vertices

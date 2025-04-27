@@ -1,8 +1,8 @@
 rm(list = ls())
 
-source("experimental-sociology/abm-segregation/functions_plot.R")
-source("experimental-sociology/abm-segregation/functions_simulation.R")
-source("experimental-sociology/abm-segregation/functions_models.R")
+source("functions_plot.R")
+source("functions_simulation.R")
+source("functions_models.R")
 
 # ================= DEFINE SIMULATION ================= 
 
@@ -17,9 +17,7 @@ simulation  <- list(
 
 # ================= RUN SIMULATION ================= 
 
-
 results <- run_simulation(simulation)
-
 
 # ================= GENERATE GRAPHS ================= 
 
