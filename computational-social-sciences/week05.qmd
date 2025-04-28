@@ -2,16 +2,110 @@
 title: "Week 05"
 subtitle: "Network visualisation"
 ---
+Welcome to this session of the seminar! In the last weeks you might have seen, that the visualisation of networks is not as easy as it may seem.
+
+```{r}
+library(needs)
+needs(tidygraph,
+      ggraph,
+      igraph,
+      ggplot2,
+      dplyr)
+
+setwd("C:/Users/ls68bino/Documents/GitHub/SGrehl.github.io/computational-social-sciences")      
+```
 
 
-# Basic visuaisation
+For example, look at the network of partner-cities that 'igraph' creates by default:
 
-Edge and vertex attributes
+IMAGE OF PARTNERCITIES 
+
+AND IMAGE OF PARTNER CITIES AFTER 
+
+
+# Basic visualisation in igraph
+
+Remember the twin-city network, you created in the last Übungsblatt? Some of you tried plotting it with igraph. Lets have a look at the possibilities:
+
+```{r}
+#Here you can download the igraph-object.
+twin_cities <- read_graph(file = "Übungsblätter/Data/twin_cities.gml", format = "gml")
+
+```
+
+By default, igraph plots the network like this: 
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+plot(twin_cities)
+```
+
+Image of the network with igraph
+
+
+As we can clearly see, it is really different to identify any nodes or edges, and especially any structure within the network.
+But already with a few lines of code, we can improve the visualisation a lot and make structural metrics more obvious. 
+
+
+**Different layouts**:
+The package 'igraph' offers a variety of layouts. Depending on the size of the network, we can already see a lot of differences in the plot by changing the layout.
+
+```{r}
+plot(twin_cities, layout = layout_with_fr)  # Fruchterman-Reingold layout
+plot(twin_cities, layout = layout_with_kk)  # Kamada-Kaway layout
+plot(twin_cities, layout = layout_nicely)
+plot(twin_cities, layout = layout_as_tree)  # Tree layout 
+plot(twin_cities, layout = layout_as_star)  # Star layout
+plot(twin_cities, layout = layout_with_mds)
+plot(twin_cities, layout = layout_with_lgl)  # Large graph layout
+```
+
+**Ìnclude vertex and edge attributes**:
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Code to plot the network with igraph (but also descriptions of what is happening.)
+# Change colors and size by indexing vertices directly
+plot(twin_cities, 
+     vertex.size = ifelse(V(twin_cities)$name == "Leipzig", 5, 2),
+     vertex.label.cex = 0.6,
+     vertex.label.dist = .5,
+     vertex.label.color = "black",
+     vertex.label.dist = 1,
+     vertex.color = ifelse(V(twin_cities)$name == "Leipzig", "pink", "lightblue"),
+     vertex.frame.color = "white",
+     layout = layout_with_lgl(twin_cities),
+     main = "Leipzig's twin-city network"
+)
+
+
+
+# Change colors by indexing edges directly (bridges)
+# To be fixed
+plot(twin_cities, 
+     edge.color = ifelse(bridges(twin_cities), "purple", "lightblue"),
+     vertex.size = 2,
+     vertex.label.cex = 0.6,
+     vertex.label.dist = .5,
+     vertex.label.color = "black",
+     vertex.frame.color = "white",
+     layout = layout_with_lgl(twin_cities),
+     main = "Leipzig's twin-city network"
+)
+
+
+
+# Change vertex size by degree
+
+# 
+
+```
+
+
 
 
 Example degree centrality
 
 ## Layouts
+
+
 
 # Network visualisation with ggraph
 
@@ -264,7 +358,7 @@ These exercises are not homework, so they will not be presented in class. I will
 
 Install the package "igraphdata" and load it. Then execute the command `data("karate")`. This loads data on the interactions among the club members of a university karate club in the early 1970s. The data have been studied by Wayne W. Zachary and are known as Zachary's karate club. 
 
-1. Convert the graph `karate` into a tidygraph object. 
+1. Convert the graph `UKfaculty` into a tidygraph object. 
 2. Plot the network using ggraph. 
 3. Display the node attribute  faction. 
 4. "Mr Hi" and "John A" were the two instructors of the club. Change their shapes to be different from the participants. 

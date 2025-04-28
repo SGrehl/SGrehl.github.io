@@ -1,4 +1,169 @@
 ---
-title: "Week 09"
-subtitle: "-"
+title: "Week 09 - Spatial data"
+subtitle: "Basics and Plotting"
 ---
+
+# Spatial data [@pebesmaSpatialDataScience2023]
+
+## Spatial thinking in the Social Sciences
+
+## Types of spatial data
+[@moragaSpatialStatisticsData2024]
+
+### Areal data
+### Geostatistical data
+### Point patterns
+### Spatio-temporal data
+### Spatial functional data
+
+### Mobility data
+
+
+# Spatial Data in R
+
+
+## sf package
+
+https://cran.r-project.org/web/packages/sf/index.html
+
+
+
+## terra package
+
+
+## Making maps
+
+ggmap
+
+
+## Packages for downloading spatial data
+
+### osmdata
+[@moragaRspatialdataCollectionData2022]
+
+```{r}
+library(needs)
+needs(osmdata, sf, tidyverse)
+library(osmdata)
+library(sf)
+library(tidyverse)
+
+# Define bounding box for Leipzig
+bb_leipzig <- getbb("Leipzig", format_out = "polygon")
+
+# Query OSM data for administrative boundaries of Leipzig
+leipzig_admin <- opq(bb_leipzig) %>% 
+  add_osm_feature(key = "boundary", value = "administrative") %>% 
+  osmdata_sf() %>% 
+  trim_osmdata(bb_leipzig)
+
+# Query OSM data for kiosks in Leipzig
+kiosks_leipzig <- opq(bb_leipzig) %>% 
+  add_osm_feature(key = "shop", value = "bakery") %>% 
+  osmdata_sf() %>% 
+  trim_osmdata(bb_leipzig)
+
+# Plotting using ggplot
+ggplot() +
+  geom_sf(data = leipzig_admin$osm_multipolygons) +
+  geom_sf(data = kiosks_leipzig$osm_points) +
+  theme_void()
+
+```
+
+
+https://rspatialdata.github.io/osm.html
+
+### wopr
+
+https://rspatialdata.github.io/population.html
+
+
+
+
+packages that contain data:
+library(spData)        # load geographic data
+library(spDataLarge)   # load larger geographic data
+
+## Voronoi-Zellen
+
+Klappt noch nicht!
+
+```{r}
+
+# Make sure we have points
+kiosk_pts <- kiosks_leipzig$osm_points
+
+# 3. Transform to projected CRS (UTM Zone 32N = EPSG:25832)
+crs_projected <- 25832
+kiosk_pts_proj <- st_transform(kiosk_pts, crs = crs_projected)
+leipzig_admin_proj <- st_transform(leipzig_admin$osm_multipolygons, crs = crs_projected)
+
+# 4. Generate Voronoi polygons
+voronoi_geom <- st_voronoi(st_union(kiosk_pts_proj))
+voronoi_sf <- st_collection_extract(voronoi_geom) %>% st_sf()
+
+# 5. Intersect with Leipzig boundary to clip the cells
+voronoi_clipped <- st_intersection(voronoi_sf, leipzig_admin_proj)
+
+# Add ID for coloring
+voronoi_clipped <- voronoi_clipped %>% 
+  mutate(cell_id = row_number())
+
+# Plot
+ggplot() +
+  geom_sf(data = leipzig_admin_proj, fill = "white", color = "black") +
+  geom_sf(data = voronoi_clipped, aes(fill = as.factor(cell_id)), alpha = 0.5, color = "black") +
+  geom_sf(data = kiosk_pts_proj, color = "red", size = 1) +
+  theme_void() +
+  theme(legend.position = "none")
+
+```
+
+```{r}
+# 1. Extract kiosk points and Leipzig polygon
+kiosk_pts <- kiosks_leipzig$osm_points
+leipzig_sf <- leipzig_admin$osm_multipolygons
+
+# 2. Transform to projected CRS for better Voronoi accuracy
+crs_projected <- 25832  # UTM Zone 32N for Leipzig area
+kiosk_pts_proj <- st_transform(kiosk_pts, crs_projected)
+leipzig_sf_proj <- st_transform(leipzig_sf, crs_projected)
+
+envelope <- leipzig_sf_proj %>% 
+  st_union() %>% 
+  st_geometry()
+
+kiosk_voronoi <- kiosk_pts_proj %>%
+  st_geometry() %>%
+  st_union() %>%
+  st_voronoi(envelope = envelope) %>%
+  st_collection_extract("POLYGON") %>%
+  st_sf()
+
+# 4. Assign CRS to Voronoi
+st_crs(kiosk_voronoi) <- crs_projected
+
+# 5. Intersect Voronoi cells with Leipzig boundary
+#    and spatially join kiosk attributes
+kiosk_voronoi_clipped <- kiosk_voronoi %>%
+  st_intersection(leipzig_sf_proj) %>%
+  st_join(kiosk_pts_proj, join = st_contains_properly)
+
+kiosk_voronoi_clipped <- kiosk_voronoi_clipped %>%
+  mutate(kiosk_id = row_number())
+
+# 6. Plot the result, colored by kiosk name (or ID)
+ggplot(kiosk_voronoi_clipped) +
+  geom_sf(aes(fill = kiosk_id), color = "black") +
+  theme_void()
+```
+
+
+
+Übung im Kurs: Leipziger Partnerstädte auf Weltkarte anzeigen
+
+
+https://stackoverflow.com/questions/74198735/constructing-a-voronoi-diagram-in-r-with-data-from-openstreetmap
+
+## ggmap

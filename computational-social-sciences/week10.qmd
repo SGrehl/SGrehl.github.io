@@ -2,3 +2,13 @@
 title: "Week 10"
 subtitle: "-"
 ---
+
+# Models for spatial data
+
+[@pebesmaSpatialDataScience2023]
+
+https://r-spatial.org/book/part-3.html
+
+https://chrismgentry.github.io/Spatial-Regression/
+
+https://www.paulamoraga.com/book-spatial/index.html
