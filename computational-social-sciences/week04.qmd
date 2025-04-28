@@ -29,7 +29,7 @@ The structural based approach mainly dates back to [@colemanRelationalAnalysisSt
 While addressing a similar problem as Coleman, Robert Putnam [@putnamBowlingAloneCollapse2001] claims that groups (and indirectly the individuals in them) need civic engagement. As such, this approach focuses less on the structural properties of the network and more on what people do/ bring into the network. Hence the label "resource-based approach". A simple way to do this is to calculate average levels of, e.g., voter turnout or participation in civic organizations per group or sub-group.
 
 
-The structural approach on the individual level relates mainly to the works of Mark Granovetter [-@granovetterStrengthWeakTies1973] and Ronald Burt [-@burtStructuralHolesSocial2009]. Granovetter's work on the strength of weak ties and Burt's work on structural holes are two of the most influential theories in social network analysis. Granovetter's theory suggests that weak ties (acquaintances) can be more valuable than strong ties (close friends) in terms of information flow and access to new opportunities. Burt's theory emphasizes the importance of being a broker or connector between different groups in a network, which can lead to greater access to resources and information.
+The structural approach on the individual level relates mainly to the works of Mark Granovetter [-@granovetterStrengthWeakTies1973] and Ronald Burt [-@burtStructuralHolesSocial1995]. Granovetter's work on the strength of weak ties and Burt's work on structural holes are two of the most influential theories in social network analysis. Granovetter's theory suggests that weak ties (acquaintances) can be more valuable than strong ties (close friends) in terms of information flow and access to new opportunities. Burt's theory emphasizes the importance of being a broker or connector between different groups in a network, which can lead to greater access to resources and information.
 
 
 # Tie formation and social capital
@@ -771,7 +771,7 @@ legend(
 
 :::
 
-## The strength of weak ties
+# The strength of weak ties
 
 Granovetter's theory of the strength of weak ties suggests that weak ties (i.e., acquaintances) can be more valuable than strong ties (i.e., close friends) in terms of information flow and access to new opportunities. This is because weak ties often connect individuals to different social groups, providing access to diverse information and resources that may not be available within one's immediate social circle.
 
