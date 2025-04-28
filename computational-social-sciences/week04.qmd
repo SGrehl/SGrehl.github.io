@@ -542,7 +542,7 @@ t.test(x = assorts,
 ## Triadic closure and forbidden triads
 
 :::{#custom-block}
-Granovetters paper is one of the most cited papers in sociology (right after Fauceault) and social network analysis. It has been cited over 50,000 times and is considered foundational work in the field of social network analysis. The concept of the strength of weak ties has been widely applied in various fields, including sociology, communication studies, and organizational behavior.
+Granovetters paper is one of the most cited papers in sociology (right after Foucault) and social network analysis. It has been cited over 50,000 times and is considered foundational work in the field of social network analysis. The concept of the strength of weak ties has been widely applied in various fields, including sociology, communication studies, and organizational behavior.
 :::
 
 
