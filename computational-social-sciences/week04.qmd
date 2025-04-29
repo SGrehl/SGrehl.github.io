@@ -1,6 +1,6 @@
 ---
-title: "Week 04"
-subtitle: "Theoretical Insights"
+title: "Week 04 - Social network analysis"
+subtitle: "Theoretical Insights and it's Measurements"
 ---
 
 ```{r}
@@ -11,11 +11,28 @@ needs(igraph,
 data("UKfaculty")
 ```
 
+Welcome to this session of the seminar **CSS**!
+
+
 # Relational Sociology and the concept of embeddedness
 
-Hier Theorie Beschreibung und die verschiedenen Ansätze
 
-Text on all the different approaches to embeddedness and social capital etc.
+Different theories on roles and conflicts between roles draw on this idea, that society exists were different individuals interact with each other. Economic, social, and political actions are embedded in social networks and relationships. This means that individuals and organizations are not isolated actors, but are instead part of a larger web of social connections that shape their behavior and decision-making. 
+
+
+## Social capital
+
+*Social Capital* as a concept goes back to the work of Pierre Bourdieu [-@bourdieuFormsCapital1986]. Its is not such a crisply defined term as it may seem. But basically, the concept boils down to the access to resources through the social network. In the most simple terms we could operationalize this as the resources possessed by the (direct) social ties of ego.  We can roughly differentiate two dimensions along which major definitions of social capital can be categorized: **resources** vs. **structure**, and a focus on the individual capital vs group capital. [@linSocialCapitalTheory2001] provides a good overview of the general concept.
+
+The structural based approach mainly dates back to [@colemanRelationalAnalysisStudy1958] who proposed that the social capital should be operationalized as the cohesion of a network or a subgroup. He claimed that cohesion produces trust, predictability and enables cooperation. This draws on Rational Choice Theory and proposes stable, cohesive groups with visibility of each others behavior as a prevention of defection. See network cohesion measures for descriptives.
+
+While addressing a similar problem as Coleman, Robert Putnam [@putnamBowlingAloneCollapse2001] claims that groups (and indirectly the individuals in them) need civic engagement. As such, this approach focuses less on the structural properties of the network and more on what people do/ bring into the network. Hence the label "resource-based approach". A simple way to do this is to calculate average levels of, e.g., voter turnout or participation in civic organizations per group or sub-group.
+
+
+The structural approach on the individual level relates mainly to the works of Mark Granovetter [-@granovetterStrengthWeakTies1973] and Ronald Burt [-@burtStructuralHolesSocial1995]. Granovetter's work on the strength of weak ties and Burt's work on structural holes are two of the most influential theories in social network analysis. Granovetter's theory suggests that weak ties (acquaintances) can be more valuable than strong ties (close friends) in terms of information flow and access to new opportunities. Burt's theory emphasizes the importance of being a broker or connector between different groups in a network, which can lead to greater access to resources and information.
+
+
+# Tie formation and social capital
 
 ## Reciprocity
 
@@ -74,11 +91,13 @@ plot(g,
 ### Dyad census in a graph
 
 ```{r}
+dyad_census(g)
 
 UKfaculty <- upgrade_graph(UKfaculty)
 UKfaculty <- simplify(UKfaculty)
 
 dyad_census(UKfaculty)
+
 ```
 
 The **level of reciprocity** shows whether a network mainly consists of mutual or asymetrical edges and can be calculated in R using either 'default'-mode (number of reciprocated edges divided by the total number of edges) or 'ratio'-mode (number of mutual dyads divided by the number of asymmetric dyads).
@@ -90,9 +109,25 @@ reciprocity(UKfaculty, mode="default")
 reciprocity(UKfaculty, mode="ratio")
 ```
 
+::: {#custom-block}
+Describing the relationships of nodes draws back on mathematical relations. The following table summarizes the most important relations:
+
+| Property         | Definition                                                        |
+|------------------|---------------------------------------------------------------------------------|
+| Reflexive        | ∀ a ∈ A: (a, a) ∈ R                                                             |
+| Symmetric        | ∀ a, b ∈ A: (a, b) ∈ R ⇒ (b, a) ∈ R                                             |
+| Transitive       | ∀ a, b, c ∈ A: (a, b) ∈ R ∧ (b, c) ∈ R ⇒ (a, c) ∈ R                             |
+| Asymmetric       | ∀ a, b ∈ A: (a, b) ∈ R ⇒ (b, a) ∉ R                                             |
+| Antisymmetric    | ∀ a, b ∈ A: (a, b) ∈ R ∧ (b, a) ∈ R ⇒ a = b                                     |
+| Irreflexive      | ∀ a ∈ A: (a, a) ∉ R                                                             |
+| Complete  | ∀ a, b ∈ A: (a, b) ∈ R ∨ (b, a) ∈ R                                             |
+
+:::
+
+
 ## Transitivity
 
-Any set of 3 vertices is called a **triad**. In directed networks, 16 different triads exist [@davisStructurePositiveInterpersonal1967].
+Any set of 3 vertices in a network is called a **triad**. In directed networks, 16 different triads exist [@davisStructurePositiveInterpersonal1967].
 
 
 
@@ -147,6 +182,7 @@ for (i in 1:16) {
 - Triads 003 and 012 are called **vacuously transitive**
 
 :::{#custom-block}
+
 The codes like `102`, `021C`, `120U` may feel cryptic at first, but they follow a logical pattern:
 
 ** Basic structure: Three-digit code
@@ -195,6 +231,7 @@ colnames(tbl) <- c("003", "012", "102", "021D", "021U", "021C", "111D", "111U", 
 tbl
 
 ```
+
 In undirected networks only 4 distinct triads exist.
 
 ```{r}
@@ -228,11 +265,14 @@ for (i in 1:4) {
 
 
 ```
+
+
 ![Triads in undirected networks](Graphics/undirectedtriad.png)
 
-# Tie formation and Social Capital
 
-## Triadic closure
+
+
+## Triadic closure and the transitivity tendency
 
 **Triadic closure** is a concept in social network theory that was first introduced by Georg Simmel. It describes the tendency of two nodes $A$ and $B$ to become connected if they share a common neighbor $C$. It can be used to understand and *predict* the formation of social ties in network (of course, there are many other factors influencing tie formation).
 
@@ -259,13 +299,7 @@ $$
 transitivity(UKfaculty, type = "global")
 ```
 
-Aufgaben: 
 
-Laden Sie den Datensatz middleschool aus dem Paket UserNetR! Denken Sie an die Konventierung des Netzwerks zu einem igraph-Objekt (package intergraph)!
-Lassen Sie sich die Anzahl der Knoten und Kanten ausgeben!
-Ist dieses Netzwerk gerichtet?
-Berechnen Sie den Dyadenzensus, die Reziprozität, den Triadenzensus und die Transitivität (Clustering-Koeffizient)!
-Welche Unterschiede lassen sich bezüglich dieser Maßzahlen im Vergleich einem randomisierten Netzwerk? Verwenden sie einen (oder zwei) data.frame, um die beiden Netzwerke zu vergleichen! Denken Sie daran, auf die Unterschiede in der Größe zu korrigieren (das AIDS-Blog-Netzwerk is viermal so groß, wie das Middleschool-Netzwerk)! Was könnten die Ursachen für die Unterschiede sein?
 
 ## Cognitive balance theory
 
@@ -289,16 +323,14 @@ Cartwright and Harari[-@cartwrightStructuralBalanceGeneralization1956] extended 
 
 A fully signed graph is balanced, if every triad in it is balanced.
 
-![@easleyNetworksCrowdsMarkets2010, page 127](Graphics/alliances.png.png)
+![@easleyNetworksCrowdsMarkets2010, page 127](Graphics/alliances.png)
 
 ### Weak balance in networks
 Additional assumption: A triad with three negative edges is also considered balanced (Davis 1967).
 
 Then a graph is called groupable if it can be partitioned into two groups such that all edges between the groups are positive and all edges within the groups are negative.
 
-![Groups [@easleyNetworksCrowdsMarkets2010, page 129]](Grapics/groupable.png)
-
-
+![@easleyNetworksCrowdsMarkets2010, page 129](Graphics/groupable.png)
 
 
 # Network segregation and homophily
@@ -359,13 +391,10 @@ Birds of a feather - Billie Eilish has the same title as one of the most cited h
 - attitudes, abilities, beliefs
 
 
-:::{#custom-block}
-Definition: from what stage on, can we say a network is homophile or segregated?
-:::
 
 :::{#custom-block}
 
-Other, secondary types of homophily can reinforce segregation on an attribute. Example: Ethnic segregation can be reinforced by socioeconomic homophily, when ethnic origin (node color) and socioeconomic status (node shape) overlap (e.g., many ethnic minority members have a lower socioeconomic status and many ethnic majority members have a higher socioeconomic status)
+Other, *secondary types of homophily* can reinforce segregation on an attribute. Example: Ethnic segregation can be reinforced by socioeconomic homophily, when ethnic origin (node color) and socioeconomic status (node shape) overlap (e.g., many ethnic minority members have a lower socioeconomic status and many ethnic majority members have a higher socioeconomic status)
 
 For an explanation see [@wimmerRacialHomophilyERG2010, page 588-594]
 :::
@@ -387,9 +416,30 @@ We can also use the **assortavity coefficient** for measurement.
 
 Assortavity coefficients are basically correlation coefficients that (in the case of categorical variables) can be measured by $e_{i,j}$ being the ratio of edge from actors of type $i$ to type $j$
 
+Let $e_{ij}$ be the ratio of edges from actors of type $i$ to type $j$.
+
+$a_i = \sum_j e_{ij} \quad \text{(ratio of edges outgoing from actors of type \( i \))}$
+
+$b_j = \sum_i e_{ij} \quad \text{(ratio of edges incoming to actors of type \( j \))}$
+
+The assortativity coefficient \( r \) is defined as:
+
+
+
+
 $$
 r = \frac{\sum_{i}e_{ii}-\sum_{i}a_ib_i}{1-\sum_{i}a_ib_i}
 $$
+
+
+$r = 0 \quad \text{if} \quad e_{ii} = a_i b_i \quad \text{(random connections)}$
+
+
+$r = 1 \quad \text{if} \quad \text{only actors of the same type are connected}$
+
+$r = - \frac{\sum_i a_i b_i}{1 - \sum_i a_i b_i} \quad \text{if} \quad \text{only actors of different types are connected}$
+
+
 
 ```{r}
 
@@ -416,9 +466,13 @@ which compares the proportion of same-group neighbors to the proportion of that 
 
 ### Measurement of homophily
 
-Measuring homophily preferences is difficult as we cannot directly observe preferences. In the social networks literature, the most common ways to estimate the strength of homophily preferences are Exponential Random Graph Models (ERGMs) and Stochastic Actor-Oriented Models (SAOMs). These estimate the existence of ties in dependence of actor attributes (such as similarity). While we will only be talking about these models in week 07, I still want to point out the caveat of ERGMs and SAOMs that they rely on a revealed preference assumption and infer preferences from the observed network structure. 
+Measuring homophily preferences is difficult as we cannot directly observe preferences. In the social networks literature, the most common ways to estimate the strength of homophily preferences are Exponential Random Graph Models (ERGMs) and Stochastic Actor-Oriented Models (SAOMs). These estimate the existence of ties in dependence of actor attributes (such as similarity). While we shortly be talking about these models in week 7, I still want to point out the caveat of ERGMs and SAOMs that they rely on a revealed preference assumption and infer preferences from the observed network structure. 
+
+
 
 Another approach to testing homophily preferences are **permutation tests**. A permutation is the result of a random reshuffle of the row and column names in an adjacency matrix. This creates a random network with the same structural properties (e.g., reciprocated ties) as the observed network. Who is connected to whom is, however different now. The level of segregation in the permuted network is now solely based on the network composition. If we permute the network a large number of times, we receive a distribution of segregation values expected due to the network composition. Then, we can test whether the observed segregation is statistically significant from the distribution of permutations. A significant difference tells us that preferences are (likely) the reason for the difference between the mean of the permutations and the observation. **We, however, do not know which preferences are responsible!**
+
+::: {.content-hidden when-format="html"}
 
 ```{r}
 
@@ -477,26 +531,52 @@ t.test(x = assorts,
 
 ```
 
-
-# Social capital on the individual level
-
-
-## Vertex importance
-
-**Vertex importance**
-
-The structural approach on the individual level relates mainly to the works of Mark Granovetter [-@granovetterStrengthWeakTies1973] and Ronald Burt [-@burtStructuralHolesSocial2009].
-
-But before we dive into there theoretical work, the vertices of a graph can provide rich information about a network, its structure and its dynamics. In sociology and psychology contexts, this is particularly true, because more often than not vertices represent people. The fact that people play different roles and have different influences inside groups and communities has motivated centuries of sociological and psychological research, so it is unsurprising that the concept of vertex importance and influence is of great interest in the study of people or organizational networks.
+:::
 
 
-It follows from much of the earlier work we have been doing in this book that the vertices of a graph can provide rich information about a network, its structure and its dynamics. In sociology and psychology contexts, this is particularly true, because more often than not vertices represent people. The fact that people play different roles and have different influences inside groups and communities has motivated centuries of sociological and psychological research, so it is unsurprising that the concept of vertex importance and influence is of great interest in the study of people or organizational networks.
+
+:::{#custom-block}
+**Reflective question**: From what stage on, can we say a network is homophile or segregated?
+:::
+
+## Triadic closure and forbidden triads
+
+:::{#custom-block}
+Granovetters paper is one of the most cited papers in sociology (right after Foucault) and social network analysis. It has been cited over 50,000 times and is considered foundational work in the field of social network analysis. The concept of the strength of weak ties has been widely applied in various fields, including sociology, communication studies, and organizational behavior.
+:::
+
+
+Following Granovetter, the strength of ties is measured by the *amount of time, emotional intensity, intimacy, and reciprocal services** that characterize the tie. Granovetter explicitly differentiates between **strong** and **weak ties*.
+
+Networks follow a so called **transitivity tendency** meaning that if $A$ is connected to $B$ and $C$, then $B$ and $C$ are more likely to be (positively) connected to each other than if $A$ was not connected to either of them. This is also called the **triadic closure** property of networks. This is due to meeting opportunities, homophily and structural balance. 
+
+Following these arguments, Granovetter calls triads, in which $A$ has strong ties to $B$ and $C$, but no tie exists between $B$ and $C$, **forbidden triads**. He argues that these triads are unstable and will be dissolved over time. Empirically forbidden triads occur in core networks. 
+
+![Forbidden triad (left) and stable triad (right) [@tuticReconstructingGranovettersNetwork2015]](Graphics/forbidden triads.png)
+
+With this in mind, Granovetter argues that the transitivity tendency a function of strength of ties and not a general property of networks.  Going through the mechanisms that drive the transitivity tendency. this becomes more obvious.
+
+1. **Meeting opportunities**: If $A$ has weak ties to $B$ and $C$, they less often interact if it where strong ties. This means that the likelihood of $B$ and $C$ meeting is lower than if $A$ has strong ties to both of them.
+
+2. **Homophily**: People have a preference to interact with people who are similar to them. If they aren't relationsships are probably more superficial and instrumental. This means that the likelihood of $B$ and $C$ being similar is lower than if $A$ has strong ties to both of them.
+
+3. **Balance theory**: In the case of weak ties, people are less strained by cognitive disbalance. 
+
+This is also empirically supported: Core networks of friends have stronger triadic closure than peripheral networks of acquaintances.
+
+
+
+# Vertex importance
+
+
+The fact that people play different roles and have different influences inside groups and communities has motivated centuries of sociological and psychological research, so it is unsurprising that the concept of vertex importance and influence is of great interest in the study of people or organizational networks.
+
 
 But importance and influence are not precisely defined concepts, and to make them real within the context of graphs and networks we need to find some sort of *mathematical definition* for them. In many visual graph layouts, more important or influential vertices that have stronger roles in overall connectivity will usually be positioned toward the center of a group of other vertices. Intuitively therefore, we use the term ‘centrality’ to describe the importance or influence of a vertex in the connected structure of a graph.
 
 
 ```{r}
-
+# Edgelist from Ona Book
 g <- graph_from_literal(1--2, 3--4, 4--1, 4--2, 4--5, 4--6, 6--7, 4--6, 7--8, 8--4, 8--9, 9--10, 10--11, 11--12, 9--13, 13--14, 11--12, 12--10, 7--4)
 
 ecount(g)
@@ -515,7 +595,7 @@ plot(g,
 ![Network with 14 vertices and 17 edges](Graphics/nn.png)
 
 
-**Degree centrality**:
+### Degree centrality
 
 The degree centralty (or *valence*) of a vertex $v$ is the number of edges connected to $v$. Its thus a measure of immediate connections. Related to the concept of degree is the ego size. The $n$th order ego network of a given vertex $v$ is the set including $v$ itself and all vertices that are reachable from $v$ by a path of length $n$. The size of the $n$ th order ego network is the number of vertices in it. 
 
@@ -523,11 +603,12 @@ The degree centralty (or *valence*) of a vertex $v$ is the number of edges conne
 
 **In-degree**: the number of edges going into a vertex.
 
-PLot of a small network with in degree as vertex label and size
+
 
 ```{r}
 # degree centrality in r
 degree(g, mode = "all")
+
 degree(UKfaculty, mode = "in")
 degree(UKfaculty, mode = "out")
 
@@ -535,9 +616,9 @@ degree(UKfaculty, mode = "out")
 ```
 
 
-**Closeness centrality**:
+### Closeness centrality:
 
-The closeness centrality of a vertec $v$ in a connected graph is the inverse of the sum of the distances from $v$ to all other vertices. Through inverting the distancematrix we make sure, that lower total distances will generate higher closeness centrality scores. In connected graphs is defined as: 
+The closeness centrality of a vertec $x$ in a connected graph is the inverse of the sum of the distances from $x$ to all other vertices. Through inverting the distancematrix we make sure, that lower total distances will generate higher closeness centrality scores. In connected graphs is defined as: 
 
 $$
 C_B(x) = \frac{1}{\sum_{y \in V} d(x,y)}
@@ -553,12 +634,13 @@ closeness(UKfaculty, mode = "out")
 ```
 
 
-**Betweenness centrality**:
+### Betweenness centrality:
 
 The betweenness centrality of a vertex $v$ is the number of shortest paths between all pairs of vertices that pass through $v$. In connected graphs is defined as:
 
+
 $$
-C_B(v) = \sum_{s \neq v \neq t} \frac{\sigma_{st}(v)}{\sigma_{st}}
+C_B(v) = \sum_{s. t \in V \\ s \neq v \neq t} \frac{\sigma_{st}(v)}{\sigma_{st}}
 $$
 
 where $\sigma_{st}$ is the number of shortest paths between vertices $s$ and $t$ and $\sigma_{st}(v)$ is the number of those paths that pass through $v$.
@@ -570,9 +652,10 @@ betweenness(UKfaculty, directed = TRUE)
 ```
 
 
-**Eigenvektor centrality**:
+### Eigenvector centrality:
 
-The Eigenvector centrality (or *prestige*) is a measure of how connected a vertex is to other influential vertices in the graph. Relative scores are assigned to each vertex based on the scores of its neighbouts. It can be calculated using the adjacency matrix of the graph.
+The Eigenvector centrality (or *prestige*) is a measure of how connected a vertex is to other influential vertices in the graph. Relative scores are assigned to each vertex based on the scores of its neighbors. It can be calculated using the adjacency matrix of the graph.
+
 For a given graph 
 $G$ = (V,E), let $A = (a_{v,t})$ be the adjacency matrix, i.e. $a_{v,t} = 1$ if vertex $v$ is linked to vertex $t$, and $a_{v,t} = 0$ otherwise. The relative centrality score, $x_v$, of vertex $v$ can be defined as:
 
@@ -580,11 +663,11 @@ $$
 {\displaystyle x_{v}={\frac {1}{\lambda }}\sum _{t\in M(v)}x_{t}={\frac {1}{\lambda }}\sum _{t\in V}a_{v,t}x_{t}}
 $$
 
-where $M(v)$ is the set of neighbours of vertex $v$ and $\lambda$ is a constant. The centrality score of a vertex is proportional to the sum of the centrality scores of its neighbours. The constant $\lambda$ is the largest eigenvalue of the adjacency matrix.
+where $M(v)$ is the set of neighbors of vertex $v$ and $\lambda$ is a constant. The centrality score of a vertex is proportional to the sum of the centrality scores of its neighbors. The constant $\lambda$ is the largest eigenvalue of the adjacency matrix.
 
 ```{r}
-evcent(g, directed = FALSE)
-evcent(UKfaculty, directed = TRUE)
+eigen_centrality(g, directed = FALSE)
+eigen_centrality(UKfaculty, directed = TRUE)
 ```
 
 
@@ -593,93 +676,195 @@ We have not looked at the impact of edge weights on centrality in this chapter. 
 :::
 
 
-**Local clustering coefficient**: 
-The local clustering coefficient gives an indication of the of the extend of clustering of a single vertex (How close its neighbours are to being a clique (complete graph).).
+### Local clustering coefficient: 
+
+The local clustering coefficient gives an indication of the of the extend of clustering of a single vertex (How close its neighbors are to being a clique (complete graph).
 
 Let $G = (V, E)$ be an undirected simple graph[^1] with $V$ vertices and $E$ edges. $n$ is the total number of vertices in the graph, $m$ the total number of edges.
 
 [^1]: A simple graph is a graph that does not contain multiple edges or loops.
 
-The neighbourhood $N_i$ of a vertex $v_i$ are its immediatle neighbours and defined as followed:
+The neighborhood $N_i$ of a vertex $v_i$ are its immediate neighbors and defined as followed:
 
 $$
 N_i = \{v_j : e_{ij} \in E \wedge e_{ji} \in E\}
 $$
 
-Whe define $k_i$ as he number of vertives $|N_i|$ in the neighbourhood of $v_i$. The local clustering coefficient of a vertex $v_i$ is the proportion of edges between the vertices within its neighbourhood divided by the number of edges that could possibly exist between them.
+
+We define $k_i$ as he number of vertices $|N_i|$ in the neighborhood of $v_i$. The local clustering coefficient of a vertex $v_i$ is the proportion of edges between the vertices within its neighborhood divided by the number of edges that could possibly exist between them.
 
 Thus we define the local clustering coefficient of a vertex $v_i$ as:
 
 $$
-C_i = \frac{\{|e_{jk} : v_j, v_k \in N_i, e_{jk} \in E|\}}{k_i (k_1-1)}
+C_i = \frac{\{|e_{jk} : v_j, v_k \in N_i, e_{jk} \in E|\}}{k_i (k_i-1)}
 $$
 
-where $e_{ij}$ is the number of edges between the vertices in the neighbourhood of $v_i$ and $k_i$ is the number of vertices in the neighbourhood of $v_i$.
+where $e_{ij}$ is the number of edges between the vertices in the neighborhood of $v_i$ and $k_i$ is the number of vertices in the neighborhood of $v_i$.
 
 ```{r}
 transitivity(UKfaculty, type = "local")
 ```
 
-::: {student-exercise}
-Which node in the network g has the highest?
+
+
+::: {.student-exercise}
+
+Which node in the network g has the highest
 
 1. Degree centrality
 2. Closeness centrality
 3. Betweenness centrality
-4. Eigenvector centrality?
+4. Local clustering coefficient?
+
+Think about it first and then check your results using R.
+
+:::
+
+:::{.content-hidden when-format="html"}
+
+```{r}
+# Calculate centrality measures
+deg_centrality <- degree(g, mode = "in")
+closeness_centrality <- closeness(g, mode = "all")
+betweenness_centrality <- betweenness(g, directed = FALSE)
+eigen_centrality <- eigen_centrality(g, directed = FALSE)$vector
+local_clustering <- transitivity(g, type = "local")
+
+# Identify nodes with the highest centrality values
+highest_degree <- which.max(deg_centrality)
+highest_closeness <- which.max(closeness_centrality)
+highest_betweenness <- which.max(betweenness_centrality)
+highest_eigenvector <- which.max(eigen_centrality)
+highest_local <- which.max(local_clustering)
+
+# Assign default node colors
+V(g)$color <- "lavender"
+
+# Update colors for nodes with the highest centrality
+V(g)$color[highest_degree] <- "pink"
+V(g)$color[highest_closeness] <- "yellow"
+V(g)$color[highest_betweenness] <- "green"
+V(g)$color[highest_local] <- "blue"
+
+# Plot the graph
+plot(
+  g,
+  vertex.color = V(g)$color,
+  vertex.size = 20,
+  vertex.label.cex = 0.8,
+  edge.width = 2,
+  main = "Network with Highlighted Centrality Nodes"
+)
+
+# Add a legend
+legend(
+  "bottomright",
+  legend = c("Highest Degree", "Highest Closeness", "Highest Betweenness", "Highest Local"),
+  col = c("pink", "yellow", "green", "blue"),
+  pch = 19,
+  bty = "n"
+)
+
+```
+
+![Vertx importance](Graphics/verteximportance.png)
+
+:::
+
+# The strength of weak ties
+
+Granovetter's theory of the strength of weak ties suggests that weak ties (i.e., acquaintances) can be more valuable than strong ties (i.e., close friends) in terms of information flow and access to new opportunities. This is because weak ties often connect individuals to different social groups, providing access to diverse information and resources that may not be available within one's immediate social circle.
+
+```{r}
+
+
+# Define the edges
+edges <- c(
+  1,2, 1,3, 2,3,    # Triad 1: nodes 1,2,3 fully connected
+  4,5, 4,6, 5,6,    # Triad 2: nodes 4,5,6 fully connected
+  3,4               # Weak tie between the two triads
+)
+
+# Create the graph
+weak <- make_graph(edges, directed = FALSE)
+
+# Plot the graph
+plot(weak, 
+  vertex.size=30,
+  vertex.color = "lavender",
+  edge.width=c(rep(2,6), 0.5),  # Thicker edges within triads, thin edge for weak tie
+  edge.color=c(rep("black",6), "gray")
+  )  # Force-directed layout for nice separation
+
+# Add a legend
+legend("bottomleft", 
+    legend = c("Strong Tie", "Weak Tie"), 
+    col = c("black", "gray"), 
+    lwd = c(2, 1), 
+    bty = "n")
+
+
+
+```
+
+![Weak ties](Graphics/weak.png)
+
+The connection between the two triads is a weak tie, while the connections within each triad are strong ties. The weak tie (3-4) allows for information flow between the two otherwise disconnected groups.
+
+::: {.student-exercise}
+
+Remember last session:
+
+1. What is a bridge?
+2. What is a cutpoint?
+
+:::
+
+## Local bridges and structural holes
+
+Empirically, bridges are extremely rare in social networks.
+
+![Bridge in the FSR-Logo network](Graphics/fsr.png)
+
+This is why we also introduce the notion of **local bridges**. 
+
+![Local bridges](Graphics/localbridge.png)
+
+Edge {A,B} is a local bridge if its endpoints $A$ and $B$ have no contacts in common. So if deleting the edge will increase the distance between $A$ and $B$ with more than 2. So it provides their endpoints with access to parts of the network that otherwise would be far away. 
+
+![Classification of links ](Graphics/sbrudges.png)
+
+::: {.student-exercise}
+
+Following Granovetters ideas on triadic closure, why must every local bridge be a weak tie?
 
 :::
 
 
+While most social structures tend to be characterized by dense clusters of strong connections, some individuals can act as mediators between these clusters. These individuals are often referred to as **brokers** and according to Burt [-@burtStructuralHolesSocial1995] they can benefit from their position as brokers between two or more groups. Burt calls the space between two groups a **structural hole**.
 
-### The strength of weak ties
+![Positions at structural holes](Graphics/burt.png)
 
-The strength of weak ties is a concept introduced by Mark Granovetter in 1973. It suggests that weak ties (acquaintances) can be more valuable than strong ties (close friends) in terms of information flow and access to new opportunities. Weak ties often connect different social groups, providing access to diverse information and resources.
+Burt introduces the measurement of **constraint** to measure the degree to which a vertex is constrained by its neighbours. 
 
-The strength of ties is measured by the amount of time, emotional intensity, intimacy, and reciprocal services that characterize the tie. Strong ties are typically found within close-knit groups, while weak ties are more common in larger social networks.
+**High constraint** = your friends know each other a lot → your network is tight and redundant.
 
-Granovetter refers to the idea of triadic closure
+**Low constraint** = your friends are mostly independent → you can bridge different groups (you have more "social capital").
 
-**Strong triadic closure property:**
-
-Assumption: In a network there are strong and 
-![Granovetter's strength of weak ties](Graphics/weak.png)
-
-HIER FEHLT NOCH WAS!
-
-:::{#custom-block}
-Granovetters paper is one of the most cited papers in sociology (right after Fauceault) and social network analysis. It has been cited over 50,000 times and is often considered a foundational work in the field of social network analysis. The concept of the strength of weak ties has been widely applied in various fields, including sociology, communication studies, and organizational behavior.
-:::
-
-### Structural holes
-
-::: {student-exercise}
-
-Remember last sessions excurse on cutpoints and bridges?
-
-1. What is a cutpoint?
-2. What is a bridge?
-:::
+- $C_i$ is the constraint of vertex $i$.
+- $V_i$ is the set of vertices that are neighbours of $i$.
+- $p_{ij}$ is the proportion of ties between $i$ and $j$.
+- $a_{ij}$ is the strength of tie between $i$ and $j$.
 
 
+$$
+C_i = \sum_{j \in V_i \setminus \{i\}} \left( p_{ij} + \sum_{q \in V_i \setminus \{i,j\}} p_{iq} p_{qj} \right)^2
+$$
 
-## Resource based aproach
+```{r}
+constraint(g,
+          nodes = V(g),
+          weights = NULL
+)
 
-This approach is closely linked to the name of Pierre Bourdieu [1982](https://www.hup.harvard.edu/books/9780674212770). He proposed that success depended on the level of capital individuals can mobilize. While Bourdieu remains a bit vage about what he means, Lin [2001](https://doi.org/10.1017/CBO9780511815447) has some clearer definitions. But basically, the concept boils down to the access to resources through the social network. In the most simple terms we could operationalize this as the resources possessed by the (direct) social ties of ego. 
-
-
-# Social capital on the group level
-
-Similarly to *Homophily*, *Social Capital* is not such a crisply defined term as it may seem. We can roughly differentiate two dimensions along which major definitions of social capital can be categorized: **resources** vs. **structure**, and a focus on the individual vs the group. [@linSocialCapitalTheory2001] provides a good overview of the general concept.
-
-## Structural approach
-
-This mainly dates back to [@colemanRelationalAnalysisStudy1958] who proposed that the social capital should be operationalized as the cohesion of a network or a subgroup. He claimed that cohesion produces trust, predictability and enables cooperation. This draws on Rational Choice Theory and proposes stable, cohesive groups with visibility of each others behavior as a prevention of defection. See network cohesion measures for descriptives.
-
-## Resource based aproach
-
-
-While addressing a similar problem as Coleman, Robert Putnam [@putnamBowlingAloneCollapse2001] claims that groups (and indirectly the individuals in them) need civic engagement. As such, this approach focuses less on the structural properties of the network and more on what people do/ bring into the network. Hence the label "resource-based approach". A simple way to do this is to calculate average levels of, e.g., voter turnout or participation in civic organizations per group or sub-group.
-
-
-
+```

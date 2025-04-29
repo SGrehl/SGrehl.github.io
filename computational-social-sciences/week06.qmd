@@ -3,6 +3,10 @@ title: "Week 06"
 subtitle: "-"
 ---
 
+# Small world phenomenon
+
+
+
 Aufgabe: Why your friends have more friends than you do (Feld 1991)
 
 Romantic relationships at highschools
