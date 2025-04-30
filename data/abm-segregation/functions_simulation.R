@@ -7,6 +7,7 @@
 #                                                                #
 ##################################################################
 
+library(parallel)
 source("functions_data.R")
 
 run_replications <- function(model,
