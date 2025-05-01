@@ -20,7 +20,14 @@ For example, look at the network of partner-cities that 'igraph' creates by defa
 
 IMAGE OF PARTNERCITIES 
 
-AND IMAGE OF PARTNER CITIES AFTER 
+# Why visualize? 
+
+# Basic visualisation in 'igraph'
+
+# Visualisation in ggplot
+
+# Interactive graphs and dynamic visualisation
+
 
 
 # Basic visualisation in igraph
