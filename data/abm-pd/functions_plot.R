@@ -1,3 +1,13 @@
+##################################################################
+#                                                                #
+# Functions for ...                                              #
+# we need for plotting                                           #
+#                                                                # 
+# Version 1                                                      #
+#                                                                #
+##################################################################
+
+
 plot_world <- function(world, 
                        color = c("white", "red", "blue")) {
   m <- sqrt(length(V(world)))  # infer grid size from population length

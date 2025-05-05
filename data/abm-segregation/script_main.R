@@ -8,11 +8,12 @@ source("functions_models.R")
 
 simulation  <- list(
   model = "baseline",
-  replications = 10,
-  master_seed  = 42,
+  replications = 50,
   tbl_parameter = expand.grid(
     happiness_threshold = seq(0, .8, length.out = 5)
-  )
+  ),
+  master_seed  = 42,
+  max_cores    = 15
 )
 
 # ================= RUN SIMULATION ================= 
