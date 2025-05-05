@@ -1,8 +1,8 @@
 ---
-title: "Week 05"
-subtitle: "Network visualisation"
+title: "Week 05 - Informatipn representation"
+subtitle: "Network visualisation with `igraph`, `ggraph` and `networkD3`"
 ---
-Welcome to this session of the seminar! In the last weeks you might have seen, that the visualisation of networks is not as easy as it may seem.
+Welcome to this session of the seminar! In the last weeks you might have seen, that the visualisation of networks is not as easy as it may seem. This is due to the fact, that it is quite difficult to sensefully map 3D Information in a two dimensional space. The content of this chapter is deeply inspired by the materials by Katherine Ognyanova [-@ognyanovaStaticDynamicNetwork2024] and [@rawlingsHowAreSocial2023a].
 
 ```{r}
 library(needs)
@@ -10,384 +10,1118 @@ needs(tidygraph,
       ggraph,
       igraph,
       ggplot2,
-      dplyr)
+      dplyr,
+      gganimate,
+      networkD3,
+      dplyr,
+      tidyr,
+      tibble,
+      stringr,
+      gridExtra,
+      htmlwidgets,
+      intergraph
+      )
+
 
 setwd("C:/Users/ls68bino/Documents/GitHub/SGrehl.github.io/computational-social-sciences")      
 ```
 
 
-For example, look at the network of partner-cities that 'igraph' creates by default:
+# Visualisation of networks
 
-IMAGE OF PARTNERCITIES 
+When we design a network visualization, like almost always we first need to think about the purpose of the visualization. What are the structural features we want to show? What do we want to communicate?
 
-# Why visualize? 
+- Do we want to show the network as a whole?
+- Do we want to show the network structure?
+- Do we want to show the actors and their attributes?
+- Do we want to show the edges and their attributes?
+- Do we want to show the network dynamics?
+- Do we want to show communities or clusters? (next week)
+- Do we want to show the network in a geographical context? (We will cover that in geo visualisation)
 
-# Basic visualisation in 'igraph'
+Most of the time, we will want to show a combination of these features.
 
-# Visualisation in ggplot
+When we talk about network visualisation, there are different forms of representation, that we can use. The most common we call network maps, a visualitsation of the nodes and edges in a two-dimensional space. But we can use other forms of representation as well, like
 
-# Interactive graphs and dynamic visualisation
+- Good old statistical charts (e.g. bar charts, histograms, boxplots, tables, etc.)
+- Arc diagrams
+- Heat maps
+- etc. 
+
+Today we will focus mostly on network maps.
+
+When mapping networks we have different design-elements, that we can use to represent the nodes and edges. The most common are: Color, Position, Size, Shape and Position as well as labels. 
 
 
+::: {#custom-block}
+# Colors in R
 
-# Basic visualisation in igraph
+Colors are extremely useful in plotting to differentiate between types of objects or different values of variabes.
 
-Remember the twin-city network, you created in the last Übungsblatt? Some of you tried plotting it with igraph. Lets have a look at the possibilities:
+Colors can be called by using either named colors, hex or RGB values.
 
-```{r}
-#Here you can download the igraph-object.
-twin_cities <- read_graph(file = "Übungsblätter/Data/twin_cities.gml", format = "gml")
+In base R, we can plot by defining point coordinates, symbol shapes, point size and color: 
+
+```{r}	
+plot(x=1:10,
+     y=rep(5,10),
+     pch=20,
+     cex=3,
+     col="lavender")
+
+points(x=1:10,
+       y=rep(6, 10),
+       pch=1,
+       cex=3,
+       col="#B43757"
+)
+
+points(x=1:10,
+       y=rep(4, 10),
+       pch=7,
+       cex=3,
+       col=rgb(175, 105, 238, maxColorValue=255)
+       )
 
 ```
 
+![Base plot](Graphics/plotbase.png){width=300px}
+
+We can also set the the opacity of our colors by using `alpha` in rgb. The alpha value can be set between 0 (transparent) and 1 (opaque).
+
+```{r}
+plot(x=1:5,
+     y=rep(5,5),
+     pch=19, 
+     cex=12,
+     col=rgb(.25, .5, .3, alpha=.5),
+     xlim=c(0,6)
+     ) 
+
+```
+
+![](Graphics/opacity.png){width=300px}
+
+In a hex color representation, we can use `adjustcolor()` to adjust the color brightness.
+
+```{r}
+
+col.tr <- grDevices::adjustcolor("#B43757",
+                                 alpha=0.2)
+plot(x=1:5,
+     y=rep(5,5),
+     pch=19, cex=12,
+     col=col.tr,
+     xlim=c(0,6)
+     )
+```
+![Opacity](Graphics/opacity2.png){width=300px}
+
+You can use built-in R colors by using the command `colors()`. 
+
+Sometimes we need a number of contrastiing colors. We can use predefined color palettes or the `RColorBrewer` package.
+
+```{r}
+
+par(bg="white")
+
+pal1 <- heat.colors(5,
+                    alpha=1
+                    ) #  5 colors from the heat palette, opaque
+
+pal2 <- rainbow(5,
+                alpha=.5
+                )      #  5 colors from the heat palette, transparent
+
+plot(x=1:10,
+     y=1:10,
+     pch=19,
+     cex=5,
+     col=pal1
+     )
+
+par(mfrow = c(4, 1)
+    ) # Set up the plotting area to have 3 rows and 1 column
+
+plot(x=1:10,
+     y=1:10,
+     pch=19,
+     cex=5,
+     col=pal2
+     )
+
+# Generate our own palette and plot
+palf <- colorRampPalette(c("lavender",
+                           "lightblue")
+                         ) 
+plot(x=1:10,
+     y=1:10,
+     pch=19,
+     cex=5,
+     col=palf(10)
+     ) 
+
+palf <- colorRampPalette(c(rgb(1,1,1, .2),
+                           rgb(.8,0,0, .7)),
+                         alpha=TRUE)
+
+plot(x=10:1,
+     y=1:10,
+     pch=19,
+     cex=5,
+     col=palf(10)
+     ) 
+
+
+library(RColorBrewer)
+
+display.brewer.all() # shows all palettes
+
+par(mfrow = c(1, 1)) # Reset the plotting area to default
+
+```
+
+::: {layout-ncol="3"}
+![Heat-palette](Graphics/heat1.png){group="color"}
+
+![Rainbow-palette](Graphics/rainbow_palette.png){group="color"}
+
+![Self-defined palette](Graphics/self.png){group="color"}
+::: 
+
+:::
+
+# Basic visualisation in 'igraph'
+
+
+Remember the `twin-city` network, you created in the last Übungsblatt? 
+We will use it again to day in order to show the different options we have in plotting.
+
+```{r}
+twin_cities <- readRDS("Übungsblätter/Data/twin_cities.rds")
+
+
+
+tc_transform <- twin_cities |> 
+    enframe() |> 
+    unnest_wider("value") |> 
+    unnest(c(cities, countries)) |> 
+    mutate(
+        cities = str_replace(cities, "Addis Ababa", "Addis_Abeba"),
+        cities = str_replace(cities, "Frankfurt am Main", "Frankfurt_am_Main"),
+        cities = str_replace(cities, "Ho Chi Minh City", "Ho_Chi_Minh_Stadt"),
+        cities = str_replace(cities, "Kyiv", "Kyjiw"),
+        cities = str_replace(cities, "Nanjing", "Nanjing"),
+        cities = str_replace(cities, "Kraków", "Krakau")
+    )
+
+
+d1 <- tibble(
+  city = c(
+    "Addis_Abeba",
+    "Birmingham",
+    "Bologna",
+    "Brünn",
+    "Frankfurt_am_Main",
+    "Hannover",
+    "Herzliya",
+    "Ho_Chi_Minh_Stadt",
+    "Houston",
+    "Krakau",
+    "Kyjiw",
+    "Lyon",
+    "Nanjing",
+    "Thessaloniki",
+    "Travnik"
+  ),
+  country = c(
+    "Ethiopia",
+    "United Kingdom",
+    "Italy",
+    "Czech Republic",
+    "Germany",
+    "Germany",
+    "Israel",
+    "Vietnam",
+    "United States",
+    "Poland",
+    "Ukraine",
+    "France",
+    "China",
+    "Greece",
+    "Bosnia and Herzegovina"
+  )
+) |> 
+    rename(
+        cities = city,
+        countries = country
+    )
+
+
+vertices <- tc_transform |> 
+    select(-name) |> 
+    rbind(d1) |> 
+    distinct(cities, .keep_all = T)
+
+
+edgelist <- tc_transform |> 
+    select(-countries) |> 
+    rename(
+        from = name,
+        to = cities   
+    )
+
+
+twin_cities <- graph_from_data_frame(d = edgelist,
+                                     directed = FALSE,
+                                     vertices = vertices)
+
+
+twin_cities <- igraph::simplify(twin_cities,
+                                       remove.multiple = TRUE,
+                                       remove.loops = TRUE)
+```
+
+
 By default, igraph plots the network like this: 
+
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 plot(twin_cities)
 ```
 
-Image of the network with igraph
+![Default plot of the twin city network with `igraph`](Graphics/twin_city_base.png){width=400px}
+
+As we can clearly see, it is really difficult to identify any nodes or edges, and especially any structure within the network.
+But already with a few lines of code, we can improve the visualization a lot and make structural metrics more obvious. 
+
+## Plotting parameters
 
 
-As we can clearly see, it is really different to identify any nodes or edges, and especially any structure within the network.
-But already with a few lines of code, we can improve the visualisation a lot and make structural metrics more obvious. 
+Lets have a look at the (most important) different options: 
+
+| Parameter             | Description                                                                                       |
+|-----------------------|---------------------------------------------------------------------------------------------------|
+| **NODES**             |                                                                                                   |
+| vertex.color          | Node color                                                                                        |
+| vertex.frame.color    | Node border color                                                                                 |
+| vertex.shape          | Node shape options include "none", "circle", "square", "csquare", "rectangle", "crectangle", "vrectangle", "pie", "raster", or "sphere"                     |
+| vertex.size           | Size of the node (default is 15)                                                                  |
+| vertex.size2          | Second size of the node (e.g., for a rectangle)                                                   |
+| vertex.label          | Character vector used to label the nodes                                                          |
+| vertex.label.family   | Font family of the label (e.g., "Times", "Helvetica")                                             |
+| vertex.label.font     | Font: 1 plain, 2 bold, 3 italic, 4 bold italic, 5 symbol                                          |
+| vertex.label.cex      | Font size (multiplication factor, device-dependent)                                                |
+| vertex.label.dist     | Distance between the label and the vertex                                                         |
+| vertex.label.degree   | Position of the label in relation to the vertex, where 0 is right, "pi" is left, "pi/2" is below, and "-pi/2" is above |
+| **EDGES**             |                                                                                                   |
+| edge.color            | Edge color                                                                                        |
+| edge.width            | Edge width, defaults to 1                                                                         |
+| edge.arrow.size       | Arrow size, defaults to 1                                                                          |
+| edge.arrow.width      | Arrow width, defaults to 1                                                                         |
+| edge.lty              | Line type options: 0 or "blank", 1 or "solid", 2 or "dashed", 3 or "dotted", 4 or "dotdash", 5 or "longdash", 6 or "twodash"                                      |
+| edge.label            | Character vector used to label edges                                                               |
+| edge.label.family     | Font family of the label (e.g., "Times", "Helvetica")                                              |
+| edge.label.font       | Font: 1 plain, 2 bold, 3 italic, 4 bold italic, 5 symbol                                           |
+| edge.label.cex        | Font size for edge labels                                                                          |
+| edge.curved           | Edge curvature, range 0-1 (FALSE sets it to 0, TRUE to 0.5)                                        |
+| arrow.mode            | Vector specifying arrow presence: 0 no arrow, 1 back, 2 forward, 3 both                             |
+| **OTHER**             |                                                                                                   |
+| margin                | Empty space margins around the plot, vector with length 4                                           |
+| frame                 | If TRUE, the plot will be framed                                                                   |
+| main                  | Adds a title to the plot if set                                                                    |
+| sub                   | Adds a subtitle to the plot if set                                                                 |
+| asp                   | Aspect ratio of the plot (y/x), numeric                                                            |
+| palette               | Color palette to use for vertex color                                                               |
+| rescale               | Whether to rescale coordinates to [-1,1], default is TRUE
 
 
-**Different layouts**:
-The package 'igraph' offers a variety of layouts. Depending on the size of the network, we can already see a lot of differences in the plot by changing the layout.
+There are two ways to define the attributes for a plot. We can either define them directly in the plot prompt or add the information to the igraph-object directly.
 
 ```{r}
-plot(twin_cities, layout = layout_with_fr)  # Fruchterman-Reingold layout
-plot(twin_cities, layout = layout_with_kk)  # Kamada-Kaway layout
-plot(twin_cities, layout = layout_nicely)
-plot(twin_cities, layout = layout_as_tree)  # Tree layout 
-plot(twin_cities, layout = layout_as_star)  # Star layout
-plot(twin_cities, layout = layout_with_mds)
-plot(twin_cities, layout = layout_with_lgl)  # Large graph layout
+
+# Option 1:
+
+plot(twin_cities,
+     edge.arrow.size=.2,
+     edge.color="lavender",
+     vertex.color="lavender",
+     vertex.frame.color="#ffffff",
+     vertex.label.color="black",
+     vertex.label.cex = 0.5,
+     vertex.cex = 3
+     )
+
+```
+![Change of visual parameters](Graphics/plot_addition.png){width=400px}
+
+or: 
+
+```{r}
+tc <- twin_cities
+leipzig_vertex <- which(V(tc)$name == "Leipzig")  # Find the index of Leipzig
+
+# Calculate shortest path distances from Leipzig to all other nodes
+distances <- distances(tc, v = leipzig_vertex)
+
+
+# Färbe die Knoten basierend auf der Entfernung von Leipzig
+V(tc)$color[distances == 1] <- "lightblue"  # Wenn Abstand 1, Farbe "lightblue"
+V(tc)$color[distances == 2] <- "lightcyan"  # Wenn Abstand 2, Farbe "lightcyan"
+
+
+V(tc)$size <- 4
+
+V(tc)$label <- NA
+
+E(tc)$edge.color <- "gray80"
+
+
+plot(tc)
+legend(x="bottomleft",
+       c("dist = 1","dist = 2"),
+       pch=21,
+       col="#777777",
+       pt.bg=c("lightblue", "lightcyan"),
+       pt.cex=2,
+       cex=.8,
+       bty="n",
+       ncol=1)
 ```
 
-**Ìnclude vertex and edge attributes**:
+![Saving parameters in igraph-objects directly](Graphics/pp.png){width=400px}
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-# Code to plot the network with igraph (but also descriptions of what is happening.)
-# Change colors and size by indexing vertices directly
+or we can only plot names (this time for a subset of nodes for visibility)
+
+```{r}
+
+summary(V(tc)$color)
+V(tc)$color[V(tc)$name == "Leipzig"] <- "lightblue"
+
+
+lightblue_nodes <- V(tc)[which(V(tc)$color == "lightblue")]
+
+V(tc)$label <- V(tc)$name
+# Create the subgraph with those nodes
+lightblue_subgraph <- induced_subgraph(tc, lightblue_nodes)
+
+# called aus irgendeinem grund das falsche igraph - so gehts
+lightblue_subgraph <- igraph::simplify(lightblue_subgraph,
+                                       remove.multiple = TRUE,
+                                       remove.loops = TRUE)
+
+                    
+plot(lightblue_subgraph,
+     vertex.shape="none",
+     vertex.label=V(lightblue_subgraph)$name, 
+     vertex.label.font=2,
+     vertex.label.color="gray40",
+     vertex.label.cex=.7,
+     edge.color="gray85"
+     )
+
+```
+
+![Plot only labels](Graphics/just_labels.png){width=400px}
+
+and then again we can overwrite attributes in the plot directly. 
+
+
+## Plotting layouts
+
+
+
+The package `igraph` offers a variety of layouts. Depending on the size of the network, we can already see a lot of differences in the plot by changing the layout. The default value is layout_nicely, a smart function that chooses a layouter based on the graph.
+
+
+```{r}
+
+V(twin_cities)$size <- 5
+V(twin_cities)$frame.color <- "white"
+V(twin_cities)$color <- "lightblue"
+V(twin_cities)$label <- ""
+E(twin_cities)$arrow.mode <- 0
+
+plot(twin_cities)
+
+
+```
+
+![Default layout](Graphics/layout_nicely.png){width=400px}
+
+`Igraph` has a lot of built in layouts that are either a function or a numeric matrix, that specify how the vertices will be placed in a plot.
+
+If it is a numeric matrix, then the matrix has to have one line for each vertex, specifying its coordinates. The matrix should have at least two columns, for the x and y coordinates, and it can also have third column, this will be the z coordinate for 3D plots and it is ignored for 2D plots.
+
+If a two column matrix is given for the 3D plotting function rglplot then the third column is assumed to be 1 for each vertex.
+
+
+```{r}
+plot(twin_cities,
+     layout = layout_in_circle)
+
+plot(twin_cities,
+     layout=layout_on_sphere)
+```
+
+
+If layout is a **function**, this function will be called with the graph as the single parameter to determine the actual coordinates. The function should return a matrix with two or three columns. For the 2D plots the third column is ignored.
+
+The **Fruchterman-Reingold** algorithm is a popular **force-directed layout** method. It simulates a physical system where nodes act as repelling particles and edges as attracting springs. This results in a graph where nodes are evenly distributed, with more connected nodes closer together. However, it can be slow and is typically not used for graphs larger than ~1000 vertices.
+
+
+```{r}
+plot(twin_cities,
+     layout=layout_with_fr)
+```
+
+With force-directed layouts we can use the `niter` parameter to control the number of iterations to perdorm. The default is set at 500.
+
+
+
+```{r}
+plot(twin_cities,
+     layout=layout_with_fr(twin_cities,
+                           niter=50)
+)
+```
+
+::: {layout-ncol="2"}
+![FR-Layout](Graphics/layout_nicely.png){group="fr"}
+
+![FR-Layout with higher number of iterations (niter)](Graphics/niter.png){group="fr"}
+:::
+
+
+By default, plot coordinates are rescaled to the [-1, 1] interval. To adjust this, set `rescale=FALSE` and manually rescale the plot using a scalar. You can also use `norm_coords` to normalize the plot within custom boundaries for a more compact or spread-out layout.
+
+```{r}
+
+l <- layout_with_fr(twin_cities) # save coordinates so layout is not recalculated
+
+# Normalize coordinates to custom boundaries
+l <- norm_coords(l, ymin=-1, ymax=1, xmin=-1, xmax=1)
+
+# Set up plot grid
+par(mfrow=c(2,2), mar=c(0,0,0,0))
+
+# Plot with varying layouts
+plot(twin_cities, rescale=FALSE, layout=l*0.4)
+plot(twin_cities, rescale=FALSE, layout=l*0.6)
+plot(twin_cities, rescale=FALSE, layout=l*0.8)
+plot(twin_cities, rescale=FALSE, layout=l*1.0)
+
+```
+
+![FR with Norm-Coords](Graphics/norm_coords.png)
+
+The **Kamada-Kawai** algorithm is another force-directed algorithm that minimizes the energy in a spring system. 
+
+```{r}
+plot(twin_cities,
+     layout=layout_with_kk)
+```
+
+![Kamada-Kawaii](Graphics/kk.png)
+
+The `graphopt` layout algorithm allows customization of physical simulation parameters that influence the resulting graph layout. You can adjust:
+
+- `charge` — the electric repulsion between nodes (default: `0.001`)
+- `mass` — the mass of each node, affecting movement (default: `30`)
+- `spring.length` — the ideal edge length (default: `0`)
+- `spring.constant` — the stiffness of the springs (default: `1`)
+
+Tweaking these parameters can produce significantly different layouts by changing how nodes repel or attract each other.
+
+```{r}
+# The charge parameter below changes node repulsion:
+l1 <- layout_with_graphopt(twin_cities, charge=0.02)
+l2 <- layout_with_graphopt(twin_cities, charge=0.00000001)
+
+par(mfrow=c(1,2), mar=c(1,1,1,1))
+plot(twin_cities, layout=l1)
+plot(twin_cities, layout=l2)
+```
+![Graphopt with different repulsion](Graphics/different repulsion.png)
+
+The **MDS (Multidimensional Scaling)** layout positions nodes based on a distance or similarity measure. By default, it uses shortest path distances, placing more similar nodes closer together. You can also supply a custom distance matrix using the `dist` parameter. MDS layouts are useful because node positions reflect actual distances, giving the layout a clear geometric interpretation. However, visual clarity can suffer — nodes may overlap or cluster too tightly.
+
+```{r}
+plot(twin_cities,
+     layout = layout_with_mds)
+```
+
+
+
+So there are a lot of different ways to plot networks - highlighting different structural properties to the visual analysis (or description).
+
+```{r}
+
+# Get all layout functions, except the first (which is usually NULL) and bipartite layouts
+layouts <- grep("^layout_", ls("package:igraph"), value = TRUE)[-1]
+layouts <- layouts[!grepl("bipartite", layouts)]
+
+# Folder to save plots
+dir.create("Graphics/layouts", showWarnings = FALSE)
+
+# Plot and save each layout
+for (layout in layouts) {
+  layout_fun <- get(layout, asNamespace("igraph"))
+  l <- layout_fun(twin_cities)
+
+  png(filename = paste0("Graphics/layouts/", layout, ".png"), width = 800, height = 800)
+  plot(twin_cities,
+       edge.arrow.mode = 0,
+       layout = l,
+       main = layout)
+  dev.off()
+}
+
+
+# Start Quarto block
+cat("::: {layout-ncol=4}\n\n")
+
+# Print each image markdown
+for (layout in layouts) {
+  cat(sprintf('![](Graphics/layouts/%s.png){group="distribution"}\n\n', layout))
+}
+
+# End Quarto block
+cat(":::\n")
+
+```
+
+::: {layout-ncol=5}
+![](Graphics/layouts/layout_as_star.png){group="distribution"}
+
+![](Graphics/layouts/layout_as_tree.png){group="distribution"}
+
+![](Graphics/layouts/layout_components.png){group="distribution"}
+
+![](Graphics/layouts/layout_in_circle.png){group="distribution"}
+
+![](Graphics/layouts/layout_nicely.png){group="distribution"}
+
+![](Graphics/layouts/layout_on_grid.png){group="distribution"}
+
+![](Graphics/layouts/layout_on_sphere.png){group="distribution"}
+
+![](Graphics/layouts/layout_randomly.png){group="distribution"}
+
+![](Graphics/layouts/layout_with_dh.png){group="distribution"}
+
+![](Graphics/layouts/layout_with_drl.png){group="distribution"}
+
+![](Graphics/layouts/layout_with_fr.png){group="distribution"}
+
+![](Graphics/layouts/layout_with_gem.png){group="distribution"}
+
+![](Graphics/layouts/layout_with_graphopt.png){group="distribution"}
+
+![](Graphics/layouts/layout_with_kk.png){group="distribution"}
+
+![](Graphics/layouts/layout_with_lgl.png){group="distribution"}
+
+![](Graphics/layouts/layout_with_mds.png){group="distribution"}
+
+![](Graphics/layouts/layout_with_sugiyama.png){group="distribution"}
+:::
+
+
+## Higlighting specific nodes or links
+
+This plot visualizes how far each city is from Leipzig in terms of network distance. A lavender-to-blue gradient is used, where cities closer to Leipzig appear darker and those further away appear lighter. The path distance to Leipzig is added as a vertex.label.
+
+```{r}
+
+
+lavender_palette <- colorRampPalette(c("#6A5ACD", "#E6E6FA"))  # purple to lavender
+dist.from.Leipzig <- distances(twin_cities, 
+                               v = V(twin_cities)[name == "Leipzig"], 
+                               to = V(twin_cities), 
+                               weights = NA)
+
+col <- lavender_palette(max(dist.from.Leipzig) + 1)
+col <- col[dist.from.Leipzig + 1]
+
 plot(twin_cities, 
-     vertex.size = ifelse(V(twin_cities)$name == "Leipzig", 5, 2),
-     vertex.label.cex = 0.6,
-     vertex.label.dist = .5,
+     vertex.color = col, 
+     vertex.label = dist.from.Leipzig, 
+     edge.arrow.size = 0.6, 
      vertex.label.color = "black",
-     vertex.label.dist = 1,
-     vertex.color = ifelse(V(twin_cities)$name == "Leipzig", "pink", "lightblue"),
-     vertex.frame.color = "white",
-     layout = layout_with_lgl(twin_cities),
-     main = "Leipzig's twin-city network"
-)
+     vertex.label.size = 0.3)
+```
+![Distance from Leipzig](Graphics/distance.png){width=300px}
+
+This visualization highlights the shortest path between Leipzig and Kyoto
+to emphasize both the nodes and the edges involved in the path.
 
 
+```{r}
 
-# Change colors by indexing edges directly (bridges)
-# To be fixed
+city_path <- shortest_paths(twin_cities, 
+                            from = V(twin_cities)[name == "Leipzig"], 
+                            to   = V(twin_cities)[name == "Kyoto"],
+                            output = "both")
+
+ecol <- rep("gray80", ecount(twin_cities))
+ecol[unlist(city_path$epath)] <- "#9370DB"  # medium purple
+
+
+vcol <- rep("gray40", vcount(twin_cities))
+vcol[unlist(city_path$vpath)] <- "#D8BFD8"  # thistle (light purple)
+
 plot(twin_cities, 
-     edge.color = ifelse(bridges(twin_cities), "purple", "lightblue"),
-     vertex.size = 2,
-     vertex.label.cex = 0.6,
-     vertex.label.dist = .5,
-     vertex.label.color = "black",
-     vertex.frame.color = "white",
-     layout = layout_with_lgl(twin_cities),
-     main = "Leipzig's twin-city network"
+     vertex.color = vcol, 
+     edge.color = ecol, 
+     edge.width = 0.1
+     )
+```
+
+![Path between Leipzig and Kyoto](Graphics/pathleky.png){width=300px}
+
+This figure highlights all edges that are directly connected to Leipzig. The city itself is shown in purple, and its incident connections are marked in blue.
+
+
+```{r}
+
+
+inc.edges <- incident(twin_cities, 
+                      V(twin_cities)[name == "Leipzig"], 
+                      mode = "all")
+
+ecol <- rep("gray80", ecount(twin_cities))
+ecol[inc.edges] <- "#6495ED"  # cornflower blue
+
+vcol <- rep("gray40", vcount(twin_cities))
+vcol[V(twin_cities)$name == "Leipzig"] <- "#BA55D3"  # medium orchid
+
+plot(twin_cities, 
+     vertex.color = vcol, 
+     edge.color = ecol)
+```
+
+![Edges from Leipzig](Graphics/edges.png){width=300px}
+
+This network highlights the immediate neighbors of Leipzig—cities directly connected by an outgoing edge. 
+
+
+```{r}
+
+neigh.nodes <- neighbors(twin_cities, 
+                         V(twin_cities)[name == "Leipzig"], 
+                         mode = "out")
+
+vcol <- rep("gray40", vcount(twin_cities))
+vcol[neigh.nodes] <- "#87CEFA"  # light sky blue
+vcol[V(twin_cities)$name == "Leipzig"] <- "#BA55D3"  # medium orchid
+
+plot(twin_cities, 
+     vertex.color = vcol)
+```
+![Node neighbors of Leipzig](Graphics/nnn.png){width=300px}
+
+These two side-by-side plots mark groups of cities based on their country attribute (France or Japan) - this will make more sense once we dive into the community detection algorithms next week :)
+
+```{r}
+# **Mark country groups (France and Japan) with lavender-blue tones**
+
+france_nodes <- which(V(twin_cities)$countries == "France")
+japan_nodes <- which(V(twin_cities)$countries == "Japan")
+
+par(mfrow = c(1, 2))
+
+plot(twin_cities, 
+     mark.groups = france_nodes, 
+     mark.col = "#E6E6FA",  # lavender
+     mark.border = NA)
+
+plot(twin_cities, 
+     mark.groups = list(france_nodes, japan_nodes), 
+     mark.col = c("#E6E6FA", "#B0C4DE"),  # lavender and light steel blue
+     mark.border = NA)
+
+dev.off()
+```
+
+![France nodes](Graphics/france.png){width=300px}
+You get the point ;)
+
+
+# Plot visualisation in `ggraph`
+
+The basic `ggraph()` plot adds edges and nodes using layers. Here we start with a default layout and basic layers. [Here you can find additional information on changeable parameters](https://ggraph.data-imaginist.com/reference/index.html).
+
+```{r}
+ggraph(twin_cities) +
+  geom_edge_link() +    # Adds straight edges
+  geom_node_point()     # Adds simple node points
+```
+
+You can customize the layout. Here we use `"gem"`, a force-directed layout similar to Fruchterman-Reingold, which gives a more organic structure to the network. You can use different edge and node geometries for various effects. `geom_edge_fan()` helps visualize overlapping edges, and you can control their appearance with color, width, and transparency.
+
+```{r}
+
+ggraph(twin_cities, layout = "gem") +
+  geom_edge_fan(size = 1, color = "lightgray") +
+  geom_node_point(size = 4, color = "lavender") +
+  ggtitle("Twin Cities Network (GEM Layout)") +
+  theme_void()
+```
+![GGraph-Plot](Graphics/gem.png){width=300px}
+
+
+
+
+You can also use layouts like `'linear'` to arrange nodes along a line, which is useful for timelines or flows. Here we use `geom_edge_arc()` to show curved connections.
+
+Just like in `ggplot2`, you can map node or edge attributes to aesthetics using `aes()`. Below we color edges by a `type` attribute (if available) and scale node size
+
+```{r}
+# Save high-resolution ggraph plot
+p <- ggraph(twin_cities, layout = "linear") + 
+  geom_edge_arc(color = "#6495ED", width = 0.6) +
+  geom_node_point(size = 1, color = "navy") +
+  geom_node_text(aes(label = name), 
+                 nudge_y = -0.6,
+                 vjust = 1.5,
+                 angle = 45,
+                 size = 1,
+                 color = "navy") +
+  theme_void()
+
+# Save the plot
+ggsave("Graphics/twin_cities_linear.png", plot = p, 
+       width = 10, height = 6, dpi = 300, units = "in")
+```
+
+![Linear Plot](Graphics/twin_cities_linear.png){width=600px}
+
+You can also label nodes using their names. Here we use `geom_node_text()` with repelling to avoid overlapping labels.
+
+```{r}
+ggraph(twin_cities, layout = "fr") + 
+  geom_edge_link(color = "gray80") +
+  geom_node_point(size = 5, color = "lavender") +  # medium orchid
+  geom_node_text(aes(label = name), size = 3, color = "navy", repel = TRUE) +
+  theme_void()
+```
+![Repel labels](Graphics/repel.png){width=300px}
+
+The `ggraph` package automatically generates legends when aesthetics like color or size are mapped to attributes. This makes interpreting your network plots easier without manual legend handling.
+
+```{r}
+
+
+# Create the network plot with ggraph
+network_plot <- ggraph(twin_cities, layout = "fr") +
+  geom_edge_link(alpha = 0.4) +
+  geom_node_point(aes(color = countries), size = 2) +
+  theme_minimal() +
+  labs(title = "Twin Cities Network by Country") +
+  theme(
+    legend.position = "right",         # Keeps the legend on the right
+    plot.margin = margin(r = 150),     # Adds margin space for legend
+    legend.text = element_text(size = 3),  # Smaller text for legend
+    legend.title = element_text(size = 2), # Smaller legend title text
+    legend.key.size = unit(0.5, "cm")   # Smaller legend key size (color swatches)
+  )
+
+# Arrange the plot with the adjusted legend size
+grid.arrange(network_plot, ncol = 1)
+```
+
+![Color by country](Graphics/color by country.png)
+
+
+## Other representatives
+
+
+```{r}
+# Convert the twin_cities network to an adjacency matrix (without edge weights, if not available)
+netm <- as_adjacency_matrix(twin_cities, sparse = FALSE)
+
+# Set the row and column names as the city names (or node names)
+colnames(netm) <- V(twin_cities)$name
+rownames(netm) <- V(twin_cities)$name
+
+# Create a color palette for the heatmap
+palf <- colorRampPalette(c("lavender", "lightblue"))
+
+# Plot the heatmap
+heatmap(netm, 
+        Rowv = NA, 
+        Colv = NA, 
+        col = palf(100), 
+        scale = "none", 
+        margins = c(10, 10),
+        main = "Adjacency Matrix Heatmap of Twin Cities Network")
+```
+
+```{r}
+# Calculate the degree distribution of the network
+deg.dist <- degree_distribution(twin_cities, cumulative = TRUE, mode = "all")
+
+# Plot the degree distribution
+plot(x = 0:max(degree(twin_cities)), 
+     y = 1 - deg.dist, 
+     pch = 19, 
+     cex = 1.2, 
+     col = "lavender", 
+     xlab = "Degree", 
+     ylab = "Cumulative Frequency",
+     main = "Degree Distribution of Twin Cities Network")
+```
+
+
+```{r}
+# Create a random network (Erdős–Rényi model)
+set.seed(123)  # For reproducibility
+random_net <- erdos.renyi.game(20, p = 0.2, directed = FALSE)  # 20 nodes, edge probability = 0.2
+
+# Convert the random network to an adjacency matrix
+netm <- as_adjacency_matrix(random_net, sparse = FALSE)
+
+# Set row and column names as the node names (1, 2, ..., 20)
+colnames(netm) <- V(random_net)$name
+rownames(netm) <- V(random_net)$name
+
+# Create a color palette for the heatmap
+palf <- colorRampPalette(c("lavender", "lightblue"))
+
+# Plot the heatmap of the adjacency matrix
+heatmap(netm, 
+        Rowv = NA, 
+        Colv = NA, 
+        col = palf(100), 
+        scale = "none", 
+        margins = c(10, 10),
+        main = "Adjacency Matrix Heatmap of Random Network")
+
+# Calculate the degree distribution of the random network
+deg.dist <- degree_distribution(random_net, cumulative = TRUE, mode = "all")
+
+# Plot the degree distribution
+plot(x = 0:max(degree(random_net)), 
+     y = 1 - deg.dist, 
+     pch = 19, 
+     cex = 1.2, 
+     col = "lavender", 
+     xlab = "Degree", 
+     ylab = "Cumulative Frequency",
+     main = "Degree Distribution of Random Network")
+```
+
+::: {layout-ncol="2"}
+![Degree distribution](Graphics/deg.png){group="repr"}
+
+![Heatmap](Graphics/heat.png){group="repr"}
+:::
+
+
+
+# Network evolution visualisation
+
+A lot of the times, networks are plottes as static networks at different timeframes
+
+```{r}
+
+g <- twin_cities
+
+
+start_node <- "Leipzig"
+V(g)$dist <- distances(g, v = start_node)[1,]
+
+
+g_t1 <- induced_subgraph(g, vids = V(g)[V(g)$name == start_node])
+
+ggraph(g_t1, layout = "fr") +
+  geom_edge_link(color = "gray", alpha = 0.6) +
+  geom_node_point(color = "lavender", size = 6) +
+  geom_node_text(aes(label = name), vjust = -1, repel = TRUE, color = "darkblue") +
+  ggtitle("D = 0: Leipzig") +
+  theme_void() +
+  theme(plot.title = element_text(hjust = 0.5, size = 12))
+
+# D = 1: Leipzig + Neighbors
+g_t2 <- induced_subgraph(g, vids = V(g)[V(g)$dist <= 1])
+
+ggraph(g_t2, layout = "fr") +
+  geom_edge_link(color = "gray", alpha = 0.6) +
+  geom_node_point(color = "lavender", size = 6) +
+  geom_node_text(aes(label = name), vjust = -1, repel = TRUE, color = "darkblue") +
+  ggtitle("D = 1: Leipzig + Neighbors") +
+  theme_void() +
+  theme(plot.title = element_text(hjust = 0.5, size = 12))
+
+# D = 2: Leipzig + Neighbors of Neighbors
+g_t3 <- induced_subgraph(g, vids = V(g)[V(g)$dist <= 2])
+
+ggraph(g_t3, layout = "fr") +
+  geom_edge_link(color = "gray", alpha = 0.6) +
+  geom_node_point(color = "lavender", size = 6) +
+  geom_node_text(aes(label = name), vjust = -1, repel = TRUE, color = "darkblue") +
+  ggtitle("D = 2: Leipzig + Neighbors of Neighbors") +
+  theme_void() +
+  theme(plot.title = element_text(hjust = 0.5, size = 12))
+
+
+
+```
+::: {layout-ncols="3"}
+![Leipzig](Graphics/d0.png){group="distance"}
+
+![Leipzig](Graphics/d1.png){group="distance"}
+
+![Leipzig](Graphics/d3.png){group="distance"}
+:::
+
+```{r}
+
+# Set the starting node (Leipzig)
+start_node <- "Leipzig"
+
+# Calculate distance from Leipzig for all nodes
+distances_from_leipzig <- distances(g, v = start_node)[1,]
+V(g)$distance <- distances_from_leipzig  # Store the distances as a vertex attribute
+
+# Create a list of graphs for each distance level (time)
+max_dist <- max(V(g)$distance, na.rm = TRUE)  # Maximum distance
+
+# Create a list to store subgraphs at each time step
+subgraphs <- lapply(0:max_dist, function(d) {
+  # Create a subgraph that includes nodes with distance <= d
+  nodes_in_time <- V(g)[V(g)$distance <= d]
+  induced_subgraph(g, vids = nodes_in_time)
+})
+
+# Create an animated plot using ggraph
+p <- ggraph(g, layout = "fr") +
+  geom_edge_link(aes(alpha = 0.3), show.legend = FALSE) +
+  geom_node_point(aes(color = distance), size = 5) +
+  geom_node_text(aes(label = name), vjust = -1) +
+  transition_states(V(g)$distance, transition_length = 1, state_length = 100) +
+  labs(title = "Twin City Growth from Leipzig: t = {closest_state}") +
+  ease_aes('cubic-in-out')
+
+# Animate the graph over time
+animation <- animate(p, nframes = (max_dist + 1) * 10, width = 800, height = 600)
+anim_save("Graphics/twin_city_growth.gif", animation = animation)
+
+```
+
+![Growth Gif](Graphics/twin_city_growth.gif)
+
+or we can just create a shiny-App with a slider
+
+```{r, shiny}
+library(shiny)
+
+
+
+ui <- fluidPage(
+  sliderInput("t", "Time Step", min = 0, max = 2, value = 0, step = 1),
+  plotOutput("networkPlot")
+)
+
+server <- function(input, output, session) {
+  output$networkPlot <- renderPlot({
+    vids <- V(g)[V(g)$dist <= input$t]
+    g_sub <- induced_subgraph(g, vids = vids)
+    
+    ggraph(g_sub, layout = "fr") +
+      geom_edge_link(aes(alpha = 0.3), show.legend = FALSE) +
+      geom_node_point(aes(color = distance), size = 5) +
+      geom_node_text(aes(label = name), vjust = -1) +
+      ggtitle(paste("Network at time =", input$t))
+  })
+}
+
+shinyApp(ui, server)
+
+
+```
+
+
+
+# Interactive visualisation with `networkD3`
+
+To create an interactive network visualization with networkD3, you first need to convert your igraph network into two data frames: one for nodes and one for edges (links). The nodes should include a unique id and optionally attributes like group or size, while the links should include source and target indices starting from 0 (not 1).
+
+Once the data is prepared, use forceNetwork() to build the visualization, specifying node and edge attributes, and finally save it as an HTML file using htmlwidgets::saveWidget(). This allows zooming, dragging, and exploring the network interactively in a browser.
+
+
+
+```{r}
+
+# Extract links and nodes for visualization
+links <- as.data.frame(get.edgelist(twin_cities))
+nodes <- data.frame(
+  id = 1:vcount(twin_cities),
+  name = V(twin_cities)$name,
+  countries = V(twin_cities)$countries  
 )
 
 
+# Ensure node IDs are numeric and start from 0
+links.d3 <- data.frame(from = as.numeric(factor(links$V1)) - 1,
+                       to = as.numeric(factor(links$V2)) - 1)
 
-# Change vertex size by degree
-
-# 
-
-```
-
-
-
-
-Example degree centrality
-
-## Layouts
+# Add a Nodesize column (you can use an actual attribute here, like degree, if needed)
+nodes.d3 <- data.frame(idn = factor(nodes$name, levels = nodes$name), nodes)
+nodes.d3$Nodesize <- rep(6, nrow(nodes.d3))  # Add a constant size for each node
 
 
 
-# Network visualisation with ggraph
 
-
-# Network visualisation with tidygraph
-
-## Creating a Tidygraph Network
-
-`tidygraph` offers a different type of graph objects. Objects created with `igraph` need to be converted to `tidygraph` objects first: 
-
-```{r}
-
-# creating our igraph object
-graph1 <- graph_from_adjacency_matrix(adjmatrix = friends$wave_1)
-
-# converting it to tidygraph
-tgraph <- as_tbl_graph(graph1)
-
-tgraph
-
-```
-
-What tidygraph does, is that it stores all the relevant information in two tibbles which are tidyverse's version of data frames. The vertex attributes (in the tibble, where currently only "name" is given), as well as the edges as an adjacency list (and if existant, all edge attributes in the adjacency list).
-
-To run tidyverse or dplyr actions on the tibbles, we first need to tell tidygraph which dataframe (nodes or edges) it should work on. We do this with activate(nodes) and activate(edges) respectively. 
-
-Let's add information on the actors to the object: 
-
-- Alcohol consumption: We want to create a factor of the following levels: 
-    
-    - 1: none, 
-    - 2: seldomly, 
-    - 3: once a month, 
-    - 4 once a weak, 
-    - 5: more than once a weak
-    
-- Smoking (tobacco): 
-
-    - 1: never, 
-    - 2: occasionally, 
-    - 3: regularly
-    
-- Smoking (cannabis): 
-    
-    - 1: never, 
-    - 2: tried it once, 
-    - 3: occasionally, 
-    - 4: regularly
-
-
-```{r}
-
-tgraph <- tgraph %>%
-  activate(nodes) %>%
-  mutate(age = dat$age, # age of the actors
-         gender = factor(dat$male, # gender (male / female)
-                         levels = c(0, 1), 
-                         labels = c("female", 
-                                    "male")), 
-         alcohol = factor(dat$alc_1, # alcohol consumption
-                          levels = c(1:5), 
-                          labels = c("never", 
-                                     "seldomly", 
-                                     "once a month", 
-                                     "once a weak", 
-                                     "multiple times a week")), 
-         tobacco = factor(dat$tob_1, # tobacco consumption
-                          levels = c(1:3), 
-                          labels = c("never", 
-                                     "occasionally", 
-                                     "regularly")), 
-         weed = factor(dat$weed_1, # cannabis consumption
-                       levels = c(1:4), 
-                       labels = c("never", 
-                                  "tried once", 
-                                  "occasionally", 
-                                  "regularly")), 
-         pocketmon = dat$money_1, # pocket money in pounds per week
-         single = factor(dat$relationship_1, # is the person in a relationship?
-                         levels = c(1, 0), 
-                         labels = c("in relationship", 
-                                    "single")), 
-         family_smoking = dat$smoking_at_home) # are the parents or siblings smoking at home?
-
-tgraph
-
-```
-
-We can now also use the objects in our node - dataframe to plot them: 
-
-```{r}
-( # the brackets around the object call the saved object "smoking_plot"
-smoking_plot <- # saves the plot in the object "smoking_plot"
-  tgraph %>%   # calls the tidygraph object "tgraph"
-  activate(nodes) %>%  # activate the nodes
-  as_tibble() %>% # as a tibble
-  ggplot() +  # forward it all to ggplot()
-  geom_bar(aes(x = tobacco,  # create a colored bar plot of the smoking behaviour
-               fill = tobacco)) + 
-  theme_minimal() + # using the minimal theme of ggplot
-  labs(x = "Tobacco consumption", # add labels
-       y = "Number of actors", 
-       fill = "Tobacco consumption")
-
+# Save as a standalone HTML file
+htmlwidgets::saveWidget(
+  forceNetwork(Links = links.d3, Nodes = nodes.d3, Source = "from", Target = "to",
+               NodeID = "name", Group = "countries", linkWidth = 1,
+               linkColour = "#afafaf", fontSize = 12, zoom = TRUE, legend = FALSE,
+               Nodesize = "Nodesize", opacity = 0.8, charge = -300, 
+               width = 800, height = 600),
+  "Graphics/network_plot_interactive.html", selfcontained = TRUE
 )
 ```
 
 
-# Network plotting
+::: {.iframe-container}
+<iframe src="Graphics/network_plot_interactive.html" width="1000" height="600" frameborder="1"></iframe>
+:::
 
-Many geoms for network plotting exist. The manual of `ggraph` has a comprehensive list of them: [ggraph Manual](https://ggraph.data-imaginist.com/reference/index.html). 
 
 
-```{r, warning=FALSE}
+:::{.student-exercise}
 
-(networkplot <- 
-   tgraph %>%
-   ggraph(layout = "stress") + # use the stress layout
-   geom_edge_fan(width = .2,  # color the edges gray and use the "fan geom"
-                 color = "gray") + 
-   geom_node_point(aes(color = tobacco), 
-                   size = 2 ) + # color the nodes by the tobacco consumption
-   coord_fixed() + 
-   theme_graph() + 
-   labs(color = "Tobacco Consumption")
- )
+# Exercise
 
-```
+The **Bali-network** shows the interactions inside the *Jemaah Ismlamiyah* terrorist group, which conducted an attack in Bali in the year of 2002. 
 
-As we see, if we use the `fan`-geom for the edges, by default, they are not directed and rather, two edges appear if a relationship is reciprocal. Let's change that. For that, we need to use another geom: `geom_edge_link`
+You can load the network like this: 
 
-```{r, warning=FALSE}
+```{r}
+library(intergraph)
+#install.packages("devtools")
+#devtools::install_github("DougLuke/UserNetR")
+library(UserNetR)
 
-(networkplot <- 
-   tgraph %>%
-   ggraph(layout = "stress") + # use the stress layout
-   geom_edge_link(width = .2,  # color the edges gray
-                 color = "gray", 
-                 arrow = arrow(length = unit(1.5, 'mm')), # determine the size of the arrow head
-                 end_cap = circle(0.5, 'mm')) + # determine the distance between the arrow head and the node it is pointing to
-   geom_node_point(aes(color = tobacco), 
-                   size = 2 )+ # color the nodes by the tobacco consumption
-   coord_fixed() + 
-   theme_graph() + 
-   labs(color = "Tobacco Consumption")
- )
+data(Bali)
+Bali <- asIgraph(Bali)
 
+help(Bali)
 
 ```
 
-Let's assume, we want to color the edges indicating whether they are between actors with the same smoking behavior or between dissimilar actors: 
+The network consists of 17 nodes (the terrorists) and 63 edges (their interactions). Next to the names, their roles in the group are saved as node attributes. The intensity of the interaction is saved as an edge attribute (See `help(Bali)`).
 
-```{r, warning=FALSE}
+1. Plot the network so that the role is displayed as the node label. You can also change the size of the node
 
-(networkplot <- 
-   tgraph %>%
-   activate(edges) %>%
-   mutate(smoking_diff = abs(as.numeric(.N()$tobacco[from]) - as.numeric(.N()$tobacco[to]))) %>%
-   ggraph(layout = "stress") + # use the stress layout
-   geom_edge_link(width = .2,  # color the edges gray
-                 aes(color = smoking_diff), 
-                 arrow = arrow(length = unit(1.5, 'mm')), 
-                 end_cap = circle(0.5, 'mm')) + 
-   geom_node_point(aes(color = tobacco), 
-                   size = 2 )+ # color the nodes by the tobacco consumption
-   coord_fixed() + 
-   theme_graph() + 
-   labs(color = "Tobacco Consumption", 
-        edge_color = "Difference in Smoking")
- )
+2. Define the color for each node, so that the color resembles the respective role.
 
+3. Change the shape of the Commanders (CT) to a rectangle.
 
-```
+4. Use the edge attribute IC, so that an edge is thicker if there is higher interaction between terrorists.
 
-What happened here is the following: we activated the edges, thus we went into the edges data.frame. Then, by calling `.N()$tobacco`, we called the node data.frame. The [from] and [to] options refer to the tie sender and receiver, respectively. `as.numeric` is used to convert the factor tobacco to numeric. `.N()$tobacco[from]` thus searches for the smoking behavior of the sender, for instance. `abs(as.numeric(.N()$tobacco[from]) - as.numeric(.N()$tobacco[to]))` lets ggraph calculate the absolute difference in the numerical values of the smoking behavior of the sender and receiver. This attribute is then used to color the nodes.
+5. Create an interactive plot, where, when you hover over the node, the role is shown.
 
-
-
-# Layouts
-
-`ggraph` has a large number of layout algorithms. By default, it automatically picks a layout most suitable (in the algorithms perspective) for the network. Some of them can be seen below: 
-
-**Note**: Most of the time, we will be using the layouts `kk`, `stress`, `fr`, or the automatic layout. 
-
-```{r, warning=FALSE}
-
-
-plot_kk <- 
-   tgraph %>%
-   ggraph(layout = "kk") + # use the kk layout
-   geom_edge_fan(width = .2,  # color the edges gray
-                 color = "gray") + 
-   geom_node_point(aes(color = tobacco), 
-                   size = 2 )+ # color the nodes by the tobacco consumption
-   coord_fixed() + 
-   theme_graph() + 
-
-plot_circle <- 
-   tgraph %>%
-   ggraph(layout = "circle") + # use the cirle layout
-   geom_edge_fan(width = .2,  # color the edges gray
-                 color = "gray") + 
-   geom_node_point(aes(color = tobacco), 
-                   size = 2 )+ # color the nodes by the tobacco consumption
-   coord_fixed() + 
-   theme_graph() + 
-   labs(subtitle = "Circle Layout")+ 
-  theme(legend.position = "none")
-
-plot_linear <- 
-   tgraph %>%
-   ggraph(layout = "linear") + # use the linear layout
-   geom_edge_fan(width = .2,  # color the edges gray
-                 color = "gray") + 
-   geom_node_point(aes(color = tobacco), 
-                   size = 2 )+ # color the nodes by the tobacco consumption
-   coord_fixed() + 
-   theme_graph() + 
-   labs(subtitle = "Linear Layout")+ 
-  theme(legend.position = "none")
-
-plot_fr <- 
-   tgraph %>%
-   ggraph(layout = "fr") + # use the fr layout
-   geom_edge_fan(width = .2,  # color the edges gray
-                 color = "gray") + 
-   geom_node_point(aes(color = tobacco), 
-                   size = 2 )+ # color the nodes by the tobacco consumption
-   coord_fixed() + 
-   theme_graph() + 
-   labs(subtitle = "Fruchterman-Reingold\nLayout")+ 
-  theme(legend.position = "none")
-
-# plot those four plots side by side: 
-
-grid.arrange(plot_kk, 
-             plot_circle, 
-             plot_linear, 
-             plot_fr, 
-             ncol = 2, 
-             nrow = 2)
-
-
-
-```
-
-# Exercises 
-
-These exercises are not homework, so they will not be presented in class. I will upload solutions to them to Moodle so you can check your solutions / get the correct answers. If you run into problems, feel free to ask me in the normal sessions, we can then discuss the problems in or after class. 
-
-Install the package "igraphdata" and load it. Then execute the command `data("karate")`. This loads data on the interactions among the club members of a university karate club in the early 1970s. The data have been studied by Wayne W. Zachary and are known as Zachary's karate club. 
-
-1. Convert the graph `UKfaculty` into a tidygraph object. 
-2. Plot the network using ggraph. 
-3. Display the node attribute  faction. 
-4. "Mr Hi" and "John A" were the two instructors of the club. Change their shapes to be different from the participants. 
-5. Display the edge attribute weight. 
-6. Add a legend and a title to the plot. 
-7. Save the plot. 
-8. Try to interpret the plot: 
-    - Why are there different factions?
-    - What may have happened?
-    - How does the network structure help explain the factions?
-9. Look up the wikipedia article [Zachary's karate club](https://en.wikipedia.org/wiki/Zachary%27s_karate_club) on the study. Does it confirm your interpretation from 8.?
-
-
-
-
-
-## Visualisation of large networks
-
-
-
-
-# Interactive visualisation
-
-[@rawlingsHowAreSocial2023a]
-
+:::
