@@ -1,5 +1,5 @@
 ---
-title: "Week 05 - Informatipn representation"
+title: "Week 05 - Information representation"
 subtitle: "Network visualisation with `igraph`, `ggraph` and `networkD3`"
 ---
 Welcome to this session of the seminar! In the last weeks you might have seen, that the visualisation of networks is not as easy as it may seem. This is due to the fact, that it is quite difficult to sensefully map 3D Information in a two dimensional space. The content of this chapter is deeply inspired by the materials of Katherine Ognyanova [-@ognyanovaStaticDynamicNetwork2024] and [@rawlingsHowAreSocial2023a].
@@ -1082,6 +1082,8 @@ htmlwidgets::saveWidget(
                width = 800, height = 600),
   "Graphics/network_plot_interactive.html", selfcontained = TRUE
 )
+
+
 ```
 
 
@@ -1095,7 +1097,7 @@ htmlwidgets::saveWidget(
 
 # Exercise
 
-The **Bali-network** shows the interactions inside the *Jemaah Ismlamiyah* terrorist group, which conducted an attack in Bali in the year of 2002. 
+The **Bali-network** shows the interactions inside the *Jemaah Ismlamiyah* terrorist group, which conducted an attack in Bali in the year of 2002 [@koschadeInternalDynamicsTerrorist2007]. 
 
 You can load the network like this: 
 
@@ -1114,14 +1116,114 @@ help(Bali)
 
 The network consists of 17 nodes (the terrorists) and 63 edges (their interactions). Next to the names, their roles in the group are saved as node attributes. The intensity of the interaction is saved as an edge attribute (See `help(Bali)`).
 
-1. Plot the network so that the role is displayed as the node label. You can also change the size of the node
+1. Plot the network so that the role is displayed as the node label. You can also change the size of the node.
+
+```{r}
+vertex.attributes(Bali)
+
+V(Bali)$label <- V(Bali)$role
+
+plot(Bali,
+     vertex.size = 20,
+     vertex.color = "lightblue",
+     edge.color = "lightblue")
+
+```
+
 
 2. Define the color for each node, so that the color resembles the respective role.
 
+```{r}
+library(RColorBrewer)
+my_colors <- brewer.pal(5,"Blues")
+my_colors[factor(V(Bali)$role)]
+
+E(Bali)$color <- "lightblue"
+
+V(Bali)$color <- my_colors[factor(V(Bali)$role)]
+plot(Bali,vertex.size=20)
+```
+
+
 3. Change the shape of the Commanders (CT) to a rectangle.
+
+```{r}
+
+V(Bali)$shape <- "circle"
+V(Bali)[role == "CT"]$shape <- "rectangle"
+plot(Bali,vertex.size=20)
+
+```
+
 
 4. Use the edge attribute IC, so that an edge is thicker if there is higher interaction between terrorists.
 
+```{r}
+E(Bali)$width <- E(Bali)$IC
+plot(Bali, vertex.size=20)
+
+```
+
+
 5. Create an interactive plot, where, when you hover over the node, the role is shown.
+
+```{r}
+
+# Extract links and nodes for visualization
+# Extract edge list and include weights
+edges <- get.edgelist(Bali)
+weights <- E(Bali)$IC  # assuming edge weights are stored as 'weight'
+
+links <- data.frame(
+  from = edges[, 1],
+  to = edges[, 2],
+  value = weights  # 'value' is the standard name used by networkD3 for link width
+)
+
+# Convert node names to zero-based indices for networkD3
+links.d3 <- data.frame(
+  from = as.numeric(factor(links$from)) - 1,
+  to = as.numeric(factor(links$to)) - 1,
+  value = links$value
+)
+
+
+nodes <- data.frame(
+  id = 1:vcount(Bali),
+  name = V(Bali)$vertex.names,
+  role = V(Bali)$role  
+)
+
+
+# Full role name in data.frame
+nodes <- nodes %>%
+  mutate(role = recode(role,
+                            "CT" = "Command Team",
+                            "OA" = "Operational Assistant",
+                            "BM" = "Bomb Maker",
+                            "SB" = "Suicide Bomber",
+                            "TL" = "Team Lima"
+                            )
+         )
+
+
+
+
+# Add a Nodesize column (you can use an actual attribute here, like degree, if needed)
+nodes.d3 <- data.frame(idn = factor(nodes$name, levels = nodes$name), nodes)
+nodes.d3$Nodesize <- rep(6, nrow(nodes.d3))  # Add a constant size for each node
+
+
+
+
+
+forceNetwork(Links = links.d3, Nodes = nodes.d3, Source = "from", Target = "to",
+               NodeID = "role", Group = "role", linkWidth = (links.d3$value*3),
+               linkColour = "#afafaf", fontSize = 12, zoom = TRUE, legend = TRUE,
+               Nodesize = "Nodesize", opacity = 0.8, charge = -300, 
+               width = 800, height = 600)
+
+```
+
 
 :::
