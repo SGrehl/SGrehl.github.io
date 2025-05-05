@@ -2,7 +2,7 @@
 title: "Week 05 - Informatipn representation"
 subtitle: "Network visualisation with `igraph`, `ggraph` and `networkD3`"
 ---
-Welcome to this session of the seminar! In the last weeks you might have seen, that the visualisation of networks is not as easy as it may seem. This is due to the fact, that it is quite difficult to sensefully map 3D Information in a two dimensional space. The content of this chapter is deeply inspired by the materials by Katherine Ognyanova [-@ognyanovaStaticDynamicNetwork2024] and [@rawlingsHowAreSocial2023a].
+Welcome to this session of the seminar! In the last weeks you might have seen, that the visualisation of networks is not as easy as it may seem. This is due to the fact, that it is quite difficult to sensefully map 3D Information in a two dimensional space. The content of this chapter is deeply inspired by the materials of Katherine Ognyanova [-@ognyanovaStaticDynamicNetwork2024] and [@rawlingsHowAreSocial2023a].
 
 ```{r}
 library(needs)
