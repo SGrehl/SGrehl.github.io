@@ -32,7 +32,6 @@ run_replications <- function(model,
     # run the sequences parallel
     # 1.2a) start cluster and ensure it’s stopped on exit
     cl <- parallel::makePSOCKcluster(ncores)
-    on.exit(parallel::stopCluster(cl), add = TRUE)
     
     # load the functions needed for 
     parallel::clusterEvalQ(cl, {
@@ -40,7 +39,7 @@ run_replications <- function(model,
     })
     
     # export your model object (functions are already loaded)
-    parallel::clusterExport(cl, "model", envir = environment())
+    parallel::clusterExport(cl, c("model", "master_seed"), envir = environment())
     
     ## 1.2b) run all replications in parallel
     results <- parallel::parLapply(
@@ -51,6 +50,8 @@ run_replications <- function(model,
         run_sequence(model)
       }
     )
+    
+    stopCluster(cl) 
   }
   
   # 2) extract data

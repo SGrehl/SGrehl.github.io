@@ -65,7 +65,7 @@ Rcpp::List run_step_fast_cpp(Rcpp::List world, Rcpp::List model)
   }
   
   // ----- write the new fitness vector back into the data-frame & world ---
-  agents["fitness"] = fitness / (rounds * nAgents);
+  agents["fitness"] = fitness / (rounds * (nAgents-1));
   world["agents"]   = agents;
   
   return world;
