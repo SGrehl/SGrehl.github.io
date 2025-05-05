@@ -8,6 +8,7 @@
 ##################################################################
 
 library(tidyverse)
+library(Rcpp)
 # compile the real fast c++ code
 Rcpp::sourceCpp("run_step_fast.cpp")
 
@@ -203,7 +204,7 @@ run_step <- function(world, model) {
       agents$fitness[j] <- agents$fitness[j] - model$c * coop_j + model$b * coop_i
     }
   }
-  agents$fitness <- agents$fitness / (n * rounds)
+  agents$fitness <- agents$fitness / ((n-1) * rounds)
   
   # Save back and return
   world$agents <- agents
@@ -252,7 +253,7 @@ run_step_fast <- function(world, model) {
       agents$fitness[j] <- agents$fitness[j] - model$c*coop_j + model$b*coop_i
     }
   }
-  agents$fitness <- agents$fitness / (n * rounds)
+  agents$fitness <- agents$fitness / ((n-1) * rounds)
   
   world$agents <- agents
   world
@@ -328,10 +329,13 @@ run_sequence <- function(model) {
     world <- update_agents(world, model)
   }
   
+  df_top10 <- bind_rows(top10_series, .id = "step") |>
+    mutate(step = as.integer(step))   
+  
   # 3) Return final state and summary
   list(
     final_world        = world,
     avg_fitness_series = avg_fitness_series,
-    top10_series       = top10_series
+    top10              = df_top10
   )
 }
