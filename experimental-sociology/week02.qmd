@@ -12,14 +12,14 @@ In this chapter, we'll delve into the formal **representation** and **analysis**
 This chapter is an **introduction**, rather than a comprehensive course in decision or game theory. If you’re already familiar with these concepts, the concise explanations in the info boxes might suffice as a refresher. For a more in-depth exploration, we recommend specialized resources such as @gilboa2010 for an accessible overview or @osborne2004 for a more rigorous, formal perspective.
 :::
 
-## 🎯 Learning Goals
+# 🎯 Learning Goals
 
 By the end of this chapter, you should:
 
 -   **Model** **simple social situations** using decision theory or game theory.
 -   **Analyze these situations** using appropriate analytical tools from **decision theory** or **game theory**.
 
-# Modelling Social Interactions
+# 🌐 Modelling Social Interactions
 
 Central to this process is understanding behavior—people’s actions have a direct bearing on how we address societal challenges. For example, consider the question, “How can we reduce discriminatory behavior?” Here, it’s clear that behavior itself is crucial: discrimination is enacted through observable actions. Yet, to combat discrimination effectively, researchers also investigate underlying attitudes (like prejudices or biases) and the cultural products (books, movies, music) that might indirectly influence discrimination.
 
@@ -61,7 +61,7 @@ Note, however, that this approach differs from distinctions found in other sourc
 
 In many research contexts, however, we do not require a strict separation between these concepts; the broader category of observed behavior often suffices, unless we specifically need to focus on strategic or hidden intentions that could significantly alter our interpretation of outcomes.
 
-# Decision Theory
+# 🧭 Decision Theory
 
 Decision theory provides a foundational toolkit for modelling individual choices under certainty and uncertainty. Because game theory builds on many of the same principles, it's helpful to begin by establishing a solid grasp of decision theory. We'll outline the fundamental elements and constraints of decision-making before examining more complex, strategic interactions.
 
@@ -226,7 +226,7 @@ This framework provides a **straightforward method** to compare actions under un
 
 $$
 a\succsim b \Leftrightarrow EU(a)\geq EU(b).
-$$.
+$$
 
 ::: callout-note
 -   While **utility** describes an actor’s valuation of a single **specific consequence**, **expected utility** extends that concept to an entire **lottery** (i.e., a scenario with multiple possible outcomes and corresponding probabilities). By weighting each potential consequence according to its probability, expected utility provides a way to compare and rank **actions**—not just individual outcomes—under uncertainty.
@@ -244,7 +244,7 @@ That said, we won’t delve deeper into the philosophical or psychological found
 
 To analyze how an imaginary actor would behave in a given situation, we introduce a **choice function**, denoted by $C(\cdot )$. This function expresses our prediction of which action(s) an actor will choose from a given decision problem $D$, where $D\subset A$ represents the set of feasible actions available in that situation.
 
-### Decisions under certainty
+### Decisions Under Certainty
 
 When the situation involves **certainty**—that is, there is only one possible state of the world—the actor knows exactly what consequence each action will lead to. In this case, we assume the actor simply chooses the action that results in the highest utility:\
 $$ C^\succsim(D) \;=\; \arg\max_{a \in D} \mathrm{EU}(a)=\arg\max_{a \in D} \mathrm{u}(x_{a,\omega}). $$
@@ -255,7 +255,7 @@ Since there is no uncertainty, the best action is the one yielding the highest k
 -   In situations of certainty, we predict that the **actor** will **choose** the **action that maximizes** their **utility**.
 :::
 
-### Decisions under uncertainty
+### Decisions Under Uncertainty
 
 When the actor faces **uncertainty**—meaning that multiple states of the world are possible, each with its own probability —we use the concept of **expected utility**.
 
@@ -348,7 +348,7 @@ Importantly, as researchers, we **do not need to know the exact numerical values
 -   Decision-making under **uncertainty** is about choosing the action with the highest **expected utility**—a weighted average of possible outcomes, according to their probabilities.
 :::
 
-# Game Theory
+# 🎲 Game Theory
 
 **Game theory** is the study of strategic situations where the outcome of a decision depends not just on a single actor’s choice, but on the **interdependent actions of multiple actors**. In contrast to the models we’ve discussed so far—where the environment was treated as fixed or probabilistic—game theory explicitly models the fact that **other people matter**: their decisions affect our outcomes, and vice versa.
 
@@ -570,7 +570,7 @@ $$
 
 In this equilibrium, each player keeps the other perfectly indifferent and maximally uncertain—neither can benefit by changing their strategy.
 
-# 🏋️ **Pre-Class Assignment**
+# 🏋 Pre-Class Assignment
 
 1.  Read the assigned materials.
 
@@ -584,6 +584,14 @@ In this equilibrium, each player keeps the other perfectly indifferent and maxim
 
     1.  \[easy\] Model this situation with $n=2$ and $f=.5$.
 
-    2.  \[hard\] Try to derive the general function of p for any $n$ and $f$.
+    2.  \[hard\] ~~Try to derive the general function of p for any~~ $n$ ~~and~~ $f$~~.~~ [Just realized that the original model I presented is not correct, and that this is nearly impossible to do for you! Sorry.]{style="background-color: yellow;"}
+
+    3.  \[still hard enough\] Try to get all possible Nash equilibria for the Model 5.1. (Tip: There are two cases with different numbers of equilibria).
 
 6.  Bring your results and any questions to the seminar.
+
+# 🚀 Link to In-Class Material
+
+::: callout-warning
+Here is the [link for the in-class material](week02_inclass.html).
+:::
