@@ -3,7 +3,7 @@
 # Functions for ...                                              #
 # running a complete replication or simulation                   #
 #                                                                # 
-# Version 1                                                      #
+# Version 2                                                      #
 #                                                                #
 ##################################################################
 
@@ -69,11 +69,16 @@ run_simulation <- function(simulation){
   for (i in seq_len(nrow(simulation$tbl_parameter))) {
     # fetch the temporary parameters
     tmp_parameter <- simulation$tbl_parameter |> 
-      slice(i) |>
-      as.list()
+      slice(i) |>                           # select the i-th row 
+      as.list() 
+    
+    # check if a variable is a vector like c(2,2) and unwrap these list-columns 
+    tmp_parameter_replace <- lapply(tmp_parameter,
+                                     function(x) if (is.list(x) && length(x) == 1) x[[1]] else x
+                                    )
     
     # replace the baseline model parameters with the temporary parameters
-    tmp_model <- modifyList(model, tmp_parameter)
+    tmp_model <- modifyList(model, tmp_parameter_replace)
     
     # run the replications with this temorary model
     result <- run_replications(model        = tmp_model, 
