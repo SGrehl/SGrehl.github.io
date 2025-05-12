@@ -1,9 +1,5 @@
-const es_week = 6;
-<<<<<<< Updated upstream
+const es_week = 5;
 const css_week = 5;
-=======
-const css_week = 6;
->>>>>>> Stashed changes
 
 document.addEventListener("DOMContentLoaded", () => {
   const allLinks = document.querySelectorAll('nav a');
