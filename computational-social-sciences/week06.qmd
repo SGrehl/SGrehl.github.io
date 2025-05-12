@@ -1,13 +1,587 @@
 ---
-title: "Week 06"
-subtitle: "-"
+title: "Week 06 - Community Detection Algorithms"
+subtitle: "From Cliques to Communities"
 ---
+Welcome to this weeks session on social network analysis!
 
-# Small world phenomenon
+```{r}
+library(needs)
+needs(igraph,
+      intergraph,
+      igraphdata)
+```
+
+
+# Why study social groups?
+
+
+An actor’s membership in **highly cohesive social groups** has been considered in many sociological studies. It has been hypothesised to correlate with other aspects of social behaviour such as
+
+- (Egoistic) suicide (Durkheim)
+- Adherence to social norms
+- Generalized trust
+- Access to human capital
+- Social status, authority, roles, and positions
+- Flow of information and influence
+
+In order to empirically test these sorts of hypotheses, **groups must be detected** in a network.
+
+But what exactly is a *highly cohesive social group*?
+
+In network analysis, a social group can be defined by the **structure of the underlying network relations**. This task of identifying these is called **community detection**. The development of methods for community detection has been — and continues to be — a highly active area of research [@kolaczykStatisticalAnalysisNetwork2020, @newmanDetectingCommunityStructure2004, @smithCriminalNetworks2021].
+
+We look for groups (or *communities*) in networks because individuals often cluster together due to **homophily** (tendency to associate with similar others) or **shared social contexts and activities**. These structural clusters often play a critical role in shaping behavior, diffusion of information, and social influence.
+
+
+By a **community** ,” we typically mean a **set of nodes with dense internal connections and relatively few ties to the rest of the network** [@kolaczykStatisticalAnalysisNetwork2020]. This contrasts with overly strict definitions like cliques and better reflects the loosely cohesive groupings common in empirical networks .
 
 
 
-Aufgabe: Why your friends have more friends than you do (Feld 1991)
+Take for examples this artificially constructed network:
 
-Romantic relationships at highschools
+```{r}
+# Create 3 groups with 10 nodes each
+group_sizes <- c(20, 10, 10, 10)
+num_groups <- length(group_sizes)
+
+# Probability of connection
+p_in <- 0.4  # high within-group connection probability
+p_out <- 0.02  # low between-group connection probability
+
+
+pref_matrix <- matrix(p_out,
+                      nrow = num_groups,
+                      ncol = num_groups)
+diag(pref_matrix) <- p_in  # within-group connections
+
+# Generate the graph using stochastic block model
+g <- sample_sbm(sum(group_sizes),
+                pref.matrix = pref_matrix,
+                block.sizes = group_sizes)
+
+# Add group membership as vertex attribute
+V(g)$group <- rep(1:num_groups,
+                  times = group_sizes)
+
+# Color nodes by group
+group_colors <- c("lavender", "lavender", "lavender", "lavender")
+V(g)$color <- group_colors[V(g)$group]
+
+# Plot the graph
+plot(g,
+     vertex.label = NA,
+     vertex.size = 10,
+     layout = layout_with_fr)
+```
+
+![Clearly detectable groups](Graphics/croups.png)
+
+The detection is less trivial in most real networks.
+
+![Less detectable groups](Graphics/ccroups.png)
+
+::: {#custom-block}
+** Small world phenomenon**
+
+In large scale contemporary societies, two randomly chosen individuals are personally connected, via their friends, acquaintances and family
+
+
+A small-world network is thus a network that is characterized by 
+
+- **High clustering**: your friends are also friends with each other.
+
+- **Short average path lengths**: most individuals are only a few steps away from one another.
+:::
+
+
+# Basic subgroup concepts
+
+Subgroups in networks are often defined by patterns of connectivity. These patterns help us identify tightly knit sets of actors that may share similar roles, resources, or behaviors.
+
+
+## Cliques
+
+One way to define network communities is by the **level of connectivity**. Recall that a network is completely connected if every pair of nodes is linked by a single edge.
+
+```{r}
+
+triad <- make_full_graph(3)  # Complete graph of 3 nodes (triad)
+graph_4 <- make_full_graph(4)  # Complete graph of 4 nodes
+graph_5 <- make_full_graph(5)  # Complete graph of 5 nodes
+graph_6 <- make_full_graph(6)  # Complete graph of 6 nodes
+
+par(mfrow = c(1, 4))
+
+# Plot each graph
+plot(triad, 
+     vertex.size = 20, 
+     vertex.label = NA, 
+     vertex.color = "lavender", 
+     edge.color = "gray")
+
+plot(graph_4, 
+     vertex.size = 20, 
+     vertex.label = NA, 
+     vertex.color = "lavender", 
+     edge.color = "gray")
+
+plot(graph_5, 
+     vertex.size = 20, 
+     vertex.label = NA, 
+     vertex.color = "lavender", 
+     edge.color = "gray")
+
+plot(graph_6, 
+     vertex.size = 20, 
+     vertex.label = NA, 
+     vertex.color = "lavender", 
+     edge.color = "gray")
+
+par(mfrow = c(1, 1))
+
+```
+
+![Complete Graphs](Graphics/cliquees.png)
+
+When applied to a **subnetwork**, such a structure is called a **clique**. A clique is **maximal** if no other actor can be added to it without breaking its complete connectivity. That is, every member is connected to every other, and no additional node outside the group is connected to all of them.
+
+:::{#custom-block}
+If you recall the triad-census from two weeks ago, a 3-clique is a triad 300 [@fuhseSozialeNetzwerkeKonzepte2018].
+:::
+
+For example, in the following network:
+
+```{r}
+
+g <- graph_from_literal(A:B:C:D -- A:B:C:D, D - E, E - F - G - E)
+
+plot(g,
+     layout = layout_with_fr,
+     vertex.label.cex = 0.8,
+     vertex.color = "lavender")
+
+```
+
+![](Graphics/cliques.png)
+
+We can identify cliques and maximal cliques using:
+
+```{r}
+cliques(g,
+        min = 3)
+
+max_cliques(g,
+            min = 3)
+
+count_max_cliques(g,
+                  min = 3)
+
+
+largest_cliques(g)
+
+# Visualize maximal cliques
+plot(g,
+     mark.groups = max_cliques(g, min=3),
+     vertex.label.cex = 0.8,
+     main = "Maximal Cliques",
+     vertex.color="lavender")
+
+# Visualize cliques
+plot(g,
+     mark.groups = cliques(g, min=3),
+     vertex.label.cex = 0.8,
+     main = "Cliques",
+     vertex.color="lavender")
+
+```
+
+::: columns
+::: column
+![](Graphics/ccliques.png)
+:::
+
+::: column
+![](Graphics/maxcliques.png)
+:::
+:::
+
+
+::: {.student-exercise}
+
+1. Create the following network: 
+
+```{r}
+g <- graph_from_literal(1-2:3:4:5:6:7, 2-3:4:5:6:7, 3-4:5:6:7, 4-5:6:7,
+                   5-6:7, 6-7, 7-8:9:10, 8-9:11,
+                   11-12, 12-13:14, 9-10:13, 10-15,
+                   14-16, 13-16, 15-16)
+
+plot(g)
+```
+
+2. Identify all **maximal cliques** with `min = 3` and highlight them visually
+
+3. Assign the node IDs of the largest maximal clique to a variable called `group`.
+
+:::
+
+**Limitations of Cliques**:
+
+Cliques are one of the **simplest and strictest forms** of cohesive subgroups. However, they have several limitations:
+
+- The definition is conservative: cliques with more than three members are rare in real networks.
+- No internal differentiation: all members are structurally equivalent.
+- Computationally intractable for large networks.
+
+
+
+## n-Cliques
+
+Cliques are oftenly connected with each other and nodes and relations overlap. Because of this, there are several proposals for the relaxation of these concepts [@balasundaramCliqueRelaxationsSocial2011]. One method is the so called *n-clique*. To identify these, we do not only count direct relationships, but we look at cliques as the clique and all nodes that are reachable within a distance of $n$. Usually we call for small $n$s like $2$.
+
+:::{.student-exercise}
+**Exercise**:
+
+4. Identify all nodes that are part of the **2-clique** of the largest maximal clique of $g$ and add them to the `group`variable
+
+:::
+
+
+## k-Core Subgraphs
+
+Another possibility to identify looser subgraphs are **k-cores**.
+
+A **k-core** subgraph is a maximal subnetwork in which every node is connected to at least $k$ other nodes within that subnetwork [@batageljOmAlgorithmCores2003]. The k-core of a graph is the maximal subgraph in which every vertex has at least degree k. The cores of a graph form layers: the (k+1)-core is always a subgraph of the k-core.
+
+In igraph `coreness()` calculates the largest $k$ (*Coreness*) for each node, so that this node belongs to this k-core.
+
+
+
+```{r}
+
+coreness(g)
+
+```
+
+## K-Plex Subgraphs
+
+The concept of **k-plex** looks for the largest group $n$ inside a network where each person is allowed to *not* know up to $k-1$ persons in the group. So, each person must have at least $n-k$ friends within the group. 
+
+Example: In a 2-plex of 5 people, everyone must know atr least three of the others. 
+
+I graph doesn't have a built-in support for **k-plexes**. We can write our own function using the concepts of cliques though.
+
+```{r}
+
+all_cliques <- cliques(g, min = 4)
+
+
+is_kplex <- function(graph, nodes, k) {
+  subg <- induced_subgraph(graph, nodes)
+  degs <- degree(subg)
+  n <- length(nodes)
+  all(degs >= (n - k))
+}
+
+
+k <- 2
+kplexes <- Filter(function(nodes) is_kplex(g, nodes, k), all_cliques)
+
+plot(g,
+     mark.groups = kplexes,
+     vertex.label.cex = 0.8,
+     main = "2-Plex",
+     vertex.color="lavender")
+```
+
+
+
+## Cohesive groups
+
+Another widely used approach to dividing a network into communities is based on the idea that members of a social group are more **strongly connected to each other** than to the rest of the network.
+
+One way to formalize this is through **structural cohesion**. According to Moody and White (2003), the cohesion of a subnetwork can be defined by the extent to which its **connectedness depends on individual members**. That is, the structural cohesion of a group is measured by the **minimum number of nodes that must be removed to disconnect the group**.
+
+This concept corresponds to **vertex-connectivity** (denoted as κ): A group's cohesion is the minimum number of actors who, if removed, would disconnect the group.
+
+Moody and White proposed using this concept to divide a network into **cohesive blocks** — nested groups of actors that remain connected even as nodes are progressively removed.
+
+“For a given graph g, a subset of its vertices h is said to be maximally k-cohesive if there is no superset of h with vertex connectivity greater than or equal to k”. Cohesive blocks are the maximally k-cohesive subnetworks.
+
+
+In igraph we can find cohesive blocks via the call `cohesive_blocks()`. Through the `blockGraphs`-function we can save these blocks as graphs. `cohesion` will give us the $k$ score of each block. And `max_cohesion()`the maximal cohesion of each vertex.
+
+
+However, the calculation of cohesive blocks is only efficient for small graphs (n < 100)
+
+```{r}
+
+b <- cohesive_blocks(g)
+length(b) # number of cohesive blocks
+blocks(b) # blocks as vectors
+blockGraphs(b, g) # blocks as graphs
+
+cohesion(b) # the cohesion of the blocks
+max_cohesion(b) # the maximal cohesion of each vertex
+
+
+```
+
+:::{.student-exercise}
+
+**Exercise**:
+
+>“If your method doesn’t work on this network, then go home.”
+
+– Eric Kolaczyk, at the opening workshop of the 2010-11 SAMSI program year on Complex Networks on the karate network
+
+Zachary [-@zacharyInformationFlowModel1977] studied conflict and fission in this network, as the karate club was split into two separate clubs, after long disputes between two factions of the club, one led by John A., the other by Mr. Hi. The `Faction` vertex attribute gives the faction memberships of the actors. After the split of the club, club members chose their new clubs based on their factions, except actor no. 9, who was in John A.'s faction but chose Mr. Hi's club.
+
+Because the Karate-network from Zachary  includes a real-life slpit, it gives a ground thruth to compare the algoritmic results. 
+
+1. Load the karate network from the `igraphdata` package
+
+```{r}
+data(karate)
+
+plot(karate)
+```
+
+![Karate-network: The color represents the faction](Graphics/karate.png)
+
+2. Use the described methods to identify subgroups in the graph.
+
+2.1 How well do they perform in reference to the ground truth?
+
+2.2 What insight does each method provide?
+
+:::
+
+
+
+# Community detection algorithms
+
+Although the general principle behind community detection is relatively straightforward - to identify those vertices that are more closely tied to each other than to others in the network - finding communities can be computationally very demanding - especially for large networks. Nevertheless, many algorithms have been developed and igraph contains several of them. With your own data you should try using different ones to determine which appears to be the most useful as they all have different strengths and weaknesses. In this section, you will use two different methods - the *fast-greedy* method and the *edge-betweeness* method.
+
+## Communities via edge betweenness
+
+One intuitive way to identify communities is to find and remove the **"bridges"** between groups. These are the edges that lie on many shortest paths — in other words, they have **high edge betweenness**.
+
+Edge betweenness is defined similarly to vertex betweenness:
+
+Let  
+- $( g_{jk} )$ be the number of shortest paths between nodes $( j )$ and $( k )$,  
+- $( g_{jk}(e) )$ the number of those paths that pass through edge $( e )$.
+
+Then the **edge betweenness** $( B(e) )$ is:
+
+$$
+B(e) = \sum_{j < k} \frac{g_{jk}(e)}{g_{jk}}
+$$
+
+This metric helps identify **key connectors** in a network whose removal will fragment the graph.
+
+
+```{r}
+
+edge_betweenness(g)
+
+E(g)$betw <- edge_betweenness(g)
+
+plot(g,
+     vertex.color = "lavender",  
+     edge.label = E(g)$betw ,  
+     edge.color = "gray",  
+     main = "Network with Edge Betweenness",
+     vertex.size = 10,  # Set a reasonable node size
+     vertex.label = NA,  # Hide node labels (optional),
+     layout = layout_nicely(g)
+)
+
+```
+![Edge Betweenness](Graphics/edge betweenness.png)
+
+### The Girvan-Newman Method
+
+This algorithm uses *edge betweenness* to divide the network:
+
+1. Calculate edge betweenness for all edges.
+2. Remove the edge with the highest betweenness (Random selection if multiple candidates).
+3. Recalculate betweenness.
+4. Repeat until the network is split into components.
+
+Although **intuitive** and **sociologically grounded**, this method is **computationally expensive** for large networks.
+
+```{r}
+eb <- cluster_edge_betweenness(g)
+
+# Number of communities found
+length(eb)
+
+# Community structure
+communities(eb)
+membership(eb)
+
+# Visualize communities
+plot(g, mark.groups = communities(eb), main = "Girvan–Newman Communities")
+
+```
+
+
+## Modularity based
+
+Modularity is a **quality measure** for a particular division of a network into communities. It quantifies how well the division captures dense internal connections and sparse external ones. In other words the modularity score is an index of how inter-connected edges are within versus between communities.
+
+Values of modularity range from **−0.5 to 1**, with **higher values indicating clearer group structure**. Values above ~0.3 usually indicate meaningful structure.
+
+Modularity can also be used **descriptively** — for example, to assess how well a node attribute (e.g., gender, location) explains community divisions.
+
+
+### Fast and Greedy Algorithm
+
+**Fast-greedy** is a modularity based method - it works by trying to build larger and larger communities by adding vertices to each community one by one and assessing a modularity score at each step.
+
+
+
+1. It starts with each node as its own community
+2. Then it looks for the best merge (If they are connected they will make the network more tightly connected)
+3. Once the best pair of communities is found it merges them into a single community
+4. Repeat until the algorithm can no longer find beneficial merges. (When all groups are as tightly knit as possible.)
+
+:::{#custom-block}
+**Greedy**: The algorithm is greedy because it always tries to make the best local decision at each step — merging the communities that will immediately improve the network's structure.
+
+**Fast**: It's fast because it doesn't have to check every possible community; it only considers the best possible merges, making the process quick.
+:::
+
+In igraph, a relatively fast greedy algorithm is implemented that searches over all possible partitions and optimises the modularity in form of an agglomerative hierarchical clustering (Clauset, Newman, and Moore 2004)
+ 
+```{r}
+
+fgc <-cluster_fast_greedy(g)
+
+modularity(fgc)
+membership(fgc)
+
+plot(fgc, g, main = "Fast Greedy Communities")
+```
+![Cluster with Fast and Greedy](Graphics/fgc.png)
+
+### Louvain
+
+[@nutarelliQuickLookLouvain2024]
+
+The Louvain method is widely used for large networks. 
+
+It starts by trying to maximize the $Q^t$ value (modularity). It reaches its peak when three conditions are met: 
+
+1. The delta term is one, indicating that $i$ and $j$ belong to the same communiry. 
+2. The $\text{Adj}_{ij}$ is also 1 - suggesting a direct connection between two nodes
+3. The fraction with ks (relates to the degree of nodes) is as small as possible. (Represents the expected number of edges between i and j if they were randomly connected).
+
+
+![One iteration of the Louvain Algorithm](Graphics/louvain.png)
+
+
+The louvain clustering algorithm 
+
+1. **Maximizes the modularity**: So it looks at all the connections between pairs of nodes and figures out how to group them into clusters in a way that maximizes the overall modularity
+2. **Forming supernodes**: Once we have our initial clusters, we treat each cluster as if it where a single large node. This simplifies the network.
+3. **Iterative refinement**: The process is then repeated. We look at this simpler network and again try to find the best way to group these big nodes into clusters. With each iteration, we're looking to increase the modularity, refining the network's structure.
+
+We keep doing this until we can't improve the modularity any further – in other words, until our clusters are as meaningful and well-defined as they can be.
+
+This iterative process of clustering, creating big nodes, and then re-clustering allows the Louvain algorithm to efficiently and effectively reveal the underlying structure of complex networks.
+
+
+```{r}
+lv <- cluster_louvain(g)
+
+modularity(lv)
+plot(lv, g, main = "Louvain Communities")
+```
+
+![Louvain Clustering](Graphics/louvainn.png)
+
+**Pros**:
+
+- Fast and scalable
+- Tends to detect modular structure well
+
+**Cons**:
+
+- May yield slightly inconsistent results (depends on tie-breaking order)
+
+### Leiden
+
+The Leiden algorithm improves Louvain by fixing some of its flaws (e.g., disconnected subcommunities). It guarantees well-connected communities and higher modularity while being fixer and more consistent as the Louvain.
+
+![Leiden Algorithm](Graphics/leiden.png)
+
+a) The Leiden algorithm starts from a singleton partition
+b) The algorithm moves individual nodes from one community to another to find a partition,  c) which is then refined+.
+d) An aggregate network is created based on the refined partition, using the non-refined partition to create an initial partition for the aggregate network.For example, the red community in (b) is refined into two subcommunities in (c), which after aggregation become two separate nodes in (d), both belonging to the same community.
+e) The algorithm then moves individual nodes in the aggregate network
+f) In this case, refinement does not change the partition .
+
+These steps are repeated until no further improvements can be made.
+
+
+
+
+
+```{r}
+
+
+lc <- cluster_leiden(g,
+                     objective_function = "modularity",
+                     n_iterations = 10)
+
+#modularity
+communities(lc)
+membership(lc)
+
+plot(lc, g, main = "Leiden Communities")
+```
+![Leiden-Clustering](Graphics/leidenn.png)
+
+## Further community detection algorithms implemented in `igraph`
+
+| Name               | Function                  | Directed Ties | Weights | More Components |
+|--------------------|---------------------------|---------------|---------|-----------------|
+| Edge-betweenness   | `cluster_edge_betweenness`| ✅             | ✅      | ✅              |
+| Leading eigenvector| `cluster_leading_eigen`   | ❌             | ❌      | ✅              |
+| Fast-greedy        | `cluster_fast_greedy`     | ❌             | ✅      | ✅              |
+| Louvain            | `cluster_louvain`         | ❌             | ✅      | ✅              |
+| Walktrap           | `cluster_walktrap`        | ❌             | ✅      | ❌              |
+| Label propagation  | `cluster_label_prop`      | ❌             | ✅      | ❌              |
+| InfoMAP            | `cluster_infomap`         | ✅             | ✅      | ✅              |
+| Spinglass          | `cluster_spinglass`       | ❌             | ✅      | ❌              |
+| Optimal            | `cluster_optimal`         | ❌             | ✅      | ✅              |
+
+
+## Getting community information
+
+Each community detection function produces several pieces of information in a community object. Using the functions `length()`, `sizes()` and `membership()` it is possible to quickly extract information about how many communities there are and which vertices are in which community. In igraph, it is also possible to make quick plots of the network which show each vertex in its community by color. To do this, the community object and graph object are included as the two arguments to the plot function.
+
+
+## Validation of Community
+
+The problem of validating a network partitioning is not trivial. If a vertex attribute is suspected to correlate with the clustering, it can be used to validate the clustring.
+
+
+
+:::{.student-exercise}
+
+**Exercise**:
+
+1. Find communities in the karate network with the Girvan Newman method, the Louvain Algorithm and the Leiden algorithm. 
+2. Compare the predictions with the actual composition of groups. What are possible explanations for differences?
+
+:::
+
+
+
+
+
 
