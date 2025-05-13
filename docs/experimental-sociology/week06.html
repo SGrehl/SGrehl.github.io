@@ -5601,7 +5601,7 @@ F-statistic:  2230 on 1 and 12498 DF,  p-value: &lt; 2.2e-16</code></pre>
 10   10   1.272727   1.630976</code></pre>
 </div>
 </div>
-<p>Here We see too that PP is ESS also with respect to aD.</p>
+<p>Here we see too that PP is ESS also with respect to aD.</p>
 <p>This reveals a crucial insight: <strong>evolution does not always select the most efficient outcome</strong>. Strategies like PP can become entrenched, not because they are optimal, but because they are <strong>resistant to invasion</strong> — they are stable in the evolutionary sense.</p>
 <p>This reflects real-world systems too. Sometimes, societies, organizations, or institutions <strong>settle into inefficient but stable states</strong>, resistant to change even when better alternatives exist.</p>
 <p>The only way out of this evolutionary dead end is through <strong>random drift</strong>. In a world dominated by the PP strategy (<code>01001</code>), other <strong>similarly cooperative strategies</strong> — such as <code>01111</code> — can enter the population without being selected against, because they achieve identical payoffs. These strategies aren’t better, but they’re neutral in terms of fitness, so they can spread through chance alone.</p>
@@ -5620,13 +5620,13 @@ F-statistic:  2230 on 1 and 12498 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Also called <strong>execution errors</strong>, these occur when an agent <strong>intends</strong> to play a certain strategy but <strong>accidentally does something else</strong>. For example, Agent A wants to cooperates, but instead defects. In this case the outcome is the same as if Agent A wanted to defect in the first place.</p>
 <p>In modeling terms:</p>
 <blockquote class="blockquote">
-<p>With a small probability <span class="math inline">\(\epsilon\)</span>, the agent performs a <strong>random action</strong> instead of what their strategy dictates.</p>
+<p>With a small probability <span class="math inline">\(\epsilon\)</span> (epsilon), the agent performs a <strong>random action</strong> instead of what their strategy dictates.</p>
 </blockquote>
-<p>This type of error introduces uncertainty about one’s own behavior and, as we will see, can make retaliatory strategies like Tit-for-Tat vulnerable — especially if the opponent can’t distinguish an error from a betrayal.</p>
+<p>This type of error introduces uncertainty about one’s own behavior and, as we will see, can make retaliatory strategies like GT vulnerable — especially if the opponent can’t distinguish an error from a deliberate action.</p>
 </section>
 <section id="misperception-perceptual-noise" class="level3">
 <h3 class="anchored" data-anchor-id="misperception-perceptual-noise">Misperception — Perceptual Noise</h3>
-<p>Also called <strong>noise</strong>, Here, the action is implemented correctly, but it is <strong>interpreted incorrectly</strong> by the opponent. For example, Agent A cooperates, but Agent B <strong>perceives</strong> it as defection. The difference is, that while agent B get’s all the benefits</p>
+<p>Also called <strong>noise</strong>, Here, the action is implemented correctly, but it is <strong>interpreted incorrectly</strong> by the opponent. For example, Agent A cooperates, but Agent B <strong>perceives</strong> it as defection. The difference to the situation with an error is that the outcome can still be (C,C) and, hence, B benefits from A’s cooperation, even so it is perceived as defection.</p>
 <p>In modeling terms:</p>
 <blockquote class="blockquote">
 <p>With a small probability <span class="math inline">\(\eta\)</span> (eta), an agent <strong>misreads the opponent’s action</strong> and updates its memory incorrectly.</p>
@@ -5635,11 +5635,12 @@ F-statistic:  2230 on 1 and 12498 DF,  p-value: &lt; 2.2e-16</code></pre>
 </section>
 <section id="do-agents-know-they-erred" class="level3">
 <h3 class="anchored" data-anchor-id="do-agents-know-they-erred">Do Agents Know They Erred?</h3>
-<p>One important — and often underappreciated — modeling decision concerns <strong>agent awareness of mistakes</strong>. In other words, when an error occurs, do agents <strong>know</strong> it was a mistake, or do they treat it as intentional behavior? The answer can have a dramatic impact on the system’s dynamics.</p>
-<p>If <strong>agents know they made an error</strong>, they might adjust their behavior accordingly — for example, by attempting to <strong>make amends</strong> or return to cooperation more quickly. This is especially relevant for conditional strategies like <strong>Tit-for-Tat</strong>, which typically respond to defection with defection. If a Tit-for-Tat agent realizes that its own defection was a mistake, it might become <strong>contrite</strong> and respond with a string of cooperative moves to signal regret, rather than starting a retaliatory loop <span class="citation" data-cites="wu1995">(see <a href="#ref-wu1995" role="doc-biblioref">Wu and Axelrod 1995</a>)</span>.</p>
+<p>One important modeling decision concerns the <strong>agents awareness of mistakes</strong>, that is, when an error occurs, do agents <strong>know</strong> it was a mistake, or do they treat it as intentional behavior? The answer can have a dramatic impact on the system’s dynamics.</p>
+<p>If <strong>agents know they made an error</strong>, they might adjust their behavior accordingly — for example, by attempting to <strong>make amends</strong> or return to cooperation more quickly. This is especially relevant for conditional strategies like GT or TFT, which typically respond to defection with defection. If a TFT agent realizes that its own defection was a mistake, on the other hand, it might become <strong>contrite</strong> and respond with a string of cooperative moves to signal regret, rather than starting a retaliatory loop <span class="citation" data-cites="wu1995">(see <a href="#ref-wu1995" role="doc-biblioref">Wu and Axelrod 1995</a>)</span>.</p>
 <p>Similarly, if <strong>agents know that others made an error</strong>, they might choose to <strong>forgive</strong> rather than retaliate. This capacity for leniency can stabilize cooperation in noisy environments — but it depends on agents being able to distinguish between intentional and accidental defection, which is not always realistic.</p>
-<p>In contrast, when it comes to <strong>misperception</strong> — where agents misinterpret the opponent’s action — it’s far less plausible that they would be aware of the mistake. Agents may not know that their interpretation was incorrect. However, they might <strong>suspect</strong> that some level of noise exists in the environment. If so, this belief could be reflected in the strategies they adopt: agents might implement <strong>forgiving strategies</strong> that tolerate occasional (seemingly) defections, under the assumption that some of them may be just misunderstandings.</p>
-<p>In simulation models, this difference can be captured by adjusting the <strong>strategy space itself</strong>. For example, introducing strategies like <strong>Generous Tit-for-Tat</strong>, which only retaliates probabilistically, or <strong>Win-Stay, Lose-Shift</strong>, which adapts based on payoff rather than pure memory, allows agents to handle errors more flexibly.</p>
+<p>In contrast, when it comes to <strong>misperception</strong> — where agents misinterpret the opponent’s action — it’s much less plausible that an agent would be aware of its own misperception (otherwise the hole idea of this mistake is somewhat fruitless). However, they may know that others have misinterpreted their actions (and therefore act accordingly).</p>
+<p>Yet, even without knowledge that some level of error or noise exists in the environment, agents are not totally helpless. That is, even without knowledge of mistakes evolution might favor agents that implement <strong>forgiving strategies</strong> that tolerate occasional (seemingly) defections.</p>
+<p>In order to capture this idea in simulation models, the <strong>strategy space itself</strong> must allow for such strategies. For example, introducing strategies like <strong>Generous Tit-for-Tat</strong>, which only retaliates probabilistically, or <strong>Win-Stay, Lose-Shift</strong>, which adapts based on payoff rather than pure memory, allows agents to handle errors more flexibly.</p>
 <p>In the next section, we’ll explore how to <strong>implement these forms of mistakes</strong> in code.</p>
 </section>
 </section>
@@ -5666,18 +5667,20 @@ F-statistic:  2230 on 1 and 12498 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  coop_j <span class="ot">&lt;-</span> coop_j <span class="sc">+</span> action_j</span>
 <span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a> </span>
 <span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># apply perceptual errors: agents may misinterpret their partner’s actual action</span></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  perception_i_of_j <span class="ot">&lt;-</span> <span class="fu">ifelse</span> (<span class="fu">runif</span>(<span class="dv">1</span>) <span class="sc">&lt;</span> model<span class="sc">$</span>noise, <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="dv">1</span>), action_j)   perception_j_of_i <span class="ot">&lt;-</span> <span class="fu">ifelse</span> (<span class="fu">runif</span>(<span class="dv">1</span>) <span class="sc">&lt;</span> model<span class="sc">$</span>noise, <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="dv">1</span>), action_i) </span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># update agent state based on transition matrix</span></span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 1 = DD , 2 = CD , 3 = DC , 4 = CC</span></span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Note: transition uses the agent&#39;s *intended* action (not actual behavior), and their *perceived* view of the other</span></span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>  state_i  <span class="ot">&lt;-</span> trans_mat[state_i,  intension_i <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> perception_i_of_j <span class="sc">+</span> <span class="dv">1</span>]</span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>  state_j  <span class="ot">&lt;-</span> trans_mat[state_j,  intension_j <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> perception_j_of_i <span class="sc">+</span> <span class="dv">1</span>]</span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  perception_i_of_j <span class="ot">&lt;-</span> <span class="fu">ifelse</span> (<span class="fu">runif</span>(<span class="dv">1</span>) <span class="sc">&lt;</span> model<span class="sc">$</span>noise, <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="dv">1</span>), action_j)</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>  perception_j_of_i <span class="ot">&lt;-</span> <span class="fu">ifelse</span> (<span class="fu">runif</span>(<span class="dv">1</span>) <span class="sc">&lt;</span> model<span class="sc">$</span>noise, <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="dv">1</span>), action_i)</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># update agent state based on transition matrix</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 1 = DD , 2 = CD , 3 = DC , 4 = CC</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Note: we use ego&#39;s intended action (i.e. they do not know they erred), and their perceived view of the other</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>  state_i  <span class="ot">&lt;-</span> trans_mat[state_i,  intension_i <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> perception_i_of_j <span class="sc">+</span> <span class="dv">1</span>]</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>  state_j  <span class="ot">&lt;-</span> trans_mat[state_j,  intension_j <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> perception_j_of_i <span class="sc">+</span> <span class="dv">1</span>]</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This loop simulates one round of repeated interaction between two agents (<code>i</code> and <code>j</code>). For each round:</p>
 <ol type="1">
 <li><p><strong>Determine intentions</strong>: Based on their current internal state and strategy, each agent chooses what they <em>intend</em> to do (cooperate or defect).</p></li>
-<li><p><strong>Introduce behavioral noise</strong>: With a small probability (<code>model$error</code>), each agent might perform a <strong>random action</strong>, disregarding their intention.</p></li>
+<li><p><strong>Introduce behavioral errors</strong>: With a small probability (<code>model$error</code>), each agent might perform a <strong>random action</strong>, disregarding their intention.</p></li>
 <li><p><strong>Track cooperation</strong>: We keep count of how many times each agent actually cooperates, for use in fitness calculations.</p></li>
 <li><p><strong>Apply perceptual noise</strong>: Even if actions are executed correctly, agents may <strong>misinterpret</strong> what the other did. With probability <code>model$noise</code>, their perception of the other’s action is randomized.</p></li>
 <li><p><strong>Update state</strong>: Agents update their internal state based on their own <strong>intended action</strong> and what they <strong>perceived</strong> the other agent to have done. This reflects the idea that agents are unaware they’ve made a mistake or misinterpreted a move — they act based on what they <em>think</em> happened.</p></li>
@@ -5700,7 +5703,7 @@ F-statistic:  2230 on 1 and 12498 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Let’s now explore how even small behavioral errors can affect the dynamics of an evolutionary agent-based model. We’ll run a simulation using the <code>with_error</code> model, which is similar to our earlier <code>baseline</code> but with the following changes:</p>
 <ul>
 <li><code>mu_rnd = 0.05</code> (random mutation allowed)</li>
-<li><code>mutators_n_fixed = FALSE</code> (number of mutators scales with mutation rate)</li>
+<li><code>mutators_n_fixed = FALSE</code> (random number of random mutators)</li>
 <li><code>max_t = 2500</code> (sufficient time for stabilization)</li>
 </ul>
 <p>In this experiment, we vary the <strong>error rate</strong> — the probability that an agent executes a random action instead of following its intended strategy:</p>
@@ -6698,7 +6701,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb32-351"><a href="#cb32-351" aria-hidden="true" tabindex="-1"></a>df_fit</span>
 <span id="cb32-352"><a href="#cb32-352" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb32-353"><a href="#cb32-353" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-354"><a href="#cb32-354" aria-hidden="true" tabindex="-1"></a>Here We see too that PP is ESS also with respect to aD.</span>
+<span id="cb32-354"><a href="#cb32-354" aria-hidden="true" tabindex="-1"></a>Here we see too that PP is ESS also with respect to aD.</span>
 <span id="cb32-355"><a href="#cb32-355" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-356"><a href="#cb32-356" aria-hidden="true" tabindex="-1"></a>This reveals a crucial insight: **evolution does not always select the most efficient outcome**. Strategies like PP can become entrenched, not because they are optimal, but because they are **resistant to invasion** — they are stable in the evolutionary sense.</span>
 <span id="cb32-357"><a href="#cb32-357" aria-hidden="true" tabindex="-1"></a></span>
@@ -6724,13 +6727,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb32-377"><a href="#cb32-377" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-378"><a href="#cb32-378" aria-hidden="true" tabindex="-1"></a>In modeling terms:</span>
 <span id="cb32-379"><a href="#cb32-379" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-380"><a href="#cb32-380" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; With a small probability $\epsilon$, the agent performs a **random action** instead of what their strategy dictates.</span></span>
+<span id="cb32-380"><a href="#cb32-380" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; With a small probability $\epsilon$ (epsilon), the agent performs a **random action** instead of what their strategy dictates.</span></span>
 <span id="cb32-381"><a href="#cb32-381" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-382"><a href="#cb32-382" aria-hidden="true" tabindex="-1"></a>This type of error introduces uncertainty about one&#39;s own behavior and, as we will see, can make retaliatory strategies like Tit-for-Tat vulnerable — especially if the opponent can&#39;t distinguish an error from a betrayal.</span>
+<span id="cb32-382"><a href="#cb32-382" aria-hidden="true" tabindex="-1"></a>This type of error introduces uncertainty about one&#39;s own behavior and, as we will see, can make retaliatory strategies like GT vulnerable — especially if the opponent can&#39;t distinguish an error from a deliberate action.</span>
 <span id="cb32-383"><a href="#cb32-383" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-384"><a href="#cb32-384" aria-hidden="true" tabindex="-1"></a><span class="fu">### Misperception — Perceptual Noise</span></span>
 <span id="cb32-385"><a href="#cb32-385" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-386"><a href="#cb32-386" aria-hidden="true" tabindex="-1"></a>Also called **noise**, Here, the action is implemented correctly, but it is **interpreted incorrectly** by the opponent. For example, Agent A cooperates, but Agent B **perceives** it as defection. The difference is, that while agent B get&#39;s all the benefits</span>
+<span id="cb32-386"><a href="#cb32-386" aria-hidden="true" tabindex="-1"></a>Also called **noise**, Here, the action is implemented correctly, but it is **interpreted incorrectly** by the opponent. For example, Agent A cooperates, but Agent B **perceives** it as defection. The difference to the situation with an error is that the outcome can still be (C,C) and, hence, B benefits from A&#39;s cooperation, even so it is perceived as defection.</span>
 <span id="cb32-387"><a href="#cb32-387" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-388"><a href="#cb32-388" aria-hidden="true" tabindex="-1"></a>In modeling terms:</span>
 <span id="cb32-389"><a href="#cb32-389" aria-hidden="true" tabindex="-1"></a></span>
@@ -6740,208 +6743,212 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb32-393"><a href="#cb32-393" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-394"><a href="#cb32-394" aria-hidden="true" tabindex="-1"></a><span class="fu">### Do Agents Know They Erred?</span></span>
 <span id="cb32-395"><a href="#cb32-395" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-396"><a href="#cb32-396" aria-hidden="true" tabindex="-1"></a>One important — and often underappreciated — modeling decision concerns **agent awareness of mistakes**. In other words, when an error occurs, do agents **know** it was a mistake, or do they treat it as intentional behavior? The answer can have a dramatic impact on the system&#39;s dynamics.</span>
+<span id="cb32-396"><a href="#cb32-396" aria-hidden="true" tabindex="-1"></a>One important modeling decision concerns the **agents awareness of mistakes**, that is, when an error occurs, do agents **know** it was a mistake, or do they treat it as intentional behavior? The answer can have a dramatic impact on the system&#39;s dynamics.</span>
 <span id="cb32-397"><a href="#cb32-397" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-398"><a href="#cb32-398" aria-hidden="true" tabindex="-1"></a>If **agents know they made an error**, they might adjust their behavior accordingly — for example, by attempting to **make amends** or return to cooperation more quickly. This is especially relevant for conditional strategies like **Tit-for-Tat**, which typically respond to defection with defection. If a Tit-for-Tat agent realizes that its own defection was a mistake, it might become **contrite** and respond with a string of cooperative moves to signal regret, rather than starting a retaliatory loop <span class="co">[</span><span class="ot">see @wu1995</span><span class="co">]</span>.</span>
+<span id="cb32-398"><a href="#cb32-398" aria-hidden="true" tabindex="-1"></a>If **agents know they made an error**, they might adjust their behavior accordingly — for example, by attempting to **make amends** or return to cooperation more quickly. This is especially relevant for conditional strategies like GT or TFT, which typically respond to defection with defection. If a TFT agent realizes that its own defection was a mistake, on the other hand, it might become **contrite** and respond with a string of cooperative moves to signal regret, rather than starting a retaliatory loop <span class="co">[</span><span class="ot">see @wu1995</span><span class="co">]</span>.</span>
 <span id="cb32-399"><a href="#cb32-399" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-400"><a href="#cb32-400" aria-hidden="true" tabindex="-1"></a>Similarly, if **agents know that others made an error**, they might choose to **forgive** rather than retaliate. This capacity for leniency can stabilize cooperation in noisy environments — but it depends on agents being able to distinguish between intentional and accidental defection, which is not always realistic.</span>
 <span id="cb32-401"><a href="#cb32-401" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-402"><a href="#cb32-402" aria-hidden="true" tabindex="-1"></a>In contrast, when it comes to **misperception** — where agents misinterpret the opponent’s action — it’s far less plausible that they would be aware of the mistake. Agents may not know that their interpretation was incorrect. However, they might **suspect** that some level of noise exists in the environment. If so, this belief could be reflected in the strategies they adopt: agents might implement **forgiving strategies** that tolerate occasional (seemingly) defections, under the assumption that some of them may be just misunderstandings.</span>
+<span id="cb32-402"><a href="#cb32-402" aria-hidden="true" tabindex="-1"></a>In contrast, when it comes to **misperception** — where agents misinterpret the opponent’s action — it’s much less plausible that an agent would be aware of its own misperception (otherwise the hole idea of this mistake is somewhat fruitless). However, they may know that others have misinterpreted their actions (and therefore act accordingly).</span>
 <span id="cb32-403"><a href="#cb32-403" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-404"><a href="#cb32-404" aria-hidden="true" tabindex="-1"></a>In simulation models, this difference can be captured by adjusting the **strategy space itself**. For example, introducing strategies like **Generous Tit-for-Tat**, which only retaliates probabilistically, or **Win-Stay, Lose-Shift**, which adapts based on payoff rather than pure memory, allows agents to handle errors more flexibly.</span>
+<span id="cb32-404"><a href="#cb32-404" aria-hidden="true" tabindex="-1"></a>Yet, even without knowledge that some level of error or noise exists in the environment, agents are not totally helpless. That is, even without knowledge of mistakes evolution might favor agents that implement **forgiving strategies** that tolerate occasional (seemingly) defections.</span>
 <span id="cb32-405"><a href="#cb32-405" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-406"><a href="#cb32-406" aria-hidden="true" tabindex="-1"></a>In the next section, we’ll explore how to **implement these forms of mistakes** in code.</span>
+<span id="cb32-406"><a href="#cb32-406" aria-hidden="true" tabindex="-1"></a>In order to capture this idea in simulation models, the **strategy space itself** must allow for such strategies. For example, introducing strategies like **Generous Tit-for-Tat**, which only retaliates probabilistically, or **Win-Stay, Lose-Shift**, which adapts based on payoff rather than pure memory, allows agents to handle errors more flexibly.</span>
 <span id="cb32-407"><a href="#cb32-407" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-408"><a href="#cb32-408" aria-hidden="true" tabindex="-1"></a><span class="fu">## Implementing Mistakes</span></span>
+<span id="cb32-408"><a href="#cb32-408" aria-hidden="true" tabindex="-1"></a>In the next section, we’ll explore how to **implement these forms of mistakes** in code.</span>
 <span id="cb32-409"><a href="#cb32-409" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-410"><a href="#cb32-410" aria-hidden="true" tabindex="-1"></a>We introduce in the <span class="in">`model`</span> two new variables:</span>
+<span id="cb32-410"><a href="#cb32-410" aria-hidden="true" tabindex="-1"></a><span class="fu">## Implementing Mistakes</span></span>
 <span id="cb32-411"><a href="#cb32-411" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-412"><a href="#cb32-412" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`error`</span> the probability that an agent chooses a random strategy</span>
-<span id="cb32-413"><a href="#cb32-413" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`noise`</span> the probability that an agent i thinks that agent j did a random strategy instead.</span>
-<span id="cb32-414"><a href="#cb32-414" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-415"><a href="#cb32-415" aria-hidden="true" tabindex="-1"></a>In our <span class="in">`run_step()`</span> function we must make some changes in the loop where agents interact with one another.<span class="ot">[^3]</span></span>
+<span id="cb32-412"><a href="#cb32-412" aria-hidden="true" tabindex="-1"></a>We introduce in the <span class="in">`model`</span> two new variables:</span>
+<span id="cb32-413"><a href="#cb32-413" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-414"><a href="#cb32-414" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`error`</span> the probability that an agent chooses a random strategy</span>
+<span id="cb32-415"><a href="#cb32-415" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`noise`</span> the probability that an agent i thinks that agent j did a random strategy instead.</span>
 <span id="cb32-416"><a href="#cb32-416" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-417"><a href="#cb32-417" aria-hidden="true" tabindex="-1"></a><span class="ot">[^3]: </span>I made a few more changes than strictly necessary compared to the original version of the code — in particular, I renamed several variables. This wasn’t just for the sake of change, but for educational clarity. By giving variables more descriptive names, it becomes easier to follow the logic of the simulation and understand exactly what each part of the code is doing.</span>
+<span id="cb32-417"><a href="#cb32-417" aria-hidden="true" tabindex="-1"></a>In our <span class="in">`run_step()`</span> function we must make some changes in the loop where agents interact with one another.<span class="ot">[^3]</span></span>
 <span id="cb32-418"><a href="#cb32-418" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-421"><a href="#cb32-421" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb32-422"><a href="#cb32-422" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: FALSE</span></span>
-<span id="cb32-423"><a href="#cb32-423" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (r <span class="cf">in</span> <span class="fu">seq_len</span>(rounds)) {</span>
-<span id="cb32-424"><a href="#cb32-424" aria-hidden="true" tabindex="-1"></a>  <span class="co"># determine the intended actions based on current state</span></span>
-<span id="cb32-425"><a href="#cb32-425" aria-hidden="true" tabindex="-1"></a>  intension_i <span class="ot">&lt;-</span> strat_i[state_i]</span>
-<span id="cb32-426"><a href="#cb32-426" aria-hidden="true" tabindex="-1"></a>  intension_j <span class="ot">&lt;-</span> strat_j[state_j]</span>
-<span id="cb32-427"><a href="#cb32-427" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb32-428"><a href="#cb32-428" aria-hidden="true" tabindex="-1"></a>  <span class="co"># agent executes a move, possibly with error</span></span>
-<span id="cb32-429"><a href="#cb32-429" aria-hidden="true" tabindex="-1"></a>  action_i <span class="ot">&lt;-</span> <span class="fu">ifelse</span> (<span class="fu">runif</span>(<span class="dv">1</span>) <span class="sc">&lt;</span> model<span class="sc">$</span>error, <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="dv">1</span>), intension_i)</span>
-<span id="cb32-430"><a href="#cb32-430" aria-hidden="true" tabindex="-1"></a>  action_j <span class="ot">&lt;-</span> <span class="fu">ifelse</span> (<span class="fu">runif</span>(<span class="dv">1</span>) <span class="sc">&lt;</span> model<span class="sc">$</span>error, <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="dv">1</span>), intension_j)</span>
-<span id="cb32-431"><a href="#cb32-431" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb32-432"><a href="#cb32-432" aria-hidden="true" tabindex="-1"></a>  <span class="co"># track cooperation (1 = cooperate, 0 = defect)</span></span>
-<span id="cb32-433"><a href="#cb32-433" aria-hidden="true" tabindex="-1"></a>  coop_i <span class="ot">&lt;-</span> coop_i <span class="sc">+</span> action_i</span>
-<span id="cb32-434"><a href="#cb32-434" aria-hidden="true" tabindex="-1"></a>  coop_j <span class="ot">&lt;-</span> coop_j <span class="sc">+</span> action_j</span>
-<span id="cb32-435"><a href="#cb32-435" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb32-436"><a href="#cb32-436" aria-hidden="true" tabindex="-1"></a>  <span class="co"># apply perceptual errors: agents may misinterpret their partner’s actual action</span></span>
-<span id="cb32-437"><a href="#cb32-437" aria-hidden="true" tabindex="-1"></a>  perception_i_of_j <span class="ot">&lt;-</span> <span class="fu">ifelse</span> (<span class="fu">runif</span>(<span class="dv">1</span>) <span class="sc">&lt;</span> model<span class="sc">$</span>noise, <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="dv">1</span>), action_j)   perception_j_of_i <span class="ot">&lt;-</span> <span class="fu">ifelse</span> (<span class="fu">runif</span>(<span class="dv">1</span>) <span class="sc">&lt;</span> model<span class="sc">$</span>noise, <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="dv">1</span>), action_i) </span>
-<span id="cb32-438"><a href="#cb32-438" aria-hidden="true" tabindex="-1"></a>  <span class="co"># update agent state based on transition matrix</span></span>
-<span id="cb32-439"><a href="#cb32-439" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 1 = DD , 2 = CD , 3 = DC , 4 = CC</span></span>
-<span id="cb32-440"><a href="#cb32-440" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Note: transition uses the agent&#39;s *intended* action (not actual behavior), and their *perceived* view of the other</span></span>
-<span id="cb32-441"><a href="#cb32-441" aria-hidden="true" tabindex="-1"></a>  state_i  <span class="ot">&lt;-</span> trans_mat[state_i,  intension_i <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> perception_i_of_j <span class="sc">+</span> <span class="dv">1</span>]</span>
-<span id="cb32-442"><a href="#cb32-442" aria-hidden="true" tabindex="-1"></a>  state_j  <span class="ot">&lt;-</span> trans_mat[state_j,  intension_j <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> perception_j_of_i <span class="sc">+</span> <span class="dv">1</span>]</span>
-<span id="cb32-443"><a href="#cb32-443" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb32-444"><a href="#cb32-444" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-445"><a href="#cb32-445" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-446"><a href="#cb32-446" aria-hidden="true" tabindex="-1"></a>This loop simulates one round of repeated interaction between two agents (<span class="in">`i`</span> and <span class="in">`j`</span>). For each round:</span>
-<span id="cb32-447"><a href="#cb32-447" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-448"><a href="#cb32-448" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>**Determine intentions**: Based on their current internal state and strategy, each agent chooses what they *intend* to do (cooperate or defect).</span>
+<span id="cb32-419"><a href="#cb32-419" aria-hidden="true" tabindex="-1"></a><span class="ot">[^3]: </span>I made a few more changes than strictly necessary compared to the original version of the code — in particular, I renamed several variables. This wasn’t just for the sake of change, but for educational clarity. By giving variables more descriptive names, it becomes easier to follow the logic of the simulation and understand exactly what each part of the code is doing.</span>
+<span id="cb32-420"><a href="#cb32-420" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-423"><a href="#cb32-423" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-424"><a href="#cb32-424" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: FALSE</span></span>
+<span id="cb32-425"><a href="#cb32-425" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (r <span class="cf">in</span> <span class="fu">seq_len</span>(rounds)) {</span>
+<span id="cb32-426"><a href="#cb32-426" aria-hidden="true" tabindex="-1"></a>  <span class="co"># determine the intended actions based on current state</span></span>
+<span id="cb32-427"><a href="#cb32-427" aria-hidden="true" tabindex="-1"></a>  intension_i <span class="ot">&lt;-</span> strat_i[state_i]</span>
+<span id="cb32-428"><a href="#cb32-428" aria-hidden="true" tabindex="-1"></a>  intension_j <span class="ot">&lt;-</span> strat_j[state_j]</span>
+<span id="cb32-429"><a href="#cb32-429" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb32-430"><a href="#cb32-430" aria-hidden="true" tabindex="-1"></a>  <span class="co"># agent executes a move, possibly with error</span></span>
+<span id="cb32-431"><a href="#cb32-431" aria-hidden="true" tabindex="-1"></a>  action_i <span class="ot">&lt;-</span> <span class="fu">ifelse</span> (<span class="fu">runif</span>(<span class="dv">1</span>) <span class="sc">&lt;</span> model<span class="sc">$</span>error, <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="dv">1</span>), intension_i)</span>
+<span id="cb32-432"><a href="#cb32-432" aria-hidden="true" tabindex="-1"></a>  action_j <span class="ot">&lt;-</span> <span class="fu">ifelse</span> (<span class="fu">runif</span>(<span class="dv">1</span>) <span class="sc">&lt;</span> model<span class="sc">$</span>error, <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="dv">1</span>), intension_j)</span>
+<span id="cb32-433"><a href="#cb32-433" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb32-434"><a href="#cb32-434" aria-hidden="true" tabindex="-1"></a>  <span class="co"># track cooperation (1 = cooperate, 0 = defect)</span></span>
+<span id="cb32-435"><a href="#cb32-435" aria-hidden="true" tabindex="-1"></a>  coop_i <span class="ot">&lt;-</span> coop_i <span class="sc">+</span> action_i</span>
+<span id="cb32-436"><a href="#cb32-436" aria-hidden="true" tabindex="-1"></a>  coop_j <span class="ot">&lt;-</span> coop_j <span class="sc">+</span> action_j</span>
+<span id="cb32-437"><a href="#cb32-437" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb32-438"><a href="#cb32-438" aria-hidden="true" tabindex="-1"></a>  <span class="co"># apply perceptual errors: agents may misinterpret their partner’s actual action</span></span>
+<span id="cb32-439"><a href="#cb32-439" aria-hidden="true" tabindex="-1"></a>  perception_i_of_j <span class="ot">&lt;-</span> <span class="fu">ifelse</span> (<span class="fu">runif</span>(<span class="dv">1</span>) <span class="sc">&lt;</span> model<span class="sc">$</span>noise, <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="dv">1</span>), action_j)</span>
+<span id="cb32-440"><a href="#cb32-440" aria-hidden="true" tabindex="-1"></a>  perception_j_of_i <span class="ot">&lt;-</span> <span class="fu">ifelse</span> (<span class="fu">runif</span>(<span class="dv">1</span>) <span class="sc">&lt;</span> model<span class="sc">$</span>noise, <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="dv">1</span>), action_i)</span>
+<span id="cb32-441"><a href="#cb32-441" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb32-442"><a href="#cb32-442" aria-hidden="true" tabindex="-1"></a>  <span class="co"># update agent state based on transition matrix</span></span>
+<span id="cb32-443"><a href="#cb32-443" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 1 = DD , 2 = CD , 3 = DC , 4 = CC</span></span>
+<span id="cb32-444"><a href="#cb32-444" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Note: we use ego&#39;s intended action (i.e. they do not know they erred), and their perceived view of the other</span></span>
+<span id="cb32-445"><a href="#cb32-445" aria-hidden="true" tabindex="-1"></a>  state_i  <span class="ot">&lt;-</span> trans_mat[state_i,  intension_i <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> perception_i_of_j <span class="sc">+</span> <span class="dv">1</span>]</span>
+<span id="cb32-446"><a href="#cb32-446" aria-hidden="true" tabindex="-1"></a>  state_j  <span class="ot">&lt;-</span> trans_mat[state_j,  intension_j <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> perception_j_of_i <span class="sc">+</span> <span class="dv">1</span>]</span>
+<span id="cb32-447"><a href="#cb32-447" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb32-448"><a href="#cb32-448" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb32-449"><a href="#cb32-449" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-450"><a href="#cb32-450" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>**Introduce behavioral noise**: With a small probability (`model$error`), each agent might perform a **random action**, disregarding their intention.</span>
+<span id="cb32-450"><a href="#cb32-450" aria-hidden="true" tabindex="-1"></a>This loop simulates one round of repeated interaction between two agents (<span class="in">`i`</span> and <span class="in">`j`</span>). For each round:</span>
 <span id="cb32-451"><a href="#cb32-451" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-452"><a href="#cb32-452" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>**Track cooperation**: We keep count of how many times each agent actually cooperates, for use in fitness calculations.</span>
+<span id="cb32-452"><a href="#cb32-452" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>**Determine intentions**: Based on their current internal state and strategy, each agent chooses what they *intend* to do (cooperate or defect).</span>
 <span id="cb32-453"><a href="#cb32-453" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-454"><a href="#cb32-454" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>**Apply perceptual noise**: Even if actions are executed correctly, agents may **misinterpret** what the other did. With probability <span class="in">`model$noise`</span>, their perception of the other&#39;s action is randomized.</span>
+<span id="cb32-454"><a href="#cb32-454" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>**Introduce behavioral errors**: With a small probability (`model$error`), each agent might perform a **random action**, disregarding their intention.</span>
 <span id="cb32-455"><a href="#cb32-455" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-456"><a href="#cb32-456" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>**Update state**: Agents update their internal state based on their own **intended action** and what they **perceived** the other agent to have done. This reflects the idea that agents are unaware they’ve made a mistake or misinterpreted a move — they act based on what they *think* happened.</span>
+<span id="cb32-456"><a href="#cb32-456" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>**Track cooperation**: We keep count of how many times each agent actually cooperates, for use in fitness calculations.</span>
 <span id="cb32-457"><a href="#cb32-457" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-458"><a href="#cb32-458" aria-hidden="true" tabindex="-1"></a>If we had no errors and noise the above code would be:</span>
+<span id="cb32-458"><a href="#cb32-458" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>**Apply perceptual noise**: Even if actions are executed correctly, agents may **misinterpret** what the other did. With probability <span class="in">`model$noise`</span>, their perception of the other&#39;s action is randomized.</span>
 <span id="cb32-459"><a href="#cb32-459" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-462"><a href="#cb32-462" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb32-463"><a href="#cb32-463" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: FALSE   </span></span>
-<span id="cb32-464"><a href="#cb32-464" aria-hidden="true" tabindex="-1"></a>  <span class="co"># without error</span></span>
-<span id="cb32-465"><a href="#cb32-465" aria-hidden="true" tabindex="-1"></a>  action_i <span class="ot">&lt;-</span> intension_i </span>
-<span id="cb32-466"><a href="#cb32-466" aria-hidden="true" tabindex="-1"></a>  action_j <span class="ot">&lt;-</span> intension_j</span>
-<span id="cb32-467"><a href="#cb32-467" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ...      </span></span>
-<span id="cb32-468"><a href="#cb32-468" aria-hidden="true" tabindex="-1"></a>  <span class="co"># without noise</span></span>
-<span id="cb32-469"><a href="#cb32-469" aria-hidden="true" tabindex="-1"></a>  perception_i_of_j <span class="ot">&lt;-</span> action_j</span>
-<span id="cb32-470"><a href="#cb32-470" aria-hidden="true" tabindex="-1"></a>  perception_j_of_i <span class="ot">&lt;-</span> action_i </span>
-<span id="cb32-471"><a href="#cb32-471" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-472"><a href="#cb32-472" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-473"><a href="#cb32-473" aria-hidden="true" tabindex="-1"></a>Note that in this implementation, **agents do not realize when they have made a mistake**—whether through misimplementation or misperception. This is an intentional design choice aimed at keeping the model tractable. Allowing agents to **detect their own errors** would significantly **increase the complexity of the strategy space**. In particular, it would require us to expand the number of possible internal states an agent can track and respond to. With `memory = 1`, each agent currently reacts to one of five states: &quot;first, DD, CD, DC, CC&quot;. If we wanted to incorporate awareness of prior errors, we would need to **double the number of states** beyond the first—for instance, introducing a parallel set of states such as &quot;eDD, eCD, eDC, eCC&quot;, where the prefix <span class="sc">\`</span>e<span class="sc">\`</span> indicates that the agent knows it made an error in the previous round. Each of these error-aware states would then require specific decision rules, effectively increasing the strategy space from $2^5 = 32$ to $2^9 = 512$ possible strategies.</span>
-<span id="cb32-474"><a href="#cb32-474" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-475"><a href="#cb32-475" aria-hidden="true" tabindex="-1"></a>While this expansion is certainly feasible, it introduces a much higher computational burden and makes the model harder to analyze. For now, we assume agents act based solely on what they believe happened, without recognizing or compensating for their own mistakes — a simplification that reflects limited introspective capacity and keeps the model analytically manageable.</span>
+<span id="cb32-460"><a href="#cb32-460" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>**Update state**: Agents update their internal state based on their own **intended action** and what they **perceived** the other agent to have done. This reflects the idea that agents are unaware they’ve made a mistake or misinterpreted a move — they act based on what they *think* happened.</span>
+<span id="cb32-461"><a href="#cb32-461" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-462"><a href="#cb32-462" aria-hidden="true" tabindex="-1"></a>If we had no errors and noise the above code would be:</span>
+<span id="cb32-463"><a href="#cb32-463" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-466"><a href="#cb32-466" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-467"><a href="#cb32-467" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: FALSE   </span></span>
+<span id="cb32-468"><a href="#cb32-468" aria-hidden="true" tabindex="-1"></a>  <span class="co"># without error</span></span>
+<span id="cb32-469"><a href="#cb32-469" aria-hidden="true" tabindex="-1"></a>  action_i <span class="ot">&lt;-</span> intension_i </span>
+<span id="cb32-470"><a href="#cb32-470" aria-hidden="true" tabindex="-1"></a>  action_j <span class="ot">&lt;-</span> intension_j</span>
+<span id="cb32-471"><a href="#cb32-471" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ...      </span></span>
+<span id="cb32-472"><a href="#cb32-472" aria-hidden="true" tabindex="-1"></a>  <span class="co"># without noise</span></span>
+<span id="cb32-473"><a href="#cb32-473" aria-hidden="true" tabindex="-1"></a>  perception_i_of_j <span class="ot">&lt;-</span> action_j</span>
+<span id="cb32-474"><a href="#cb32-474" aria-hidden="true" tabindex="-1"></a>  perception_j_of_i <span class="ot">&lt;-</span> action_i </span>
+<span id="cb32-475"><a href="#cb32-475" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb32-476"><a href="#cb32-476" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-477"><a href="#cb32-477" aria-hidden="true" tabindex="-1"></a><span class="fu">## Analyzing Errors</span></span>
+<span id="cb32-477"><a href="#cb32-477" aria-hidden="true" tabindex="-1"></a>Note that in this implementation, **agents do not realize when they have made a mistake**—whether through misimplementation or misperception. This is an intentional design choice aimed at keeping the model tractable. Allowing agents to **detect their own errors** would significantly **increase the complexity of the strategy space**. In particular, it would require us to expand the number of possible internal states an agent can track and respond to. With `memory = 1`, each agent currently reacts to one of five states: &quot;first, DD, CD, DC, CC&quot;. If we wanted to incorporate awareness of prior errors, we would need to **double the number of states** beyond the first—for instance, introducing a parallel set of states such as &quot;eDD, eCD, eDC, eCC&quot;, where the prefix <span class="sc">\`</span>e<span class="sc">\`</span> indicates that the agent knows it made an error in the previous round. Each of these error-aware states would then require specific decision rules, effectively increasing the strategy space from $2^5 = 32$ to $2^9 = 512$ possible strategies.</span>
 <span id="cb32-478"><a href="#cb32-478" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-479"><a href="#cb32-479" aria-hidden="true" tabindex="-1"></a>Let’s now explore how even small behavioral errors can affect the dynamics of an evolutionary agent-based model. We’ll run a simulation using the <span class="in">`with_error`</span> model, which is similar to our earlier <span class="in">`baseline`</span> but with the following changes:</span>
+<span id="cb32-479"><a href="#cb32-479" aria-hidden="true" tabindex="-1"></a>While this expansion is certainly feasible, it introduces a much higher computational burden and makes the model harder to analyze. For now, we assume agents act based solely on what they believe happened, without recognizing or compensating for their own mistakes — a simplification that reflects limited introspective capacity and keeps the model analytically manageable.</span>
 <span id="cb32-480"><a href="#cb32-480" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-481"><a href="#cb32-481" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`mu_rnd = 0.05`</span> (random mutation allowed)</span>
-<span id="cb32-482"><a href="#cb32-482" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`mutators_n_fixed = FALSE`</span> (number of mutators scales with mutation rate)</span>
-<span id="cb32-483"><a href="#cb32-483" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`max_t = 2500`</span> (sufficient time for stabilization)</span>
+<span id="cb32-481"><a href="#cb32-481" aria-hidden="true" tabindex="-1"></a><span class="fu">## Analyzing Errors</span></span>
+<span id="cb32-482"><a href="#cb32-482" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-483"><a href="#cb32-483" aria-hidden="true" tabindex="-1"></a>Let’s now explore how even small behavioral errors can affect the dynamics of an evolutionary agent-based model. We’ll run a simulation using the <span class="in">`with_error`</span> model, which is similar to our earlier <span class="in">`baseline`</span> but with the following changes:</span>
 <span id="cb32-484"><a href="#cb32-484" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-485"><a href="#cb32-485" aria-hidden="true" tabindex="-1"></a>In this experiment, we vary the **error rate** — the probability that an agent executes a random action instead of following its intended strategy:</span>
-<span id="cb32-486"><a href="#cb32-486" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-489"><a href="#cb32-489" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb32-490"><a href="#cb32-490" aria-hidden="true" tabindex="-1"></a>simulation  <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb32-491"><a href="#cb32-491" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> <span class="st">&quot;with_error&quot;</span>,</span>
-<span id="cb32-492"><a href="#cb32-492" aria-hidden="true" tabindex="-1"></a>  <span class="at">replications =</span> <span class="dv">15</span>,</span>
-<span id="cb32-493"><a href="#cb32-493" aria-hidden="true" tabindex="-1"></a>  <span class="at">tbl_parameter =</span> <span class="fu">expand.grid</span>(</span>
-<span id="cb32-494"><a href="#cb32-494" aria-hidden="true" tabindex="-1"></a>    <span class="at">error =</span> <span class="fu">seq</span>(<span class="dv">0</span>, .<span class="dv">2</span>, <span class="at">length.out =</span> <span class="dv">5</span>)</span>
-<span id="cb32-495"><a href="#cb32-495" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb32-496"><a href="#cb32-496" aria-hidden="true" tabindex="-1"></a>  <span class="at">master_seed  =</span> <span class="dv">42</span>,</span>
-<span id="cb32-497"><a href="#cb32-497" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_cores    =</span> <span class="dv">15</span></span>
-<span id="cb32-498"><a href="#cb32-498" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb32-499"><a href="#cb32-499" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-500"><a href="#cb32-500" aria-hidden="true" tabindex="-1"></a><span class="co"># results &lt;- run_simulation(simulation)</span></span>
-<span id="cb32-501"><a href="#cb32-501" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;../data/abm-pd2/week06_results_02.rds&quot;</span>)</span>
-<span id="cb32-502"><a href="#cb32-502" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-485"><a href="#cb32-485" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`mu_rnd = 0.05`</span> (random mutation allowed)</span>
+<span id="cb32-486"><a href="#cb32-486" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`mutators_n_fixed = FALSE`</span> (random number of random mutators)</span>
+<span id="cb32-487"><a href="#cb32-487" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`max_t = 2500`</span> (sufficient time for stabilization)</span>
+<span id="cb32-488"><a href="#cb32-488" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-489"><a href="#cb32-489" aria-hidden="true" tabindex="-1"></a>In this experiment, we vary the **error rate** — the probability that an agent executes a random action instead of following its intended strategy:</span>
+<span id="cb32-490"><a href="#cb32-490" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-493"><a href="#cb32-493" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-494"><a href="#cb32-494" aria-hidden="true" tabindex="-1"></a>simulation  <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb32-495"><a href="#cb32-495" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> <span class="st">&quot;with_error&quot;</span>,</span>
+<span id="cb32-496"><a href="#cb32-496" aria-hidden="true" tabindex="-1"></a>  <span class="at">replications =</span> <span class="dv">15</span>,</span>
+<span id="cb32-497"><a href="#cb32-497" aria-hidden="true" tabindex="-1"></a>  <span class="at">tbl_parameter =</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb32-498"><a href="#cb32-498" aria-hidden="true" tabindex="-1"></a>    <span class="at">error =</span> <span class="fu">seq</span>(<span class="dv">0</span>, .<span class="dv">2</span>, <span class="at">length.out =</span> <span class="dv">5</span>)</span>
+<span id="cb32-499"><a href="#cb32-499" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb32-500"><a href="#cb32-500" aria-hidden="true" tabindex="-1"></a>  <span class="at">master_seed  =</span> <span class="dv">42</span>,</span>
+<span id="cb32-501"><a href="#cb32-501" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_cores    =</span> <span class="dv">15</span></span>
+<span id="cb32-502"><a href="#cb32-502" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb32-503"><a href="#cb32-503" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-504"><a href="#cb32-504" aria-hidden="true" tabindex="-1"></a>We begin by visualizing how average population fitness evolves over time under different error levels (see @fig-pop-fitness2):</span>
-<span id="cb32-505"><a href="#cb32-505" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-508"><a href="#cb32-508" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb32-509"><a href="#cb32-509" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-pop-fitness2</span></span>
-<span id="cb32-510"><a href="#cb32-510" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: &quot;Average population fitness over t for diffrent error rates.&quot;</span></span>
-<span id="cb32-511"><a href="#cb32-511" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb32-512"><a href="#cb32-512" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: Show R Code (Plot)</span></span>
-<span id="cb32-513"><a href="#cb32-513" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_avg_fitness</span>(results<span class="sc">$</span>df_population,</span>
-<span id="cb32-514"><a href="#cb32-514" aria-hidden="true" tabindex="-1"></a>                 error)</span>
-<span id="cb32-515"><a href="#cb32-515" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-516"><a href="#cb32-516" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-517"><a href="#cb32-517" aria-hidden="true" tabindex="-1"></a>Even at a modest error rate of **5%**, we observe a **significant decline** in average fitness. As the error rate increases, fitness drops further. Note that all simulations with errors have **large confidence intervals (CIs)**. These wide CIs suggest high variability in outcomes across different replications — some worlds may still sustain partial cooperation, while others collapse into full defection. We can easily see this in an OLS:</span>
-<span id="cb32-518"><a href="#cb32-518" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-521"><a href="#cb32-521" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb32-522"><a href="#cb32-522" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(pop_fit_mean <span class="sc">~</span> error, <span class="at">data =</span> results<span class="sc">$</span>df_population))</span>
-<span id="cb32-523"><a href="#cb32-523" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-524"><a href="#cb32-524" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-525"><a href="#cb32-525" aria-hidden="true" tabindex="-1"></a>Let’s zoom in on the final steps of the simulation with an error rate of <span class="in">`0.05`</span> (accross different replications):</span>
-<span id="cb32-526"><a href="#cb32-526" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-529"><a href="#cb32-529" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb32-530"><a href="#cb32-530" aria-hidden="true" tabindex="-1"></a>results<span class="sc">$</span>df_strategies <span class="sc">|&gt;</span> <span class="fu">filter</span>(error <span class="sc">==</span> <span class="fl">0.05</span>, step <span class="sc">==</span> <span class="dv">2500</span>) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(strat_share_mean)) <span class="sc">|&gt;</span> <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">10</span>)</span>
-<span id="cb32-531"><a href="#cb32-531" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-532"><a href="#cb32-532" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-533"><a href="#cb32-533" aria-hidden="true" tabindex="-1"></a>Here, we see that GT remains the most successful strategy on average. However, its **mean fitness has dropped to 1.42** — far from the cooperative optimum of 2. The reason is simple: even when both players use GT, a single misstep can trigger an irreversible chain of mutual defections. Cooperation with these strategies is **fragile** under error.</span>
-<span id="cb32-534"><a href="#cb32-534" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-535"><a href="#cb32-535" aria-hidden="true" tabindex="-1"></a>Now let’s look at the most extreme scenario with a 20% error rate:</span>
+<span id="cb32-504"><a href="#cb32-504" aria-hidden="true" tabindex="-1"></a><span class="co"># results &lt;- run_simulation(simulation)</span></span>
+<span id="cb32-505"><a href="#cb32-505" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;../data/abm-pd2/week06_results_02.rds&quot;</span>)</span>
+<span id="cb32-506"><a href="#cb32-506" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-507"><a href="#cb32-507" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-508"><a href="#cb32-508" aria-hidden="true" tabindex="-1"></a>We begin by visualizing how average population fitness evolves over time under different error levels (see @fig-pop-fitness2):</span>
+<span id="cb32-509"><a href="#cb32-509" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-512"><a href="#cb32-512" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-513"><a href="#cb32-513" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-pop-fitness2</span></span>
+<span id="cb32-514"><a href="#cb32-514" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: &quot;Average population fitness over t for diffrent error rates.&quot;</span></span>
+<span id="cb32-515"><a href="#cb32-515" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb32-516"><a href="#cb32-516" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: Show R Code (Plot)</span></span>
+<span id="cb32-517"><a href="#cb32-517" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_avg_fitness</span>(results<span class="sc">$</span>df_population,</span>
+<span id="cb32-518"><a href="#cb32-518" aria-hidden="true" tabindex="-1"></a>                 error)</span>
+<span id="cb32-519"><a href="#cb32-519" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-520"><a href="#cb32-520" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-521"><a href="#cb32-521" aria-hidden="true" tabindex="-1"></a>Even at a modest error rate of **5%**, we observe a **significant decline** in average fitness. As the error rate increases, fitness drops further. Note that all simulations with errors have **large confidence intervals (CIs)**. These wide CIs suggest high variability in outcomes across different replications — some worlds may still sustain partial cooperation, while others collapse into full defection. We can easily see this in an OLS:</span>
+<span id="cb32-522"><a href="#cb32-522" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-525"><a href="#cb32-525" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-526"><a href="#cb32-526" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(pop_fit_mean <span class="sc">~</span> error, <span class="at">data =</span> results<span class="sc">$</span>df_population))</span>
+<span id="cb32-527"><a href="#cb32-527" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-528"><a href="#cb32-528" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-529"><a href="#cb32-529" aria-hidden="true" tabindex="-1"></a>Let’s zoom in on the final steps of the simulation with an error rate of <span class="in">`0.05`</span> (accross different replications):</span>
+<span id="cb32-530"><a href="#cb32-530" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-533"><a href="#cb32-533" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-534"><a href="#cb32-534" aria-hidden="true" tabindex="-1"></a>results<span class="sc">$</span>df_strategies <span class="sc">|&gt;</span> <span class="fu">filter</span>(error <span class="sc">==</span> <span class="fl">0.05</span>, step <span class="sc">==</span> <span class="dv">2500</span>) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(strat_share_mean)) <span class="sc">|&gt;</span> <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">10</span>)</span>
+<span id="cb32-535"><a href="#cb32-535" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb32-536"><a href="#cb32-536" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-539"><a href="#cb32-539" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb32-540"><a href="#cb32-540" aria-hidden="true" tabindex="-1"></a>results<span class="sc">$</span>df_strategies <span class="sc">|&gt;</span> <span class="fu">filter</span>(error <span class="sc">==</span> <span class="fl">0.2</span>, step <span class="sc">==</span> <span class="dv">2500</span>) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(strat_share_mean)) <span class="sc">|&gt;</span> <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">10</span>)</span>
-<span id="cb32-541"><a href="#cb32-541" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-542"><a href="#cb32-542" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-543"><a href="#cb32-543" aria-hidden="true" tabindex="-1"></a>The picture changes dramatically: aD becomes the dominant strategy. GT falls to third place, and nearly all strategies show **very poor fitness**, hovering far below 1. Cooperation has collapsed under the weight of constant mistakes.</span>
-<span id="cb32-544"><a href="#cb32-544" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-545"><a href="#cb32-545" aria-hidden="true" tabindex="-1"></a>What these results tell us is that **cooperation can survive low error rates**, but it **cannot withstand high error rates** — at least not with the current strategy space.</span>
+<span id="cb32-537"><a href="#cb32-537" aria-hidden="true" tabindex="-1"></a>Here, we see that GT remains the most successful strategy on average. However, its **mean fitness has dropped to 1.42** — far from the cooperative optimum of 2. The reason is simple: even when both players use GT, a single misstep can trigger an irreversible chain of mutual defections. Cooperation with these strategies is **fragile** under error.</span>
+<span id="cb32-538"><a href="#cb32-538" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-539"><a href="#cb32-539" aria-hidden="true" tabindex="-1"></a>Now let’s look at the most extreme scenario with a 20% error rate:</span>
+<span id="cb32-540"><a href="#cb32-540" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-543"><a href="#cb32-543" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-544"><a href="#cb32-544" aria-hidden="true" tabindex="-1"></a>results<span class="sc">$</span>df_strategies <span class="sc">|&gt;</span> <span class="fu">filter</span>(error <span class="sc">==</span> <span class="fl">0.2</span>, step <span class="sc">==</span> <span class="dv">2500</span>) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(strat_share_mean)) <span class="sc">|&gt;</span> <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">10</span>)</span>
+<span id="cb32-545"><a href="#cb32-545" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb32-546"><a href="#cb32-546" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-547"><a href="#cb32-547" aria-hidden="true" tabindex="-1"></a>The problem is that the simple strategies we’re working with — such as GT — are **not designed to tolerate errors**. Once trust is broken, they typically defect forever, unable to distinguish between malice and mistake. They lack mechanisms for **forgiveness**, **error recovery**, or even flexible adaptation in noisy environments.</span>
+<span id="cb32-547"><a href="#cb32-547" aria-hidden="true" tabindex="-1"></a>The picture changes dramatically: aD becomes the dominant strategy. GT falls to third place, and nearly all strategies show **very poor fitness**, hovering far below 1. Cooperation has collapsed under the weight of constant mistakes.</span>
 <span id="cb32-548"><a href="#cb32-548" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-549"><a href="#cb32-549" aria-hidden="true" tabindex="-1"></a>To address this limitation, we need to equip our agents with the ability to implement **more nuanced behaviors** — strategies that can forgive occasional defections, test trust again, or respond probabilistically. This requires a **richer and more complex strategy space**, where memory and adaptability allow cooperation to persist even in the presence of noise.</span>
+<span id="cb32-549"><a href="#cb32-549" aria-hidden="true" tabindex="-1"></a>What these results tell us is that **cooperation can survive low error rates**, but it **cannot withstand high error rates** — at least not with the current strategy space.</span>
 <span id="cb32-550"><a href="#cb32-550" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-551"><a href="#cb32-551" aria-hidden="true" tabindex="-1"></a>We’ll explore this in more depth in the **next in-class session**, where we extend the memory length and introduce strategies capable of resilience under uncertainty.</span>
+<span id="cb32-551"><a href="#cb32-551" aria-hidden="true" tabindex="-1"></a>The problem is that the simple strategies we’re working with — such as GT — are **not designed to tolerate errors**. Once trust is broken, they typically defect forever, unable to distinguish between malice and mistake. They lack mechanisms for **forgiveness**, **error recovery**, or even flexible adaptation in noisy environments.</span>
 <span id="cb32-552"><a href="#cb32-552" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-553"><a href="#cb32-553" aria-hidden="true" tabindex="-1"></a>Before we close, let’s take a moment to explore how the simulation behaves in the presence of **perceptual noise**, rather than behavioral error.</span>
+<span id="cb32-553"><a href="#cb32-553" aria-hidden="true" tabindex="-1"></a>To address this limitation, we need to equip our agents with the ability to implement **more nuanced behaviors** — strategies that can forgive occasional defections, test trust again, or respond probabilistically. This requires a **richer and more complex strategy space**, where memory and adaptability allow cooperation to persist even in the presence of noise.</span>
 <span id="cb32-554"><a href="#cb32-554" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-555"><a href="#cb32-555" aria-hidden="true" tabindex="-1"></a>In this setup, agents still intend to follow their strategies correctly, but they may **misperceive** what the other agent did — for example, interpreting cooperation as defection due to observational mistakes or misunderstanding. Here&#39;s the simulation setup:</span>
+<span id="cb32-555"><a href="#cb32-555" aria-hidden="true" tabindex="-1"></a>We’ll explore this in more depth in the **next in-class session**, where we extend the memory length and introduce strategies capable of resilience under uncertainty.</span>
 <span id="cb32-556"><a href="#cb32-556" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-559"><a href="#cb32-559" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb32-560"><a href="#cb32-560" aria-hidden="true" tabindex="-1"></a>simulation  <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb32-561"><a href="#cb32-561" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> <span class="st">&quot;with_error&quot;</span>,</span>
-<span id="cb32-562"><a href="#cb32-562" aria-hidden="true" tabindex="-1"></a>  <span class="at">replications =</span> <span class="dv">15</span>,</span>
-<span id="cb32-563"><a href="#cb32-563" aria-hidden="true" tabindex="-1"></a>  <span class="at">tbl_parameter =</span> <span class="fu">expand.grid</span>(</span>
-<span id="cb32-564"><a href="#cb32-564" aria-hidden="true" tabindex="-1"></a>    <span class="at">noise =</span> <span class="fu">seq</span>(<span class="dv">0</span>, .<span class="dv">2</span>, <span class="at">length.out =</span> <span class="dv">5</span>)</span>
-<span id="cb32-565"><a href="#cb32-565" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb32-566"><a href="#cb32-566" aria-hidden="true" tabindex="-1"></a>  <span class="at">master_seed  =</span> <span class="dv">42</span>,</span>
-<span id="cb32-567"><a href="#cb32-567" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_cores    =</span> <span class="dv">15</span></span>
-<span id="cb32-568"><a href="#cb32-568" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb32-569"><a href="#cb32-569" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-570"><a href="#cb32-570" aria-hidden="true" tabindex="-1"></a><span class="co"># results &lt;- run_simulation(simulation)</span></span>
-<span id="cb32-571"><a href="#cb32-571" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;../data/abm-pd2/week06_results_03.rds&quot;</span>)</span>
-<span id="cb32-572"><a href="#cb32-572" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-557"><a href="#cb32-557" aria-hidden="true" tabindex="-1"></a>Before we close, let’s take a moment to explore how the simulation behaves in the presence of **perceptual noise**, rather than behavioral error.</span>
+<span id="cb32-558"><a href="#cb32-558" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-559"><a href="#cb32-559" aria-hidden="true" tabindex="-1"></a>In this setup, agents still intend to follow their strategies correctly, but they may **misperceive** what the other agent did — for example, interpreting cooperation as defection due to observational mistakes or misunderstanding. Here&#39;s the simulation setup:</span>
+<span id="cb32-560"><a href="#cb32-560" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-563"><a href="#cb32-563" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-564"><a href="#cb32-564" aria-hidden="true" tabindex="-1"></a>simulation  <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb32-565"><a href="#cb32-565" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> <span class="st">&quot;with_error&quot;</span>,</span>
+<span id="cb32-566"><a href="#cb32-566" aria-hidden="true" tabindex="-1"></a>  <span class="at">replications =</span> <span class="dv">15</span>,</span>
+<span id="cb32-567"><a href="#cb32-567" aria-hidden="true" tabindex="-1"></a>  <span class="at">tbl_parameter =</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb32-568"><a href="#cb32-568" aria-hidden="true" tabindex="-1"></a>    <span class="at">noise =</span> <span class="fu">seq</span>(<span class="dv">0</span>, .<span class="dv">2</span>, <span class="at">length.out =</span> <span class="dv">5</span>)</span>
+<span id="cb32-569"><a href="#cb32-569" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb32-570"><a href="#cb32-570" aria-hidden="true" tabindex="-1"></a>  <span class="at">master_seed  =</span> <span class="dv">42</span>,</span>
+<span id="cb32-571"><a href="#cb32-571" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_cores    =</span> <span class="dv">15</span></span>
+<span id="cb32-572"><a href="#cb32-572" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb32-573"><a href="#cb32-573" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-574"><a href="#cb32-574" aria-hidden="true" tabindex="-1"></a>We begin by visualizing how average population fitness evolves over time under different noise levels (see @fig-pop-fitness3):</span>
-<span id="cb32-575"><a href="#cb32-575" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-578"><a href="#cb32-578" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb32-579"><a href="#cb32-579" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-pop-fitness3</span></span>
-<span id="cb32-580"><a href="#cb32-580" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: &quot;Average population fitness over t for diffrent error rates.&quot;</span></span>
-<span id="cb32-581"><a href="#cb32-581" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb32-582"><a href="#cb32-582" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: Show R Code (Plot)</span></span>
-<span id="cb32-583"><a href="#cb32-583" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_avg_fitness</span>(results<span class="sc">$</span>df_population,</span>
-<span id="cb32-584"><a href="#cb32-584" aria-hidden="true" tabindex="-1"></a>                 noise)</span>
-<span id="cb32-585"><a href="#cb32-585" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-586"><a href="#cb32-586" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-587"><a href="#cb32-587" aria-hidden="true" tabindex="-1"></a>The result is strikingly similar to what we observed for behavioral error. This isn’t a coincidence. For strategies like Grim Trigger, it makes no practical difference whether an opponent actually defected or was simply perceived to have defected. In both cases, GT interprets the situation as a betrayal — and responds by defecting in all future rounds. The effect is the same: cooperation breaks down.</span>
-<span id="cb32-588"><a href="#cb32-588" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-589"><a href="#cb32-589" aria-hidden="true" tabindex="-1"></a><span class="fu"># 🧩 Conclusion</span></span>
+<span id="cb32-574"><a href="#cb32-574" aria-hidden="true" tabindex="-1"></a><span class="co"># results &lt;- run_simulation(simulation)</span></span>
+<span id="cb32-575"><a href="#cb32-575" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;../data/abm-pd2/week06_results_03.rds&quot;</span>)</span>
+<span id="cb32-576"><a href="#cb32-576" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-577"><a href="#cb32-577" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-578"><a href="#cb32-578" aria-hidden="true" tabindex="-1"></a>We begin by visualizing how average population fitness evolves over time under different noise levels (see @fig-pop-fitness3):</span>
+<span id="cb32-579"><a href="#cb32-579" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-582"><a href="#cb32-582" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-583"><a href="#cb32-583" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-pop-fitness3</span></span>
+<span id="cb32-584"><a href="#cb32-584" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: &quot;Average population fitness over t for diffrent error rates.&quot;</span></span>
+<span id="cb32-585"><a href="#cb32-585" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb32-586"><a href="#cb32-586" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: Show R Code (Plot)</span></span>
+<span id="cb32-587"><a href="#cb32-587" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_avg_fitness</span>(results<span class="sc">$</span>df_population,</span>
+<span id="cb32-588"><a href="#cb32-588" aria-hidden="true" tabindex="-1"></a>                 noise)</span>
+<span id="cb32-589"><a href="#cb32-589" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb32-590"><a href="#cb32-590" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-591"><a href="#cb32-591" aria-hidden="true" tabindex="-1"></a>In this chapter, we took a major step forward by moving beyond idealized, error-free models of interaction. We explored how the introduction of **behavioral** and **perceptual mistakes** changes the dynamics of repeated games — and we saw just how fragile cooperation can be when the world gets messy.</span>
+<span id="cb32-591"><a href="#cb32-591" aria-hidden="true" tabindex="-1"></a>The result is strikingly similar to what we observed for behavioral error. This isn’t a coincidence. For strategies like Grim Trigger, it makes no practical difference whether an opponent actually defected or was simply perceived to have defected. In both cases, GT interprets the situation as a betrayal — and responds by defecting in all future rounds. The effect is the same: cooperation breaks down.</span>
 <span id="cb32-592"><a href="#cb32-592" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-593"><a href="#cb32-593" aria-hidden="true" tabindex="-1"></a>Here’s what we learned:</span>
+<span id="cb32-593"><a href="#cb32-593" aria-hidden="true" tabindex="-1"></a><span class="fu"># 🧩 Conclusion</span></span>
 <span id="cb32-594"><a href="#cb32-594" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-595"><a href="#cb32-595" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Evolution doesn’t always lead to efficient outcomes**: some systems may settle into inefficient but stable equilibria. A strategy doesn’t need to be optimal to persist — it just needs to resist invasion.</span>
-<span id="cb32-596"><a href="#cb32-596" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>We distinguished between **misimplementation** (behavioral errors, where agents do something unintended) and **misperception** (communicational noise, where agents misinterpret others&#39; actions).</span>
-<span id="cb32-597"><a href="#cb32-597" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Even **low levels of error or noise** can significantly undermine cooperation, highlighting just how sensitive some strategies are to imperfection.</span>
-<span id="cb32-598"><a href="#cb32-598" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Strategies like **Grim Trigger**, while dominant under ideal conditions, prove to be **highly brittle** in noisy environments — often spiraling into permanent defection after a single misstep.</span>
-<span id="cb32-599"><a href="#cb32-599" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>In contrast, **Always Defect** often re-emerges in high-error settings — not because it yields the best payoffs, but because **stable patterns of cooperation become harder to maintain** when trust is fragile and agents are unforgiving.</span>
-<span id="cb32-600"><a href="#cb32-600" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-601"><a href="#cb32-601" aria-hidden="true" tabindex="-1"></a><span class="fu"># 🏋 Pre-Class Assignment</span></span>
-<span id="cb32-602"><a href="#cb32-602" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-603"><a href="#cb32-603" aria-hidden="true" tabindex="-1"></a>Before the next session, take some time to engage with the model hands-on. The following exercises will help you consolidate what you&#39;ve learned and begin thinking critically about the dynamics of agent-based models.</span>
+<span id="cb32-595"><a href="#cb32-595" aria-hidden="true" tabindex="-1"></a>In this chapter, we took a major step forward by moving beyond idealized, error-free models of interaction. We explored how the introduction of **behavioral** and **perceptual mistakes** changes the dynamics of repeated games — and we saw just how fragile cooperation can be when the world gets messy.</span>
+<span id="cb32-596"><a href="#cb32-596" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-597"><a href="#cb32-597" aria-hidden="true" tabindex="-1"></a>Here’s what we learned:</span>
+<span id="cb32-598"><a href="#cb32-598" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-599"><a href="#cb32-599" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Evolution doesn’t always lead to efficient outcomes**: some systems may settle into inefficient but stable equilibria. A strategy doesn’t need to be optimal to persist — it just needs to resist invasion.</span>
+<span id="cb32-600"><a href="#cb32-600" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>We distinguished between **misimplementation** (behavioral errors, where agents do something unintended) and **misperception** (communicational noise, where agents misinterpret others&#39; actions).</span>
+<span id="cb32-601"><a href="#cb32-601" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Even **low levels of error or noise** can significantly undermine cooperation, highlighting just how sensitive some strategies are to imperfection.</span>
+<span id="cb32-602"><a href="#cb32-602" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Strategies like **Grim Trigger**, while dominant under ideal conditions, prove to be **highly brittle** in noisy environments — often spiraling into permanent defection after a single misstep.</span>
+<span id="cb32-603"><a href="#cb32-603" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>In contrast, **Always Defect** often re-emerges in high-error settings — not because it yields the best payoffs, but because **stable patterns of cooperation become harder to maintain** when trust is fragile and agents are unforgiving.</span>
 <span id="cb32-604"><a href="#cb32-604" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-605"><a href="#cb32-605" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>**\[Easy\]**\</span>
-<span id="cb32-606"><a href="#cb32-606" aria-hidden="true" tabindex="-1"></a>    According to our simulation, how many **Grim Trigger (GT)** strategies are needed in order to **displace Probe and Peace (PP)** in a population otherwise dominated by PP? Use the experimental setup from class where we gradually increased the number of GT agents and observed their relative fitness.</span>
-<span id="cb32-607"><a href="#cb32-607" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-608"><a href="#cb32-608" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>**\[Medium\]**\</span>
-<span id="cb32-609"><a href="#cb32-609" aria-hidden="true" tabindex="-1"></a>    Using the same simulation framework, test how many **GT agents** are required to achieve **higher fitness than Always Defect (aD)** in a population where all other agents use aD. How many GT agents need to be introduced for cooperation to become evolutionarily viable?</span>
-<span id="cb32-610"><a href="#cb32-610" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-611"><a href="#cb32-611" aria-hidden="true" tabindex="-1"></a><span class="fu"># 🚀 Link to In-Class Material</span></span>
-<span id="cb32-612"><a href="#cb32-612" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-613"><a href="#cb32-613" aria-hidden="true" tabindex="-1"></a>Here is the <span class="co">[</span><span class="ot">link for the in-class material</span><span class="co">](week06_inclass.html)</span>.</span>
+<span id="cb32-605"><a href="#cb32-605" aria-hidden="true" tabindex="-1"></a><span class="fu"># 🏋 Pre-Class Assignment</span></span>
+<span id="cb32-606"><a href="#cb32-606" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-607"><a href="#cb32-607" aria-hidden="true" tabindex="-1"></a>Before the next session, take some time to engage with the model hands-on. The following exercises will help you consolidate what you&#39;ve learned and begin thinking critically about the dynamics of agent-based models.</span>
+<span id="cb32-608"><a href="#cb32-608" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-609"><a href="#cb32-609" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>**\[Easy\]**\</span>
+<span id="cb32-610"><a href="#cb32-610" aria-hidden="true" tabindex="-1"></a>    According to our simulation, how many **Grim Trigger (GT)** strategies are needed in order to **displace Probe and Peace (PP)** in a population otherwise dominated by PP? Use the experimental setup from class where we gradually increased the number of GT agents and observed their relative fitness.</span>
+<span id="cb32-611"><a href="#cb32-611" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-612"><a href="#cb32-612" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>**\[Medium\]**\</span>
+<span id="cb32-613"><a href="#cb32-613" aria-hidden="true" tabindex="-1"></a>    Using the same simulation framework, test how many **GT agents** are required to achieve **higher fitness than Always Defect (aD)** in a population where all other agents use aD. How many GT agents need to be introduced for cooperation to become evolutionarily viable?</span>
 <span id="cb32-614"><a href="#cb32-614" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-615"><a href="#cb32-615" aria-hidden="true" tabindex="-1"></a><span class="fu"># ⚙️ Some Advanced Stuff</span></span>
+<span id="cb32-615"><a href="#cb32-615" aria-hidden="true" tabindex="-1"></a><span class="fu"># 🚀 Link to In-Class Material</span></span>
+<span id="cb32-616"><a href="#cb32-616" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-617"><a href="#cb32-617" aria-hidden="true" tabindex="-1"></a>Here is the <span class="co">[</span><span class="ot">link for the in-class material</span><span class="co">](week06_inclass.html)</span>.</span>
+<span id="cb32-618"><a href="#cb32-618" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-619"><a href="#cb32-619" aria-hidden="true" tabindex="-1"></a><span class="fu"># ⚙️ Some Advanced Stuff</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
