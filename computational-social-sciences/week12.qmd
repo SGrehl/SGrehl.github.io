@@ -2,3 +2,17 @@
 title: "Week 12"
 subtitle: "-"
 ---
+
+Space adds a new way to control for factors that our classic models arguably cannot capture (distance, presence of certain things). 
+We can ask new questions
+--> NEW PITFALLS
+
+
+- Autospatical correlation
+
+Morans 
+Local Morans
+
+- OLS with place
+
+- Other spatial models 

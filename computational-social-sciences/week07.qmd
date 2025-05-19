@@ -1,9 +1,869 @@
 ---
-title: "Week 07"
-subtitle: "-"
+title: "Week 07 - Network inference"
+subtitle: "Is the high clustering i nfriendship networks really meaningfully stronger than in random graphs?"
 ---
 
+Over the past weeks, we've spent time creating, analyzing, and visualizing networks.  
+But so far, our approach has been **purely descriptive**.
 
-Aufgabe: Why your friends have more friends than you do (Feld 1991)
+Descriptive analysis helps us summarize network structures, such as:
 
-Romantic relationships at highschools
+- Degree distribution  
+- Centrality  
+- Density  
+
+
+However, we typically analyze **just one network**.  
+So — when we observe a measure — **how do we know if it's large or small?** Without a **sampling model** or assumptions about **randomness**, we can't:
+
+- Assess uncertainty  
+- Judge statistical significance  
+
+This means we can't tell whether a pattern is **surprising** or **meaningful**. Descriptive tools are limited in assessing these questions. 
+
+To go beyond description, we need models that let us answer **research-level** questions like
+
+- How do social networks evolve?
+- How can we disrupt a network to prevent disease spread?
+- How similar are two networks?
+- What principles govern network building and resilience?
+- How can we design more efficient or robust networks?
+- How are different networks interlinked?
+
+```{r}
+library(needs)
+needs(RSiena,
+      statnet,
+      igraph,
+      tidyr,
+      igraphdata,
+      dplyr)
+
+set.seed(1)
+```
+
+
+
+
+# Model-Free Simulation (Null Random Graphs)
+
+In this approach, we generate random networks that preserve some basic properties—such as the number of nodes and ties, or the degree sequence—but are otherwise random.
+
+**Common examples include:**
+
+- **Erdős-Rényi (Bernoulli) random graphs**  
+  – Each edge exists independently with probability $p$
+- **Configuration models**  
+  – Use edge swaps to preserve degree distribution
+
+By simulating these graphs, we can generate a **baseline distribution** for network statistics and compare the observed network to this distribution.
+
+
+
+### Bernoulli (Erdós-Renyi) Random graphs
+
+The **Erdős-Rényi model** [-@erdosRandomGraphs1959] is the most basic random graph model.
+
+- Let $V$ be a set of $n$ nodes  
+- An edge between any two nodes exists with probability $p$, **independently** of all others
+
+Because edges are assigned independently, some values (like clustering and path length) can be **calculated analytically**.
+
+- **Expected number of edges**:  $\frac{n(n-1)}{2}p$
+
+- **Expected degree of a node**:$(n-1)p$
+
+- **Expected clustering coefficient**:  $\frac{\binom{n}{3}p^3}{\binom{n}{2}p} = p$
+
+In R, null-model comparison is as easy as using `sample_gnm()` or permuting edges. 
+
+In practice, when we compare real-world networks to Erdős-Rényi models with the same number of nodes and edges, we often observe:
+
+- **Higher clustering coefficients**
+- **Shorter average path lengths**
+- **More high-degree nodes than expected**
+
+
+
+```{r}
+
+data(karate)
+
+#create erdos renyi graph
+rand <- sample_gnm(vcount(karate),
+                   ecount(karate),
+                   directed = FALSE,
+                   loops = FALSE)
+
+
+
+par(mfrow=c(1,2))
+
+
+# Degree distribution of observed network
+degree_karate <- table(igraph::degree(karate))
+barplot(degree_karate, main = "Karate Club", xlab = "Degree", ylab = "Frequency")
+
+# Degree distribution of random network
+degree_rand <- table(igraph::degree(rand))
+barplot(degree_rand, main = "Erdős-Rényi", xlab = "Degree", ylab = "Frequency")
+
+
+obs <- transitivity(karate)
+rand <- transitivity(rand)
+
+
+sim_trans <- replicate(100, {
+  gr <- sample_gnm(vcount(karate), ecount(karate))
+  transitivity(gr)
+})
+cat("Observed clustering:", round(obs,3), 
+    "Mean(random):", round(mean(sim_trans),3), 
+    "SD(random):", round(sd(sim_trans),3), "\n")
+```
+
+![Degree Comparison of a random graph and the Karate-network](Graphics/comp.png)
+Observed clustering: 0.256 Mean(random): 0.132 SD(random): 0.027
+
+Obviously, what we see is that the observed clustering coefficient is **substantially higher** than the simulated average, it suggests a non-random structure — possibly reflecting social tendencies like triadic closure or community formation. But do we win any more information from this? At least we didn't expect ties to form at random to begin with..
+
+
+## The Barabasi-Albert model
+
+
+Real-world networks often display something that we call **power-law degree distributions**: many nodes have few connections, and a few nodes act as **hubs** with many connections [@barabasiEmergenceScalingRandom1999a].
+
+These networks are known as **scale-free networks** because their degree distribution follows a **power-law** — it looks the same regardless of the scale at which we examine it. 
+
+
+```{r}
+# Set parameters
+# Define parameters
+alpha <- 1.1     # Power law exponent
+C <- 8         # Constant multiplier
+x <- seq(1, 100, length.out = 500)  # x values
+
+# Power law function
+y <- C * x^(-alpha)
+
+# Plot the line
+plot(x, y,
+     type = "l",               # Line plot
+     col = "lavender",         # Lavender color
+     lwd = 4,                  # Line width
+     xaxt = "n",               # Suppress x-axis ticks
+     yaxt = "n",               # Suppress y-axis ticks
+     xlab = "number of ties",
+     ylab = "number of vertices")
+
+```
+
+![Power-law distribution](Graphics/powerlaw.png)
+
+:::{#custom-block}
+
+The “rich-get-richer” mechanism explains how hubs form in scale-free networks.
+Hubs are especially common in citation networks, biological systems, and technological networks, but not typically found in friendship or social networks, where humans have cognitive and temporal limits on the number of relationships they can maintain [@fuhseSozialeNetzwerkeKonzepte2018].
+
+:::
+
+To simulate scale-free networks, Barabási and Albert introduced a **preferential attachment** model for network growth. It starts with a small connected graph (e.g. two nodes with one edge) and then at each time step we add one more node and connect that node to an existing node $i$ with probability: 
+
+$$\text{Prob(node i is chosen)}= \frac{deg(i)}{\sum_j deg(j)}$$
+This means nodes with higher degree are more likely to receive new edges, reinforcing hub formation.
+
+The resulting degree distribution approximates a **power law** with expontne $\gamma$ = 3.
+
+
+```{r}
+
+# Define number of vertices and edges
+n <- vcount(karate)        # Number of vertices
+total_edges <- ecount(karate)
+m <- floor(total_edges / n)  # Approx. number of edges per node
+
+# Generate preferential attachment graph
+pa <- sample_pa(n = n,
+                m = m,
+                power = 2,
+                directed = FALSE)
+plot(pa, 
+     vertex.color = "lavender")
+
+```
+
+![Sampling with preferential attachment](Graphics/pa.png)
+
+However, this simple process does not produce clustering (i.e., no triangles).
+
+# Exponential random graph models
+
+**Exponential Random Graph Models (ERGMs)** are a powerful framework for modeling the structure of a **single observed network**. They allow us to quantify which types of configurations are statistically more or less likely than expected by chance.
+
+Formally, an ERGM models the probability of observing a network $y$ as:
+
+$$
+P_\theta(Y = y) = \frac{\exp(\theta^\top g(y))}{k(\theta)}
+$$
+Where:
+- $g(y)$ is a vector of network statistics (e.g., number of edges, triangles, degree counts),
+- $\theta$ are model parameters,
+- $k(\theta)$ is the normalizing constant (summing over all possible networks with the same node set).
+
+- They provide a **statistical hypothesis test** for network structure.
+- The fitted parameters tell us **which features** (e.g. triads, hubs, reciprocity) are present and significant.
+- We can **simulate networks** from the fitted model to compare other metrics (e.g., path lengths, clustering) to the observed network.
+
+ERGMs are especially useful when we want to go **beyond descriptive statistics** and understand what social processes might be generating the observed structure.
+
+## Fitting ergms with statnet
+
+The [`statnet`](https://statnet.org/) suite provides a powerful set of tools for:
+
+- model estimation  
+- model-based simulation  
+- goodness-of-fit diagnostics
+
+Following the ergm-tutorial of Chen [- @chenChapter3ERGM], We’ll use the `flomarriage` dataset: a historical network of marriage alliances among powerful families in Renaissance Florence .
+
+
+ 
+
+```{r}
+
+data(package="ergm")
+data(florentine)
+
+class(flomarriage) #statnet networks are objects of class "network"
+
+flomarriage
+
+summary(flomarriage)
+
+plot(flomarriage)
+
+#Provide the statistics of the network
+summary(flomarriage~edges+triangle+kstar(1:3)+degree(0:5))
+
+
+```
+
+![Florentine network](Graphics/florentine.png)
+
+### Specify network statistics
+
+We can specify the network statistics $g(y)$ to functions in the ergm package using the terms.
+
+Most common terms are:
+
+
+| Name        | Unit of Counting       | Description                                                                                                 | Num. of Statistics         | Dep/Ind | Dir/Undir | Unip/Bip |
+|-------------|------------------------|-------------------------------------------------------------------------------------------------------------|----------------------------|---------|-----------|----------|
+| edges       | edges                  | Number of edges                                                                                             | 1                          | ind     | both      | both     |
+| nodefactor  | units of the attribute | Times nodes with a categorical attribute level appear in the edge set                                       | 1 per level                | ind     | both      | both     |
+| nodematch   | edges                  | Edges where incident nodes match on a nodal attribute                                                       | 1 or per level             | ind     | both      | both     |
+| nodemix     | edges                  | Edges between combinations of nodal attribute values                                                        | 1 per combination          | ind     | both      | both     |
+| nodecov     | units of the attribute | Sum of nodal attribute values for incident nodes across all edges                                           | 1                          | ind     | both      | both     |
+| absdiff     | units of the attribute | Absolute difference in a nodal attribute between incident nodes                                             | 1                          | ind     | both      | both     |
+| mutual      | dyad                   | Number of mutual edges (a → b and b → a)                                                                    | 1                          | dep     | dir       | both     |
+| degree      | node                   | Number of nodes with degree x                                                                               | 1 per degree value         | dep     | undir     | unip     |
+| idegree     | node                   | Number of nodes with in-degree x                                                                            | 1 per degree value         | dep     | dir       | unip     |
+| odegree     | node                   | Number of nodes with out-degree x                                                                           | 1 per degree value         | dep     | dir       | unip     |
+| b1degree    | node                   | Number of mode 1 nodes with degree x                                                                        | 1 per degree value         | dep     | undir     | bip      |
+| b2degree    | node                   | Number of mode 2 nodes with degree x                                                                        | 1 per degree value         | dep     | undir     | bip      |
+| mindegree   | node                   | Number of nodes with at least degree x                                                                      | 1 per degree value         | dep     | undir     | unip     |
+| triangles   | triangles              | Number of triangles                                                                                         | 1 (more if attributes used) | dep     | undir     | unip     |
+| gwesp       | complex                | Geometrically weighted edgewise shared partners                                                             | 1                          | dep     | both      | unip     |
+:::{.hovering}
+
+
+For full list, in R type: `help("ergm-terms")`
+
+
+
+:::{#custom-block}
+
+When fitting an ergm we can think of `ergm(y~x)` as analogous to `glm(y~x)` - but for networks.
+
+So these statistics make uup the $g(y)$-vector. 
+
+For example:
+
+```{r}
+#| code-fold: False
+
+summary(flomarriage ~ edges + triangle + kstar(1:3) + degree(0:5))
+```
+
+- **edges**: overall density
+
+- **triangle**: tendency toward triadic closure
+
+- **kstar(1:3)**: centralization / popularity (2-stars, 3-stars, etc.)
+
+- **degree(0:5)**: distribution of node degrees
+
+:::
+
+We can start by fitting the most simple ergm (with only the edges term). This is similar to comparing networks to the Erdos-Renyi graphl, assuming there is no structure beyond density.
+
+
+
+$$
+T(G) = #edges, \theta = log \frac{p}{1-p}
+$$
+
+
+```{r}
+#| code-fold: False
+flomodel.01 <- ergm(flomarriage ~ edges)
+
+# View model summary
+summary(flomodel.01)
+```
+
+![R-Output flomodel.01](Graphics/flo01.png)
+
+
+
+The interpretation is similiar to when you interpret glm: 
+
+- `edges` Coefficient: If the coefficient is `-1.6094`, then: If the number of edges increase 1, the log-odds of an edge existing between any two nodes is -1.6094 -The probability of a tie between any two nodes is approximately 16.6%.
+
+
+- $p< \alpha$: parameter does not equal to 0 significantly,
+
+- Null Deviance: The null deviance in the ergm output appears to be based on an Erdos-Renyi random graph with p = 0.5.
+
+- Residual Deviance: 2 times difference of loglik (saturated model - our model) (smaller is better)
+
+- AIC, BIC: loglik+penalty(#parameter)
+
+
+
+
+#### Include `triangle` terms as a measure of clustering: 
+
+```{r}
+#| code-fold: False
+flomodel.02=ergm(flomarriage~edges+triangle)
+
+summary(flomodel.02)
+
+```
+
+![Include triangles for clustering](Graphics/flo02.png)
+
+#### Include nodal covariates:
+
+We can include continuous nodal covariates
+
+```{r}
+wealth=flomarriage %v% 'wealth' # %v% get the vertex attributes
+
+plot(flomarriage, vertex.cex=wealth/25, main="Florentine marriage by wealth", cex.main=0.8)
+```
+
+![](Graphics/wealth.png)
+
+
+```{r}
+#| code-fold: False
+flomodel.03=ergm(flomarriage~edges+nodecov('wealth'))
+summary(flomodel.03)
+```
+
+![](Graphics/flo03.png)
+
+**Baseline (`edges`):**  
+The log-odds of a tie between two nodes with **zero wealth** is −2.595. This corresponds to a **low baseline probability** of a tie:
+
+$$
+\text{logit}^{-1}(-2.595) \approx 0.0695
+$$
+
+→ So, with no wealth effect, there's about a **7% chance** of a tie forming.
+
+**Wealth effect:** 
+
+For **each unit increase in wealth**, the **log-odds of a tie increase by 0.01055**, **per node**. So:
+
+- If both nodes increase wealth by 1 unit, the log-odds of a tie increase by:
+
+$$
+2 \cdot 0.01055 = 0.0211
+$$
+
+In probability terms, this is a **small but positive effect**:  
+→ **Richer nodes are more likely to form ties**, and the effect is **additive** across node pairs.
+
+
+
+#### Include transformation of continuous nodal covariates:
+
+Effect of absolute wealth difference:
+Specifically, it says:
+
+"Are families with similar wealth more likely to form marriage ties?"
+
+```{r}
+#| code-fold: False
+flomodel.04=ergm(flomarriage~edges+absdiff("wealth"))
+
+summary(flomodel.04)
+```
+
+![](Graphics/flo04.png)
+
+- This is the **baseline log-odds** of a tie between two nodes, **assuming their wealth is equal**.
+- Translating to probability:
+  
+  $$
+  \text{logit}^{-1}(-2.302) \approx \texttt{plogis(-2.302)} \approx 0.091
+  $$
+
+  → So, when wealth difference is 0, there's about a **9.1% chance** of a tie.
+
+**Coefficient wealth difference**:
+
+- This means **for each unit increase in the absolute difference of wealth** between two families, the **log-odds of a tie increases by 0.0155**.
+- This is counterintuitive — we would normally expect that **greater wealth differences decrease** tie probability. But here, ties are **more likely** as the difference grows.
+
+  → **Interpretation**: Wealth difference may be associated with **strategic marriages** between wealthy and less wealthy families (e.g., alliances). 
+  
+```{r}
+plogis(-2.302 + 0.0155*5)
+```
+  
+
+
+#### Include categorical (or discrete) variables
+
+```{r}
+#| code-fold: False
+data("faux.mesa.high")
+mesa=faux.mesa.high
+mesa
+
+fauxmodel.01=ergm(mesa ~edges + nodecov('Grade'))
+
+summary(fauxmodel.01)
+
+fauxmodel.02=ergm(mesa ~edges + nodefactor('Grade'))
+
+summary(fauxmodel.02)
+```
+
+
+
+#### Include Homophily: 
+
+- nodematch: Uniform homophily and differential homophily
+
+- uniform homophily(diff=FALSE), adds one network statistic to the model, which counts the number of edges (i,j) for which `attrname(i)==attrname(j)`.
+
+- differential homophily` (diff=TRUE)`, p(#of unique values of the attrname attribute) network statistics are added to the model.
+
+- The $k$th such statistic counts the number of edges $(i,j)$ for which `attrname(i) == attrname(j) == value(k)`, where `value(k)` is the $k$th smallest unique value of the attrname attribute.
+
+- When multiple attribute names are given, the statistic counts only ties for which all of the attributes match.
+
+```{r}
+fauxmodel.03 <- ergm(mesa ~edges + nodematch('Grade',diff=F) )
+
+summary(fauxmodel.03)
+```
+
+--> Nodes that share the same attribute are more likely to form a tie. --> Indicates homophily.
+
+```{r}
+fauxmodel.05 <- ergm(mesa ~edges + nodematch('Grade',diff=F)+ nodematch('Race',diff=T) )
+
+summary(fauxmodel.05)
+
+```
+
+![](Graphics/homophilymodel.png)
+
+
+## Simulation of networks using statnet
+
+We can use models to similate other networks, maintaining the characteristics defined in the model.
+
+```{r}
+flomodel.04.sim <- simulate(flomodel.04, nsim=10,seed = 1)
+
+summary(flomodel.04.sim)
+
+
+```
+
+
+:::{.student-exercise}
+**Exercise**: 
+
+Use the following code to load the karate network from the `ìgraphdata` package as an object of the `network` class.
+
+
+Use ergms to answer these questions and interpret the results.
+
+1. Are ties more likely to form between members of the same faction?
+
+2. Is there evidence of **triadic closure**[^1]? 
+
+[^1]: Including a `triangle` term can lead to overfitting in small networks, so it might generally better to use the `gwesp()` term instead. This term captures triadic closure in a more stable way by applying a geometrically weighted decay to the count of shared partners for each edge.
+
+::: 
+
+:::{#custom-block}
+
+# Stochastic Actor-Oriented Models (SAOMs) for longitudinal network analysis
+
+We sadly do not have enough time to delve into these interesting analysis tools in the scope of this seminar but I still want to include them for completeness.
+
+Stochastic Actor-Oriented Models (SAOMs) [@snijdersIntroductionStochasticActorbased2010] are designed to capture the dynamic evolution of social networks by modeling the decisions and actions of **individual actors over time**. Unlike static network models, SAOMs incorporate an action-theoretic perspective, emphasizing that network changes result from intentional choices made by actors who seek to optimize their social positions according to certain preferences and constraints. This micro-level focus allows SAOMs to simulate how individual behavior drives the gradual transformation of the network structure, making them particularly well suited for analyzing longitudinal network data.
+
+
+
+If you want to have a first look yourself: [https://de.slideshare.net/slideshow/22-an-introduction-to-stochastic-actororiented-models-saom-or-siena/175668810](https://de.slideshare.net/slideshow/22-an-introduction-to-stochastic-actororiented-models-saom-or-siena/175668810) and [https://www.stats.ox.ac.uk/~snijders/siena/IntroSAOM_h.pdf](https://www.stats.ox.ac.uk/~snijders/siena/IntroSAOM_h.pdf) here are a straightforward introductions. 
+
+:::
+
+
+:::{.hidden when-format="html"}
+
+# Stochastic Actor-Oriented Models (SAOMs) for longitudinal networks
+
+https://de.slideshare.net/slideshow/22-an-introduction-to-stochastic-actororiented-models-saom-or-siena/175668810
+
+When data include longitudinal networks (panels of the same network over time), Stochastic Actor-Oriented Models (SAOMs) provide a framework to model the dynamics. In SAOMs, nodes are treated as actors who sequentially update their ties in continuous time. At each “mini-step”, one actor gets the opportunity to add/drop a tie. The probability of each possible change depends on an objective (evaluation) function that scores the resulting network. Specifically, when actor i considers changing the tie to j, the model assumes a random-utility form (multinomial logit):
+
+SAOM for friendship network 1, 2, 3, ??
+
+
+```{r}
+library(RSiena)
+
+net1 <- asNetwork(graph1)
+
+net2 <- asNetwork(graph2)
+
+net3 <- asNetwork(graph3)
+
+
+smoking_vec <- ifelse(V(graph1)$smoking == 1, 0, 1)  # 0 = Nichtraucher, 1 = Raucher
+table(smoking_vec)  # Check
+
+
+smoking_cov <- coCovar(smoking_vec)
+
+# 1. Netzwerke vorbereiten (müssen als Adjazenzmatrizen vorliegen)
+m1 <- as.matrix(as_adj(graph1))
+m2 <- as.matrix(as_adj(graph2))
+m3 <- as.matrix(as_adj(graph3))
+
+# Siena-Netzwerkobjekt erstellen (3 Zeitpunkte)
+networks <- sienaNet(array(c(m1, m2, m3), dim = c(nrow(m1), ncol(m1), 3)))
+
+
+
+smoking_cov <- coCovar(smoking_vec)
+
+# 3. Siena-Datenobjekt
+siena_data <- sienaDataCreate(networks, smoking_cov)
+
+# 4. Effekte spezifizieren
+effects <- getEffects(siena_data)
+effects <- includeEffects(effects, sameX, interaction1 = "smoking_cov")
+
+# 5. Modell festlegen
+model <- sienaAlgorithmCreate(projname = "raucher_siena")
+
+# 6. Schätzung durchführen
+result <- siena07(model, data = siena_data, effects = effects)
+
+# 7. Ergebnisse anzeigen
+summary(result)
+
+
+
+# Smoking als dynamische Variable
+
+```
+
+
+::: 
+
+# Insights from Network-Studies
+
+To sum things up on our knowledge on social network analysis and in order to get inspired on what we actually can do with these tools now, that we have learned so much, I have collected some case studies from the literature and some insights that they provide us with: Lets start with one, that we have already looked at today: 
+
+
+## Power in Rennaissance Florence [@padgettRobustActionRise1993]
+
+```{r}
+name=flomarriage %v% 'vertex.names'
+
+plot(flomarriage,
+     vertex.cex=wealth/25,
+     main="Florentine marriage by wealth",
+     cex.main=0.8,
+     label = name,
+     vertex.col="lavender")
+```
+
+![Florentine family marriage network](Graphics/medici.png)
+
+The Florentine marriage network offers a compelling demonstration of how network structure can reveal the foundations of social and political power. Although the *Medici* family began with relatively modest wealth and political influence, Cosimo de’ Medici strategically leveraged intermarriage ties, economic relationships, and political patronage to consolidate power. His actions positioned the Medici as central brokers within Florence’s elite social network.
+
+While other families like the *Strozzi* possessed greater wealth and held more political offices, they lacked the Medici’s structural advantage. A simple count of marriage ties shows the Medici ahead—but only marginally. However, a deeper look using *betweenness centrality* reveals their unique position: the Medici were on over **half** of all shortest paths connecting other families in the network, with a betweenness score of **0.522**. In contrast, the Strozzi scored just **0.103**, and the next most central family, the *Guadagni*, scored **0.255**.
+
+This measure reflects the Medici’s pivotal role in brokering connections across elite families. For example, the Medici connected the *Barbadori* and *Guadagni* via multiple shortest paths, acting as a key intermediary. Such centrality enabled them to influence communication, marriage arrangements, business alliances, and political decisions.
+
+These findings show how network structure provides critical insight beyond wealth or formal political power. It demonstrates that:
+
+- Influence often stems from *positional advantage* within a network rather than from resources alone.
+- *Betweenness centrality* can uncover hidden forms of power—especially brokerage roles.
+- Social alliances (like marriages) were consciously used by patriarchs to shape political landscapes.
+- The Medici capitalized on structural gaps or “disjunctures” in the elite network—opportunities that others failed to exploit.
+
+As Padgett and Ansell note, Medician control emerged not from dominance in wealth or titles, but from bridging divides among rival families — something only the Medici managed to achieve. This suggests that elite social networks were both instruments and outcomes of intentional strategy.
+
+
+
+## The Frog-Pond Effect [@frankChoosingRightPond1985]
+
+The **Frog Pond Effect** describes how individuals assess their own abilities not in absolute terms, but *relative* to those around them. In other words, whether someone feels successful or competent depends heavily on the context or "pond" they're in.
+
+Being a "big frog in a small pond" — for instance, a strong performer in a weak peer group—often leads to higher self-esteem, while being a "small frog in a big pond" can lead to feelings of inadequacy, even if one's actual performance is the same.
+
+In network terms:
+
+- Each person (node) compares themselves mainly to their local neighborhood (connected peers).
+- The structure of the social network can therefore influence how individuals perceive their own status or competence.
+- For example, a student with average grades might feel very different about their performance depending on whether their friends are mostly top students or struggling ones.
+
+This has important implications:
+
+- Self-perception and motivation are not purely personal traits—they are shaped by the immediate social context.
+- In educational settings or workplaces, the composition of peer groups can affect confidence and behavior, even without changing actual outcomes.
+
+```{r}
+#| code-fold: False
+
+g <- make_ring(10) %>%
+  set_vertex_attr("name", value = LETTERS[1:10]) %>%
+  set_vertex_attr("achievement", value = c(85, 90, 70, 60, 75, 95, 65, 80, 50, 88))
+
+# Function to calculate frog pond effect for each node
+frog_pond <- function(graph) {
+  ego_scores <- numeric(vcount(graph))
+  for (i in V(graph)) {
+    neighbors <- neighbors(graph, i)
+    if (length(neighbors) > 0) {
+      avg_neighbor <- mean(V(graph)[neighbors]$achievement)
+      ego_scores[i] <- V(graph)[i]$achievement - avg_neighbor
+    } else {
+      ego_scores[i] <- NA  # No neighbors
+    }
+  }
+  return(ego_scores)
+}
+
+# Calculate effect and add as attribute
+V(g)$frogpond <- frog_pond(g)
+
+# Visualize the graph
+plot(
+  g,
+  vertex.size = 30,
+  vertex.label = paste0("\nFP: ", round(V(g)$frogpond, 1)),
+  vertex.color = ifelse(V(g)$frogpond > 0, "lightgreen", "pink"),
+  main = "Frog Pond Effect: Positive (green) vs Negative (red)"
+)
+```
+
+![Frog pond effect](Graphics/frog_pond.png)
+
+## Why your friends have more friends than you do [@feldWhyYourFriends1991]
+
+The **Friendship Paradox** reveals a surprising social network property:
+
+> "On average, your friends have more friends than you do."
+
+This paradox arises due to how degree centrality interacts with the network structure: individuals with more friends are more likely to appear in others’ friend lists, which biases the average.
+
+```{r}
+# Create a small example network
+
+g <- sample_pa(20, p = 0.2, directed = FALSE)
+
+if (is.null(V(g)$name)) {
+  V(g)$name <- as.character(seq_along(V(g)) - 1)  # igraph uses 0-based indexing
+}
+
+
+# Get the degree (number of friends) for each node
+degree_values <- igraph::degree(g)
+
+# For each node, compute the average degree of their neighbors
+friend_avg_degrees <- sapply(V(g), function(v) {
+  neighbors_v <- neighbors(g, v)
+  if (length(neighbors_v) == 0) return(NA)
+  mean(igraph::degree(g, neighbors_v))
+})
+
+# Compare own degree to the average degree of neighbors
+comparison_df <- data.frame(
+  node = V(g)$name,
+  own_degree = degree_values,
+  friends_avg_degree = friend_avg_degrees,
+  paradox = friend_avg_degrees > degree_values
+)
+
+# Output summary
+print(comparison_df)
+
+# Optional: visualize who experiences the paradox
+V(g)$color <- ifelse(friend_avg_degrees > degree_values, "orange", "lightblue")
+plot(g, vertex.label = NA, vertex.size = 10, main = "Friendship paradox: Neighbours have higher degree (orange) vs Neighbours have lower degree (blue)")
+```
+
+
+![Friendship paradox: average degree of neighbour higher > i: orange, lower: blue](Graphics/friendship.png)
+
+This ist't just a statistical curiosity but has social consequences: 
+
+- People may feel less popular or connected than average, even if they aren't
+- It reflects sampling bias: highly connected nodes are more likely to appear in your local network.
+
+## Friendship and Romances among High School Students [@bearmanChainsAffectionStructure2004]
+
+Bearman et al. [-@bearmanChainsAffectionStructure2004] asked which structural properties of social networks are relevant for the spread of diseases, as ego-centered network studies reveal little about the broader network structures that facilitate disease transmission. So in 1994 they conducted a study at a U.S. highschool (Jefferson High) with 832 students surveyed on their health status and their sexual and romantic partners in the past 8 months.
+
+![Jefferson High Romantic Network](Graphics/Bild1.jpg)
+
+- **Network Characteristics**  
+  - **Structure**: Resembles a *spanning tree*  
+    - Chain-like network with minimal cycles  
+    - Very few closed loops (no cycle of length 4)  
+    - A small number of nodes serve as central connectors  
+  - **Size and Connectivity**  
+    - 52% of students were in the largest connected component  
+    - Longest path within the largest component: 37 nodes  
+  - **Normative Influence**  
+    - Network likely shaped by social norms limiting simultaneous partnerships
+
+- **Key Insight**  
+  - The largest component is described as a *"worst-case scenario for the potential transmission of disease"* [@bearmanChainsAffectionStructure2004, page 59]
+  - Most individuals had only one partner, yet due to the structure, their risk of infection was higher than those in isolated dyads or small clusters
+
+- **Conclusion**  
+  - **STD risk is not merely a function of partner count**  
+    - Structural position within the network strongly affects exposure and vulnerability
+
+
+
+
+## In the network of the conclave [@NetworkConclaveBocconi2025][^2]
+
+[^2]: The official paper is not yet published
+
+The study by Giuseppe Soda, Alessandro Iorio, and Leonardo Rizzo from Bocconi University explores how network science can shed light on the complex social, political, and relational dynamics behind the election of a new Pope. Although the final decision is traditionally attributed to divine inspiration, the researchers demonstrate that the structure of relationships within the College of Cardinals plays a crucial role in shaping consensus and influence.
+
+Behind the closed doors of the Sistine Chapel, the papal election resembles the selection processes found in other organizational contexts—such as presidential elections or CEO appointments—yet it remains deeply embedded in ancient traditions and rituals. By mapping the Vatican as a relational ecosystem, the study identifies key factors that determine which cardinals are more likely to emerge as leading candidates, or *papabili*.
+
+
+The researchers constructed a multi-layered network based on:
+
+- **Official co-memberships:** Connections through shared work in Roman Curia dicasteries, commissions, councils, and academies.
+- **Episcopal consecrations:** "Spiritual genealogies" that link cardinals through ordination and build loyalty.
+- **Informal relationships:** Ideological affinities, mentoring, and patronage networks revealed by journalistic sources.
+
+These layers combined give a systemic map of the College of Cardinals, capturing formal and informal ties alike.
+
+![Conclave network](Graphics/pope.webp)
+
+The study identifies three main criteria that increase a cardinal’s prominence in the network:
+
+- **Status (Eigenvector Centrality):** Reflects connections to influential cardinals, rewarding those linked to the most central figures.
+- **Information Control (Betweenness Centrality):** Highlights cardinals who serve as bridges or hubs between different groups.
+- **Coalition Building Capacity:** A composite measure capturing cohesion within groups, direct influence (number of connections), and the strategic role as a social broker linking different factions.
+
+An additional factor is **age**, adjusted based on historical papal election trends favoring candidates of moderate age.
+
+ **Top Status:** Robert Prevost (US), Lazzaro You Heung-sik (South Korea), Arthur Roche (UK), Jean-Marc Aveline (France), Claudio Gugerotti (Italy)
+- **Top Information Controllers:** Anders Arborelius (Sweden), Pietro Parolin (Italy), Víctor Fernández (Argentina), Gérald Lacroix (Canada), Joseph Tobin (USA)
+- **Top Coalition Builders:** Luis Antonio Tagle (Philippines), Ángel Fernández Artime (Spain), Gérald Lacroix (Canada), Fridolin Besungu (Congo), Sérgio da Rocha (Brazil)
+
+The network shows a strong presence of "soft liberal" cardinals and an increasingly global geographical spread, especially with growing roles for Asia and Africa.
+
+It underscores several important insights for network theory:
+
+- **Multi-layer networks**: Combining formal, informal, and historical relational data provides a richer, more accurate representation of influence dynamics.
+- **Centrality measures matter**: Different types of centrality capture distinct aspects of power—status, information brokerage, and coalition-building.
+- **Relational structures shape outcomes**: Even in highly ritualized and spiritual processes, human relationships and social capital influence decisions.
+- **Predictive yet humble modeling**: While models can’t fully predict outcomes, they improve understanding of complex social phenomena.
+
+
+
+
+## Spread of happyness [@fowlerDynamicSpreadHappiness2008]
+
+The study investigates whether happiness spreads through social networks and whether distinct clusters of happy and unhappy individuals form within these networks. Previous research has focused on the role of socioeconomic and genetic factors in determining happiness, but this research takes a relational perspective, exploring how interpersonal connections influence emotional well-being over time.
+
+Using a longitudinal dataset from the Framingham Heart Study, which tracked 4,739 individuals in Massachusetts between 1983 and 2003, the researchers applied  social network analysis methods to explore the contagiousness of happiness. Happiness was measured using a validated four-item scale, providing a reliable metric of emotional well-being.
+
+![Happiness clusters in the Framingham social network. Graphs show largest component of friends, spouses, and siblings at exam 6 (centred on year 1996, showing 1181 individuals) and exam 7 (year 2000, showing 1020 individuals). Each node represents one person (circles are female, squares are male). Lines between nodes indicate relationship (black for siblings, red for friends and spouses). Node colour denotes mean happiness of ego and all directly connected (distance 1) alters, with blue shades indicating least happy and yellow shades indicating most happy (shades of green are intermediate)](Graphics/F1.large.jpg)
+
+The key findings were:
+
+- **Existence of Clusters:** Networks show distinct clusters of happy and unhappy people, supporting the idea of emotional homophily and influence.
+- **Social Contagion:** Individuals surrounded by many happy people have a significantly higher likelihood of being happy themselves.
+- **Influence of Relationship Types:** Contagion effects are strongest among friends, family members, neighbors, and spouses, but not among coworkers.
+- **Network effects independently exist:** Effects persist even after controlling for confounding factors such as shared environment and socioeconomic similarities.
+
+
+
+With implications for sociology: 
+
+- **Emotional Contagion in Networks:** Happiness spreads through social ties, highlighting the importance of network structure in shaping individual well-being.
+- **Clusters as Emotional Ecosystems:** Networks are not random but organize into niches or clusters of similar emotional states, reinforcing the idea of social reinforcement and peer effects.
+- **Tie Strength and Type Matter:** The differential impact of relationship types emphasizes the role of close and stable ties in transmitting emotions, while more formal or less intimate ties (e.g., coworkers) show weaker or no contagion effects.
+- **Longitudinal Approach:** Following actors over time allows for stronger causal inference about social influence beyond mere correlation or selection.
+
+
+
+
+## (Hashtag-homophily)
+
+In my master’s thesis, I conduct a descriptive study on opinion homophily on Twitter. The motivation behind this research is that strong homophily — the tendency for people to connect with others who share similar beliefs — can lead to so called *echo chambers* and disrupt the broader societal discourse.
+
+So I had a descriptive look following the question: To what extent do people connect (and disconnect) on Twitter based on similar opinions and convictions?
+
+A friend of mine and I collected data (in a different seminar) on tweets on Twitter related to the hashtag **#FridaysForFuture** (e.g. Tweets, Account ID and Follower/Followee information on all tweets posted in the week between December 4th and December 10th 2019)
+
+
+![](Graphics/Bild2.png)
+
+**Descriptive comparison of communities**:
+
+![](Graphics/Bild3.png)
+
+![Comparison of discourse](Graphics/Bild4.png)
+I then compared the content of the tweets by analyzing frequencies, emojis, and sentiment to determine whether the discourse differed significantly within each cluster. To be fair, today I wouldn't use these same methods - which is fair, considering there were less chances to learn CSS methods when I studied 😅
+
+You will have the chance to sharpen your text-analysis skills next semester with **Felix Lennert**!  
+
+
+# Ausblick - Going critical 
+
+An exciting next step is to combine **network analysis** with **agent-based models (ABMs)**. While network analysis reveals the structure and relationships between actors, ABMs allow researchers to simulate individual behaviors and observe how these aggregate into collective patterns and how diffusion processes take place. This integration enables a deeper understanding of how happiness or other social phenomena dynamically evolve over time and how micro-level interactions lead to macro-level structural changes.
+
+
+
+These connections will be explored in the "Experimental Sociology" class with Sascha.🥳 For those of you who are too curius though [this website](https://meltingasphalt.com/interactive/going-critical/) by Kevin Simler is a great introduction!
+
+
+
+

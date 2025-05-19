@@ -4324,15 +4324,15 @@ window.Quarto = {
 <span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>     <span class="at">file =</span> <span class="st">&quot;data/Glasgow_data/glasgow_data.RData&quot;</span>)</span>
 <span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>graph1 <span class="ot">&lt;-</span> <span class="fu">graph_from_adjacency_matrix</span>(<span class="at">adjmatrix =</span> friends<span class="sc">$</span>wave_1, </span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">mode =</span> <span class="st">&quot;directed&quot;</span>,</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">mode =</span> <span class="st">&quot;undirected&quot;</span>,</span>
 <span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">weighted =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>graph2 <span class="ot">&lt;-</span> <span class="fu">graph_from_adjacency_matrix</span>(<span class="at">adjmatrix =</span> friends<span class="sc">$</span>wave_2, </span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">mode =</span> <span class="st">&quot;directed&quot;</span>,</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">mode =</span> <span class="st">&quot;undirected&quot;</span>,</span>
 <span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">weighted =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>graph3 <span class="ot">&lt;-</span> <span class="fu">graph_from_adjacency_matrix</span>(<span class="at">adjmatrix =</span> friends<span class="sc">$</span>wave_3, </span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">mode =</span> <span class="st">&quot;directed&quot;</span>,</span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">mode =</span> <span class="st">&quot;undirected&quot;</span>,</span>
 <span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">weighted =</span> <span class="cn">TRUE</span>)                                     </span>
 <span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a></span>
@@ -4422,26 +4422,229 @@ window.Quarto = {
 <hr>
 <p><strong>1 Analyze the network in terms of the distribution of social capital:</strong></p>
 <p><strong>1.1</strong> Identify cutpoints, bridges, and local bridges <em>(1 Point)</em></p>
-<p><strong>1.2</strong> Are there forbidden triads in the sense of Granovetter? <em>(1 Point)</em></p>
-<p><strong>1.3</strong> Are all local bridges weak ties? <em>(1 Point)</em></p>
-<p><strong>1.4</strong> Calculate Burt’s constraint measure for each node. Interpret the distribution. <em>(2 Points)</em></p>
-<p><strong>1.5</strong> Why does Burt propose the constraint measure instead of traditional centrality measures? <em>(2 Points)</em></p>
-<hr>
-<p><strong>2 Analyze <code>graph3</code> with respect to segregation and cohesion</strong></p>
-<p><strong>2.1</strong> Calculate segregation based on gender and pocket money. Interpret the results. <em>(2 Points)</em></p>
-<p><strong>2.2</strong> Create subnetworks for boys and girls. Which one is more cohesive? <em>(1 Point)</em></p>
-<p><strong>2.3</strong> Which group is more cohesive: alcohol users or non-users? What can we make of this? <em>(1 Point)</em></p>
-<p><strong>2.4</strong> Create a random network of the same size. Compare density, dyad census, and clustering. Reflect: Is this comparison helpful? <em>(2 Points)</em></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>rand <span class="ot">&lt;-</span> <span class="fu">erdos.renyi.game</span>(<span class="fu">vcount</span>(graph3),</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">ecount</span>(graph3),</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">type =</span> <span class="st">&quot;gnm&quot;</span>,</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                         <span class="at">directed =</span> <span class="cn">TRUE</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                         )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mark_local_bridges <span class="ot">&lt;-</span> <span class="cf">function</span>(g) {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Works for both directed and undirected graphs</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Initialize edge attributes</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">E</span>(g)<span class="sc">$</span>lb <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">E</span>(g)<span class="sc">$</span>lbdeg <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (e_idx <span class="cf">in</span> <span class="fu">seq_along</span>(<span class="fu">E</span>(g))) {</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    ends_ <span class="ot">&lt;-</span> <span class="fu">ends</span>(g, <span class="fu">E</span>(g)[e_idx])</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    u <span class="ot">&lt;-</span> ends_[<span class="dv">1</span>]</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    v <span class="ot">&lt;-</span> ends_[<span class="dv">2</span>]</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    g_tmp <span class="ot">&lt;-</span> <span class="fu">delete_edges</span>(g, <span class="fu">E</span>(g)[e_idx])</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    d <span class="ot">&lt;-</span> <span class="fu">distances</span>(g_tmp, <span class="at">v =</span> u, <span class="at">to =</span> v, <span class="at">mode =</span> <span class="cf">if</span> (<span class="fu">is.directed</span>(g)) <span class="st">&quot;out&quot;</span> <span class="cf">else</span> <span class="st">&quot;all&quot;</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">is.infinite</span>(d)) {</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>      <span class="fu">E</span>(g)<span class="sc">$</span>lb[e_idx] <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>      <span class="fu">E</span>(g)<span class="sc">$</span>lbdeg[e_idx] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span> (d <span class="sc">&gt;</span> <span class="dv">2</span>) {</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>      <span class="fu">E</span>(g)<span class="sc">$</span>lb[e_idx] <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>      <span class="fu">E</span>(g)<span class="sc">$</span>lbdeg[e_idx] <span class="ot">&lt;-</span> d</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>      <span class="fu">E</span>(g)<span class="sc">$</span>lb[e_idx] <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>      <span class="fu">E</span>(g)<span class="sc">$</span>lbdeg[e_idx] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(g)</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>graph1_lb <span class="ot">&lt;-</span> <span class="fu">mark_local_bridges</span>(graph1)</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="fu">E</span>(graph1_lb)<span class="sc">$</span>lb</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="fu">E</span>(graph1_lb)<span class="sc">$</span>lbdeg</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="fu">E</span>(graph1_lb)<span class="sc">$</span>lb[<span class="fu">E</span>(graph1_lb)<span class="sc">$</span>lbdeg <span class="sc">==</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Bridges should be local bridges marked with NA</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="fu">bridges</span>(graph1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><strong>1.2</strong> Are there forbidden triads in the sense of Granovetter? <em>(1 Point)</em> Zu schwierig</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to check for forbidden triads</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>find_forbidden_triads <span class="ot">&lt;-</span> <span class="cf">function</span>(g, <span class="at">strong_threshold =</span> <span class="dv">1</span>, <span class="at">weak_threshold =</span> <span class="fl">0.5</span>) {</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  forbidden_triads <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Get all combinations of 3 nodes</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  triplets <span class="ot">&lt;-</span> <span class="fu">combn</span>(<span class="fu">V</span>(g), <span class="dv">3</span>, <span class="at">simplify =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (triad <span class="cf">in</span> triplets) {</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    v1 <span class="ot">&lt;-</span> triad[<span class="dv">1</span>]</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    v2 <span class="ot">&lt;-</span> triad[<span class="dv">2</span>]</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    v3 <span class="ot">&lt;-</span> triad[<span class="dv">3</span>]</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check if all 3 are mutually connected (i.e., a closed triad)</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    edges <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">get.edge.ids</span>(g, <span class="fu">c</span>(v1, v2)),</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>      <span class="fu">get.edge.ids</span>(g, <span class="fu">c</span>(v2, v3)),</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>      <span class="fu">get.edge.ids</span>(g, <span class="fu">c</span>(v1, v3))</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Skip if any of the edges is missing</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">any</span>(edges <span class="sc">==</span> <span class="dv">0</span>)) <span class="cf">next</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get weights</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    weights <span class="ot">&lt;-</span> <span class="fu">sapply</span>(edges, <span class="cf">function</span>(eid) <span class="fu">E</span>(g)<span class="sc">$</span>weight[eid])</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Count strong and weak ties</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    strong_ties <span class="ot">&lt;-</span> <span class="fu">sum</span>(weights <span class="sc">&gt;=</span> strong_threshold)</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    weak_ties <span class="ot">&lt;-</span> <span class="fu">sum</span>(weights <span class="sc">&lt;=</span> weak_threshold)</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Forbidden triad: 2 strong + 1 weak</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (strong_ties <span class="sc">==</span> <span class="dv">2</span> <span class="sc">&amp;&amp;</span> weak_ties <span class="sc">==</span> <span class="dv">1</span>) {</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>      forbidden_triads[[<span class="fu">length</span>(forbidden_triads) <span class="sc">+</span> <span class="dv">1</span>]] <span class="ot">&lt;-</span> <span class="fu">c</span>(v1, v2, v3)</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(forbidden_triads)</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="fu">find_forbidden_triads</span>(graph1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function tofind forbidden triads in a weighted, undirected graph</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>find_forbidden_triads <span class="ot">&lt;-</span> <span class="cf">function</span>(g) {</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>forbidden <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (v <span class="cf">in</span> <span class="fu">V</span>(g)<span class="sc">$</span>name) {</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Eindeutige Nachbarn holen (nach Namen)</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>neighbors_v <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">neighbors</span>(g, v, <span class="at">mode =</span> <span class="st">&quot;all&quot;</span>)<span class="sc">$</span>name)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(neighbors_v) <span class="sc">&lt;</span> <span class="dv">2</span>) <span class="cf">next</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>neighbor_pairs <span class="ot">&lt;-</span> <span class="fu">combn</span>(neighbors_v, <span class="dv">2</span>, <span class="at">simplify =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (pair <span class="cf">in</span> neighbor_pairs) {</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> pair[<span class="dv">1</span>]</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>j <span class="ot">&lt;-</span> pair[<span class="dv">2</span>]</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Gewicht der Verbindungen prüfen</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>w_vi <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="fu">E</span>(g)[(<span class="fu">.from</span>(v) <span class="sc">&amp;</span> <span class="fu">.to</span>(i)) <span class="sc">|</span> (<span class="fu">.from</span>(i) <span class="sc">&amp;</span> <span class="fu">.to</span>(v))]<span class="sc">$</span>weight, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>w_vj <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="fu">E</span>(g)[(<span class="fu">.from</span>(v) <span class="sc">&amp;</span> <span class="fu">.to</span>(j)) <span class="sc">|</span> (<span class="fu">.from</span>(j) <span class="sc">&amp;</span> <span class="fu">.to</span>(v))]<span class="sc">$</span>weight, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">all</span>(w_vi <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">&amp;&amp;</span> <span class="fu">all</span>(w_vj <span class="sc">==</span> <span class="dv">1</span>)) {</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Verbindung zwischen i und j (in irgendeiner Richtung)?</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">are_adjacent</span>(g, i, j) <span class="sc">&amp;&amp;</span> <span class="sc">!</span><span class="fu">are_adjacent</span>(g, j, i)) {</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>forbidden <span class="ot">&lt;-</span> <span class="fu">c</span>(forbidden, <span class="fu">list</span>(<span class="fu">c</span>(v, i, j)))</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="fu">return</span>(forbidden)</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="fu">find_forbidden_triads</span>(graph1) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><strong>1.3</strong> Are all local bridges weak ties? <em>(1 Point)</em></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>local_bridge_edges <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">E</span>(graph1_lb)<span class="sc">$</span>lb)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Check their weights</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>local_bridge_weights <span class="ot">&lt;-</span> <span class="fu">E</span>(graph1_lb)<span class="sc">$</span>weight[local_bridge_edges]</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if all are weak ties (weight &lt;= 0.5, or exactly 0.5)</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span>(local_bridge_weights <span class="sc">==</span> <span class="fl">0.5</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>strong_local_bridges <span class="ot">&lt;-</span> local_bridge_edges[local_bridge_weights <span class="sc">&gt;</span> <span class="fl">0.5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><strong>1.4</strong> Calculate Burt’s constraint measure for each node. Interpret the distribution. <em>(2 Points)</em></p>
+<p><strong>1.5</strong> Why does Burt propose the constraint measure instead of traditional centrality measures? <em>(2 Points)</em></p>
+<p>Burt’s core interest is not just how central an actor is in a network, but how strategically positioned they are to access diverse, non-redundant information across disconnected social groups. This is crucial for innovation, brokerage, and competitive advantage.</p>
+<p>Ronald S. Burt hat die Struktur der Netzwerke untersucht und den Constraint-Wert als Maß eingeführt, das angibt, wie geschlossen oder offen die direkte Beziehungsstruktur eines Akteurs ist. Ein hoher Constraint-Wert bedeutet, dass die eigenen Kontakte eines Akteurs stark untereinander vernetzt sind – es bestehen viele geschlossene Dreiecke (hohe lokale Dichte). In einem solchen dicht gebundenen Teilnetz überschneiden sich die Informationsquellen der Kontakte weitgehend, sodass der Informationsgewinn für den Akteur redundant wird. Im Gegensatz dazu signalisiert ein niedriger Constraint-Wert ein offenes Netzwerk mit vielen strukturellen Löchern: Die Kontakte eines Akteurs kennen sich kaum untereinander, und der Akteur kann als Vermittler („Broker“) zwischen verschiedenen, wenig vernetzten Gruppen fungieren.</p>
+<hr>
+<p><strong>2 Analyze <code>graph3</code> with respect to segregation and cohesion</strong></p>
+<p><strong>2.1</strong> Calculate segregation based on gender and pocket money. Interpret the results. <em>(2 Points)</em></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assortativity_nominal</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  graph3, </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">types =</span> <span class="fu">as.factor</span>(<span class="fu">V</span>(graph3)<span class="sc">$</span>gender), </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">directed =</span> <span class="cn">FALSE</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">assortativity</span>(</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">graph =</span> graph3, </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">values =</span> <span class="fu">V</span>(graph3)<span class="sc">$</span>money, </span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">directed =</span> <span class="cn">FALSE</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><strong>2.2</strong> Create subnetworks for boys and girls. Which one is more cohesive? <em>(1 Point)</em></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">induced_subgraph</span>(graph3, <span class="fu">V</span>(graph3)[gender <span class="sc">==</span> <span class="dv">0</span>]) <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transitivity</span>(<span class="at">type =</span> <span class="st">&quot;global&quot;</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">induced_subgraph</span>(graph3, <span class="fu">V</span>(graph3)[gender <span class="sc">==</span> <span class="dv">1</span>]) <span class="sc">|&gt;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transitivity</span>(<span class="at">type =</span> <span class="st">&quot;global&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><strong>2.3</strong> Which group is more cohesive: alcohol users or non-users? What can we make of this? <em>(1 Point)</em></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">induced_subgraph</span>(graph1, <span class="fu">V</span>(graph1)[alc <span class="sc">==</span> <span class="dv">1</span>]) <span class="sc">|&gt;</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transitivity</span>(<span class="at">type =</span> <span class="st">&quot;global&quot;</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">induced_subgraph</span>(graph3, <span class="fu">V</span>(graph3)[alc <span class="sc">&gt;</span> <span class="dv">1</span>]) <span class="sc">|&gt;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transitivity</span>(<span class="at">type =</span> <span class="st">&quot;global&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><strong>2.4</strong> Create a random network of the same size. Compare density, dyad census, and clustering. Reflect: Is this comparison helpful? <em>(2 Points)</em></p>
+<p>:::{content-hidden when-format=“html”}</p>
+<p>Dyadenzensus ist schwierig, wenn es nur gerichtete kanten gibt, dann bleibt alles weird</p>
+<p>:::</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>rand <span class="ot">&lt;-</span> <span class="fu">erdos.renyi.game</span>(<span class="fu">vcount</span>(graph3),</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">ecount</span>(graph3),</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">type =</span> <span class="st">&quot;gnm&quot;</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                         <span class="at">directed =</span> <span class="cn">FALSE</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>                         )</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute metrics</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>metrics <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">Measure =</span> <span class="fu">c</span>(<span class="st">&quot;Transitivity&quot;</span>, <span class="st">&quot;Edge Density&quot;</span>, <span class="st">&quot;Dyad Mutual&quot;</span>,  <span class="st">&quot;Dyad Null&quot;</span>),</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">Original =</span> <span class="fu">c</span>(</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">transitivity</span>(graph3, <span class="at">type =</span> <span class="st">&quot;global&quot;</span>),</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">edge_density</span>(graph3),</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">dyad_census</span>(graph3)<span class="sc">$</span>mut,</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">#dyad_census(graph3)$asym,</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">dyad_census</span>(graph3)<span class="sc">$</span>null</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">Random =</span> <span class="fu">c</span>(</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">transitivity</span>(rand, <span class="at">type =</span> <span class="st">&quot;global&quot;</span>),</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">edge_density</span>(rand),</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">dyad_census</span>(rand)<span class="sc">$</span>mut,</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">#dyad_census(rand)$asym,</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">dyad_census</span>(rand)<span class="sc">$</span>null</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stargazer)</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Print as stargazer table</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(metrics, <span class="at">type =</span> <span class="st">&quot;text&quot;</span>, <span class="at">summary =</span> <span class="cn">FALSE</span>, <span class="at">rownames =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <hr>

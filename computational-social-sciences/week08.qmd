@@ -3,28 +3,5 @@ title: "Week 08"
 subtitle: "-"
 ---
 
-# Simulationen
-
-# ERGMS
-
-# SAOMS
 
 
-# Romantic affiliations in High Schools
-
-https://people.duke.edu/~jmoody77/chains.pdf
-
-# The spread of obesity
-https://www.bmj.com/content/337/bmj.a2338
-
-https://pmc.ncbi.nlm.nih.gov/articles/PMC4056220/
-https://www.springermedizin.de/homophily-and-gender-differences-in-unhealthy-weight-control-beh/50906174
-
-# Spread of happyness
-https://www.bmj.com/content/337/bmj.a2338
-
-# Criminal networks
-
-https://www.sciencedirect.com/science/article/pii/S0277953614000987
-
-# My master thesis

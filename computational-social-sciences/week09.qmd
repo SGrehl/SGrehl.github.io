@@ -1,169 +1,213 @@
 ---
 title: "Week 09 - Spatial data"
-subtitle: "Basics and Plotting"
----
+subtitle: "Introduction to Spatial Data & the `sf` package"
 
-# Spatial data [@pebesmaSpatialDataScience2023]
+---
+Students will 
+
+- understand what spatial (geographic) data are and why they are useful
+- learn Rs `sf`package for storing/ manipulatinf spatial vector data
+- load and inspect spatial data (shapefiles, GeoJson) and view their geometry.
+- recognize coordinate reference system and perform projections
+- acquire data from osm/google and spatial visualisation
 
 ## Spatial thinking in the Social Sciences
 
-## Types of spatial data
-[@moragaSpatialStatisticsData2024]
+Close things are more similar - etc - what does this lead to?
 
-### Areal data
-### Geostatistical data
-### Point patterns
-### Spatio-temporal data
-### Spatial functional data
+# Spatial data [@pebesmaSpatialDataScience2023]
 
-### Mobility data
+What is spatial data? 
+
+Spatial data is data that has a geographical attribute.  https://brunoconteleite.github.io/02-gis-unibo/00_class01.pdf
+Cpmmon aspect: unstructured --> needs to be manipulated into the structure required by research
+
+GIS: 
+Geographic Information Systems
+(old systems ) used to manipulate, process spatial data
+since the 1990s: rise of user friendly desktop softwares
+
+Data Science revolution: full integration of GIS tools into data processing pipelines 
+
+Applications: Cholera maps in Soho London (Snow 1856) On the mode of communication of cholera. Edinburgh medical journal, 1(7),
+p.668.
 
 
-# Spatial Data in R
+## Types of spatial objects
+GIS systems represent spatial data in either vector or raster formats. 
 
+**Raster data**: Geography as continous of pixels (gridcells) with associated values. They normally represent **high resolution** features of the geograpy (like an image)
+
+Example image of raster
+and continous and/ ore categorical data. 
+
+Vector data: Spatial geometries (as a collection of points over a geography)
+
+## Geometries
+
+Can represent different objects (points, lines, polygons, multiobjects).
+
+Points: 
+
+Lines: 
+
+Polygons: Polygons are a particular form of *geometry*. They consist of sequences of ponts connected by straight lines. Usually when we plot maps, what we get are `multipolygons'. 
+
+Bild von allen dreien
+
+
+:::{#custom-block}
+Vector data: file packages (usually multifiles)
+Shapefiles (*.shp), contains also several auxiliar files (e.g. *.dbf, *.shx). Most used!
+GeoJSON (.json) is written in Javascript (used mostly in web interfaces)
+Geopackage (*.gpk), unique package/file
+KMZ (*.kmz), from Google Earth format
+Raster data: imagery
+*.tiff (most used)
+Other image files (e.g. jpeg, gif, png)
+NetCDF files (*.nc) standardized data for geoscience (CDF = common data format)
+:::
+
+
+## Geometries in R
 
 ## sf package
 
 https://cran.r-project.org/web/packages/sf/index.html
 
+Simple features package
+State of the art standardized set of functions for GIS tasks
+- replacing old packages
+
+Core elements of a simple feature are 
+1. Geometry
+2. Projection
+3. Attributes
 
 
-## terra package
+Bild von sf package
 
+https://r-spatial.github.io/sf/articles/sf1.html
 
-## Making maps
+Simple feature geometry types
+The following seven simple feature types are the most common, and are for instance the only ones used for GeoJSON:
 
-ggmap
+type	description
+POINT	zero-dimensional geometry containing a single point
+LINESTRING	sequence of points connected by straight, non-self intersecting line segments; one-dimensional geometry
+POLYGON	geometry with a positive area (two-dimensional); sequence of points form a closed, non-self intersecting ring; the first ring denotes the exterior ring, zero or more subsequent rings denote holes in this exterior ring
+MULTIPOINT	set of points; a MULTIPOINT is simple if no two Points in the MULTIPOINT are equal
+MULTILINESTRING	set of linestrings
+MULTIPOLYGON	set of polygons
+GEOMETRYCOLLECTION	set of geometries of any type except GEOMETRYCOLLECTION
 
+ach of the geometry types can also be a (typed) empty set, containing zero coordinates (for POINT the standard is not clear how to represent the empty geometry). Empty geometries can be thought of being analogues to missing (NA) attributes, NULL values or empty lists.
 
-## Packages for downloading spatial data
+The remaining ten geometries are rare but are increasingly found:
 
-### osmdata
-[@moragaRspatialdataCollectionData2022]
+type	description
+CIRCULARSTRING	The CIRCULARSTRING is the basic curve type, similar to a LINESTRING in the linear world. A single segment requires three points, the start and end points (first and third) and any other point on the arc. The exception to this is for a closed circle, where the start and end points are the same. In this case the second point MUST be the center of the arc, i.e., the opposite side of the circle. To chain arcs together, the last point of the previous arc becomes the first point of the next arc, just like in LINESTRING. This means that a valid circular string must have an odd number of points greater than 1.
+COMPOUNDCURVE	A compound curve is a single, continuous curve that has both curved (circular) segments and linear segments. That means that in addition to having well-formed components, the end point of every component (except the last) must be coincident with the start point of the following component.
+CURVEPOLYGON	Example compound curve in a curve polygon: CURVEPOLYGON(COMPOUNDCURVE(CIRCULARSTRING(0 0,2 0, 2 1, 2 3, 4 3),(4 3, 4 5, 1 4, 0 0)), CIRCULARSTRING(1.7 1, 1.4 0.4, 1.6 0.4, 1.6 0.5, 1.7 1) )
+MULTICURVE	A MultiCurve is a 1-dimensional GeometryCollection whose elements are Curves, it can include linear strings, circular strings or compound strings.
+MULTISURFACE	A MultiSurface is a 2-dimensional GeometryCollection whose elements are Surfaces, all using coordinates from the same coordinate reference system.
+CURVE	A Curve is a 1-dimensional geometric object usually stored as a sequence of Points, with the subtype of Curve specifying the form of the interpolation between Points
+SURFACE	A Surface is a 2-dimensional geometric object
+POLYHEDRALSURFACE	A PolyhedralSurface is a contiguous collection of polygons, which share common boundary segments
+TIN	A TIN (triangulated irregular network) is a PolyhedralSurface consisting only of Triangle patches.
+TRIANGLE	A Triangle is a polygon with 3 distinct, non-collinear vertices and no interior boundary
+
+E.g. geolocated surveys are points, roads are lines, regions/states are polygons
+library.virginia.edu
+. Each “layer” can be combined. Demonstrate with sf:
 
 ```{r}
-library(needs)
-needs(osmdata, sf, tidyverse)
-library(osmdata)
 library(sf)
-library(tidyverse)
+nc <- st_read(system.file("shape/nc.shp", package="sf"))  # NC SIDS counties
+head(nc)         # shows attributes + geometry
+plot(st_geometry(nc))  # simple view of polygons
+```
 
-# Define bounding box for Leipzig
-bb_leipzig <- getbb("Leipzig", format_out = "polygon")
+North Carolina counties
 
-# Query OSM data for administrative boundaries of Leipzig
-leipzig_admin <- opq(bb_leipzig) %>% 
-  add_osm_feature(key = "boundary", value = "administrative") %>% 
-  osmdata_sf() %>% 
-  trim_osmdata(bb_leipzig)
+![NC-sf setup (https://r-spatial.github.io/sf/articles/sf1.html)](Graphics/sf_fig.png)
 
-# Query OSM data for kiosks in Leipzig
-kiosks_leipzig <- opq(bb_leipzig) %>% 
-  add_osm_feature(key = "shop", value = "bakery") %>% 
-  osmdata_sf() %>% 
-  trim_osmdata(bb_leipzig)
+# Coordinate reference systems and tranformations
 
-# Plotting using ggplot
-ggplot() +
-  geom_sf(data = leipzig_admin$osm_multipolygons) +
-  geom_sf(data = kiosks_leipzig$osm_points) +
-  theme_void()
+Spatial data is data characterized by coordinates in a coordinate system. Different coordinate systems can be used for this, and the most important difference is whether coordinates are defined over a 2 dimensional or 3 dimensional space referenced to orthogonal axes (Cartesian coordinates), or using distance and directions (polar coordinates, spherical and ellipsoidal coordinates). 
 
+**Quantities, units, datum (Lott 2015)**
+
+- a coordinate system is a set of mathematical rules for specifying how coordinates are to be assigned to points,
+- a datum is a parameter or set of parameters that define the position of the origin, the scale, and the orientation of a coordinate system,
+- a geodetic datum is a datum describing the relationship of a two- or three-dimensional coordinate system to the Earth, and
+- a coordinate reference system is a coordinate system that is related to an object by a datum; for geodetic and vertical datums, the object will be the Earth.
+
+The Earth does not follow a regular shape. The topography of the Earth is of course known to vary strongly, but also the surface formed by constant gravity at mean sea level, the geoid, is irregular. A commonly used model that is fit to the geoid is an ellipsoid of revolution, which is an ellipsoid with two identical minor axes. Fitting such an ellipsoid to the Earth gives a datum. However, fitting it to different areas, or based on different sets of reference points gives different fits, and hence different datums: a datum can for instance be fixed to a particular tectonic plate (like the European Terrestrial Reference System 1989 (ETRS89)), others can be globally fit (like WGS84). More local fits lead to smaller approximation errors.
+
+Until now, we have seen data using a geographic coordinate system, with positions described as degrees of longitude and latitude. Those coordinates are based on a model that approximates the irregular surface of the Earth's mean sea level
+(the geoid) as an ellipsioid (a slightly flattened sphere). ("datum" in the nc description.)
+
+```{r}
+plot(st_geometry(nc), axes = TRUE)
 ```
 
 
-https://rspatialdata.github.io/osm.html
+### Vector data and Geographical projections**Projections**
 
-### wopr
+A projection converts geographical coordingates in cartesian or rectanngular (X,Y) coordinates. Since it is impossible to provide an exact representation of a curved surface on a plane, specialized projections were developed for different regions of the world and different analytical applications.
 
-https://rspatialdata.github.io/population.html
+For example, the images below show how identical circular areas appear at different points of the Earth under a Mercator projection (which preserves shapes) and a Lambert equal-area projection (which preserves areas).
+
+![Mercator distortian(https://pmarchand1.github.io/atelier_rgeo/rgeo_workshop.html)](Graphics/mercator_distortion.png)
+
+
+![Labort distortian(https://pmarchand1.github.io/atelier_rgeo/rgeo_workshop.html)](Graphics/lambert_distortion.png)
+
+**Mollweide Projektion**
+
+Global equal area projection that preserves area proportions but distorts shapes (especially at high latitudes) - Rather world maps than country level analysis.
+
+Therefore, we now use EPSG:4839 (DHDN / 3-degree Gauss zone 3), which is a projection specifically designed for Germany (see this website to find adequate projections). This projection provides a better representation of the country’s geography as it minimizes distortion for this specific region. Notice how the proportions look more natural compared to the previous projections.
+
+
+:::{.student.exercise}
+Load the shapefile der Wahlkreise in Germany https://www.bundeswahlleiterin.de/bundestagswahlen/2025/wahlkreiseinteilung/downloads.html
+
+With different projections
+:::
+
+
+# Geometric operations on vector data
 
 
 
+
+# Add data to shape files
+
+Now we move on to analyze voting behavior on a spatial level. First, we load and clean electoral data from a CSV file. The data can be found here. The data contains voting results including:
+
+First and second votes (Erststimme/Zweitstimme)
+Number of eligible voters
+Actual votes cast
+Invalid votes
+Votes per party
+We perform several data cleaning steps including handling missing values, removing leading zeros of the district numbers (so that we can finally merge it with the districts in the shape file). We also need to merge two districts. Finally, we can join them to our shape file using normal dplyr functions. This is as sf treats shape files as a normal data frame with an added geometry column that is used for all spatial operations.
+
+
+# Übungsblatt: 
+
+Load ALLBUS data and plot happyness per country in Germany
+
+which variable contains countie
+which variable contains happyness 
+plot
 
 packages that contain data:
 library(spData)        # load geographic data
 library(spDataLarge)   # load larger geographic data
 
-## Voronoi-Zellen
-
-Klappt noch nicht!
-
-```{r}
-
-# Make sure we have points
-kiosk_pts <- kiosks_leipzig$osm_points
-
-# 3. Transform to projected CRS (UTM Zone 32N = EPSG:25832)
-crs_projected <- 25832
-kiosk_pts_proj <- st_transform(kiosk_pts, crs = crs_projected)
-leipzig_admin_proj <- st_transform(leipzig_admin$osm_multipolygons, crs = crs_projected)
-
-# 4. Generate Voronoi polygons
-voronoi_geom <- st_voronoi(st_union(kiosk_pts_proj))
-voronoi_sf <- st_collection_extract(voronoi_geom) %>% st_sf()
-
-# 5. Intersect with Leipzig boundary to clip the cells
-voronoi_clipped <- st_intersection(voronoi_sf, leipzig_admin_proj)
-
-# Add ID for coloring
-voronoi_clipped <- voronoi_clipped %>% 
-  mutate(cell_id = row_number())
-
-# Plot
-ggplot() +
-  geom_sf(data = leipzig_admin_proj, fill = "white", color = "black") +
-  geom_sf(data = voronoi_clipped, aes(fill = as.factor(cell_id)), alpha = 0.5, color = "black") +
-  geom_sf(data = kiosk_pts_proj, color = "red", size = 1) +
-  theme_void() +
-  theme(legend.position = "none")
-
-```
-
-```{r}
-# 1. Extract kiosk points and Leipzig polygon
-kiosk_pts <- kiosks_leipzig$osm_points
-leipzig_sf <- leipzig_admin$osm_multipolygons
-
-# 2. Transform to projected CRS for better Voronoi accuracy
-crs_projected <- 25832  # UTM Zone 32N for Leipzig area
-kiosk_pts_proj <- st_transform(kiosk_pts, crs_projected)
-leipzig_sf_proj <- st_transform(leipzig_sf, crs_projected)
-
-envelope <- leipzig_sf_proj %>% 
-  st_union() %>% 
-  st_geometry()
-
-kiosk_voronoi <- kiosk_pts_proj %>%
-  st_geometry() %>%
-  st_union() %>%
-  st_voronoi(envelope = envelope) %>%
-  st_collection_extract("POLYGON") %>%
-  st_sf()
-
-# 4. Assign CRS to Voronoi
-st_crs(kiosk_voronoi) <- crs_projected
-
-# 5. Intersect Voronoi cells with Leipzig boundary
-#    and spatially join kiosk attributes
-kiosk_voronoi_clipped <- kiosk_voronoi %>%
-  st_intersection(leipzig_sf_proj) %>%
-  st_join(kiosk_pts_proj, join = st_contains_properly)
-
-kiosk_voronoi_clipped <- kiosk_voronoi_clipped %>%
-  mutate(kiosk_id = row_number())
-
-# 6. Plot the result, colored by kiosk name (or ID)
-ggplot(kiosk_voronoi_clipped) +
-  geom_sf(aes(fill = kiosk_id), color = "black") +
-  theme_void()
-```
 
 
 
-Übung im Kurs: Leipziger Partnerstädte auf Weltkarte anzeigen
 
-
-https://stackoverflow.com/questions/74198735/constructing-a-voronoi-diagram-in-r-with-data-from-openstreetmap
-
-## ggmap

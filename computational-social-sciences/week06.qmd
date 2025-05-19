@@ -221,7 +221,32 @@ plot(g)
 
 2. Identify all **maximal cliques** with `min = 3` and highlight them visually
 
+
+```{r}
+
+
+plot(g,
+     mark.groups = max_cliques(g, min=3),
+     vertex.label.cex = 0.8,
+     main = "All maximal Cliques",
+     vertex.color="lavender")
+
+```
+
+
 3. Assign the node IDs of the largest maximal clique to a variable called `group`.
+
+```{r}
+largest_clique <- largest_cliques(g)[[1]]
+
+
+largest_clique <- max_cliques(g, min=4)[[1]]
+V(g)$group <- V(g) %in% largest_clique
+```
+
+
+3. Assign the node IDs of the largest maximal clique to a variable called `group`.
+
 
 :::
 
@@ -243,6 +268,27 @@ Cliques are oftenly connected with each other and nodes and relations overlap. B
 **Exercise**:
 
 4. Identify all nodes that are part of the **2-clique** of the largest maximal clique of $g$ and add them to the `group`variable
+
+
+```{r}
+
+dist_matrix <- distances(g, v = largest_clique)
+
+dist <- apply(dist_matrix,
+              2,
+              min)
+
+nodes <- which(dist <= 2)
+
+V(g)$group[nodes] <- TRUE
+
+
+V(g)$color <- ifelse(V(g)$group, "lavender", "lightblue")
+
+plot(g)
+```
+
+
 
 :::
 
@@ -399,6 +445,7 @@ plot(g,
 )
 
 ```
+
 ![Edge Betweenness](Graphics/edge betweenness.png)
 
 ### The Girvan-Newman Method
@@ -543,6 +590,8 @@ membership(lc)
 
 plot(lc, g, main = "Leiden Communities")
 ```
+
+
 ![Leiden-Clustering](Graphics/leidenn.png)
 
 ## Further community detection algorithms implemented in `igraph`
@@ -576,6 +625,33 @@ The problem of validating a network partitioning is not trivial. If a vertex att
 **Exercise**:
 
 1. Find communities in the karate network with the Girvan Newman method, the Louvain Algorithm and the Leiden algorithm. 
+
+
+```{r}
+lc <- cluster_leiden(karate,
+                     objective_function = "modularity",
+                     n_iterations = 10)
+plot(lc, karate)
+
+
+cl <- cluster_leiden(karate,
+                     objective_function = "modularity",
+                     n_iterations = 10)
+plot(cl, karate)
+
+
+
+cfg <- cluster_fast_greedy(karate)
+
+plot(cfg, karate)
+
+plot(structure(list(membership=cutat(cfg,2)),class="communities"),karate)
+
+```
+
+
+
+
 2. Compare the predictions with the actual composition of groups. What are possible explanations for differences?
 
 :::
