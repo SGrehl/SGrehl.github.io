@@ -39,6 +39,7 @@ ui <- fluidPage(
 # 3) Server
 server <- function(input, output, session) {
   source("functions_sequence.R")
+  source("functions_plot.R")
   
   # Reactive model parameters
   model <- reactive({
@@ -104,12 +105,12 @@ server <- function(input, output, session) {
     
     # 3) If running, do one step and schedule the next
     if (isolate(vals$running)) {
-      Sys.sleep(0)                                                 # yield control :contentReference[oaicite:11]{index=11}
+      Sys.sleep(0)                                                 
       isolate({
-        vals$world <- run_step(vals$world, model())               # step model
+        vals$world <- run_step(vals$world, model())             
         vals$step  <- vals$step + 1
       })
-      invalidateLater(200, session)                               # reschedule :contentReference[oaicite:12]{index=12}
+      invalidateLater(200, session)                               
     }
   })
   
@@ -122,15 +123,8 @@ server <- function(input, output, session) {
   # Render the graph at each shiny redraw
   output$gridPlot <- renderPlot({
     req(vals$world)
-    g    <- vals$world$agents
-    cols <- c("#a5d875","#eb6a6a","#73bcde")
-    plot(g,
-         vertex.color = cols[V(g)$type],
-         vertex.size  = 6,
-         vertex.label = NA,
-         edge.color   = "grey80",
-         layout       = plot_layout())
-  }, res = 96)                                                   # :contentReference[oaicite:8]{index=8}
+    plot_world_shiny(vals$world, plot_layout)
+  }, res = 96)                                                  
   
   # Status text
   output$status <- renderText({
