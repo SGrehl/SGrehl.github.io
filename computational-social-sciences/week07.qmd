@@ -12,6 +12,7 @@ Descriptive analysis helps us summarize network structures, such as:
 - Centrality  
 - Density  
 
+
 However, we typically analyze **just one network**.  
 So — when we observe a measure — **how do we know if it's large or small?** Without a **sampling model** or assumptions about **randomness**, we can't:
 
@@ -499,6 +500,7 @@ summary(flomodel.04.sim)
 
 
 :::{.student-exercise}
+**Exercise**: 
 
 Use the following code to load the karate network from the `ìgraphdata` package as an object of the `network` class.
 
@@ -514,6 +516,7 @@ Use ergms to answer these questions and interpret the results.
 ::: 
 
 :::{#custom-block}
+
 # Stochastic Actor-Oriented Models (SAOMs) for longitudinal network analysis
 
 We sadly do not have enough time to delve into these interesting analysis tools in the scope of this seminar but I still want to include them for completeness.
@@ -588,13 +591,6 @@ summary(result)
 
 ```
 
-
-:::{#custom-block}
-
-Six degrees of who cares** Garick (2010)
-1. Ist man über einen Pfas
-
-:::
 
 ::: 
 
@@ -742,7 +738,6 @@ This ist't just a statistical curiosity but has social consequences:
 - It reflects sampling bias: highly connected nodes are more likely to appear in your local network.
 
 ## Friendship and Romances among High School Students [@bearmanChainsAffectionStructure2004]
-
 
 Bearman et al. [-@bearmanChainsAffectionStructure2004] asked which structural properties of social networks are relevant for the spread of diseases, as ego-centered network studies reveal little about the broader network structures that facilitate disease transmission. So in 1994 they conducted a study at a U.S. highschool (Jefferson High) with 832 students surveyed on their health status and their sexual and romantic partners in the past 8 months.
 
