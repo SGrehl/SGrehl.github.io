@@ -221,6 +221,7 @@ plot(g)
 
 2. Identify all **maximal cliques** with `min = 3` and highlight them visually
 
+
 ```{r}
 
 
@@ -243,6 +244,10 @@ largest_clique <- max_cliques(g, min=4)[[1]]
 V(g)$group <- V(g) %in% largest_clique
 ```
 
+
+3. Assign the node IDs of the largest maximal clique to a variable called `group`.
+
+
 :::
 
 **Limitations of Cliques**:
@@ -264,6 +269,7 @@ Cliques are oftenly connected with each other and nodes and relations overlap. B
 
 4. Identify all nodes that are part of the **2-clique** of the largest maximal clique of $g$ and add them to the `group`variable
 
+
 ```{r}
 
 dist_matrix <- distances(g, v = largest_clique)
@@ -281,6 +287,7 @@ V(g)$color <- ifelse(V(g)$group, "lavender", "lightblue")
 
 plot(g)
 ```
+
 
 
 :::
@@ -438,6 +445,7 @@ plot(g,
 )
 
 ```
+
 ![Edge Betweenness](Graphics/edge betweenness.png)
 
 ### The Girvan-Newman Method
@@ -583,6 +591,7 @@ membership(lc)
 plot(lc, g, main = "Leiden Communities")
 ```
 
+
 ![Leiden-Clustering](Graphics/leidenn.png)
 
 ## Further community detection algorithms implemented in `igraph`
@@ -617,6 +626,7 @@ The problem of validating a network partitioning is not trivial. If a vertex att
 
 1. Find communities in the karate network with the Girvan Newman method, the Louvain Algorithm and the Leiden algorithm. 
 
+
 ```{r}
 lc <- cluster_leiden(karate,
                      objective_function = "modularity",
@@ -638,6 +648,7 @@ plot(cfg, karate)
 plot(structure(list(membership=cutat(cfg,2)),class="communities"),karate)
 
 ```
+
 
 
 
