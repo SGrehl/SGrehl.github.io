@@ -22,6 +22,10 @@ ui <- fluidPage(
         "R_S_prob", "Waning immunity (R → S):",
         min = 0, max = 1, value = 0.5, step = 0.01
       ),
+      sliderInput(
+        "init_R", "Initial share of R:",
+        min = 0, max = 1, value = 0.5, step = 0.01
+      ),
       actionButton("reset", "Reset"),
       actionButton("step",  "Step"),
       actionButton("run",   "Run"),
