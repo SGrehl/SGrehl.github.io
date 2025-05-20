@@ -23,8 +23,12 @@ ui <- fluidPage(
         min = 0, max = 1, value = 0.5, step = 0.01
       ),
       sliderInput(
-        "init_R", "Initial share of R:",
-        min = 0, max = 1, value = 0.5, step = 0.01
+        "init_I", "Initial Infected:",
+        min = 1, max = 13, value = 1, step = 1
+      ),
+      sliderInput(
+        "init_R", "Initial share of Removed:",
+        min = 0, max = 1, value = 0, step = 0.01
       ),
       actionButton("reset", "Reset"),
       actionButton("step",  "Step"),
@@ -52,6 +56,8 @@ server <- function(input, output, session) {
       transmit_prob = input$transmit_prob,
       I_R_prob      = input$I_R_prob,
       R_S_prob      = input$R_S_prob,
+      init_I        = input$init_I,
+      init_R        = input$init_R,
       seed          = 123
     )
   })
