@@ -23,7 +23,7 @@ ui <- fluidPage(
         min = 0, max = 1, value = 0.5, step = 0.01
       ),
       sliderInput(
-        "I_S_prob", "Getting immunity (🔴 I → S 🟢):",
+        "I_S_prob", "Getting healty (🔴 I → S 🟢):",
         min = 0, max = 1, value = 0.5, step = 0.01
       ),
       sliderInput(
