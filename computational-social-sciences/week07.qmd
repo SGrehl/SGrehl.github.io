@@ -37,7 +37,8 @@ needs(RSiena,
       igraph,
       tidyr,
       igraphdata,
-      dplyr)
+      dplyr,
+      intergraph)
 
 set.seed(1)
 ```
@@ -243,7 +244,7 @@ summary(flomarriage)
 plot(flomarriage)
 
 #Provide the statistics of the network
-summary(flomarriage~edges+triangle+kstar(1:3)+degree(0:5))
+summary(flomarriage~edges+triangle)
 
 
 ```
@@ -491,6 +492,7 @@ summary(fauxmodel.05)
 We can use models to similate other networks, maintaining the characteristics defined in the model.
 
 ```{r}
+
 flomodel.04.sim <- simulate(flomodel.04, nsim=10,seed = 1)
 
 summary(flomodel.04.sim)
@@ -505,11 +507,41 @@ summary(flomodel.04.sim)
 Use the following code to load the karate network from the `ìgraphdata` package as an object of the `network` class.
 
 
+```{r}
+net <- asNetwork(karate)
+
+```
+
+
+
 Use ergms to answer these questions and interpret the results.
 
 1. Are ties more likely to form between members of the same faction?
 
+```{r}
+
+net %v% "faction" <- V(karate)$Faction
+
+model <- ergm(net ~ edges + nodematch("faction"))
+
+
+
+summary(model)
+
+```
+
+
 2. Is there evidence of **triadic closure**[^1]? 
+
+```{r}
+model <- ergm(net ~ edges + triangle)
+
+
+# probably overfitted due to the small network
+model <- ergm(net ~ edges + gwesp(0.5, fixed = TRUE))
+summary(model)
+```
+
 
 [^1]: Including a `triangle` term can lead to overfitting in small networks, so it might generally better to use the `gwesp()` term instead. This term captures triadic closure in a more stable way by applying a geometrically weighted decay to the count of shared partners for each edge.
 

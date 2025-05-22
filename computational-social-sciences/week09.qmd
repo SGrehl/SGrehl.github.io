@@ -103,6 +103,88 @@ GEOMETRYCOLLECTION	set of geometries of any type except GEOMETRYCOLLECTION
 
 ach of the geometry types can also be a (typed) empty set, containing zero coordinates (for POINT the standard is not clear how to represent the empty geometry). Empty geometries can be thought of being analogues to missing (NA) attributes, NULL values or empty lists.
 
+```{r}
+library(osmdata)
+leipzig_poly <- opq("Leipzig, Germany") %>%
+  add_osm_feature(key = "boundary", value = "administrative") %>%
+  osmdata_sf()
+
+leipzig <- leipzig_poly$osm_multipolygons %>%
+  dplyr::filter(name == "Leipzig") %>%
+  st_transform(4326)
+
+
+doeni <- st_sf(
+  name = "Lieblingsdöner",
+  geometry = st_sfc(st_point(c(12.3563, 51.3419)), crs = 4326)  # Koordinaten Leipzig Zentrum
+)
+
+# Shapefile ggf. ins gleiche CRS transformieren
+leipzig <- st_transform(leipzig, 4326)
+
+plot2 <- ggplot() +
+  geom_sf(data = leipzig, fill = "lavender", color = "lightgray") +
+  geom_sf(data = doeni, color = "pink", size = 3) +
+  geom_sf_text(data = doeni, aes(label = name), nudge_y = 0.01, size = 3) +
+  theme_minimal()
+
+```
+
+
+```{r}
+library(ggplot2)
+library(sf)
+
+# Punkt (z. B. eine Stadt)
+pt <- st_point(c(1, 1))
+
+# MultiPoint (z. B. mehrere Städte)
+mp <- st_multipoint(matrix(c(1,1, 2,2, 3,1.5), ncol = 2, byrow = TRUE))
+
+# LineString (z. B. eine Straße)
+ln <- st_linestring(matrix(c(0,0, 1,1, 2,0), ncol = 2, byrow = TRUE))
+
+# MultiLineString (z. B. Straßennetz)
+ml <- st_multilinestring(list(
+  matrix(c(0,0, 1,1, 2,0), ncol = 2, byrow = TRUE),
+  matrix(c(2,2, 3,3, 4,2), ncol = 2, byrow = TRUE)
+))
+
+# Polygon (z. B. ein Gebiet)
+pg <- st_polygon(list(rbind(c(0,0), c(2,0), c(2,2), c(0,2), c(0,0))))
+
+# MultiPolygon (z. B. eine Region mit zwei Flächen)
+mpg <- st_multipolygon(list(
+  list(rbind(c(3,0), c(5,0), c(5,2), c(3,2), c(3,0))),
+  list(rbind(c(6,1), c(7,1), c(7,2), c(6,2), c(6,1)))
+))
+
+# Erstelle ein sf-Objekt mit allen Geometrien
+geometries <- st_sfc(pt, mp, ln, ml, pg, mpg)
+types <- c("Point", "MultiPoint", "LineString", "MultiLineString", "Polygon", "MultiPolygon")
+sf_obj <- st_sf(type = types, geometry = geometries)
+
+# Plot
+ggplot(sf_obj) +
+  geom_sf(aes(color = type), size = 2) +
+  ggtitle("Beispiele für Geometrie-Typen in sf") +
+  theme_minimal()
+
+# Beispiel: eine Stadt in Deutschland
+stadt <- st_sf(
+  name = "Musterstadt",
+  geometry = st_sfc(st_point(c(10.0, 51.0)), crs = 4326)
+)
+
+# Plot 2: Stadtpunkt
+plot2 <- ggplot() +
+  geom_sf(data = stadt, color = "red", size = 3) +
+  ggtitle("Stadt als Punkt auf der Karte") +
+  theme_minimal()
+
+```
+
+
 The remaining ten geometries are rare but are increasingly found:
 
 type	description
