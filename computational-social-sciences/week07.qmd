@@ -562,69 +562,6 @@ If you want to have a first look yourself: [https://de.slideshare.net/slideshow/
 :::
 
 
-:::{.hidden when-format="html"}
-
-# Stochastic Actor-Oriented Models (SAOMs) for longitudinal networks
-
-https://de.slideshare.net/slideshow/22-an-introduction-to-stochastic-actororiented-models-saom-or-siena/175668810
-
-When data include longitudinal networks (panels of the same network over time), Stochastic Actor-Oriented Models (SAOMs) provide a framework to model the dynamics. In SAOMs, nodes are treated as actors who sequentially update their ties in continuous time. At each “mini-step”, one actor gets the opportunity to add/drop a tie. The probability of each possible change depends on an objective (evaluation) function that scores the resulting network. Specifically, when actor i considers changing the tie to j, the model assumes a random-utility form (multinomial logit):
-
-SAOM for friendship network 1, 2, 3, ??
-
-
-```{r}
-library(RSiena)
-
-net1 <- asNetwork(graph1)
-
-net2 <- asNetwork(graph2)
-
-net3 <- asNetwork(graph3)
-
-
-smoking_vec <- ifelse(V(graph1)$smoking == 1, 0, 1)  # 0 = Nichtraucher, 1 = Raucher
-table(smoking_vec)  # Check
-
-
-smoking_cov <- coCovar(smoking_vec)
-
-# 1. Netzwerke vorbereiten (müssen als Adjazenzmatrizen vorliegen)
-m1 <- as.matrix(as_adj(graph1))
-m2 <- as.matrix(as_adj(graph2))
-m3 <- as.matrix(as_adj(graph3))
-
-# Siena-Netzwerkobjekt erstellen (3 Zeitpunkte)
-networks <- sienaNet(array(c(m1, m2, m3), dim = c(nrow(m1), ncol(m1), 3)))
-
-
-
-smoking_cov <- coCovar(smoking_vec)
-
-# 3. Siena-Datenobjekt
-siena_data <- sienaDataCreate(networks, smoking_cov)
-
-# 4. Effekte spezifizieren
-effects <- getEffects(siena_data)
-effects <- includeEffects(effects, sameX, interaction1 = "smoking_cov")
-
-# 5. Modell festlegen
-model <- sienaAlgorithmCreate(projname = "raucher_siena")
-
-# 6. Schätzung durchführen
-result <- siena07(model, data = siena_data, effects = effects)
-
-# 7. Ergebnisse anzeigen
-summary(result)
-
-
-
-# Smoking als dynamische Variable
-
-```
-
-
-::: 
 
 # Insights from Network-Studies
 
@@ -899,3 +836,65 @@ These connections will be explored in the "Experimental Sociology" class with Sa
 
 
 
+
+:::{.content-hidden when-format="html"}
+#SAOMS
+
+https://de.slideshare.net/slideshow/22-an-introduction-to-stochastic-actororiented-models-saom-or-siena/175668810
+
+When data include longitudinal networks (panels of the same network over time), Stochastic Actor-Oriented Models (SAOMs) provide a framework to model the dynamics. In SAOMs, nodes are treated as actors who sequentially update their ties in continuous time. At each “mini-step”, one actor gets the opportunity to add/drop a tie. The probability of each possible change depends on an objective (evaluation) function that scores the resulting network. Specifically, when actor i considers changing the tie to j, the model assumes a random-utility form (multinomial logit):
+
+SAOM for friendship network 1, 2, 3, ??
+
+
+```{r}
+library(RSiena)
+
+net1 <- asNetwork(graph1)
+
+net2 <- asNetwork(graph2)
+
+net3 <- asNetwork(graph3)
+
+
+smoking_vec <- ifelse(V(graph1)$smoking == 1, 0, 1)  # 0 = Nichtraucher, 1 = Raucher
+table(smoking_vec)  # Check
+
+
+smoking_cov <- coCovar(smoking_vec)
+
+# 1. Netzwerke vorbereiten (müssen als Adjazenzmatrizen vorliegen)
+m1 <- as.matrix(as_adj(graph1))
+m2 <- as.matrix(as_adj(graph2))
+m3 <- as.matrix(as_adj(graph3))
+
+# Siena-Netzwerkobjekt erstellen (3 Zeitpunkte)
+networks <- sienaNet(array(c(m1, m2, m3), dim = c(nrow(m1), ncol(m1), 3)))
+
+
+
+smoking_cov <- coCovar(smoking_vec)
+
+# 3. Siena-Datenobjekt
+siena_data <- sienaDataCreate(networks, smoking_cov)
+
+# 4. Effekte spezifizieren
+effects <- getEffects(siena_data)
+effects <- includeEffects(effects, sameX, interaction1 = "smoking_cov")
+
+# 5. Modell festlegen
+model <- sienaAlgorithmCreate(projname = "raucher_siena")
+
+# 6. Schätzung durchführen
+result <- siena07(model, data = siena_data, effects = effects)
+
+# 7. Ergebnisse anzeigen
+summary(result)
+
+
+
+# Smoking als dynamische Variable
+
+```
+
+::: 
