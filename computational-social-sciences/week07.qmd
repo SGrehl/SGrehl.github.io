@@ -217,7 +217,7 @@ Where:
 
 ERGMs are especially useful when we want to go **beyond descriptive statistics** and understand what social processes might be generating the observed structure.
 
-## Fitting ergms with statnet
+## Fitting ergms with `statnet`
 
 The [`statnet`](https://statnet.org/) suite provides a powerful set of tools for:
 
@@ -343,7 +343,7 @@ The interpretation is similiar to when you interpret glm:
 
 
 
-#### Include `triangle` terms as a measure of clustering: 
+### Include `triangle` terms as a measure of clustering: 
 
 ```{r}
 #| code-fold: False
@@ -355,7 +355,7 @@ summary(flomodel.02)
 
 ![Include triangles for clustering](Graphics/flo02.png)
 
-#### Include nodal covariates:
+### Include nodal covariates:
 
 We can include continuous nodal covariates
 
@@ -400,7 +400,7 @@ In probability terms, this is a **small but positive effect**:
 
 
 
-#### Include transformation of continuous nodal covariates:
+### Include transformation of continuous nodal covariates:
 
 Effect of absolute wealth difference:
 Specifically, it says:
@@ -438,7 +438,7 @@ plogis(-2.302 + 0.0155*5)
   
 
 
-#### Include categorical (or discrete) variables
+### Include categorical (or discrete) variables
 
 ```{r}
 #| code-fold: False
@@ -457,7 +457,7 @@ summary(fauxmodel.02)
 
 
 
-#### Include Homophily: 
+### Include Homophily: 
 
 - nodematch: Uniform homophily and differential homophily
 
