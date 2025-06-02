@@ -1,6 +1,6 @@
 ---
 title: "Week 11"
-subtitle: "-"
+subtitle: "Collecting and Enriching Spatial Data"
 ---
 
 
@@ -13,9 +13,42 @@ subtitle: "-"
 
 - Descriptive mapping (Open street maps, so on)
 
-- Looking at distances (projections) and access to places 
-
 - Isochronic maps, Voronoi maos
+
+- Operationalizing access (Distances, density, so on)
+
+## Geometric measurement 
+
+```{r}
+# Length of streets (in degrees, transform to metric CRS for meters)
+leipzig_streets_utm <- st_transform(leipzig_streets, 32633)  # UTM zone for Leipzig approx
+
+streets_length <- st_length(leipzig_streets_utm)
+
+# Area of polygons
+leipzig_utm <- st_transform(leipzig, 32633)
+
+areas <- st_area(leipzig_utm)
+
+# Distance between points (doeni and gwz)
+dist <- st_distance(doeni, gwz)
+
+
+```
+
+
+## Further operations
+
+```{r}
+# Extract coordinates of a point
+coords <- st_coordinates(doeni)
+
+# Centroid of a polygon (e.g. Leipzig boundary)
+centroid <- st_centroid(st_union(leipzig))
+
+# Simplify geometry to reduce detail (good for plotting)
+leipzig_simple <- st_simplify(leipzig, dTolerance = 0.001)
+```
 
 
 
@@ -56,7 +89,15 @@ ggplot() +
 
 ```
 
+Load Leipzig from Open street map
 
+#leipzig_poly <- opq("Leipzig, Germany") |>
+  #add_osm_feature(key = "boundary", value = "administrative") |>
+  #osmdata_sf()
+
+#leipzig <- leipzig_poly$osm_multipolygons |>
+  #dplyr::filter(name == "Leipzig") |>
+  #st_transform(4326)
 
 ## Voronoi-Zellen
 

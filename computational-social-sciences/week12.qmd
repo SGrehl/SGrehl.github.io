@@ -3,6 +3,21 @@ title: "Week 12"
 subtitle: "-"
 ---
 
+Lets remember: 
+
+
+> _"Everything is related to everything else, but near things are more related than distant things."_  
+> — Waldo Tobler, First Law of Geography
+
+Spatial thinking refers to reasoning about **location**, **distance**, and **spatial relationships**. It is useful in answering questions such as:
+
+- Are healthcare facilities equally accessible to all neighborhoods?
+- Is crime concentrated in specific urban areas?
+- Do voting patterns show spatial clustering?
+
+**Spatial dependence** can violate assumptions of classical models (like independence of observations). Recognizing spatial structure allows us to design better models and policies.
+
+
 Space adds a new way to control for factors that our classic models arguably cannot capture (distance, presence of certain things). 
 We can ask new questions
 --> NEW PITFALLS

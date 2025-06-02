@@ -1,295 +1,660 @@
 ---
 title: "Week 09 - Spatial data"
-subtitle: "Introduction to Spatial Data & the `sf` package"
+subtitle: "Introduction to Spatial Data"
 
 ---
-Students will 
 
-- understand what spatial (geographic) data are and why they are useful
-- learn Rs `sf`package for storing/ manipulatinf spatial vector data
-- load and inspect spatial data (shapefiles, GeoJson) and view their geometry.
-- recognize coordinate reference system and perform projections
-- acquire data from osm/google and spatial visualisation
+Welcome to out first session on **Spatial data analysis**! By the end of this session, you will:
 
-## Spatial thinking in the Social Sciences
-
-Close things are more similar - etc - what does this lead to?
-
-# Spatial data [@pebesmaSpatialDataScience2023]
-
-What is spatial data? 
-
-Spatial data is data that has a geographical attribute.  https://brunoconteleite.github.io/02-gis-unibo/00_class01.pdf
-Cpmmon aspect: unstructured --> needs to be manipulated into the structure required by research
-
-GIS: 
-Geographic Information Systems
-(old systems ) used to manipulate, process spatial data
-since the 1990s: rise of user friendly desktop softwares
-
-Data Science revolution: full integration of GIS tools into data processing pipelines 
-
-Applications: Cholera maps in Soho London (Snow 1856) On the mode of communication of cholera. Edinburgh medical journal, 1(7),
-p.668.
+```{r}
+library(needs)
+needs(osmdata,
+      sf)
+```
 
 
-## Types of spatial objects
-GIS systems represent spatial data in either vector or raster formats. 
+- Understand what spatial (geographic) data are and why we should consider spatial data in the social sciences
+- Learn R’s `sf` package for storing and manipulating spatial vector data
+- Load and inspect spatial data formats (e.g., *Shapefiles, GeoJSON*)
+- Understand and apply coordinate reference systems (CRS) and projections
+- Perform basic geometric operations on vector data
+- Create basic spatial visualizations
 
-**Raster data**: Geography as continous of pixels (gridcells) with associated values. They normally represent **high resolution** features of the geograpy (like an image)
+# Spatial thinking in the Social Sciences
 
-Example image of raster
-and continous and/ ore categorical data. 
+These last weeks we asked: Who is connected to whom, and how do these structures influence relationships and individual opinions, behavior and attitudes? 
+Starting from this week, we ask ourselves: **Who is close to whom** - and what does this mean? 
 
-Vector data: Spatial geometries (as a collection of points over a geography)
+Spatial thinking is strongly based on the idea that: 
 
-## Geometries
+> "Everything is related to everything else, but near things are more related than distant things."
+(First law of geography - [@toblerComputerMovieSimulating1970])
 
-Can represent different objects (points, lines, polygons, multiobjects).
+It thus refers to reasoning about **location**, **distance**, and **spatial relationships** and can for example be useful in answering questions such as: 
 
-Points: 
+- Are healthcare facilities equally accessible to all neighborhoods?
+- Is crime concentrated in specific urban areas due to overlapping social conditions?
+- Do voting patterns show spatial clustering due to shared environments? 
 
-Lines: 
+# What is Spatial Data?
 
-Polygons: Polygons are a particular form of *geometry*. They consist of sequences of ponts connected by straight lines. Usually when we plot maps, what we get are `multipolygons'. 
+**Spatial data** is any data that has a geographical attribute. It contains information about the **location** and/or shape of physical features on earth and can include much more than just the coordinates on a standard dateset [@pebesmaSpatialDataScience2023].
 
-Bild von allen dreien
-
-
-:::{#custom-block}
-Vector data: file packages (usually multifiles)
-Shapefiles (*.shp), contains also several auxiliar files (e.g. *.dbf, *.shx). Most used!
-GeoJSON (.json) is written in Javascript (used mostly in web interfaces)
-Geopackage (*.gpk), unique package/file
-KMZ (*.kmz), from Google Earth format
-Raster data: imagery
-*.tiff (most used)
-Other image files (e.g. jpeg, gif, png)
-NetCDF files (*.nc) standardized data for geoscience (CDF = common data format)
+:::{custom-block}
+For example: A dataset on schools might contain school names, addresses, and exact coordinates (latitude/longitude) — allowing us to map them.
 :::
 
 
-## Geometries in R
+Spatial data is often **unstructured**: 
 
-## sf package
+- Formats vary (Shapefiles, GeoJSON, GPKG, KML)
+- Coordinate systems may be missing or mismatched
+- Boundaries and resolutions differ across datasets
+- Files may contain only geometry but no relevant attributes
 
-https://cran.r-project.org/web/packages/sf/index.html
-
-Simple features package
-State of the art standardized set of functions for GIS tasks
-- replacing old packages
-
-Core elements of a simple feature are 
-1. Geometry
-2. Projection
-3. Attributes
+Thus data must be **cleaned, projected and joined** to be useful for further analysis.
 
 
-Bild von sf package
+:::{#custom-block}
 
-https://r-spatial.github.io/sf/articles/sf1.html
+## GIS
 
-Simple feature geometry types
-The following seven simple feature types are the most common, and are for instance the only ones used for GeoJSON:
+**Geographic Information systems** were originally developed in the 1960s-90s as a standalone software to manage spatial data. Today, spatial data tools are more and more integrated into data science languages like **R** and **Python** - bringing spatial data analysis into reproducible workflows.
+:::
 
-type	description
-POINT	zero-dimensional geometry containing a single point
-LINESTRING	sequence of points connected by straight, non-self intersecting line segments; one-dimensional geometry
-POLYGON	geometry with a positive area (two-dimensional); sequence of points form a closed, non-self intersecting ring; the first ring denotes the exterior ring, zero or more subsequent rings denote holes in this exterior ring
-MULTIPOINT	set of points; a MULTIPOINT is simple if no two Points in the MULTIPOINT are equal
-MULTILINESTRING	set of linestrings
-MULTIPOLYGON	set of polygons
-GEOMETRYCOLLECTION	set of geometries of any type except GEOMETRYCOLLECTION
+![Original map made by John Snow in 1854. Cholera cases are highlighted in black, showing the clusters of cholera cases (indicated by stacked rectangles) in the London epidemic of 1854. The map was created in order to better understand the pattern of cholera spread in the 1854 Broad Street cholera outbreak, which Snow would use as an example of how cholera spread via the fecal-oral route through water systems as opposed to the miasma theory of disease spread. The contaminated pump is located at the intersection of Broad Street and Cambridge Street (now Lexington Street), running into Little Windmill Street. The map marks an important part of the development of epidemiology as a field, and of disease mapping as a whole.[@snowModeCommunicationCholera1855]](Graphics/Snow-cholera-map.png){width=50%}
 
-ach of the geometry types can also be a (typed) empty set, containing zero coordinates (for POINT the standard is not clear how to represent the empty geometry). Empty geometries can be thought of being analogues to missing (NA) attributes, NULL values or empty lists.
+
+# Types of spatial data
+
+In GIS, spatial data is typically represented in one of two formats.  
+
+**Raster data:**
+
+Representation of geography as a continous of pixels (gridcells) with associated values. They normally represent **high resolution** features of the geograpy (like an image)
+
+
+**Vector data:**
+
+All geospatial vector data can be described by a set of geometric objects (so called simple features.)
+
+The most common spatial types are **points**, **lines** and **polygons**:
+
+| Geometric Entity | Description | R | Example |
+|------------------|-------------|-----------|---------------------|
+| Points           | Discrete locations in space defined by a single pair of coordinates. | `st_point(c(2, 3))` | Location of survey respondents, cities, bus stops |
+| Lines            | Ordered sequences of points connected by straight segments. | `st_linestring(rbind(c(1, 2), c(3, 4), c(5, 6)))` | Roads, rivers, subway lines |
+| Polygons         | Closed sequences of points defining areas; first and last points must be the same. | `st_polygon(list(rbind(c(1, 1), c(2, 4), c(5, 3), c(1, 1))))` | Country borders, administrative districts, lakes |
+
+
+We can wrap one or more geometries to collections, allowing us to combine different objects and metadata:
+
+| Function     | Purpose                                      |
+|--------------|----------------------------------------------|
+| `st_point()` | Creates a single geometry (e.g., a point)     |
+| `st_sfc()`   | Creates a vector (collection) of geometries   |
+| `st_sf()`    | Creates a full spatial data frame (with data + geometry) |
 
 ```{r}
-library(osmdata)
-leipzig_poly <- opq("Leipzig, Germany") %>%
-  add_osm_feature(key = "boundary", value = "administrative") %>%
-  osmdata_sf()
+#| code-fold: false
 
-leipzig <- leipzig_poly$osm_multipolygons %>%
-  dplyr::filter(name == "Leipzig") %>%
-  st_transform(4326)
+point1 <- st_point(c(7.5, 1))
+point2 <- st_point(c(4, pi))
+point3 <- st_point(c(2, 2))
+
+points_sfc <- st_sfc(point1, point2, point3)
+
+
+points_sf <- st_sf(
+  id = 1:3,
+  label = c("A", "B", "C"),
+  geometry = points_sfc
+)
+
+
+x_limits <- c(0, 12)
+y_limits <- c(0, 12)
+
+
+ggplot(data = points_sf) +
+  geom_sf(color = "lavender", size = 4) +
+  geom_sf_text(aes(label = label), nudge_y = 0.5, size = 2) +  # Adds labels above points
+  coord_sf(xlim = x_limits, ylim = y_limits) +
+  theme_minimal() +
+  labs(x = "Longitude", y = "Latitude")
+
+
+
+
+# Define the two lines as matrices
+line1 <- st_linestring(matrix(c(6, 1,
+                                2, 4,
+                                6, 2), ncol = 2, byrow = TRUE))
+line2 <- st_linestring(matrix(c(2, 5,
+                                5, 4,
+                                8, 5), ncol = 2, byrow = TRUE))
+
+# Combine into an sfc with individual features
+lines_sfc <- st_sfc(line1, line2)
+
+
+lines_sf <- st_sf(
+  label = c("Route A", "Route B"),
+  geometry = lines_sfc
+)
+
+
+ggplot(data = lines_sf) +
+  geom_sf(color = "purple", size = 6) +
+  geom_sf_text(aes(label = label), size = 2, nudge_y = 0.5) +
+  coord_sf(xlim = c(0, 10), ylim = c(0, 10)) +
+  theme_minimal() 
+
+
+
+square1 <- st_polygon(list(matrix(c(1,8,
+                                    4,1,
+                                    3,4,
+                                    7,3,
+                                    1,8), ncol = 2, byrow = TRUE)))
+square2 <- st_polygon(list(matrix(c(6,6,
+                                    7,7,
+                                    9,8,
+                                    8,9,
+                                    6,6), ncol = 2, byrow = TRUE)))
+
+# Combine into sfc
+polygons_sfc <- st_sfc(square1, square2)
+
+
+polygons_sf <- st_sf(
+  label = c("Area 1", "Area 2"),
+  geometry = polygons_sfc
+)
+
+
+# Plot
+ggplot(data = polygons_sf) +
+  geom_sf(fill = "lavender", color = "navy") +
+  geom_sf_text(aes(label = label), size = 4, nudge_y = 0.5) +
+  coord_sf(xlim = c(0, 10), ylim = c(0, 10)) +
+  theme_minimal()
+
+
+
+ggplot() +
+  # Polygons first (so they sit underneath)
+  geom_sf(data = polygons_sf, fill = "lavender", color = "coral", size = 0.8) +
+  geom_sf(data = lines_sf, color = "lightblue", size = 3, lineend = "round") +
+  geom_sf(data = points_sf, color = "pink", size = 5) +
+  theme_minimal() 
+
+```
+::: {layout-ncol=4}
+
+![Multipoint Geometry](Graphics/multipoints.png){group="my-gallery" height="150"}
+
+![Multiline Geometry](Graphics/multilines.png){group="my-gallery" height="150"}
+
+![Multipolygo n Geometry](Graphics/multipolygons.png){group="my-gallery" height="150"}
+
+![Geometry Collection](Graphics/multiobject.png){group="my-gallery" height="150"}
+
+:::
+
+
+
+
+:::{#custom-block}
+
+While vector formats are great for discrete features, raster format can be more useful for the representation of continuous variables. 
+
+**Vector data formats**
+
+- **Shapefile (.shp)**: legacy format, often comes with `.dbf`, `.shx`, etc.
+- **GeoJSON (.json)**: used in web mapping, lightweight, human-readable.
+- **Geopackage (.gpkg)**: modern format; compact, supports multiple layers in one file.
+- **KML/KMZ**:  used by Google Earth.
+
+**Raster data formats**
+
+- **TIFF (.tif)**: supports georeferencing and multi-band data; widely used.
+- **NetCDF (.nc)**: used in climate science and geosciences.
+- **Other image files** — JPEG, PNG (used rarely in analysis but common for display)
+
+If needed we can also transform vector data to raster data and vice versa.
+
+![https://gsp.humboldt.edu/olm/Lessons/GIS/08%20Rasters/RasterToVector.html](Graphics/convertingdatamodels2.png)
+
+For this lecture (and usually when using spatial data for the social sciences) we will focus on vector representation of data.
+
+:::
+
+
+# Coordinate Reference Systems
+
+Spatial data is data characterized by coordinates in a coordinate system. Different coordinate systems can be used for this, and the most important difference is whether coordinates are defined over a 2 dimensional or 3 dimensional space referenced to orthogonal axes (Cartesian coordinates), or using distance and directions (polar coordinates, spherical and ellipsoidal coordinates). 
+
+A **Coordinate Reference System** is a framework used to uniquely define spatial positions on Earth. It acts as the interface between the coordinares of a geographic object and its real-world location.
+
+
+A CRS consists of two main concepts: 
+
+- **Coordinate system**: A set of mathematical rules that specify how coordinates are assigned to points
+- **Datum**: Parameters that define the origin, scale and orientation of the coordinate system.
+  - a **geodetic datum** is a datum that describes the relationship of a two- or three-dimensional coordinate system to the Earth
+
+We use different Datums, because the earths shape is irregular. The *geoid* — the surface of constant gravitational potential approximating mean sea level — is not a perfect sphere or ellipsoid. To approximate the geoid, ellipsoids of revolution (ellipsoids with two identical minor axes) are used.
+
+Fitting an ellipsoid to the Earth’s surface results in a datum. Different datums arise because ellipsoids can be fit globally *(e.g.: WGS84 (World Geodetic System 1984)*, used worldwide by GPS.) or locally (g.e.:  *ETRS89 (European Terrestrial Reference System 1989)*, fixed to the European tectonic plate), resulting in varying levels of accuracy for different regions.
+
+
+A **projection** converts geographical coordingates (longitude, lattitude) into planar cartesian coordinates (X,Y). Since it is impossible to provide an exact representation of a curved surface on a plane, specialized projections were developed for different regions of the world and different analytical applications.
+
+For example, the images below show how identical circular areas appear at different points of the Earth under a Mercator projection (which preserves shapes), a Lambert equal-area projection (which preserves areas) and a Mollweide projection (preserving area proportions but distorting shape).
+
+::: {layout-ncol=3}
+
+
+![Mercator distortion](Graphics/mercator_distortion.png){width=100%}  
+*Mercator projection: preserves angles, distorts size near poles*
+
+
+
+![Lambert distortion](Graphics/lambert_distortion.png){width=100%}  
+*Lambert projection: area-preserving, useful for mid-latitudes*
+
+
+
+![Mollweide distortion](Graphics/mollweide.png){width=100%}  
+*Mollweide projection: compromises shape and area, good for global maps*
+
+
+:::
+
+
+You can find a list of implemented projections using `sf::sf_proj_info(type = "proj")`.
+
+
+
+# The `sf package`
+
+A **feature** is thought of as a thing, or an object in the real world, such as a building or a tree. As is the case with objects, they often consist of other objects. This is the case with features too: a set of features can form a single feature. A forest stand can be a feature, a forest can be a feature, a city can be a feature. A satellite image pixel can be a feature, a complete image can be a feature too.
+
+Features have a *geometry* describing where on Earth the feature is located, and they have *attributes*, which describe other properties. The geometry of a tree can be the delineation of its crown, of its stem, or the point indicating its centre. Other properties may include its height, color, diameter at breast height at a particular date, and so on.
+
+[https://cran.r-project.org/web/packages/sf/index.html](The Simple Features Package for R (`sf`)) is the state of the art package for working with spatial vector data in R. It replaces older packages (that are still available like `sp`and `rgdal`) with a clean, modern interface that *aligns with the tidyverse* [@pebesmaSimpleFeatures].
+
+Every spatial object in `sf` contains:
+
+1. Geometry (shapes/coordinates)
+2. Coordinate Reference System (CRS/projection)
+3. Attributes (data about the object)
+
+
+
+
+
+The most common geometry types supported by the `sf` package are:
+
+| Type              | Description                                                                 |
+|-------------------|-----------------------------------------------------------------------------|
+| `POINT`           | Zero-dimensional geometry containing a single coordinate (e.g., a tree)     |
+| `LINESTRING`      | One-dimensional sequence of points forming a path (e.g., a road or river)   |
+| `POLYGON`         | Two-dimensional area enclosed by lines (e.g., a building footprint)         |
+| `MULTIPOINT`      | Set of points (e.g., tree locations in a park)                              |
+| `MULTILINESTRING` | Set of lines (e.g., transit routes in a city)                               |
+| `MULTIPOLYGON`    | Set of polygons (e.g., a country with multiple islands)                     |
+| `GEOMETRYCOLLECTION` | Mixed set of geometry types (e.g., points, lines, polygons combined)     |
+
+
+:::{#custom-block}
+
+We can also define empty geometries (placeholders)
+for spatial objects. It is similar to having an `NA` in a column of a data frame. This is useful to preserve data structure consistency, even if some lack location. We can check `st_is_empty()` to filter or check for empty geometries before performing operations.
+ 
+:::
+
+```{r}
+#| code-fold: false
+
+# Load Leipzig Polygon (with Stadtviertel) from Shapefile
+leipzig <- sf::st_read(dsn = "Data/Leipzig/ot.shp") # dsn = Data Set Name, 
+
+leipzig
+
+```
+
+![Sf-Objects in R](Graphics/sf_leipzig.png)
+
+:::{#custom-box}
+
+Most tools for spatial analysis (including R-spatial packages) use PROJ, an open source C++ library that transforms coordinates from one CRS to another. They can be described in many ways including formalized "proj4 strings" such as `+proj=longlat` or identifying authority codes like EPSG-codes. The latter is more modern and the corresponding codes can be found on [this website](https://epsg.io/)
+
+:::
+
+
+```{r}
+#| code-fold: false
+
+bb <- st_bbox(leipzig)
+
+#streets <- opq(bbox = bb) |>
+  #add_osm_feature(key = "highway") |>
+  #osmdata_sf()
+
+# Load streets (from OSM)
+leipzig_streets <- streets$osm_lines |>
+  filter(highway %in% c("motorway", "primary", "secondary", "tertiary")) |>  # filter larger streets only! Speed
+  st_transform(4326) |>
+  st_intersection(st_union(leipzig))
 
 
 doeni <- st_sf(
   name = "Lieblingsdöner",
-  geometry = st_sfc(st_point(c(12.3563, 51.3419)), crs = 4326)  # Koordinaten Leipzig Zentrum
+  geometry = st_sfc(st_point(c(12.3563, 51.3419)),
+                    crs = 4326)
 )
 
-# Shapefile ggf. ins gleiche CRS transformieren
-leipzig <- st_transform(leipzig, 4326)
 
-plot2 <- ggplot() +
+gwz <- st_sf(
+  name = "GWZ",
+  geometry = st_sfc(st_point(c(12.36845,51.3319)),
+                    crs = 4326)
+)
+
+# Shapefile ins gleiche CRS transformieren
+leipzig <- st_transform(leipzig,
+                        4326)
+
+# Plot everything
+ggplot() +
   geom_sf(data = leipzig, fill = "lavender", color = "lightgray") +
+  geom_sf(data = leipzig_streets, color = "bisque3", size = 0.3) +
   geom_sf(data = doeni, color = "pink", size = 3) +
-  geom_sf_text(data = doeni, aes(label = name), nudge_y = 0.01, size = 3) +
+  geom_sf_text(data = doeni, aes(label = name), nudge_y = 0.005, size = 3) +
+  geom_sf(data = gwz, color = "pink", size = 3) +
+  geom_sf_text(data = gwz, aes(label = name), nudge_y = 0.005, size = 3) +
   theme_minimal()
 
 ```
 
+![Lieblingsdöner und GWZ](Graphics/lieblingsdoener.png){width=300}
+
+
+
+## Geometry creation
+
+We can define strings, lines or polygons like above, using `st_point()`, `st_linestring()` or `st_polygon()`.
 
 ```{r}
-library(ggplot2)
-library(sf)
+#| code-fold: false
 
-# Punkt (z. B. eine Stadt)
-pt <- st_point(c(1, 1))
-
-# MultiPoint (z. B. mehrere Städte)
-mp <- st_multipoint(matrix(c(1,1, 2,2, 3,1.5), ncol = 2, byrow = TRUE))
-
-# LineString (z. B. eine Straße)
-ln <- st_linestring(matrix(c(0,0, 1,1, 2,0), ncol = 2, byrow = TRUE))
-
-# MultiLineString (z. B. Straßennetz)
-ml <- st_multilinestring(list(
-  matrix(c(0,0, 1,1, 2,0), ncol = 2, byrow = TRUE),
-  matrix(c(2,2, 3,3, 4,2), ncol = 2, byrow = TRUE)
-))
-
-# Polygon (z. B. ein Gebiet)
-pg <- st_polygon(list(rbind(c(0,0), c(2,0), c(2,2), c(0,2), c(0,0))))
-
-# MultiPolygon (z. B. eine Region mit zwei Flächen)
-mpg <- st_multipolygon(list(
-  list(rbind(c(3,0), c(5,0), c(5,2), c(3,2), c(3,0))),
-  list(rbind(c(6,1), c(7,1), c(7,2), c(6,2), c(6,1)))
-))
-
-# Erstelle ein sf-Objekt mit allen Geometrien
-geometries <- st_sfc(pt, mp, ln, ml, pg, mpg)
-types <- c("Point", "MultiPoint", "LineString", "MultiLineString", "Polygon", "MultiPolygon")
-sf_obj <- st_sf(type = types, geometry = geometries)
-
-# Plot
-ggplot(sf_obj) +
-  geom_sf(aes(color = type), size = 2) +
-  ggtitle("Beispiele für Geometrie-Typen in sf") +
-  theme_minimal()
-
-# Beispiel: eine Stadt in Deutschland
-stadt <- st_sf(
-  name = "Musterstadt",
-  geometry = st_sfc(st_point(c(10.0, 51.0)), crs = 4326)
+line <- st_sf(
+  name = "Connection",
+  geometry = st_sfc(
+    st_linestring(rbind(
+      st_coordinates(doeni),
+      st_coordinates(gwz)
+    )),
+    crs = 4326
+  )
 )
 
-# Plot 2: Stadtpunkt
-plot2 <- ggplot() +
-  geom_sf(data = stadt, color = "red", size = 3) +
-  ggtitle("Stadt als Punkt auf der Karte") +
+# Plot everything
+ggplot() +
+  geom_sf(data = leipzig, fill = "lavender", color = "lightgray") +
+  geom_sf(data = leipzig_streets, color = "bisque3", size = 0.3) +
+  geom_sf(data = doeni, color = "pink", size = 3) +
+  geom_sf_text(data = doeni, aes(label = name), nudge_y = 0.005, size = 3) +
+  geom_sf(data = gwz, color = "pink", size = 3) +
+  geom_sf_text(data = gwz, aes(label = name), nudge_y = 0.005, size = 3) +
+  geom_sf(data = line, color = "lightblue", size = 1) +
   theme_minimal()
 
 ```
 
+![Added Linestring between my work and my favorite Döner](Graphics/linestring and street.png){width=300}
 
-The remaining ten geometries are rare but are increasingly found:
-
-type	description
-CIRCULARSTRING	The CIRCULARSTRING is the basic curve type, similar to a LINESTRING in the linear world. A single segment requires three points, the start and end points (first and third) and any other point on the arc. The exception to this is for a closed circle, where the start and end points are the same. In this case the second point MUST be the center of the arc, i.e., the opposite side of the circle. To chain arcs together, the last point of the previous arc becomes the first point of the next arc, just like in LINESTRING. This means that a valid circular string must have an odd number of points greater than 1.
-COMPOUNDCURVE	A compound curve is a single, continuous curve that has both curved (circular) segments and linear segments. That means that in addition to having well-formed components, the end point of every component (except the last) must be coincident with the start point of the following component.
-CURVEPOLYGON	Example compound curve in a curve polygon: CURVEPOLYGON(COMPOUNDCURVE(CIRCULARSTRING(0 0,2 0, 2 1, 2 3, 4 3),(4 3, 4 5, 1 4, 0 0)), CIRCULARSTRING(1.7 1, 1.4 0.4, 1.6 0.4, 1.6 0.5, 1.7 1) )
-MULTICURVE	A MultiCurve is a 1-dimensional GeometryCollection whose elements are Curves, it can include linear strings, circular strings or compound strings.
-MULTISURFACE	A MultiSurface is a 2-dimensional GeometryCollection whose elements are Surfaces, all using coordinates from the same coordinate reference system.
-CURVE	A Curve is a 1-dimensional geometric object usually stored as a sequence of Points, with the subtype of Curve specifying the form of the interpolation between Points
-SURFACE	A Surface is a 2-dimensional geometric object
-POLYHEDRALSURFACE	A PolyhedralSurface is a contiguous collection of polygons, which share common boundary segments
-TIN	A TIN (triangulated irregular network) is a PolyhedralSurface consisting only of Triangle patches.
-TRIANGLE	A Triangle is a polygon with 3 distinct, non-collinear vertices and no interior boundary
-
-E.g. geolocated surveys are points, roads are lines, regions/states are polygons
-library.virginia.edu
-. Each “layer” can be combined. Demonstrate with sf:
+## Geometric confirmation
 
 ```{r}
-library(sf)
-nc <- st_read(system.file("shape/nc.shp", package="sf"))  # NC SIDS counties
-head(nc)         # shows attributes + geometry
-plot(st_geometry(nc))  # simple view of polygons
+#| code-fold: false
+
+
+# Check if geometries are valid - meaning following the formal rules
+st_is_valid(leipzig_streets)
+
+# Check geometry type
+st_geometry_type(leipzig_streets)
+
+# Check if geometry is empty
+st_is_empty(doeni)
+
+# Get CRS
+st_crs(leipzig)
+st_crs(doeni)
+
+# Ceck if point lies inside polygon
+st_contains(leipzig, doeni)
+
 ```
 
-North Carolina counties
-
-![NC-sf setup (https://r-spatial.github.io/sf/articles/sf1.html)](Graphics/sf_fig.png)
-
-# Coordinate reference systems and tranformations
-
-Spatial data is data characterized by coordinates in a coordinate system. Different coordinate systems can be used for this, and the most important difference is whether coordinates are defined over a 2 dimensional or 3 dimensional space referenced to orthogonal axes (Cartesian coordinates), or using distance and directions (polar coordinates, spherical and ellipsoidal coordinates). 
-
-**Quantities, units, datum (Lott 2015)**
-
-- a coordinate system is a set of mathematical rules for specifying how coordinates are to be assigned to points,
-- a datum is a parameter or set of parameters that define the position of the origin, the scale, and the orientation of a coordinate system,
-- a geodetic datum is a datum describing the relationship of a two- or three-dimensional coordinate system to the Earth, and
-- a coordinate reference system is a coordinate system that is related to an object by a datum; for geodetic and vertical datums, the object will be the Earth.
-
-The Earth does not follow a regular shape. The topography of the Earth is of course known to vary strongly, but also the surface formed by constant gravity at mean sea level, the geoid, is irregular. A commonly used model that is fit to the geoid is an ellipsoid of revolution, which is an ellipsoid with two identical minor axes. Fitting such an ellipsoid to the Earth gives a datum. However, fitting it to different areas, or based on different sets of reference points gives different fits, and hence different datums: a datum can for instance be fixed to a particular tectonic plate (like the European Terrestrial Reference System 1989 (ETRS89)), others can be globally fit (like WGS84). More local fits lead to smaller approximation errors.
-
-Until now, we have seen data using a geographic coordinate system, with positions described as degrees of longitude and latitude. Those coordinates are based on a model that approximates the irregular surface of the Earth's mean sea level
-(the geoid) as an ellipsioid (a slightly flattened sphere). ("datum" in the nc description.)
+## Geometric operations
 
 ```{r}
-plot(st_geometry(nc), axes = TRUE)
+#| code-fold: false
+# Buffer: create a buffer zone around a point (e.g., 500 meters)
+doeni_buffer <- st_buffer(doeni, dist = 500, 4326)  # approx 500m in degrees (~very rough!)
+
+
+# Intersection: streets intersecting with the buffer
+streets_near_doeni <- st_intersection(leipzig_streets, doeni_buffer) |> 
+  select(osm_id, name, geometry)
+
+
+
+# Difference: parts of streets outside buffer
+streets_outside <- st_difference(leipzig_streets, doeni_buffer) |> 
+  select(osm_id, name, geometry)
+
 ```
 
 
-### Vector data and Geographical projections**Projections**
+We can check all methods for `sf`- objects with `methods(class = "sf")`
 
-A projection converts geographical coordingates in cartesian or rectanngular (X,Y) coordinates. Since it is impossible to provide an exact representation of a curved surface on a plane, specialized projections were developed for different regions of the world and different analytical applications.
+## Add data to simple features
 
-For example, the images below show how identical circular areas appear at different points of the Earth under a Mercator projection (which preserves shapes) and a Lambert equal-area projection (which preserves areas).
+Even though these plots already look pretty cool, we as sociologists are usually interested not just in looking at the placement of objects, but more on how these relate to further variables. The `sf` handles data like a data.frame, allowing us to combine it (and add) further data to the frames and thus analyzing the relations between different phenomena.
 
-![Mercator distortian(https://pmarchand1.github.io/atelier_rgeo/rgeo_workshop.html)](Graphics/mercator_distortion.png)
-
-
-![Labort distortian(https://pmarchand1.github.io/atelier_rgeo/rgeo_workshop.html)](Graphics/lambert_distortion.png)
-
-**Mollweide Projektion**
-
-Global equal area projection that preserves area proportions but distorts shapes (especially at high latitudes) - Rather world maps than country level analysis.
-
-Therefore, we now use EPSG:4839 (DHDN / 3-degree Gauss zone 3), which is a projection specifically designed for Germany (see this website to find adequate projections). This projection provides a better representation of the country’s geography as it minimizes distortion for this specific region. Notice how the proportions look more natural compared to the previous projections.
+Imagine if we were interested in analyzing whether the movement of actors in Leipzig is dependent on my Lieblingsdöner. For a descriptive (and visual analysis) we load, clean and add data on the innercity movements of Leipzig.
 
 
-:::{.student.exercise}
-Load the shapefile der Wahlkreise in Germany https://www.bundeswahlleiterin.de/bundestagswahlen/2025/wahlkreiseinteilung/downloads.html
 
-With different projections
+```{r}
+#| code-fold: false
+zuzuege_innerstaedtisch_2024 <- read_csv("Data/Leipzig/Bevölkerungsbewegung_Wanderungen.csv") |>
+  filter(Sachmerkmal == "Innerstädtische Zuzüge") |>
+  pivot_longer(
+    cols = 3:12,              # Spalten 2015–2024
+    names_to = "Jahr",
+    values_to = "Zuzuege"
+  ) |>
+  filter(Jahr == "2024") |> # Nur Jahr 2024
+  mutate(Zuzuege = as.numeric(Zuzuege))
+
+
+
+leipzig_data <- left_join(x = shape,                  # Zusammenfügen der Daten über den Ortsteil (Name / Gebiet)
+                          y = zuzuege_innerstaedtisch_2024,
+                          by = c("Name" = "Gebiet"))
+```
+
+![Leipzig sf with Information on Innerstädtische Zuzüge](Graphics/zuzuege.png)
+
+
+And if we plot this now with my favorite Döner: 
+
+
+```{r}
+#| code-fold: false
+
+ggplot(leipzig_data) +
+  geom_sf(aes(fill = Zuzuege)) +
+  scale_fill_gradient(low = "lavender", high = "pink", na.value = "grey90") +
+  geom_sf(data = doeni, color = "pink", size = 3) +
+  geom_sf_text(data = doeni, aes(label = name), nudge_y = 0.005, size = 3) +
+  # Buffer around the Döner location
+  geom_sf(data = doeni_buffer, fill = "lightblue", color = NA, alpha = 0.6) +
+  theme_minimal() +
+  labs(title = "Innerstädtische Zuzüge 2024 und Leos Lieblingsdöner", fill = "Zuzüge")
+```
+
+
+![Innerstädtische Zuzüge](Graphics/innerstädtische zuzuege.png){width=300}
+
+we can obviously see, that people in Leipzig are motivated to move as close to my favorite Döner as possible 😉 
+
+
+:::{.student-exercise}
+
+Lets try this for ourselves: 
+
+You can download a GeoJson with Information on the boundaries of world countries, their name, ISO Code, Affiliated countries from [here](https://hub.arcgis.com/datasets/esri::world-countries-generalized/explore) 
+
+1. Load the world boundaries as an `sf` object using `st_read()`. 
+2. Plot the countries using different Coordinate Reference Systems (CRSs). Observe how these different CRSs change the appearance of the world. 
+
+From [here](https://simplemaps.com/data/countries) you can download the free version of the simplemaps information metadata on the world countries. It contains information on different countries population and economic information. 
+
+
+1. Add the information from the .csv to your `sf`-object.
+2. Find the five countries with the highest and lowest median age.
+3. Visualize median age using a color gradient.
+4. Identify which countries drive on the left.
+4. Visualize the driving side on a map.
+
+
 :::
 
 
-# Geometric operations on vector data
 
 
 
 
-# Add data to shape files
-
-Now we move on to analyze voting behavior on a spatial level. First, we load and clean electoral data from a CSV file. The data can be found here. The data contains voting results including:
-
-First and second votes (Erststimme/Zweitstimme)
-Number of eligible voters
-Actual votes cast
-Invalid votes
-Votes per party
-We perform several data cleaning steps including handling missing values, removing leading zeros of the district numbers (so that we can finally merge it with the districts in the shape file). We also need to merge two districts. Finally, we can join them to our shape file using normal dplyr functions. This is as sf treats shape files as a normal data frame with an added geometry column that is used for all spatial operations.
 
 
-# Übungsblatt: 
-
-Load ALLBUS data and plot happyness per country in Germany
-
-which variable contains countie
-which variable contains happyness 
-plot
-
-packages that contain data:
-library(spData)        # load geographic data
-library(spDataLarge)   # load larger geographic data
+::: {.content-hidden when-format="html"}
 
 
 
+```{r}
+# Path to your GeoJSON file
+geojson_path <- "Data/World/World_Countries_(Generalized)_9029012925078512962.geojson"
+
+world <- st_read(geojson_path) # works exactly the same for shapefiles
+
+
+names(world)
+
+
+# Default CRS (likely WGS84)
+ggplot(world) +
+  geom_sf() +
+  labs(title = "World in Default CRS (WGS84)") +
+  theme_minimal()
+
+# Mercator projection
+ggplot(st_transform(world, 3857)) +
+  geom_sf() +
+  labs(title = "World in Mercator Projection (EPSG:3857)") +
+  theme_minimal()
+
+# Robinson projection (EPSG:54030 — custom, needs PROJ string if not registered)
+ggplot(st_transform(world, "+proj=robin")) +
+  geom_sf() +
+  labs(title = "World in Robinson Projection") +
+  theme_minimal()
+
+
+ggplot(st_transform(world, "+proj=moll")) +
+  geom_sf() +
+  labs(title = "World in Mollweide Projection") +
+  theme_minimal()
+
+ggplot(st_transform(world, 4326)) +
+  geom_sf() +
+  labs(title = "World in Mollweide Projection") +
+  theme_minimal()
+
+
+
+csv_path <- "Data/World/countries.csv"
+
+countries_info <- read_csv(csv_path) |>
+  clean_names()  # makes column names lowercase and safe
+
+names(countries_info)
+
+# Merge on country name — adjust if names differ
+world_joined <- world |>
+  left_join(countries_info, by = c("COUNTRY" = "country"))  # adjust "NAME" if needed
+
+#Q2.1
+
+world_joined |>
+  filter(!is.na(median_age)) |>
+  arrange(desc(median_age)) |>
+  select(COUNTRY, median_age) |>
+  head(5)
+
+world_joined |>
+  filter(!is.na(median_age)) |>
+  arrange(median_age) |>
+  select(COUNTRY, median_age) |>
+  head(5)
+
+
+
+# Get names of countries with left-side driving
+left_driving_countries <- world_joined |>
+  filter(driving_side == "left") |>
+  pull(COUNTRY)  
+
+print(left_driving_countries)
+
+right_driving_countries <- world_joined |>
+  filter(driving_side == "right") |>
+  pull(COUNTRY)
+
+print(right_driving_countries)
+
+ggplot(world_joined) +
+  geom_sf(aes(fill = driving_side), color = "white", size = 0.1) +
+  scale_fill_manual(values = c("right" = "lavender", "left" = "pink", "NA" = "gray80"), na.value = "lightgrey") +
+  labs(
+    title = "Driving Side by Country",
+    fill = "Driving Side"
+  ) +
+  theme_minimal()
+
+ggplot(world_joined) +
+  geom_sf(aes(fill = median_age), color = "white", size = 0.1) +
+  scale_fill_gradient(
+    low = "lavender",
+    high = "pink",
+    na.value = "lightgrey"
+  ) +
+  labs(
+    title = "Median Age") +
+  theme_minimal()
+
+
+```
+
+![Plot of driving side](Graphics/driving side.png)
+
+
+:::
 
 
