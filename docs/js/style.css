@@ -1,0 +1,82 @@
+.inline-fragment {
+  display: flex;
+}
+
+.inline-fragment p {
+  padding-right: 10px;
+}
+
+figcaption {
+   text-align: center;
+}
+
+.rotate-a {
+  max-width: 60%;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform-origin: center center;    
+  transform: translate(-50%, -50%) ;
+}
+
+.rotate-b {
+  max-width: 60%;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform-origin: center center;    
+  transform: translate(-50%, -50%);
+}
+
+
+.icon-bullet {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  margin-left: 1.5em;
+  position: relative;
+}
+
+.icon-bullet::before {
+  content: "•";
+  position: absolute;
+  left: -1.5em;
+  font-size: 1.2em;
+  top: 0;
+}
+
+.icon svg {
+  width: 48px;
+  height: 48px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: -2px;    /* tweak this if it's too high */
+  color: #EEE8D5; /* or adapt to your theme */
+}
+
+
+/* Ensure the overall simulation container lays out children side‐by‐side */
+.simulation {
+  display: flex;
+  align-items: flex-start; /* top‐align settings and results */
+  gap: 1rem;               /* space between the two panels */
+}
+
+/* The “settings” panel—fixed width or let it size to its contents */
+.simulation > .settings {
+  flex: 0 0 auto;      /* don’t stretch; size to content */
+  max-width: 300px;    /* optional: cap its width */
+}
+
+/* The “results” panel fills the remaining horizontal space */
+.simulation > .results {
+  flex: 1 1 0;         /* grow to fill available space */
+  margin-left: 1rem;   /* extra breathing room */
+}
+
+/* If you want the canvas to resize responsively: */
+.simulation .results canvas {
+  height: 100%;
+  width: auto;
+  display: block;
+}
