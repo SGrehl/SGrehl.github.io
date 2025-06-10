@@ -74,24 +74,7 @@ ul li {
   margin-bottom: 2px; /* Adjust as needed */
 }
 
-.simulation {
-  display: flex;
-  overflow: auto; 
-}
 
-.settings {
-  float: left;
-  flex: 0 0 250px; /* fixed width */
-  padding: 10px;
-  margin-right: 20px;
-  border-right: 1px solid #ddd;
-  font-size: 50%;
-}
-
-.results {
-  flex: 1;
-  font-size: 50%;
-}
 
 table.board, td.cell
 {
@@ -115,7 +98,66 @@ td.blue
 	background-color: blue;
 }
 
-#simulationCanvas {
+.simulation canvas {
   border: 1px solid #ccc;
 }
+.simulation .settings {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.simulation .results {
+  display: flex;
+  justify-content: center;
+  gap: 0.5em;
+  margin-bottom: 1em;
+}
+
+
+/* row of buttons */
+.simulation .settings .buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.5em;
+  margin-bottom: 1em;
+}
+
+/* row of inputs */
+.simulation .settings .input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.01em;
+}
+
+.simulation .settings .input input {
+  margin-bottom: 0.5em;
+}
+
+/* (optional) keep your fixed‐size button styles */
+.simulation .settings button {
+  width: 100px;
+  height: 40px;
+  background-color: var(--btn-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+:root {
+  --btn-color: #4A90E2;
+}
+
+.simulation .settings button:hover {
+  background-color: #357ABD;
+}
+
+/* when we add .running, override to green */
+.simulation .settings button.running {
+  background-color: #4CAF50 !important;
+}
+
 
