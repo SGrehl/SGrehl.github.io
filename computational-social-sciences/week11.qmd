@@ -1,185 +1,750 @@
 ---
-title: "Week 11"
-subtitle: "Collecting and Enriching Spatial Data"
+title: "Week 11 - The spatial turn I "
+subtitle: "Why distance and access are tricky"
 ---
 
 
-## Types of spatial data
-[@moragaSpatialStatisticsData2024]
+Welcome to our second lecture on spatial data. Last week we spoke about spatial data in general and mapping -— perhaps one of the most powerful tools for spatial analysis. This week, we will:
+
+- Learn how to enrich spatial data with information from web‐based platforms.  
+- Discuss the challenges of using location as a proxy for social phenomena.  
+- Create advanced map visualizations in R.  
+
+# Spatial thinking in the Social Sciences
+
+There has been a steady growth of interest in spatial concepts and techniques within the social sciences. Much of this work builds on foundational research by geographers, but what distinguishes sociology (and related fields) is the application of spatial data, measures, and models to a wide range of substantive questions drawn from established intellectual traditions. Sociologists are less interested in spatial patterns for their own sake and more concerned with how those patterns reflect and shape social relations [@loganMakingPlaceSpace2012].
+
+Spatial data allow us to analyze how social processes—such as inequality, crime, or human behavior -— vary across geographic contexts. By explicitly incorporating location, we can uncover patterns and relationships that non -‐ spatial methods miss. As Abbott argues, “one cannot understand social life without understanding the arrangements of particular social actors in particular social times and places… Social facts are located” [@abbottTimeSpaceContemporary1997, 1152].
+
+In spatial thinking we focus on four core concepts:
+
+- **Distance**: How far apart phenomena are in geographic space.  
+- **Proximity**: The relative closeness of observations to one another or to key features.  
+- **Exposure**: The degree to which a population encounters an environmental or social hazard.  
+- **Access**: The ability to reach services, resources, or opportunities based on location.  
+
+All of these concepts depend on the underlying geometry of our data and our definition of space [@loganMakingPlaceSpace2012].
+
+Spatial thinking encompasses:
+
+1. **The arrangement** of social phenomena in space (points, polygons, networks).  
+2. **The causes** of those locational patterns (e.g., economic forces, policy decisions).  
+3. **The consequences** for individuals and groups (e.g., unequal access, segregation).  
+
+Even when we work with areal units (neighborhoods, districts), we must grapple with questions of boundary definition and scale—issues that are substantive, not merely technical.
 
 
+Incorporating spatial information to our models enables us to examine disparities in resource distributions, service accessibility, and with that information on opportunities and restrictions of individuals. This is critical for understanding and advocating for spatial justice and equity, as well as deriving (functioning) urban policies, that can lead and inform effective interventions on urban safety strategies, crime prevention or equitable resource allocation. 
 
-- Data acquisition via google maps and open street maps
-
-- Descriptive mapping (Open street maps, so on)
-
-- Isochronic maps, Voronoi maos
-
-- Operationalizing access (Distances, density, so on)
-
-## Geometric measurement 
-
-```{r}
-# Length of streets (in degrees, transform to metric CRS for meters)
-leipzig_streets_utm <- st_transform(leipzig_streets, 32633)  # UTM zone for Leipzig approx
-
-streets_length <- st_length(leipzig_streets_utm)
-
-# Area of polygons
-leipzig_utm <- st_transform(leipzig, 32633)
-
-areas <- st_area(leipzig_utm)
-
-# Distance between points (doeni and gwz)
-dist <- st_distance(doeni, gwz)
-
-
-```
-
-
-## Further operations
-
-```{r}
-# Extract coordinates of a point
-coords <- st_coordinates(doeni)
-
-# Centroid of a polygon (e.g. Leipzig boundary)
-centroid <- st_centroid(st_union(leipzig))
-
-# Simplify geometry to reduce detail (good for plotting)
-leipzig_simple <- st_simplify(leipzig, dTolerance = 0.001)
-```
-
-
-
-## Packages for downloading spatial data
+# Sources of data collection
 
 https://www.paulamoraga.com/book-spatial/r-packages-to-download-open-spatial-data.html
 
-### osmdata
-[@moragaRspatialdataCollectionData2022]
-
 ```{r}
 library(needs)
-needs(osmdata, sf, tidyverse)
-library(osmdata)
-library(sf)
-library(tidyverse)
 
-# Define bounding box for Leipzig
-bb_leipzig <- getbb("Leipzig", format_out = "polygon")
-
-# Query OSM data for administrative boundaries of Leipzig
-leipzig_admin <- opq(bb_leipzig) %>% 
-  add_osm_feature(key = "boundary", value = "administrative") %>% 
-  osmdata_sf() %>% 
-  trim_osmdata(bb_leipzig)
-
-# Query OSM data for kiosks in Leipzig
-kiosks_leipzig <- opq(bb_leipzig) %>% 
-  add_osm_feature(key = "shop", value = "bakery") %>% 
-  osmdata_sf() %>% 
-  trim_osmdata(bb_leipzig)
-
-# Plotting using ggplot
-ggplot() +
-  geom_sf(data = leipzig_admin$osm_multipolygons) +
-  geom_sf(data = kiosks_leipzig$osm_points) +
-  theme_void()
+needs(sf, # for handling geometries,
+      osmdata, # for adding elements from the OpenStreetMap database,
+      tidyr,
+      ggplot2,
+      giscoR, # for Eurostat administrative information,
+      haven,
+      dplyr,
+      geodata, # for data on climate,
+      purrr,
+      htmlwidgets
+      )
 
 ```
 
-Load Leipzig from Open street map
+## Enriching survey data with administrative boundaries
 
-#leipzig_poly <- opq("Leipzig, Germany") |>
-  #add_osm_feature(key = "boundary", value = "administrative") |>
-  #osmdata_sf()
+Until recently, most quantitative, standardized studies in the social sciences have relied on survey data. In Germany, one of the flagship representative surveys is the ALLBUS (German General Social Survey) [@gesis-leibniz-institutfuersozialwissenschaftenALLBUSGGSS20182019], which records respondents’ federal state of residence in the variable `land`.
 
-#leipzig <- leipzig_poly$osm_multipolygons |>
-  #dplyr::filter(name == "Leipzig") |>
-  #st_transform(4326)
+To map survey responses onto geographic boundaries, we can use the `giscoR` package—an R client for the GISCO (Geographic Information System of the European Commission) open-data repository. GISCO provides a variety of spatial layers, including country outlines, coastlines, labels, and NUTS regions, at multiple resolutions and in three common projections (EPSG:4326, 3035, and 3857) [@hernangomezGiscoRDownloadMap2020].
 
-## Voronoi-Zellen
 
-Klappt noch nicht!
+```{r}
+#| code-fold: false
+
+allbus_df <- read_dta("C:/Users/ls68bino/Documents/GitHub/SGrehl.github.io/computational-social-sciences/Data/ALLBUS/ZA5270_v2-0-0.dta")
+
+#Federal state level
+nuts1_de <- gisco_get_nuts(year = 2021, nuts_level = 1, country = "DE", resolution = "20")
+
+allbus_df <- allbus_df |> 
+  mutate(
+    land = case_when(
+      land == 10  ~ "Schleswig-Holstein",
+      land == 20  ~ "Hamburg",
+      land == 30  ~ "Niedersachsen",
+      land == 40  ~ "Bremen",
+      land == 50  ~ "Nordrhein-Westfalen",
+      land == 60  ~ "Hessen",
+      land == 70  ~ "Rheinland-Pfalz",
+      land == 80  ~ "Baden-Württemberg",
+      land == 90  ~ "Bayern",
+      land == 100 ~ "Saarland",
+      land %in% c(111, 112) ~ "Berlin",         # collapse former West/Ost
+      land == 120 ~ "Brandenburg",
+      land == 130 ~ "Mecklenburg-Vorpommern",
+      land == 140 ~ "Sachsen",
+      land == 150 ~ "Sachsen-Anhalt",
+      land == 160 ~ "Thüringen",
+      TRUE ~ NA_character_
+    )
+  )
+
+
+happiness_by_land <- allbus_df |>
+  filter(!is.na(land), !is.na(ls01)) |>
+  group_by(land) |>
+  summarise(mean_happiness = mean(ls01, na.rm = TRUE)) |>
+  ungroup()
+
+nuts1_de <- nuts1_de |>
+  left_join(happiness_by_land, by = c("NAME_LATN" = "land"))
+
+
+ggplot(nuts1_de) +
+  geom_sf(aes(fill = mean_happiness), color = "white") +
+  scale_fill_gradient(
+    name     = "Avg Happiness\n(0–10)",
+    low      = "lavender",    # pink
+    high     = "pink",    # lavender
+    na.value = "grey90"
+  ) +
+  labs(
+    title    = "Mean Self-Reported Happiness by Bundesland (ALLBUS)",
+    caption  = "Data: ALLBUS ZA5270_v2-0-0; Boundaries: NUTS 2 (giscoR)"
+  ) +
+  theme_minimal()
+
+```
+
+![](Graphics/mean_happyness.png){width=50%}
+
+::: {#custom-block}
+
+**NUTS-Regions** 
+
+The Nomenclature of Territorial Units for Statistics (NUTS) is an EU standard for dividing member states into hierarchical regions:
+
+- NUTS 0: Countries
+- NUTS 1: Major socio-economic regions (German federal states like "Nordrhein-Westphalen")
+- NUTS 2: Basic regions for the application of regional policies (e.g., individual Regierungsbezirke)
+- NUTS 3: Small regions for specific diagnoses (Kreise or kreisfreie Städte).
+
+ 
 
 ```{r}
 
-# Make sure we have points
-kiosk_pts <- kiosks_leipzig$osm_points
+# Plot the regions
+ggplot(nuts1_de) +
+  geom_sf(fill = "lightblue", color = "white") +
+  labs(title = "NUTS Level 1 Regions in Germany") +
+  theme_minimal()
 
-# 3. Transform to projected CRS (UTM Zone 32N = EPSG:25832)
-crs_projected <- 25832
-kiosk_pts_proj <- st_transform(kiosk_pts, crs = crs_projected)
-leipzig_admin_proj <- st_transform(leipzig_admin$osm_multipolygons, crs = crs_projected)
+# Download NUTS level 2 regions for Germany
+nuts2_de <- gisco_get_nuts(nuts_level = 2, country = "DE", resolution = 1)
 
-# 4. Generate Voronoi polygons
-voronoi_geom <- st_voronoi(st_union(kiosk_pts_proj))
-voronoi_sf <- st_collection_extract(voronoi_geom) %>% st_sf()
+# Plot the regions
+ggplot(nuts2_de) +
+  geom_sf(fill = "lightblue", color = "white") +
+  labs(title = "NUTS Level 2 Regions in Germany") +
+  theme_minimal()
 
-# 5. Intersect with Leipzig boundary to clip the cells
-voronoi_clipped <- st_intersection(voronoi_sf, leipzig_admin_proj)
 
-# Add ID for coloring
-voronoi_clipped <- voronoi_clipped %>% 
-  mutate(cell_id = row_number())
+
+# Download NUTS level 3 regions for Germany
+nuts3_de <- gisco_get_nuts(nuts_level = 3, country = "DE", resolution = 1)
+
+# Plot the regions
+ggplot(nuts3_de) +
+  geom_sf(fill = "lightblue", color = "white") +
+  labs(title = "NUTS Level 3 Regions in Germany") +
+  theme_minimal()
+
+
+# Download NUTS level 4 regions for Germany
+nuts0_de <- gisco_get_nuts(nuts_level = 0, country = "DE", resolution = 1)
+
+# Plot the regions
+ggplot(nuts0_de) +
+  geom_sf(fill = "lightblue", color = "white") +
+  labs(title = "NUTS Level 0 Regions in Germany") +
+  theme_minimal()
+
+```
+
+::: {layout-ncol=4}
+
+![](Graphics/nuts0.png){fig-alt="NUTS level 0" width="200px"}
+
+![](Graphics/nuts1.png){fig-alt="NUTS level 1" width="200px"}
+
+![](Graphics/nuts2.png){fig-alt="NUTS level 2" width="200px"}
+
+![](Graphics/nuts3.png){fig-alt="NUTS level 3" width="200px"}
+
+:::
+
+:::
+
+Because surveys must balance spatial precision with respondent confidentiality, location is typically reported only at NUTS 1 or NUTS 2 level. However, aggregated metadata—such as regional averages or counts—can sometimes be accessed at finer scales.
+
+Importantly, joining survey data to shape files is primarily a descriptive exercise: it adds geographic context for visualization and exploratory analysis, even though it does not generate new information about individual respondents.
+
+
+
+## Climatic data
+
+Environmental sociology examines the dynamic relationship between societies and their natural environments. Within this field, the study of climate impacts—and society’s influence on climate—is rapidly expanding. By leveraging new spatial data sources and geographic tools, we can begin to ask questions such as:
+
+- How does exposure to extreme weather influence survey responses on well-being or climate anxiety?  
+- Are people in regions experiencing rapid temperature increases more likely to support ambitious climate policies?  
+- Do variations in precipitation patterns correlate with reported trust in governmental climate initiatives?
+
+For data collection, we can use the **geodata** package in R [@mandelGeodataDownloadGeographic2021], which offers programmatic access to a wide range of global raster and vector datasets, including:
+
+- **Climate layers** (e.g., temperature, precipitation via WorldClim)  
+- **Elevation** and **accessibility** metrics  
+- **Land use**, **soil**, and **crop suitability** maps  
+- **Species occurrence** records  
+- **Administrative boundaries** at multiple levels  
+
+With these tools, you can seamlessly integrate environmental variables into your social-science workflows—linking survey data, policy indicators, and demographic information to enrich your analyses and visualizations.  
+
+This is just one example, data can of course also be downloaded or collected via weather channels. 
+
+```{r}
+#| code-fold: false
+
+d <- worldclim_country(country = "Germany",
+                       res = 0.5,
+                       var = "tmax",
+                       path = tempdir()
+                       )
+
+terra::plot(mean(d), plg = list(title = "Max. temperature (C)"))
+
+
+```
+
+![](Graphics/max_temp.png){width=50%}
+
+## OpenStreetMap Data with `osmdata`
+
+
+[OpenStreetMap](https://www.openstreetmap.org/#map=6/51.33/10.45) (OSM) is a crowdsourced geographic database maintained by volunteers around the world. With the **osmdata** package [@padghamOsmdataImportOpenStreetMap2023], you can pull features like roads, railway stations, schools, supermarkets, and more directly into R as **sf** objects. A full list of mappable features is on the [OSM wiki](https://wiki.openstreetmap.org/wiki/Map_features) [@moragaRspatialdataCollectionData2022].
+
+
+You can inspect which feature keys and tags you might query:
+
+```{r}
+#| code-fold: false
+
+available_features()
+
+available_tags("water")
+```
+
+When we create an `osmdata` query we start by defining a geographical area that we wish to include. This is done by defining a bounding box that defines a geographical area by its bounding lattitudes and longitudes. (ESR: ) The bounding box for a given place name can be obtained with the `getbb()`function. For example the bounding box of Leipzig can be obrained (and saved directly as a simple feature object as follows:
+
+```{r}
+#| code-fold: false
+placebb <- getbb("Leipzig",
+                 format_out = "sf_polygon")
+
+```
+
+
+To retrieve the required features of a place defined by the bounding box, we can overpass query this with `opq()`. Then, the `add_osm_feature()` function can be used to add the required features to the query. Finally, we use the `osmdata_sf()` function to obtain a simple feature object of the resultant query. 
+
+```{r}
+#| code-fold: false
+
+# turn that polygon into a simple numeric bbox
+bb <- st_bbox(placebb)
+
+# run your query using that numeric bbox
+hospitals <- opq(bbox = bb) |>
+  add_osm_feature(key = "amenity",
+                  value = "hospital") |>
+  #add_osm_feature(key = "name") |>
+  osmdata_sf()
+
+#make sure to check if they share the same crs (in this case WGS 84)
+
+
+hospitals_named <- hospitals$osm_polygons
+
+ggplot() +
+  
+  geom_sf(data = placebb, fill = "lavender", color = "grey50") +
+  geom_sf(
+    data = hospitals$osm_points,
+    aes(geometry = geometry),
+    color = "purple",
+    size = 1,
+    alpha = 0.7
+  ) +
+  
+ 
+  geom_sf(
+    data  = hospitals$osm_polygons,
+    aes(geometry = geometry),
+    fill  = "lavender",   # lavender
+    color = "purple",
+    alpha = 0.4
+  ) +
+  
+  
+  geom_sf_text(
+    data = hospitals_named,
+    aes(label = name, geometry = geometry),
+    size  = 2,
+    color = "navy",
+    check_overlap = TRUE
+  ) +
+  
+  coord_sf(expand = FALSE) +
+  labs(
+    title    = "Hospitals in Leipzig",
+    caption  = "Source: OpenStreetMap"
+  ) +
+  theme_minimal()
+
+
+```
+
+![](Graphics/hospitals.png)
+
+
+:::{.student-exercise}
+
+Explore OpenStreetMap (OSM) data to identify tram stops (“Tramhaltestellen”) and tram connections in Leipzig. Create a map that plots tram stops as points and displays tram route lines. 
+
+::: {.content-hidden when-format="html"}
+
+```{r}
+
+bb_leipzig <- getbb("Leipzig, Germany")
+
+# Query for public transport stops
+pt_stops <- opq(bbox = bb_leipzig) |>
+  add_osm_feature(key = "railway", value = "tram_stop") |>
+  osmdata_sf()
+
+# Extract points from the result
+pt_stops_sf <- pt_stops$osm_points |> filter(!st_is_empty(geometry))
+
+
+pt_lines <- opq(bbox = bb_leipzig) |>
+  add_osm_feature(key = "route", value = c("tram")) |>
+  osmdata_sf()
+
+
+# Extract lines from the result
+pt_lines_sf <- pt_lines$osm_lines |> filter(!st_is_empty(geometry))
+
+bb_leipzig_bbox <- st_bbox(c(
+  xmin = bb_leipzig[1,1], ymin = bb_leipzig[2,1],
+  xmax = bb_leipzig[1,2], ymax = bb_leipzig[2,2]
+), crs = 4326)  # WGS84 CRS
+
+# Then convert bbox to simple feature polygon
+bb_sfc <- st_as_sfc(bb_leipzig_bbox)
 
 # Plot
 ggplot() +
-  geom_sf(data = leipzig_admin_proj, fill = "white", color = "black") +
-  geom_sf(data = voronoi_clipped, aes(fill = as.factor(cell_id)), alpha = 0.5, color = "black") +
-  geom_sf(data = kiosk_pts_proj, color = "red", size = 1) +
-  theme_void() +
-  theme(legend.position = "none")
+  geom_sf(data = placebb, fill = "lavender", color = "grey50") +
+  geom_sf(data = bb_sfc, fill = NA, color = "grey50") +
+  geom_sf(data = pt_stops_sf, color = "pink", size = 1, alpha = 0.7) +
+  geom_sf(data = pt_lines_sf, color = "navy", size = 0.8, alpha = 0.7) +
+  labs(title = "Public Transport Stops and Lines in Leipzig") +
+  theme_minimal()
 
 ```
 
+:::
+
+Do you encounter any problems? Why do you think is that?
+
+:::
+
+
+
+
+# Measuring space
+
+In social sciences, space is rarely studied as an absolute concept; rather, it is almost always understood relative to a reference point or object — such as the neighborhood around a person’s home or the distance to a resource. For example, measuring distance allows us to map the location of something in relation to something else, or  researchers frequently simulate resources to define an egocentric neighborhood — like a 1-kilometer radius around a person’s residence — to study how the built environment influences travel behavior [@frankObesityRelationshipsCommunity2004]. Due to limited access to detailed (and often confidential) location data, researchers often assign individuals to administrative units like census tracts or zip codes and approximate their location using the centroid of these areas. 
+
+## Euclidean distance
+
+Euclidean distance is the straight-line distance between two points — the shortest path “as the crow flies.” For $A_{(x_1, y_1)}$ and $B_{(x_2, y_2)}$, it is calculated by:
+
+
+
+$$
+d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}
+$$
+deriving from the Pythagorean theorem.
+
+
+Euclidean distance is especially useful when approximating proximity in open, unobstructed spaces or as a baseline measure before considering more complex routes like travel time or street networks.
+
+Remember this from last week?
+
+
+```{r}
+bb <- st_bbox(leipzig)
+
+streets <- opq(bbox = bb) |>
+  add_osm_feature(key = "highway") |>
+  osmdata_sf()
+
+# Load streets (from OSM)
+leipzig_streets <- streets$osm_lines |>
+  filter(highway %in% c("motorway", "primary", "secondary", "tertiary")) |>  # filter larger streets only! Speed
+  st_transform(4326) |>
+  st_intersection(st_union(leipzig))
+
+
+doeni <- st_sf(
+  name = "Lieblingsdöner",
+  geometry = st_sfc(st_point(c(12.3563, 51.3419)),
+                    crs = 4326)
+)
+
+
+gwz <- st_sf(
+  name = "GWZ",
+  geometry = st_sfc(st_point(c(12.36845,51.3319)),
+                    crs = 4326)
+)
+
+# Shapefile ins gleiche CRS transformieren
+leipzig <- st_transform(leipzig,
+                        4326)
+
+# Plot everything
+ggplot() +
+  geom_sf(data = leipzig, fill = "lavender", color = "lightgray") +
+  geom_sf(data = leipzig_streets, color = "bisque3", size = 0.3) +
+  geom_sf(data = doeni, color = "pink", size = 3) +
+  geom_sf_text(data = doeni, aes(label = name), nudge_y = 0.005, size = 3) +
+  geom_sf(data = gwz, color = "pink", size = 3) +
+  geom_sf_text(data = gwz, aes(label = name), nudge_y = 0.005, size = 3) +
+  theme_minimal()
+```
+
+![Lieblingsdöner und GWZ](Graphics/lieblingsdoener.png){width=500}
+
+Using the `sf`-package we can compute the Euclidean distance using:
 
 
 
 ```{r}
-# 1. Extract kiosk points and Leipzig polygon
-kiosk_pts <- kiosks_leipzig$osm_points
-leipzig_sf <- leipzig_admin$osm_multipolygons
+#| code-fold: false
 
-# 2. Transform to projected CRS for better Voronoi accuracy
-crs_projected <- 25832  # UTM Zone 32N for Leipzig area
-kiosk_pts_proj <- st_transform(kiosk_pts, crs_projected)
-leipzig_sf_proj <- st_transform(leipzig_sf, crs_projected)
+dist <- st_distance(doeni, gwz)
+```
+Units: [m]
+         [,1]
+[1,] 1396.006
 
-envelope <- leipzig_sf_proj %>% 
-  st_union() %>% 
-  st_geometry()
 
-kiosk_voronoi <- kiosk_pts_proj %>%
-  st_geometry() %>%
-  st_union() %>%
-  st_voronoi(envelope = envelope) %>%
-  st_collection_extract("POLYGON") %>%
-  st_sf()
 
-# 4. Assign CRS to Voronoi
-st_crs(kiosk_voronoi) <- crs_projected
+## Manhattan distance
 
-# 5. Intersect Voronoi cells with Leipzig boundary
-#    and spatially join kiosk attributes
-kiosk_voronoi_clipped <- kiosk_voronoi %>%
-  st_intersection(leipzig_sf_proj) %>%
-  st_join(kiosk_pts_proj, join = st_contains_properly)
+The Manhattan distance is a metric, used to calculate the distance between two points in a gitterartige Pfad. In contrast to the euclidean distance, the manhattan distance measures the sum of absolute differences between two coordinates of points. 
 
-kiosk_voronoi_clipped <- kiosk_voronoi_clipped %>%
-  mutate(kiosk_id = row_number())
+The Manhattan distance for n-dimensional vectors is:
 
-# 6. Plot the result, colored by kiosk name (or ID)
-ggplot(kiosk_voronoi_clipped) +
-  geom_sf(aes(fill = kiosk_id), color = "black") +
-  theme_void()
+$$
+
+|x_1 - x_2| + |y_1-y_2| + ... + |v_{n1}-v_{n2}|
+
+$$
+
+![](Graphics/distances.png){width=50%}
+
+## Geodesic distance
+
+The geodesic distance is the shortest distance between two points on a curved surface, measured along the surface itself, rather than a straight line through space. 
+
+![](Graphics/geodesic.png)
+
+## Network distance
+
+Straight-line (Euclidean) distance is simple and fast to compute but doesn't reflect the actual travel path people use. In real life, movement is constrained by the layout of the street network.
+
+To capture network-constrained distances (e.g., for walking, cycling, or driving), we can use tools like dodgr (distances on directed graphs) or osrm, which allow for routing on real streets.
+
+In this example, we use `dodgr`  to calculate the shortest distance for cyclists between two points in Leipzig.
+
+
+```{r}
+#| code-fold: false
+
+library(dodgr)
+
+# Download road network for Leipzig
+net <- dodgr_streetnet("Leipzig", expand = 0.05)
+
+# Weight the graph (e.g., bycicle profile)
+graph <- weight_streetnet(net, wt_profile = "bicycle")
+
+
+from <- c(12.3731, 51.3397)
+to <- c(12.4, 51.35)
+
+
+path_dist <- dodgr_dists(graph, from = from, to = to)
+print(path_dist)
+
 ```
 
-# Isochronic maps (fromrome2rio)
+2519.564 meter.
 
 
-Übung im Kurs: Leipziger Partnerstädte auf Weltkarte anzeigen
+
+### Isochronic distance 
+
+Isochronic distance represents how far one can travel from a starting point within a certain amount of time, accounting for actual travel networks, speeds, and possibly time of day.
+
+:::{layout-ncol=2}
+
+![From rome to rio](Graphics/world-map-isochronic-1914.png)
 
 
-https://stackoverflow.com/questions/74198735/constructing-a-voronoi-diagram-in-r-with-data-from-openstreetmap
+![From rome to rio](Graphics/world-map-isochronic-2016.png)
+
+:::
+
+Isochrones are useful for operationalizing accessibility — for example, measuring how many schools or services are reachable within 10 minutes. They are vital in urban planning, transportation analysis, emergency response, and studying spatial inequalities.
+
+Calculating travel time is more complex than straight-line distance because it requires integrating transportation modes, routes, and speeds.
+
+The `osrm`package provides access to travel time and distance data through routing services, enabling isochrone calculations.
+
+```{r}
+library(osrm)
+
+
+# Create an sf POINT for Leipzig
+leipzig <- data.frame(
+  id = "leipzig",
+  lon = 12.3731,
+  lat = 51.3397
+)
+
+leipzig_sf <- st_as_sf(leipzig, coords = c("lon", "lat"), crs = 4326)
+
+
+# Get isochrones (returns polygons for each time range)
+iso <- osrmIsochrone(loc = leipzig_sf, breaks = c(5, 10, 15))
+
+
+
+ggplot() +
+  geom_sf(data = placebb, fill = NA, color = "grey30", size = 0.8) +
+  geom_sf(data = iso, aes(fill = factor(isomax)), color = NA, alpha = 0.6) +
+  geom_sf(data = leipzig_sf, color = "black", size = 2) +
+  scale_fill_brewer(palette = "YlOrRd", name = "Minutes") +
+  labs(
+    title = "Isochrones from Leipzig City Center",
+    subtitle = "Areas reachable within 5, 10, and 15 minutes",
+    caption = "Source: OpenStreetMap via OSRM"
+  ) +
+  theme_minimal()
+
+```
+
+![](Graphics/isos.png)
+
+For comparison, we can measure the size of these isochrome cells by using the main functions of the `sf`-package. 
+
+
+```{r}
+
+library(units)
+
+# Split by isomax value
+iso_5 <- iso |> filter(isomax == 5)
+iso_10 <- iso |> filter(isomax == 10)
+iso_15 <- iso |> filter(isomax == 15)
+
+
+iso_5_m <- st_transform(iso_5, 3857)
+iso_10_m <- st_transform(iso_10, 3857)
+iso_15_m <- st_transform(iso_15, 3857)
+
+area_5 <- st_area(iso_5_m)
+area_10 <- st_area(iso_10_m)
+area_15 <- st_area(iso_15_m)
+
+# Print areas in square kilometers
+print(set_units(area_5, km^2))
+print(set_units(area_10, km^2))
+print(set_units(area_15, km^2))
+```
+
+
+
+
+
+## Voronoi-Cells
+
+Voronoi cells (or Thiessen polygons) divide space such that each point in a polygon is closest to one specific service point. Each cell thus represents a catchment area of influence.
+
+When we intersect these polygons with population data (e.g. census blocks or grids) we can approximately measure how many people are assigned (by procimity) to each facility. 
+
+We can also compare real administrative zones (e.g. school catchments) to Voronoi-derived zones. Discrepancies reveal potential mismatch between planning and reality. 
+
+we can use `st_voronoi()`for generating Voronoi cells. with `st_intersection() we can check for overlays with population or income data.
+
+```{r}
+#| code-fold: false
+
+# Combine features
+
+hospital_areas <- bind_rows(
+  hospitals$osm_polygons,
+  hospitals$osm_multipolygons
+)
+
+
+# Get centroids of each feature
+hospital_pts <- hospital_areas |>
+  st_centroid() |>
+  st_transform(4326)  # WGS84 for consistency
+
+
+hpts <- st_union(hospital_pts)
+
+
+hpts_proj <- st_transform(hospital_pts, 32633)  # UTM zone 33N
+
+bb_proj <- st_transform(placebb, 32633)
+
+
+# Create Voronoi diagram
+voro_raw <- st_voronoi(st_union(hpts_proj), envelope = st_as_sfc(st_bbox(bb_proj)))
+
+# Extract and convert to sf
+voro_polygons <- st_collection_extract(voro_raw, "POLYGON")
+voro_sf <- st_sf(geometry = voro_polygons, crs = 32633)
+
+voro_clipped <- st_intersection(voro_sf, bb_proj)
+
+# Plot Voronoi cells + hospital locations
+ggplot() +
+  # Background: study area outline (optional)
+  geom_sf(data = placebb, fill = NA, color = "grey40", linetype = "dashed") +
+
+  # Voronoi polygons
+  geom_sf(data = voro_clipped, fill = "lightblue", color = "pink", alpha = 0.4) +
+
+  # Hospital points
+  geom_sf(data = hospital_pts, color = "purple", size = 2) +
+
+  labs(
+    title = "Voronoi Cells Around Hospitals in Leipzig",
+    subtitle = "Each polygon shows the area closest to a hospital",
+    caption = "Data: OpenStreetMap via osmdata"
+  ) +
+  theme_minimal()
+
+```
+
+![](Graphics/voronoi.png)
+
+
+## Segregation
+
+As [@mcphersonBirdsFeatherHomophily2001, p.430] stated: "the most basic source of homophily is space: We are more likely to have contact with those who are closer to us in geographic location than those who are distant."
+
+Let's begin with a powerful visualization by the NYT. 
+
+[Mapping segregation by the New York Times](https://www.nytimes.com/interactive/2015/07/08/us/census-race-map.html)
+
+The map is based on census data and shows how racially segregated or integrated American cities are.
+
+Traditionally, segregation is measured through group distributions across fixed geographic units (like census tracks or blocks). An example is the **Index of Dissimilarity**, which tells us how evenly two groups are spread across neighborhoods. 
+
+Michael White [-@whiteMeasurementSpatialSegregation1983] introduced a new perspective: What if we measured segregation based on the **actual distance** between people. Imagine every person in a city. If white residents tend to live physically closer to other white residents, and Black residents tend to live closer to other Black residents, then the city is spatially segregated—even if they live in neighboring tracts. In this view, segregation isn’t just about which side of the neighborhood boundary people live on—it’s about how far people are from each other, on average.
+Working with aggregated data for areas such as census tracts, these distances cannot be precisely measured, but they can be estimated, and White proposed an index that could summarize the spatial pattern of an entire city in terms of groups’ relative proximity to one another.
+
+Building on this work, scholars like Reardon and xx [-@reardonMeasuresSpatialSegregation2004] have refined ways to calculate spatial segregation more precisely. These newer methods blend spatial relationships with traditional aspatial tools. These methods consider people to have some proximity not only to others in the same block or tract, but also to those who live in nearby areas [@loganMakingPlaceSpace2012].
+
+
+::: {.student-exercise}
+
+*(15 minutes)*
+
+In groups of three, think of a sociological question where space plays an important role—either as a key variable or as a context.
+
+1. Discuss how you might operationalize “space” in this question.
+
+2. Reflect on the possible methods you could use to measure spatial aspects.
+
+3. Identify potential limitations or challenges in using spatial data for your question.
+
+
+:::
+
+
+
+
+
+# Bonus: Advanced visualisation using leaflet
+
+Leaflet is a powerful and flexible R package for creating interactive maps. It allows you to combine multiple map layers, including base maps, markers, polygons, and custom shapes. You can customize markers with icons, popups, and labels to provide more context. Leaflet supports different base tiles like OpenStreetMap, Stamen, and CartoDB, giving you options for map style and detail. You can add layers control so users can toggle different datasets on and off. It also supports clustering of many points to keep the map clean and performant. Advanced visualizations can use polygons or polylines to show boundaries, routes, or regions. Leaflet allows dynamic styling of features based on attributes, such as coloring districts by population density. You can integrate leaflet with other R packages like sf for spatial data handling, making it easy to plot shapefiles or geojson. It supports adding legends, scale bars, and even custom JavaScript for interactivity. Popups and tooltips provide detailed info when users hover or click on map elements. Heatmaps and choropleth maps are possible through add-on packages or custom coding. Leaflet maps can be saved as HTML files, embedded in R Markdown, or Shiny apps for interactive web dashboards. Using leaflet proxies, you can update maps dynamically in response to user input without redrawing everything. Overall, leaflet provides a versatile environment to create maps from simple point plots to complex, multi-layered geographic visualizations.
+
+```{r}
+# Define Leipzig coordinates
+leipzig_coords <- c(12.3731, 51.3397)  # lon, lat
+
+# Your Lieblingsdöner coordinates (example: replace with your actual location)
+doener_coords <- c(12.3848, 51.3390)
+
+
+
+# Create leaflet map
+m <- leaflet() |>
+        addProviderTiles(providers$CartoDB.Positron) |>
+        # Add polygon of Germany outline (optional: simplified for this example)
+        addPolygons(data = nuts0_de, # you can load Germany shape as sf object here for boundary
+                    fillColor = "lavender", color = "black", weight = 2) |>
+        # Add a circle around Leipzig to highlight it
+        addCircles(lng = leipzig_coords[1], lat = leipzig_coords[2],
+                   radius = 10000, color = "pink", fillOpacity = 0.2,
+                   popup = "Leipzig") |>
+        # Add a marker for your Lieblingsdoener
+        addMarkers(lng = doener_coords[1], lat = doener_coords[2],
+                   popup = "Mein Lieblingsdöner 🌯") |>
+        # Set initial view roughly centered on Germany
+        setView(lng = 10.0, lat = 51.0, zoom = 6)
+
+
+saveWidget(m, "my_leaflet_map.html")
+```
+
+
+<iframe src="Graphics/my_leaflet_map.html" width="100%" height="600px" frameborder="0"></iframe>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

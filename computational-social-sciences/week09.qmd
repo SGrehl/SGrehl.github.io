@@ -67,7 +67,7 @@ Thus data must be **cleaned, projected and joined** to be useful for further ana
 
 # Types of spatial data
 
-In GIS, spatial data is typically represented in one of two formats.  
+In GIS, spatial data is typically represented in one of two formats [@moragaSpatialStatisticsData2024].  
 
 **Raster data:**
 
@@ -272,8 +272,15 @@ For example, the images below show how identical circular areas appear at differ
 
 :::
 
+:::{#custom-box}
 
-You can find a list of implemented projections using `sf::sf_proj_info(type = "proj")`.
+
+You can find a list of (in R) implemented projections using `sf::sf_proj_info(type = "proj")`.
+
+Most tools for spatial analysis (including R-spatial packages) use PROJ, an open source C++ library that transforms coordinates from one CRS to another. They can be described in many ways including formalized "proj4 strings" such as `+proj=longlat` or identifying authority codes like EPSG-codes. The latter is more modern and the corresponding codes can be found on [this website](https://epsg.io/)
+
+:::
+
 
 
 
@@ -327,11 +334,7 @@ leipzig
 
 ![Sf-Objects in R](Graphics/sf_leipzig.png)
 
-:::{#custom-box}
 
-Most tools for spatial analysis (including R-spatial packages) use PROJ, an open source C++ library that transforms coordinates from one CRS to another. They can be described in many ways including formalized "proj4 strings" such as `+proj=longlat` or identifying authority codes like EPSG-codes. The latter is more modern and the corresponding codes can be found on [this website](https://epsg.io/)
-
-:::
 
 
 ```{r}
@@ -558,7 +561,7 @@ world <- st_read(geojson_path) # works exactly the same for shapefiles
 names(world)
 
 
-# Default CRS (likely WGS84)
+# Default CRS (WGS84) 
 ggplot(world) +
   geom_sf() +
   labs(title = "World in Default CRS (WGS84)") +
@@ -576,13 +579,14 @@ ggplot(st_transform(world, "+proj=robin")) +
   labs(title = "World in Robinson Projection") +
   theme_minimal()
 
+# Ermittelt an empirischen Punkten
 
 ggplot(st_transform(world, "+proj=moll")) +
   geom_sf() +
   labs(title = "World in Mollweide Projection") +
   theme_minimal()
 
-ggplot(st_transform(world, 4326)) +
+ggplot(st_transform(world, "ESRI:53004","+proj=merc +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +R=6371000 +units=m +no_defs +type=crs")) +
   geom_sf() +
   labs(title = "World in Mollweide Projection") +
   theme_minimal()
@@ -598,7 +602,9 @@ names(countries_info)
 
 # Merge on country name — adjust if names differ
 world_joined <- world |>
-  left_join(countries_info, by = c("COUNTRY" = "country"))  # adjust "NAME" if needed
+  left_join(countries_info, by = c("ISO" = "iso2")) 
+
+setdiff(world$ISO, countries_info$iso2)
 
 #Q2.1
 
@@ -616,18 +622,17 @@ world_joined |>
 
 
 
-# Get names of countries with left-side driving
-left_driving_countries <- world_joined |>
+world_joined |>
   filter(driving_side == "left") |>
-  pull(COUNTRY)  
+  pull(COUNTRYAFF) |>
+  unique() 
 
-print(left_driving_countries)
 
-right_driving_countries <- world_joined |>
+
+world_joined |>
   filter(driving_side == "right") |>
   pull(COUNTRY)
 
-print(right_driving_countries)
 
 ggplot(world_joined) +
   geom_sf(aes(fill = driving_side), color = "white", size = 0.1) +
@@ -638,7 +643,7 @@ ggplot(world_joined) +
   ) +
   theme_minimal()
 
-ggplot(world_joined) +
+ggplot(st_transform(world_joined, "+proj=robin")) +
   geom_sf(aes(fill = median_age), color = "white", size = 0.1) +
   scale_fill_gradient(
     low = "lavender",
@@ -646,8 +651,7 @@ ggplot(world_joined) +
     na.value = "lightgrey"
   ) +
   labs(
-    title = "Median Age") +
-  theme_minimal()
+    title = "Median Age")
 
 
 ```

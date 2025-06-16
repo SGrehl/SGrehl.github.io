@@ -1,5 +1,5 @@
 ---
-title: "Week 12"
+title: "Week 12 - The Spatial Turn II"
 subtitle: "-"
 ---
 
@@ -26,6 +26,8 @@ We can ask new questions
 - Autospatical correlation
 
 Morans 
+
+. In the sociological literature one of the most common of these tools is the mapping of values of local Moran’s i, a measure of clusters of high or low values on a single variable. Adoption of this method was facilitated by the early publication of studies that relied heavily on it (several of which are cited below). [@loganMakingPlaceSpace2012]
 Local Morans
 
 - OLS with place
