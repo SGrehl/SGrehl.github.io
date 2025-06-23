@@ -1,35 +1,1341 @@
 ---
-title: "Week 12 - The Spatial Turn II"
-subtitle: "-"
+title: "Week 12 - Spatial dependency"
+subtitle: "Modeling spillovers"
 ---
 
-Lets remember: 
+ 
 
+```{r}
+library(needs)
+
+needs(sf,
+      tidyverse,
+      tigris,
+      maps,
+      janitor,
+      RColorBrewer,
+      classInt,
+      spatialreg,
+      spdep,
+      spData,
+      ggplot2)
+
+
+```
+
+
+
+This chapter is based on the work of [@moragaSpatialStatisticsData2024; @gentryChrismgentrySpatialRegression2024; @lennert060021073ForschungsseminarExperimentelle2024], which provide a comprehensive overview of spatial data analysis in R.
+
+
+Let's remember:  
 
 > _"Everything is related to everything else, but near things are more related than distant things."_  
 > — Waldo Tobler, First Law of Geography
 
-Spatial thinking refers to reasoning about **location**, **distance**, and **spatial relationships**. It is useful in answering questions such as:
-
-- Are healthcare facilities equally accessible to all neighborhoods?
-- Is crime concentrated in specific urban areas?
-- Do voting patterns show spatial clustering?
-
-**Spatial dependence** can violate assumptions of classical models (like independence of observations). Recognizing spatial structure allows us to design better models and policies.
+→ This principle is at the heart of **spatial autocorrelation** — the idea that nearby places tend to share similar characteristics.
 
 
-Space adds a new way to control for factors that our classic models arguably cannot capture (distance, presence of certain things). 
-We can ask new questions
---> NEW PITFALLS
+# Spatial neighborhood matrices
+
+**Areal (or lattice) data** arise when a region is divided into discrete spatial units — such as municipalities, districts, or provinces — and outcomes are aggregated at that level (e.g., disease counts, road accidents, housing prices).
+
+To explore spatial autocorrelation, we define **neighborhood structures** — i.e., which regions are considered "neighbors."  
+These can be based on:
+- Shared borders (contiguity),
+- Shared vertices,
+- Physical distance (e.g., within X kilometers).
 
 
-- Autospatical correlation
 
-Morans 
+The `{spdep}` package [bivandSpdepSpatialDependence2002] provides tools to build neighborhood and weights structures:
 
-. In the sociological literature one of the most common of these tools is the mapping of values of local Moran’s i, a measure of clusters of high or low values on a single variable. Adoption of this method was facilitated by the early publication of studies that relied heavily on it (several of which are cited below). [@loganMakingPlaceSpace2012]
-Local Morans
+- `poly2nb()`: create neighbors based on contiguity
+- `dnearneigh()`: define neighbors based on distance thresholds
+- `nb2listw()`: convert neighbor lists to spatial weight matrices
 
-- OLS with place
+These objects are:
 
-- Other spatial models 
+- **`nb`** – a list of neighbors (by index)
+- **`listw`** – a compound object with both:
+  - neighbors (`nb`)
+  - weights for each neighbor
+
+These are the foundation for computing **Moran’s I**, **LISA statistics**, and running **spatial regression models**.
+
+```{r}
+
+# Load and assign CRS
+columbus <- st_read(system.file("shapes/columbus.gpkg", package = "spData")[1])
+
+st_crs(columbus) <- 3734
+
+columbus <- st_transform(columbus, 4326)
+
+# Plot
+ggplot(columbus) +
+  geom_sf(fill = "lavender", color = "pink", size = 0.3) +
+  labs(
+    title = "Columbus Neighborhoods",
+    subtitle = "Spatial neighborhood structure",
+    caption = "Source: spData package"
+  ) +
+  theme_minimal(base_family = "sans") +
+  theme(
+    plot.title = element_text(face = "bold", color = "#800080"),
+    plot.subtitle = element_text(color = "#993366"),
+    plot.caption = element_text(color = "#cc6699")
+  )
+
+```
+
+
+![](Graphics/columbus.png){width=40%}
+
+## Neighbours based on contiguity
+
+Contiguity-based neighbors are defined as areas that share a common boundary with a given area. There are two main types:
+
+- Queen contiguity: Areas are neighbors if they share any boundary point, including corners.
+- Rook contiguity: Areas are neighbors only if they share a common edge, not just a corner.
+
+![](Graphics/continguity.png){width=60%}
+
+With the function `poly2nb()` we can create a neighborhood list based on contiguity. The `queen` argument specifies whether to use queen or rook contiguity.
+
+```{r}
+
+if (requireNamespace("sf", quietly = TRUE)) {
+columbus <- sf::st_read(system.file("shapes/columbus.gpkg", package="spData")[1])
+plot(sf::st_geometry(columbus))
+}
+
+nb <- poly2nb(columbus, queen = TRUE)
+
+head(nb)
+
+
+plot(st_geometry(columbus), border = "pink", col = "lavender")
+plot.nb(nb, st_geometry(columbus), add = TRUE, col = "lightblue")
+
+
+id <- 20 # area id
+columbus$neighbors <- "other"
+columbus$neighbors[id] <- "area"
+columbus$neighbors[nb[[id]]] <- "neighbors"
+ggplot(columbus) + geom_sf(aes(fill = neighbors)) + theme_bw() +
+  scale_fill_manual(values = c("pink", "lavender", "white"))
+
+
+```
+
+:::{layout-ncol="2"}
+
+![](Graphics/queen.png){width=40%}
+
+![](Graphics/queen contiguity.png){width=40%}
+
+:::
+
+
+### Neighbors based on k-contiguity
+
+
+
+K-contiguity neighbors extend the concept of contiguity by allowing areas to be connected if they share a common neighbor. This approach is useful for capturing more complex spatial relationships.
+
+![](Graphics/kcontiguity.png){width="}
+
+The `nlab()`function creates a neighborhood list based on k-contiguity, where each area is connected to its k nearest neighbors based on contiguity. The argument of this function are a list of neighbors list of class nb and the maximum lag considered. 
+
+```{r}
+nb <- poly2nb(columbus, queen = TRUE)
+nblags <- spdep::nblag(neighbours = nb, maxlag = 3)
+
+plot(st_geometry(columbus), border = "pink", col = "lavender")
+plot.nb(nblags[[1]], st_geometry(columbus), add = TRUE, col = "lightblue")
+
+
+plot(st_geometry(columbus), border = "pink", col = "lavender")
+plot.nb(nblags[[2]], st_geometry(columbus), add = TRUE, col = "lightblue")
+
+
+# third order
+plot(st_geometry(columbus), border = "pink", col = "lavender")
+plot.nb(nblags[[3]], st_geometry(columbus), add = TRUE, col = "lightblue")
+
+```
+
+:::{layout-ncol="3"}
+
+![](Graphics/k-1.png){width=40%}
+
+![](Graphics/k-2.png){width=40%}
+
+![](Graphics/k-3.png){width=40%}
+
+:::
+
+
+## K-nearest neighbors
+
+**K-nearest neighbors** (k-NN) define spatial relationships based on proximity rather than shared borders. In this approach, each area is connected to exactly $k$ of its closest neighbors—no more, no less. This method is particularly useful when spatial contiguity (e.g., shared borders) fails to adequately reflect the underlying spatial interactions or dependencies.
+
+
+```{r}
+# Neighbors based on 3 nearest neighbors
+coo <- st_centroid(columbus)
+nb <- knn2nb(knearneigh(coo, k = 3)) # k number nearest neighbors
+
+# Assign color labels for visualization
+columbus$neighbors_knn <- "other"
+id <- 20 # example area id
+columbus$neighbors_knn[id] <- "area"
+columbus$neighbors_knn[nb[[id]]] <- "neighbors"
+
+ggplot(columbus) +
+  geom_sf(aes(fill = neighbors_knn), color = "lightgray") +
+  scale_fill_manual(values = c("area" = "pink", "neighbors" = "lavender", "other" = "white")) +
+  theme_bw() +
+  labs(title = "Columbus Neighborhoods (3-Nearest Neighbors)",
+       subtitle = "Spatial neighborhood structure (k-NN)",
+       caption = "Source: spData package") +
+  theme(legend.title = element_blank())
+
+# Add neighbor lines
+plot(st_geometry(columbus), border = "pink", col = "lavender")
+plot.nb(nb, st_geometry(columbus), add = TRUE, col = "lightblue")
+
+```
+
+:::{layout-ncol="2"}
+
+![](Graphics/knet.png){width=40%}
+
+![](Graphics/k neighbor.png){width=40%}
+
+:::
+
+
+
+
+
+## Neighborhood matrices
+
+Just like in network analysis we can create a neighborhood matrix that represents the connections between areas. It is aso often referred to as a spatial weights matrix.
+
+A spatial neighborhood matrix $W$ is a $nxn$ matrix. The $(i,j)$th element of $W$ $w_{ij}$ represents the weight of the connection between area $i$ and area $j$. If there is no connection, $w_{ij} = 0$. More weight is associated with areas closer together, while areas farther apart have lower weights.
+
+
+
+$$
+{\bf W} = \left(\begin{array}{ccccc}
+  w_{1,1}&w_{1,2}&w_{1,3}&\cdots &w_{1,n}\\
+  w_{2,1}&w_{2,2}&w_{2,3}&\cdots &w_{2,n}\\
+  w_{3,1}&w_{3,2}&w_{3,3}&\cdots &w_{3,n}\\
+  \vdots&&&\ddots&\\
+  w_{n,1}&w_{n,2}&w_{n,3}&\cdots &w_{n,n}
+  \end{array}\right)
+$$  
+
+If neighbours are based on contiguity, the matrix is binary, meaning that $w_{ij} = 1$ if areas $i$ and $j$ are neighbors, and $w_{ij} = 0$ otherwise. If neighbors are based on distance, the weights can be continuous values representing the distance between areas.
+
+- If two regions are **not neighbors**, `w_ij = 0`.
+- If they are neighbors, `w_ij > 0` — often based on distance or shared boundary length.
+
+Weights are usually **row-standardized** (so each row sums to 1).
+
+
+
+![](Graphics/spatial matrix.png)
+
+So the neighborhood matrix of the columbus network e.g. looks like this: 
+
+```{r}
+nb <- poly2nb(columbus, queen = TRUE)
+nbw <- spdep::nb2listw(nb, style = "B", zero.policy = TRUE)
+nbw$weights[1:3]
+
+m1 <- listw2mat(nbw)
+lattice::levelplot(t(m1),
+scales = list(y = list(at = c(10, 20, 30, 40),
+                       labels = c(10, 20, 30, 40))))
+
+
+nbw <- spdep::nb2listw(nb, style = "W") # row standardized weights (1/n neighbors)
+nbw$weights[1:3]
+
+m1 <- listw2mat(nbw)
+lattice::levelplot(t(m1),
+scales = list(y = list(at = c(10, 20, 30, 40),
+                       labels = c(10, 20, 30, 40))))       
+
+```
+
+
+
+:::{layout-ncol="2"}
+
+![](Graphics/standardized.png)
+
+![](Graphics/w.png)
+
+:::
+
+So as you can see, there is a variety of options for calculating the contiguity and weight matrices. This is at no means complete, we can also compute neighborhoods based on proximity, etc.
+
+# Autocorrelation
+
+**Spatial autocorrelation** describes the extent to which values observed in nearby locations are correlated. In simpler terms:
+
+> Do similar things tend to cluster together in space, or are they randomly scattered?
+
+![](Graphics/matrix.png){width=60%}
+
+- Positive spatial autocorrelation: Similar values cluster in space.
+- Negative spatial autocorrelation: Nearby values are different
+- No spatial autocorrelation: Values are randomly distributed
+
+
+
+We can assess spatial autocorrelation using indices that summarize the degree to which similar observations tend to occur near each other over the study area.
+One very common index is the  *Moran`s I* [@moranNotesContinuousStochastic1950]. 
+
+
+## Global Morans $I$
+
+To assess the presence of **spatial autocorrelation** across an entire study area, we use **Moran’s I** — a global statistic that quantifies whether areas with similar values tend to cluster together more than we’d expect by chance.
+
+Moran’s I evaluates how each observation relates to its neighbors, and then averages those comparisons.
+Under the **null hypothesis** of no spatial autocorrelation, observations $Y_i$ are assumed to be **independent and identically distributed** (i.i.d). In that case, Moran’s I is asymptotically normally distributed with known expectation and variance.
+
+$$
+I = \frac{N}{W} \cdot \frac{\sum_{i=1}^{N} \sum_{j=1}^{N} w_{ij}(x_i - \bar{x})(x_j - \bar{x})}{\sum_{i=1}^{N} (x_i - \bar{x})^2}
+$$
+
+
+
+with 
+
+- $N$ being the number of spatial units
+- $x_i$ being the variable of interest at location $i$
+- $\bar{x}$ is the mean of x
+- $w_{ij}$ is the spatial weight between units $i$ and $j$
+- $W = \sum_{i=1}^{N} \sum_{j=1}^{N} w_{ij}$ is the sum of all spatial weights
+
+
+
+A **positive** Moran’s I suggests that similar values are spatially clustered (positive autocorrelation), a **negative** value indicates dissimilar values are clustered (negative autocorrelation), and a value near **zero** implies no spatial autocorrelation (random spatial distribution).
+
+
+```{r}
+#| code-fold: false
+
+columbus <- columbus |>
+  st_make_valid()
+
+
+district_nb <- poly2nb(columbus, queen = TRUE)
+
+district_weights <- nb2listw(district_nb, style = "W", zero.policy = TRUE)
+
+morans_i <- moran.test(columbus$CRIME,
+                       district_weights,
+                       zero.policy = TRUE)
+
+
+```
+![](Graphics/global.png)
+
+```{r}
+#| code-fold: false
+
+moran.plot(columbus$CRIME, district_weights)
+```
+
+![](Graphics/scatter.png)
+
+We observe a positive linear relationship between the observations and their spatially lagged values. Using this plot, we can also identify data points that have a high influence on the linear relationship between the data and the lagged values.
+
+## Local Morans $I$ 
+
+While the **global** Moran’s I summarize spatial autocorrelation across the whole study area, **Local Moran’s I** provides a **location-specific estimate**. This helps identify spatial clusters and outliers — places that deviate from the general trend.
+
+Local Moran’s I for unit *i* is calculated as:
+
+$$
+I_i = \frac{(x_i - \bar{x})}{m_2} \sum_{j=1}^{N} w_{ij}(x_j - \bar{x})
+$$
+
+Where:
+- $x_i$ = value at location *i*  
+- $\bar{x}$ = mean of the variable  
+- $x_j$ = value at neighboring location *j*  
+- $w_{ij}$ = spatial weight between *i* and *j*  
+- $m_2 = \frac{1}{N} \sum_{k=1}^{N}(x_k - \bar{x})^2$ = variance of $x$
+
+
+
+This measure detects **local clusters and outliers**, allowing us to classify each observation’s spatial context.
+
+
+Based on the value and its significance, results can be classified into **LISA** (Local Indicators of Spatial Association):
+
+- **High–High (Hotspot)**  
+  High value surrounded by high values → positive spatial autocorrelation
+
+- **Low–Low (Coldspot)**  
+  Low value surrounded by low values → positive spatial autocorrelation
+
+- **High–Low (Spatial Outlier)**  
+  High value surrounded by low values → negative spatial autocorrelation
+
+- **Low–High (Spatial Outlier)**  
+  Low value surrounded by high values → negative spatial autocorrelation
+
+- **Insignificant**  
+  No clear spatial pattern
+
+
+
+```{r}
+
+local_moran <- localmoran(columbus$CRIME, district_weights, zero.policy = TRUE)
+
+columbus <- columbus |>
+  mutate(
+    local_I = local_moran[, "Ii"],
+    p_value = local_moran[, "Pr(z != E(Ii))"],
+    cluster = case_when(
+      local_I > 0 & CRIME > mean(CRIME, na.rm = TRUE) & p_value < 0.05 ~ "High-High",
+      local_I > 0 & CRIME < mean(CRIME, na.rm = TRUE) & p_value < 0.05 ~ "Low-Low",
+      local_I < 0 & CRIME > mean(CRIME, na.rm = TRUE) & p_value < 0.05 ~ "High-Low",
+      local_I < 0 & CRIME < mean(CRIME, na.rm = TRUE) & p_value < 0.05 ~ "Low-High",
+      TRUE ~ "Insignificant"
+    )
+  )
+
+
+ggplot(columbus) +
+  geom_sf(aes(fill = local_I), color = NA) +
+  scale_fill_viridis_c(option = "plasma", 
+                       name = "Local Moran's I") +
+  labs(
+    title = "Local Moran's I: Crime Rate",
+    subtitle = "Spatial autocorrelation district",
+    #caption = "Source: US Census / Your Dataset"
+  ) +
+  theme_minimal()
+
+ggplot(columbus) +
+  geom_sf(aes(fill = cluster), color = NA) +
+  scale_fill_manual(values = c(
+    "High-High" = "pink",
+    "Low-Low" = "lavender",
+    "High-Low" = "#fdae61",
+    "Low-High" = "#abd9e9",
+    "Insignificant" = "grey90"
+  )) +
+  labs(
+    title = "Local Moran's I: Crime Rate",
+    subtitle = "Cluster classification by spatial autocorrelation",
+    fill = "Cluster Type"
+  ) +
+  theme_minimal()
+
+
+
+```
+
+:::{layout-ncol="2"}
+
+![](Graphics/local.png)
+![](Graphics/cluster.png)
+:::
+
+:::{.student-exercise}
+
+Using the code below, you can download the dataset from the Github of Chris Gentry [@gentrySpatialRegressionAnalysis]
+
+```{r}
+us_counties <- counties(cb = TRUE, resolution = "20m", year = 2016, progress_bar = FALSE) |> 
+  st_transform(5070) |> 
+  mutate(FIPS = str_c(STATEFP, COUNTYFP))
+
+child_pov <- read_csv("https://raw.githubusercontent.com/chrismgentry/Spatial-Regression/master/Data/childpov18_southfull.csv") |> 
+  mutate(FIPS = as.character(FIPS),
+         FIPS = case_when(
+           str_length(FIPS) == 4 ~ str_c("0", FIPS),
+           TRUE ~ FIPS
+  ))
+
+us_counties_child_pov <- left_join(us_counties, child_pov, by = "FIPS") |> 
+  clean_names() |> 
+  drop_na(x2016_child_poverty)
+```
+
+
+
+
+1. Compute the Global Morans I
+2. Compute Local Morans
+2. Map the results
+3. Classify spatial patterns
+
+
+
+What macro-factors might explain these spatial patterns?
+
+- Urban vs. rural?
+- Racial composition?
+- Health insurance coverage?
+- Teenage pregnancy rates?
+- Employment types?
+- Marriage rates?
+- Income inequality?
+- Something else?
+
+
+::: {.content-hidden when-format="html"}
+
+# Code for analyis
+
+```{r}
+# Load and clean data for further analysis
+
+us_counties <- counties(cb = TRUE, resolution = "20m", year = 2016, progress_bar = FALSE) |> 
+  st_transform(5070) |> 
+  mutate(FIPS = str_c(STATEFP, COUNTYFP))
+
+child_pov <- read_csv("https://raw.githubusercontent.com/chrismgentry/Spatial-Regression/master/Data/childpov18_southfull.csv") |> 
+  mutate(FIPS = as.character(FIPS),
+         FIPS = case_when(
+           str_length(FIPS) == 4 ~ str_c("0", FIPS),
+           TRUE ~ FIPS
+  ))
+
+us_counties_child_pov <- left_join(us_counties, child_pov, by = "FIPS") |> 
+  clean_names() |> 
+  drop_na(x2016_child_poverty)
+
+breaks <- classIntervals(us_counties_child_pov$x2016_child_poverty, 
+                        n = 7, 
+                        style = "jenks")
+
+my_palette <- c(
+  "lavender" = "#E6E6FA",   # light lavender  # classic light pink
+  "hotpink"   = "#FF69B4"   # vibrant pink
+)
+
+
+us_counties_child_pov |> 
+  ggplot() +
+  geom_sf(aes(fill = x2016_child_poverty), 
+          color = "gray90", 
+          size = 0.1) +
+  scale_fill_gradientn(
+    colors = my_palette,
+    breaks = round(breaks$brks, 1),
+    labels = function(x) paste0(round(x, 0), "%"),  # Round to whole numbers
+    name = "Child Poverty Rate",
+    guide = guide_colorbar(
+      direction = "horizontal",
+      title.position = "top",
+      label.position = "bottom",
+      barwidth = 15,
+      barheight = 0.5,
+      ticks.colour = "gray50"
+    )
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, 
+                             size = 16, 
+                             face = "bold",
+                             margin = margin(b = 10)),
+    plot.subtitle = element_text(hjust = 0.5, 
+                               size = 10,
+                               color = "gray30",
+                               margin = margin(b = 20)),
+    plot.caption = element_text(color = "gray30", 
+                               size = 8,
+                               margin = margin(t = 10)),
+    legend.position = "bottom",
+    legend.title = element_text(size = 9),
+    legend.text = element_text(size = 8),
+    axis.text = element_text(size = 8, color = "gray50"),
+    panel.grid = element_line(color = "gray95"),
+    plot.margin = margin(10, 10, 10, 10)
+  ) +
+  labs(
+    title = "Child Poverty in the South",
+    subtitle = "Distribution of child poverty rates by county, 2016",
+    caption = "Data source: US Census Bureau via tigris | Projection: Contiguous Albers Equal Area"
+  )
+```
+
+
+
+![](Graphics/child_poverty.png)
+
+
+
+```{r}
+
+#-------------------------------------------------
+
+
+
+us_counties_child_pov <- us_counties_child_pov |> 
+  st_make_valid()
+
+counties_nb <- poly2nb(us_counties_child_pov, queen = TRUE)
+
+counties_weights <- nb2listw(counties_nb, style = "W", zero.policy = TRUE)
+
+
+morans_i_child_pov <- moran.test(us_counties_child_pov$x2016_child_poverty, 
+                                 counties_weights, 
+                                 zero.policy = TRUE)
+
+morans_i_child_pov
+
+```
+
+```{r}
+# ---------------------------
+
+moran.plot(us_counties_child_pov$x2016_child_poverty, counties_weights)
+
+
+```
+
+
+
+```{r}
+#-----------------------------------------------------------------------
+
+local_moran <- localmoran(us_counties_child_pov$x2016_child_poverty, counties_weights, zero.policy = TRUE)
+
+# Attach results to your data
+us_counties_child_pov <- us_counties_child_pov |> 
+  mutate(
+    local_I = local_moran[, "Ii"],
+    p_value = local_moran[, "Pr(z != E(Ii))"],
+    cluster = case_when(
+      local_I > 0 & x2016_child_poverty > mean(x2016_child_poverty, na.rm = TRUE) & p_value < 0.05 ~ "High-High",
+      local_I > 0 & x2016_child_poverty < mean(x2016_child_poverty, na.rm = TRUE) & p_value < 0.05 ~ "Low-Low",
+      local_I < 0 & x2016_child_poverty > mean(x2016_child_poverty, na.rm = TRUE) & p_value < 0.05 ~ "High-Low",
+      local_I < 0 & x2016_child_poverty < mean(x2016_child_poverty, na.rm = TRUE) & p_value < 0.05 ~ "Low-High",
+      TRUE ~ "Insignificant"
+    )
+  )
+
+
+ggplot(us_counties_child_pov) +
+  geom_sf(aes(fill = local_I), color = NA) +
+  scale_fill_viridis_c(option = "plasma", 
+                       name = "Local Moran's I") +
+  labs(
+    title = "Local Moran's I for Child Poverty (2016)",
+    subtitle = "Spatial autocorrelation per county",
+    caption = "Source: US Census / Your Dataset"
+  ) +
+  theme_minimal()
+
+ggplot(us_counties_child_pov) +
+  geom_sf(aes(fill = cluster), color = NA) +
+  scale_fill_manual(values = c(
+    "High-High" = "#d73027",
+    "Low-Low" = "#4575b4",
+    "High-Low" = "#fdae61",
+    "Low-High" = "#abd9e9",
+    "Insignificant" = "grey90"
+  )) +
+  labs(
+    title = "Local Moran's I: Child Poverty Rates (2016)",
+    subtitle = "Cluster classification by spatial autocorrelation",
+    fill = "Cluster Type"
+  ) +
+  theme_minimal()
+
+
+```
+
+:::
+
+:::
+
+
+
+
+
+# Regression
+
+
+
+```{r}
+#| code-fold: false
+
+equation <- x2016_child_poverty ~ urban + lnmanufacturing + lnretail + lnhealthss + lnconstruction + 
+                lnlesshs + lnunemployment + lnsinglemom + lnuninsured + lnteenbirth + 
+                lnincome_ratio + lnunmarried + lnblack + lnhispanic
+
+ols_mod <- lm(equation,
+  data = us_counties_child_pov)
+
+ols_mod |> summary()
+
+library(stargazer)
+
+var_labels <- c(
+  "urban" = "Urban (binary)",
+  "lnmanufacturing" = "Manufacturing (%)",
+  "lnretail" = "Retail (%)",
+  "lnhealthss" = "Health/Social Services (%)",
+  "lnconstruction" = "Construction (%)",
+  "lnlesshs" = "Less than High School (%)",
+  "lnunemployment" = "Unemployment Rate (%)",
+  "lnsinglemom" = "Single Mothers (%)",
+  "lnuninsured" = "Uninsured (%)",
+  "lnteenbirth" = "Teen Births (%)",
+  "lnincome_ratio" = "Income Ratio (80/20)",
+  "lnunmarried" = "Unmarried Adults (%)",
+  "lnblack" = "Black Population (%)",
+  "lnhispanic" = "Hispanic Population (%)"
+)
+
+stargazer(
+  ols_mod,
+  type = "text",  # use "html" or "latex" for other formats
+  title = "OLS Regression: Child Poverty and County Characteristics",
+  covariate.labels = var_labels,
+  dep.var.labels = "Child Poverty Rate (2016)",
+  digits = 2,
+  no.space = TRUE,
+  omit.stat = c("f", "ser")  # optional: omit F-stat and standard error
+)
+```
+
+![](Graphics/ols.png)
+
+Do you see any problems here?
+
+
+
+:::{#custom-block}
+
+## Spillovers in Spatial Data
+
+Neighboring regions often influence each other, resulting in similarities or dependencies that standard regression models may fail to capture. Ignoring these **spillover effects** can lead to omitted variable bias.
+
+**Why do spillovers matter?**
+
+- On the **right-hand side** of a regression (independent variables), neighboring areas may share:
+  - Local policies
+  - Cultural or geographic characteristics
+  - Economic shocks
+  - Other unobserved factors  
+  Moreover, the challenges faced by one area’s neighbors often resemble its own problems.
+
+- On the **left-hand side** (dependent variable), spillovers reflect interactions such as:
+  - Similar child poverty trends across neighboring counties
+  - Movement of families between adjacent counties
+  - Shared labor markets and economic activities not fully captured by available data
+
+---
+
+**Types of Spillovers**
+
+- **Local spillovers**: Effects that occur directly between neighbors.  
+  *Example*: Cigarette smuggling across adjacent state borders (LeSage, 2014).
+
+- **Global spillovers**: Effects that propagate throughout the entire system, impacting regions beyond immediate neighbors.  
+  *Example*: Traffic congestion originating in one county affecting the broader region.
+
+---
+
+**Implications for Spatial Analysis**
+
+- Spillovers lead to **spatial autocorrelation**, where observations are not independent.
+- This can cause **unequal predictive accuracy** across locations.
+- Residuals from regression models may show spatial autocorrelation:  
+
+$$
+r_i = y_i - \hat{y}_i
+$$
+
+where $r_i$ is the residual for location $i$, $y_i$ the actual value, and $\hat{y}_i$ the predicted value.
+
+Understanding and modeling spillovers helps improve the validity and precision of spatial models by explicitly accounting for these dependencies.
+
+:::
+
+Our OLS-Regression model works quite well, however as we saw in the map, there seem to be hotspots of child poverty. We can test if this is actually true, using Morans I. 
+
+We see high autocorrelation, when it comes to child poverty in the US. For a basic OLS-model, this will result in unequal accuracy of our predictions.
+
+Autocorrelated residuals are defined as 
+
+$$
+r_i = y_i -\hat{y}_i
+$$
+
+We can again use the Morans I test to adjust for autocorrelation in the residuals
+
+
+```{r}
+us_counties_child_pov_res <- us_counties_child_pov |> 
+  mutate(residuals = residuals(ols_mod))
+
+breaks_res <- classIntervals(us_counties_child_pov_res$residuals, 
+                        n = 7, 
+                        style = "jenks")
+
+
+morans_i_child_pov_res <- moran.test(us_counties_child_pov_res$residuals, 
+                                 counties_weights, 
+                                 zero.policy = TRUE)
+
+morans_i_child_pov_res
+```
+
+
+![](Graphics/residuals.png)
+
+As we can see we have autocorrelated residuals 
+
+```{r}
+#| code-fold: false
+#| 
+local_morans_resid <- localmoran(us_counties_child_pov_res$residuals, 
+                                 counties_weights, 
+                                 zero.policy = TRUE)
+
+
+us_counties_child_pov_res <- us_counties_child_pov_res |> 
+  mutate(
+    local_i_resid = local_morans_resid[, "Ii"],
+    local_i_p_resid = local_morans_resid[, "Pr(z != E(Ii))"]
+  )
+
+ggplot(us_counties_child_pov_res) +
+  geom_sf(aes(fill = local_i_resid), color = "lightgray", size = 0.1) +
+  scale_fill_gradient2(
+    low = "blue", mid = "white", high = "red",
+    midpoint = 0,
+    name = "Local Moran's I\nof Residuals"
+  ) +
+  theme_minimal() +
+  labs(
+    title = "Local Moran's I of Residuals",
+    subtitle = "Spatial Clustering of Model Residuals"
+  )
+```
+
+![](Graphics/localmoran_res.png)
+
+
+As it seems, there are some spots where the OLS predictions are worse than others. 
+
+When we model Autocorrelation into regressions, there are basically two ways: 
+
+− **Lags:** something we observe in neighboring entities (here: counties) has an 
+effect on our focal entity 
+
+− **Error**: something we do not observe yet that alters our results is the same for 
+the focal entity and the neighboring ones 
+
+=> to get unbiased estimates, we need to include this in our models
+
+
+
+
+## Spatially lagged $X$ Variables (SLX)
+
+**Main idea**: How do characteristics of neighboring counties affect the focal county?
+
+**Solution**: Include neighboring counties’ average values for each independent variable using a spatial weights matrix.
+
+In a non-spatial OLS model, we estimate:
+
+$$
+y = X \beta + \varepsilon
+$$
+
+This equation examines how the **focal county's characteristics** ($X$) influence the outcome ($y$).
+
+With a **Spatially Lagged X (SLX)** model, we add spatial lags of the independent variables:
+
+$$
+y = X \beta + W X \theta + \varepsilon
+$$
+
+
+Where:
+- $W$ is a spatial weights matrix,
+- $WX$ represents the **average values of independent variables in neighboring counties**,
+- $\theta$ captures the influence of **neighbors’ characteristics**.
+
+This model is **unidirectional**: neighboring counties can affect the focal county, but not vice versa. There are **no feedback effects** through the dependent variable, making this a *local* model.
+
+
+```{r}
+#| code-fold: false
+
+us_counties_child_pov_xlags <- us_counties_child_pov |> 
+  mutate(
+    W_lnmanufacturing = lag.listw(counties_weights, lnmanufacturing),
+    W_lnretail = lag.listw(counties_weights, lnretail),
+    W_lnhealthss = lag.listw(counties_weights, lnhealthss),
+    W_lnconstruction = lag.listw(counties_weights, lnconstruction),
+    W_lnlesshs = lag.listw(counties_weights, lnlesshs),
+    W_lnunemployment = lag.listw(counties_weights, lnunemployment),
+    W_lnsinglemom = lag.listw(counties_weights, lnsinglemom),
+    W_lnuninsured = lag.listw(counties_weights, lnuninsured),
+    W_lnteenbirth = lag.listw(counties_weights, lnteenbirth),
+    W_lnincome_ratio = lag.listw(counties_weights, lnincome_ratio),
+    W_lnunmarried = lag.listw(counties_weights, lnunmarried),
+    W_lnblack = lag.listw(counties_weights, lnblack),
+    W_lnhispanic = lag.listw(counties_weights, lnhispanic)
+  )
+
+slx_formula <- update(formula(ols_mod), 
+                     . ~ . + W_lnmanufacturing + W_lnretail + W_lnhealthss + 
+                       W_lnconstruction + W_lnlesshs + W_lnunemployment + 
+                       W_lnsinglemom + W_lnuninsured + W_lnteenbirth + 
+                       W_lnincome_ratio + W_lnunmarried + W_lnblack + W_lnhispanic)
+
+slx_mod <- lm(slx_formula, data = us_counties_child_pov_xlags)
+
+slx_mod |> summary()
+
+```
+
+![](Graphics/slx.png)
+
+:::{.student-exercise}
+
+How can we interpret the `w_lnconstruction` and `w_lnlesshs` ? How can we explain this?
+  
+:::   
+
+
+## Spatial Autoregressive (SAR) Model
+
+**Main idea**: How do the outcome values of neighboring counties influence the outcome in a focal county?
+
+**Solution**: Include a spatial lag of the **dependent variable** — i.e., use the average of neighboring counties' outcome values as a predictor.
+
+This leads to a **Spatial Autoregressive Model (SAR)**, which adds spatial dependence directly into the response variable:
+
+$$
+y = X \beta + \rho W y + \varepsilon
+$$
+
+Where:
+- $y$: Dependent variable (e.g., child poverty rate)
+- $X$: Matrix of independent variables
+- $\beta$: Coefficients for $X$
+- $W y$: Spatial lag of the dependent variable — a **weighted average of neighboring counties' outcomes**
+- $\rho$: Spatial autoregressive coefficient (captures the influence of neighbors' outcomes)
+- $\varepsilon$: Error term
+
+
+The SAR-Model covers the following key characteristics:
+
+- **Global Spillover**: Changes in one county’s outcome can affect its neighbors, who in turn affect their neighbors. The effect **ripples through the network**.
+- **Spatial Feedback**: Unlike the SLX model, where effects are unidirectional, the SAR model allows **mutual influence** among spatial units.
+- **Theoretical Justification**: Use SAR only if there’s a strong rationale for believing that the outcome in one area is causally influenced by outcomes in nearby areas.
+
+
+
+```{r}
+#| code-fold: false
+#| 
+sar_mod <- lagsarlm(formula(ols_mod),
+                    data = us_counties_child_pov,
+                    listw = counties_weights,
+                    zero.policy = TRUE)
+
+sar_mod |> summary()
+```
+
+![](Graphics/sar.png)
+
+The **SAR model** reveals significant spatial dependence in the data, with a positive spatial autoregressive coefficient $( \rho = 0.189$, *p* < 0.001). This indicates that counties tend to resemble their neighbors in terms of the outcome variable (e.g., child poverty rate). In other words, **there are meaningful spillover effects**: changes in one county’s outcome can influence those of surrounding counties.
+
+
+
+In a SAR model, a change in one county affects:
+- The **focal county** itself (**direct effect**)
+- Its **neighbors**, who then affect their neighbors, and so on (**indirect effects**)
+
+This recursive influence means that **a small initial change can propagate across the entire spatial system**.
+
+The coefficient \( \rho = 0.189 \) acts as a **spatial multiplier**. While it does not translate directly to a "percentage increase", we can think of it conceptually: changes in neighboring counties' outcomes generate a feedback loop that **amplifies the total effect** beyond just the local area.
+
+Several predictors—such as **education**, **unemployment**, and **insurance coverage**—remain significant, consistent with previous models. However, unlike OLS, **these coefficients in a SAR model cannot be interpreted directly** as marginal effects due to the **spatial multiplier effect**.
+
+
+
+A test for residual spatial autocorrelation gives a *p*-value of **0.13**, indicating that *the SAR model has largely accounted for spatial dependence in the residuals. This suggests the model is well specified in terms of spatial structure.
+
+
+
+To fully interpret the effects of predictors in a SAR model, we must **disentangle direct and indirect impacts** using the `impacts()` function:
+
+```{r}
+
+#| code-fold: false
+
+sar_impacts <- impacts(sar_mod, listw = counties_weights, R = 1000)
+summary(sar_impacts)
+
+```
+
+![](Graphics/impacts.png)
+
+In a SAR model, each independent variable has **three associated effects**:
+
+1. **Direct effect**: The impact of a one-unit change in the variable **within the focal county** on its own outcome.
+2. **Indirect effect (spillover)**: The impact of that same change on **neighboring counties' outcomes**, which then may feedback to the focal county.
+3. **Total effect**: The sum of direct and indirect effects — representing the **full spatial impact** of the variable across the system.
+
+A general interpretation rule based on this structure:
+
+> *For each 1-unit increase in an explanatory variable, the direct effect represents the expected change in the outcome in the same county. The indirect effect captures the spatial spillover — how changes in one county influence surrounding counties, and recursively, how those effects propagate back. The total effect is the combined influence across the spatial network.*
+
+
+
+## Spatial Error Model (SEM)
+
+
+The **Spatial Error Model (SEM)** addresses the possibility that **unobserved variables**—factors not included in our model—are spatially structured. In other words, residuals in one county may be correlated with those in neighboring counties because of shared, but **unmeasured**, influences.
+
+This model assumes that the **error term itself is spatially autocorrelated**, and it captures this dependence structure directly.
+
+
+$$
+y = X\beta +u
+$$
+
+ 
+with $u = \lambda Wu + \varepsilon$, the function of our unexplained error ($\varepsilon$) and our neighborsresidual values 
+
+Use SEM when:
+
+- You suspect **omitted variables** that are spatially clustered
+- Residuals from an OLS model show **spatial autocorrelation**
+- You want **directly interpretable coefficients**, unlike in SAR
+
+
+```{r}
+#| code-fold: false
+#| 
+sem_mod <- errorsarlm(formula(ols_mod),
+                      data = us_counties_child_pov,
+                      listw = counties_weights,
+                      zero.policy = TRUE)
+
+sem_mod |> summary()
+```
+
+![](Graphics/error.png)
+
+The spatial error parameter $\lambda=0.26$ with $p> 0.001 indicates a strong spatial autocorrelation in the residuals. This suggests that unmeasured, spatially clustered factors are influencing child poverty rates.
+
+Unlike *SAR*, where spillovers create indirect effects, SEM models spatial dependence in the error structure, not in the outcome. This means that coefficients in SEM can be interpreted directly as marginal effects—just like in OLS—without needing to decompose effects into direct/indirect components.
+
+
+## Nested Models
+
+In addition to the basic spatial models (SLX, SAR, SEM), we can explore **nested spatial models**—hybrid models that include combinations of spatial lags and/or error terms. These models allow for **local and global dynamics** and can be compared using **likelihood ratio tests** or **AIC** to evaluate model fit.
+
+Understanding whether your spatial processes are **local** (unidirectional influence) or **global** (system-wide feedback) is key to choosing the appropriate model.
+
+
+### Spatial Durbin Model
+
+The **Spatial Durbin Model (SDM)** accounts for spatial dependence in both:
+
+- The **dependent variable** $y$ (e.g., child poverty)
+- The **independent variables** $X$ (e.g., unemployment, education)
+
+This model assumes that:
+
+- A neighboring county’s **outcome** affects the focal county
+- The **socioeconomic characteristics** of neighbors also influence the focal county
+
+The SDM is considered a **global model**, as spatial effects can ripple throughout the entire spatial system—not just adjacent counties.
+
+$$
+y = \rho Wy + X\beta + WX\theta + \varepsilon
+$$
+
+Where:
+- $\rho$: Spatial autoregressive parameter (lagged y)
+- $WX$: Spatial lag of the independent variables
+- $\theta$: Coefficients for the lagged $X$s
+
+The SDM nests several other models:
+- If $\rho = 0$: it becomes **SLX**
+- If $\theta = 0$: it becomes **SAR**
+- If both $\rho = 0$ and $\theta = 0$: it's **OLS**
+
+
+```{r}
+#| code-fold: false
+#| 
+sdm_mod <- lagsarlm(formula(ols_mod),
+                    data = us_counties_child_pov,
+                    listw = counties_weights,
+                    type = "mixed",
+                    zero.policy = TRUE)
+
+sdm_mod |> summary()
+```
+
+
+![](Graphics/sdm.png)
+
+The SDM results reveal significant spatial dependence ($\rho = 0.21$). The model shows the best fit among our specifications with the so-far lowest AIC (9200.9), though significant residual autocorrelation suggests some spatial patterns remain uncaptured.
+
+Again, like in the SAR model, we need to calculate impacts to properly disentangle the effects.
+
+```{r}
+#| code-fold: false
+
+sdm_impacts <- impacts(sdm_mod, listw = counties_weights)
+sdm_impacts
+```
+
+
+![](Graphics/impacts_2.png)
+
+Here, unemployment shows the strongest total effect (11.72), combining a substantial direct effect (8.71) with positive spillovers (3.01), indicating that high unemployment affects poverty both within and across county lines.
+
+Education (less than high school) presents an interesting case with a strong positive direct effect (8.65) but negative indirect effect (-3.52), yielding a moderate total effect (5.12). This might be in line with what we saw in an earlier model, where higher education in surrounding counties had a positive effect on child poverty, suggesting that if a county is surrounded by better educated counties, the effect of more uneducated individuals in a county is more pronounced.
+
+The *SDM* captures both local characteristics and regional spillovers, making it a powerful tool for understanding complex spatial systems. The spatial multiplier effect in this model reflects a system-wide interdependence where changes in one county can propagate through many others.
+
+This model is particularly useful when theory or diagnostics suggest both:
+
+- Feedback effects via the outcome variable
+- Contextual effects from neighbors' characteristics
+
+### Spatial Durbin Error Model
+
+The **Spatial Durbin Error Model (SDEM)** accounts for two key spatial processes:
+
+1. **Local spillovers** from **neighboring counties’ characteristics** (lagged X variables)
+2. **Spatial autocorrelation in unmeasured factors** (via a spatial error term)
+
+Unlike the Spatial Durbin Model (SDM), SDEM **does not include a spatial lag of the dependent variable**. This means the model assumes **spillovers are local**—limited to direct neighbors—without system-wide feedback effects.
+
+This structure makes the SDEM appropriate when:
+
+- Neighboring counties’ **socioeconomic conditions** affect the focal county
+- Unmeasured, spatially clustered factors (e.g., policy environments, cultural context) may bias residuals
+- But **global feedback** via the dependent variable is not expected
+
+$$
+y = X\beta + WX\theta + u, \quad \text{with }u = \lambda Wu + \varepsilon
+$$
+
+This model can be seen as a **hybrid of SLX and SEM** and nests simpler models:
+- If $WX = 0$: becomes **SEM**
+- If $\lambda = 0$: becomes **SLX**
+- If both = 0: becomes **OLS**
+
+```{r}
+#| code-fold: false
+#| 
+sdem_mod <- errorsarlm(formula(ols_mod),
+                       data = us_counties_child_pov,
+                       listw = counties_weights,
+                       etype = "emixed",
+                       zero.policy = TRUE)
+summary(sdem_mod)
+```
+
+![](Graphics/sdem.png)
+
+Since the *SDEM* does not include a lagged variable the coefficients can be interpreted directly as marginal effects. The $\lambda=0.2063$ with $p<0.001$ suggests meaningful spatial autocorrelation in unobserved factors influencing child poverty.
+
+The effects are consistent with the other models - unemployment, inequality, and limited education are strongly associated with higher child poverty, retail and construction employment tend to reduce poverty.
+
+The **SDEM** is a flexible tool for capturing localized spatial spillovers and spatially structured omitted variables—without assuming global feedback effects. It bridges the gap between SEM and SLX models and can be especially useful when:
+
+- You're confident that spillover effects don’t ripple system-wide
+
+- You want interpretable coefficients
+
+- You still need to account for spatial clustering in residuals
+
+
+
+
+# Comparison
+
+A **LISA map** (Local Indicators of Spatial Association) shows where significant local spatial clustering exists. It identifies "hot spots" (areas where high or low values are surrounded by similar values) and spatial outliers (areas that differ from their neighbors).
+
+For a diagnostic tool of our models, we can plot the LISA map of the residuals. 
+The ideal situation is if your residuals are randomly distributed across space (no clustering), it suggests your model has adequately accounted for spatial dependence.
+
+A LISA map of residuals would mostly show "Not significant" areas.
+
+
+
+```{r}
+
+analyze_residuals <- function(model, data, weights, model_name) {
+  # Add residuals to data
+  data <- data |> 
+    mutate(residuals = residuals(model))
+  
+  # Calculate Moran's I
+  morans_i <- moran.test(data$residuals, weights, zero.policy = TRUE)
+  
+  # Calculate LISA
+  local_morans <- localmoran(data$residuals, weights, zero.policy = TRUE)
+  
+  # Add LISA to data
+  data <- data |> 
+    mutate(
+      local_i = local_morans[, "Ii"],
+      local_i_p = local_morans[, "Pr(z != E(Ii))"]
+    )
+  
+  # Create residuals map
+  breaks_res <- classIntervals(data$residuals, n = 7, style = "jenks")
+  
+  res_map <- data |> 
+    ggplot() +
+    geom_sf(aes(fill = residuals), 
+            color = "gray90", 
+            size = 0.1) +
+    scale_fill_gradientn(
+      colors = brewer.pal(7, "BuPu"),
+      breaks = round(breaks_res$brks, 1),
+      name = "Residuals",
+      guide = guide_colorbar(
+        direction = "horizontal",
+        title.position = "top",
+        label.position = "bottom",
+        barwidth = 15,
+        barheight = 0.5
+      )
+    ) +
+    theme_minimal() +
+    theme(
+      plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),
+      legend.position = "bottom"
+    ) +
+    labs(
+      title = paste(model_name, "Model Residuals"),
+      subtitle = "Purple indicates over-prediction, Blue indicates under-prediction"
+    )
+  
+  # Create LISA map
+  lisa_map <- data |> 
+    ggplot() +
+    geom_sf(aes(fill = local_i), color = "gray70", size = 0.1) +
+    scale_fill_gradient2(
+      low = "blue", mid = "white", high = "red",
+      midpoint = 0,
+      name = "Local Moran's I"
+    ) +
+    theme_minimal() +
+    theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold")) +
+    labs(
+      title = paste("Local Moran's I of", model_name, "Residuals"),
+      subtitle = "Spatial Clustering of Model Residuals"
+    )
+  
+  return(list(
+    morans_i = morans_i,
+    res_map = res_map,
+    lisa_map = lisa_map
+  ))
+}
+
+
+ols_analysis <- analyze_residuals(ols_mod, us_counties_child_pov, 
+                                counties_weights, "OLS")
+ols_analysis[[3]]
+
+
+
+slx_analysis <- analyze_residuals(slx_mod, us_counties_child_pov, 
+                                counties_weights, "SLX")
+slx_analysis[[3]]
+
+
+
+sar_analysis <- analyze_residuals(sar_mod, us_counties_child_pov, 
+                                counties_weights, "SAR")
+sar_analysis[[3]]
+
+
+sem_analysis <- analyze_residuals(sem_mod, us_counties_child_pov, 
+                                counties_weights, "SEM")
+sem_analysis[[3]]
+
+
+sdm_analysis <- analyze_residuals(sdm_mod, us_counties_child_pov, 
+                                counties_weights, "SDM")
+sdm_analysis[[3]]
+
+
+sdem_analysis <- analyze_residuals(sdem_mod, us_counties_child_pov, 
+                                counties_weights, "SDEM")
+sdem_analysis[[3]]
+
+
+# Save each plot
+ggsave("Graphics/OLS_residuals.png", plot = ols_analysis[[3]], width = 6, height = 5)
+ggsave("Graphics/SLX_residuals.png", plot = slx_analysis[[3]], width = 6, height = 5)
+ggsave("Graphics/SAR_residuals.png", plot = sar_analysis[[3]], width = 6, height = 5)
+ggsave("Graphics/SEM_residuals.png", plot = sem_analysis[[3]], width = 6, height = 5)
+ggsave("Graphics/SDM_residuals.png", plot = sdm_analysis[[3]], width = 6, height = 5)
+ggsave("Graphics/SDEM_residuals.png", plot = sdem_analysis[[3]], width = 6, height = 5)
+
+
+```
+
+
+:::{layout-ncol="3"}
+
+![](Graphics/OLS_residuals.png)
+
+![](Graphics/SLX_residuals.png)
+
+![](Graphics/SAR_residuals.png)
+
+![](Graphics/SEM_residuals.png)
+
+![](Graphics/SDM_residuals.png)
+
+![](Graphics/SDEM_residuals.png)
+
+:::
+
+```{r}
+models_comparison <- tibble(
+  Model = c("OLS", "SLX", "SAR", "SEM", "SDM", "SDEM"),
+  AIC = c(AIC(ols_mod), AIC(slx_mod), AIC(sar_mod), 
+          AIC(sem_mod), AIC(sdm_mod), AIC(sdem_mod))
+) |> 
+  arrange(AIC)
+
+```
+
+![](Graphics/aic.png)
+
+
+:::{#custom-block}
+
+While statistical fit matters, the choice of spatial model should be theoretically informed—guided by your understanding of whether spatial relationships are local, global, or driven by observed versus unobserved factors.
+
+:::
