@@ -1,5 +1,5 @@
-const es_week = 11;
-const css_week =11;
+const es_week = 12;
+const css_week =12;
 
 document.addEventListener("DOMContentLoaded", () => {
   const allLinks = document.querySelectorAll('nav a');

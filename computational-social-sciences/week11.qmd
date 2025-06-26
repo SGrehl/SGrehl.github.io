@@ -325,7 +325,7 @@ ggplot() +
 
 Explore OpenStreetMap (OSM) data to identify tram stops (“Tramhaltestellen”) and tram connections in Leipzig. Create a map that plots tram stops as points and displays tram route lines. 
 
-::: {.content-hidden when-format="html"}
+
 
 ```{r}
 
@@ -337,7 +337,8 @@ pt_stops <- opq(bbox = bb_leipzig) |>
   osmdata_sf()
 
 # Extract points from the result
-pt_stops_sf <- pt_stops$osm_points |> filter(!st_is_empty(geometry))
+pt_stops_sf <- pt_stops$osm_points |>
+  filter(!st_is_empty(geometry))
 
 
 pt_lines <- opq(bbox = bb_leipzig) |>
@@ -346,28 +347,36 @@ pt_lines <- opq(bbox = bb_leipzig) |>
 
 
 # Extract lines from the result
-pt_lines_sf <- pt_lines$osm_lines |> filter(!st_is_empty(geometry))
+pt_lines_sf <- pt_lines$osm_lines |>
+  filter(!st_is_empty(geometry))
 
-bb_leipzig_bbox <- st_bbox(c(
-  xmin = bb_leipzig[1,1], ymin = bb_leipzig[2,1],
-  xmax = bb_leipzig[1,2], ymax = bb_leipzig[2,2]
-), crs = 4326)  # WGS84 CRS
+unique(pt_lines_sf$name)
 
-# Then convert bbox to simple feature polygon
-bb_sfc <- st_as_sfc(bb_leipzig_bbox)
+# bb_leipzig_bbox <- st_bbox(c(
+#   xmin = bb_leipzig[1,1], ymin = bb_leipzig[2,1],
+#   xmax = bb_leipzig[1,2], ymax = bb_leipzig[2,2]
+# ), crs = 4326)  # WGS84 CRS
+# 
+# # Then convert bbox to simple feature polygon
+# bb_sfc <- st_as_sfc(bb_leipzig_bbox)
 
 # Plot
 ggplot() +
   geom_sf(data = placebb, fill = "lavender", color = "grey50") +
-  geom_sf(data = bb_sfc, fill = NA, color = "grey50") +
+  #geom_sf(data = bb_sfc, fill = "lightgrey", color = "grey50") +
   geom_sf(data = pt_stops_sf, color = "pink", size = 1, alpha = 0.7) +
   geom_sf(data = pt_lines_sf, color = "navy", size = 0.8, alpha = 0.7) +
-  labs(title = "Public Transport Stops and Lines in Leipzig") +
+  labs(title = "Public Transport in Leipzig") +
   theme_minimal()
+
+
+# Boundary box ist nicht sehr genau
+# Routen sind nicht immer eingetragen
+# Hat man mit seinem Tag wirklich alle Objects identifiziert?
+# Es braucht some form of validation
 
 ```
 
-:::
 
 Do you encounter any problems? Why do you think is that?
 
@@ -677,7 +686,7 @@ Traditionally, segregation is measured through group distributions across fixed 
 Michael White [-@whiteMeasurementSpatialSegregation1983] introduced a new perspective: What if we measured segregation based on the **actual distance** between people. Imagine every person in a city. If white residents tend to live physically closer to other white residents, and Black residents tend to live closer to other Black residents, then the city is spatially segregated—even if they live in neighboring tracts. In this view, segregation isn’t just about which side of the neighborhood boundary people live on—it’s about how far people are from each other, on average.
 Working with aggregated data for areas such as census tracts, these distances cannot be precisely measured, but they can be estimated, and White proposed an index that could summarize the spatial pattern of an entire city in terms of groups’ relative proximity to one another.
 
-Building on this work, scholars like Reardon and xx [-@reardonMeasuresSpatialSegregation2004] have refined ways to calculate spatial segregation more precisely. These newer methods blend spatial relationships with traditional aspatial tools. These methods consider people to have some proximity not only to others in the same block or tract, but also to those who live in nearby areas [@loganMakingPlaceSpace2012].
+Building on this work, scholars like Reardon and O'Sullivan [-@reardonMeasuresSpatialSegregation2004] have refined ways to calculate spatial segregation more precisely. These newer methods blend spatial relationships with traditional aspatial tools. These methods consider people to have some proximity not only to others in the same block or tract, but also to those who live in nearby areas [@loganMakingPlaceSpace2012].
 
 
 ::: {.student-exercise}
