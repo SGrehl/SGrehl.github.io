@@ -116,36 +116,19 @@ unstable and unrepresentative data, make reproducibility a major
 challenge in CSS.
 
 
-
-### What Do We Need for Replication?
-
-According to [@breuerReproducibilityReplicabilityComputational2025]:
-
-**Required:**
-
-- The original paper
-- Study materials (e.g., survey
-instruments)
-- Experimental protocols
-
-**Helpful:**
-
-- Data (with documentation)
-- Code (with documentation)
+For the re-analysis of Studies we need  [@breuerReproducibilityReplicabilityComputational2025]:
 
 
-### What Do We Need for (Computational) Reproduction?
+| Item                        | Replication         | (Computational) Reproduction |
+|-----------------------------|---------------------|------------------------------|
+| Original paper              | Required            | Required                     |
+| Study materials             | Required            | Helpful                      |
+| Experimental protocols      | Required            | Helpful                      |
+| Data (with documentation)   | Helpful             | Required                     |
+| Code (with documentation)   | Helpful             | Required                     |
 
-**Required:** 
 
-- The paper
-- Data (with documentation)
-- Code (with documentation)
 
-**Helpful:**
-
-- Study materials
-- Experimental protocols
 
 
 
