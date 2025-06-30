@@ -1,6 +1,6 @@
 ---
 title: "Week 12 - Spatial dependency"
-subtitle: "Modeling spillovers"
+subtitle: "Modelling spillovers"
 ---
 
  
@@ -123,8 +123,8 @@ id <- 20 # area id
 columbus$neighbors <- "other"
 columbus$neighbors[id] <- "area"
 columbus$neighbors[nb[[id]]] <- "neighbors"
-ggplot(columbus) + geom_sf(aes(fill = neighbors)) + theme_bw() +
-  scale_fill_manual(values = c("pink", "lavender", "white"))
+#ggplot(columbus) + geom_sf(aes(fill = neighbors)) + theme_bw() +
+  #scale_fill_manual(values = c("pink", "lavender", "white"))
 
 
 ```
@@ -243,7 +243,8 @@ If neighbours are based on contiguity, the matrix is binary, meaning that $w_{ij
 - If two regions are **not neighbors**, `w_ij = 0`.
 - If they are neighbors, `w_ij > 0` — often based on distance or shared boundary length.
 
-Weights are usually **row-standardized** (so each row sums to 1).
+Weights are usually **row-standardized** (so each row sums to 1). Row standardization is used to create proportional weights in cases where features have an unequal number of neighbors.
+
 
 
 
@@ -477,7 +478,7 @@ us_counties_child_pov <- left_join(us_counties, child_pov, by = "FIPS") |>
 
 
 
-1. Compute the Global Morans I
+1. Compute the Global Morans I for child poverty: `x2016_child_poverty`
 2. Compute Local Morans
 2. Map the results
 3. Classify spatial patterns
@@ -873,6 +874,7 @@ $$
 
 
 Where:
+
 - $W$ is a spatial weights matrix,
 - $WX$ represents the **average values of independent variables in neighboring counties**,
 - $\theta$ captures the influence of **neighbors’ characteristics**.
@@ -968,6 +970,7 @@ The **SAR model** reveals significant spatial dependence in the data, with a pos
 
 
 In a SAR model, a change in one county affects:
+
 - The **focal county** itself (**direct effect**)
 - Its **neighbors**, who then affect their neighbors, and so on (**indirect effects**)
 
@@ -1074,11 +1077,13 @@ y = \rho Wy + X\beta + WX\theta + \varepsilon
 $$
 
 Where:
+
 - $\rho$: Spatial autoregressive parameter (lagged y)
 - $WX$: Spatial lag of the independent variables
 - $\theta$: Coefficients for the lagged $X$s
 
 The SDM nests several other models:
+
 - If $\rho = 0$: it becomes **SLX**
 - If $\theta = 0$: it becomes **SAR**
 - If both $\rho = 0$ and $\theta = 0$: it's **OLS**
@@ -1144,6 +1149,7 @@ y = X\beta + WX\theta + u, \quad \text{with }u = \lambda Wu + \varepsilon
 $$
 
 This model can be seen as a **hybrid of SLX and SEM** and nests simpler models:
+
 - If $WX = 0$: becomes **SEM**
 - If $\lambda = 0$: becomes **SLX**
 - If both = 0: becomes **OLS**
