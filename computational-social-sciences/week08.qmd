@@ -3,5 +3,5 @@ title: "Week 08"
 subtitle: "-"
 ---
 
-
+![](Graphics/noclass.png){width="50%"}
 

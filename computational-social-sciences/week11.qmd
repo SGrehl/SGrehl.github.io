@@ -472,9 +472,7 @@ The Manhattan distance is a metric, used to calculate the distance between two p
 The Manhattan distance for n-dimensional vectors is:
 
 $$
-
 |x_1 - x_2| + |y_1-y_2| + ... + |v_{n1}-v_{n2}|
-
 $$
 
 ![](Graphics/distances.png){width=50%}
