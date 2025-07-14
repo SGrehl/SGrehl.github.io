@@ -5441,7 +5441,18 @@ Warning
 <p>Having a secure backup for your valuable scripts (and possibly your results) is essential. We strongly expect you to store your scripts with at least one layer of redundancy — this is not optional. Make sure your work is protected so you’re never in a position where you have to explain why it’s missing.</p>
 <section id="connect-github-with-rstudio" class="level3">
 <h3 class="anchored" data-anchor-id="connect-github-with-rstudio">Connect GitHub With RStudio</h3>
-<p>coming soon …</p>
+<p>Git should already be installed on RStudio Server. Therefore, first we tell RStudio to use git. Open <strong>Tools ▸ Global Options ▸ Git/SVN</strong>, tick <strong>Enable version control interface</strong>, and make sure the <em>Git executable</em> path is filled in.</p>
+<p>Now open the terminal (Alt + Shift + R) and identify yourself.</p>
+<pre><code>git config --global user.name  &quot;Jane Doe&quot; 
+git config --global user.email &quot;jane@example.com&quot;</code></pre>
+<p>Replace <em>Jane Doe</em> with the exact name and e‑mail associated with your GitHub account.</p>
+<p>Now we have to switch to the console and create a <strong>Personal Access Token (PAT).</strong></p>
+<pre><code>install.packages(c(&quot;usethis&quot;, &quot;gitcreds&quot;)) 
+usethis::create_github_token()   # opens the PAT page in your browser</code></pre>
+<p>In the browser choose the <strong>repo, user, workflow</strong> scopes, click <strong>Generate token</strong>, and copy the 40‑character token.</p>
+<p>Then back in RStudio Server and type:</p>
+<pre><code>gitcreds::gitcreds_set()         # paste the token when prompted</code></pre>
+<p>RStudio/Git will now will have the token stored. And you are good to go!</p>
 </section>
 </section>
 <section id="troubleshooting" class="level2">

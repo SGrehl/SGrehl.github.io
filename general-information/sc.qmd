@@ -449,7 +449,33 @@ Having a secure backup for your valuable scripts (and possibly your results) is 
 
 ### Connect GitHub With RStudio
 
-coming soon ...
+Git should already be installed on RStudio Server. Therefore, first we tell RStudio to use git. Open **Tools ▸ Global Options ▸ Git/SVN**, tick **Enable version control interface**, and make sure the *Git executable* path is filled in.
+
+Now open the terminal (Alt + Shift + R) and identify yourself.
+
+```         
+git config --global user.name  "Jane Doe" 
+git config --global user.email "jane@example.com"
+```
+
+Replace *Jane Doe* with the exact name and e‑mail associated with your GitHub account.
+
+Now we have to switch to the console and create a **Personal Access Token (PAT).**
+
+```         
+install.packages(c("usethis", "gitcreds")) 
+usethis::create_github_token()   # opens the PAT page in your browser
+```
+
+In the browser choose the **repo, user, workflow** scopes, click **Generate token**, and copy the 40‑character token.
+
+Then back in RStudio Server and type:
+
+```         
+gitcreds::gitcreds_set()         # paste the token when prompted
+```
+
+RStudio/Git will now will have the token stored. And you are good to go!
 
 ## Troubleshooting
 
